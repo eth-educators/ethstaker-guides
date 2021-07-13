@@ -233,10 +233,10 @@ groups:
       summary: CPU usage above 90%
 ```
 
-This base rules file has 3 rules which you can adjust by using the `expr` field.
+This base rules file has 3 rules which you can adjust by modifying the `expr` field's value.
 
 1. The first rule will alert you when you have less than around 80GB (81920000000 bytes) of available disk space on your `/` mount continuously for 1 minute. If your filesystem and your partitions are configured in a different way where you want to check for a different mount, you will have to change that `expr` field. If you have direct access to your prometheus web interface (often at `http://<machine ip>:9090`), you can execute the `node_filesystem_avail_bytes` query to view all possible mounts and their current free space. You can also view your current mounts and their free space by running the `$ df -h` command.
-2. The second rule will alert you when you have less than around 1GB (1024000000 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1GB (1024000000 bytes) value in that `expr` field.
+2. The second rule will alert you when you have less than around 1GB (1024000000 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1GB (1024000000 bytes) threshold value in that `expr` field.
 3. The third rule will alert you when your CPU cores are used for more than 90% of their processing power continuously for 5 minutes.
 
 Set ownership for the config file. If your prometheus service is running under an account that is not `prometheus`, adjust accordingly.
@@ -245,7 +245,7 @@ Set ownership for the config file. If your prometheus service is running under a
 $ sudo chown prometheus:prometheus /etc/prometheus/alert_rules.yml
 ```
 
-Restart your prometheus service and check the status to make sure it's running correctly. If you prometheus service is not configured to run using systemd with the prometheus.service name, adjust accordingly.
+Restart your prometheus service and check the status to make sure it's running correctly. If your prometheus service is not configured to run using systemd with the `prometheus.service` name, adjust accordingly.
 
 ```
 $ sudo systemctl restart prometheus.service
@@ -386,7 +386,7 @@ $ sudo systemctl enable healthcheckslowresources.timer
 
 This timer will call and reset your *Low Resources* check every week which is what is expected from the schedule we configured earlier.
 
-That's it. That should give you some good alerting basis. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.
+That's it. That should give you some good alerting foundation. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.
 
 ## Support
 
