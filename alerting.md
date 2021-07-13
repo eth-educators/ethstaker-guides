@@ -192,6 +192,7 @@ alerting:
   - static_configs:
     - targets:
       - localhost:9093
+
 rule_files:
   - "alert_rules.yml"
 ```
