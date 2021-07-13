@@ -13,7 +13,7 @@ Create a free account on https://healthchecks.io/ . Reuse the initial *My First 
 
 Adjust the notification methods for that check. By default it will only send notifications to the email address you used to create your account. You can add more messaging services by clicking on the *Integrations* element in the main menu at the top.
 
-Go back to your check and copy the ping url somewhere so you can easily reuse it later. It should look like `https://hc-ping.com/<long string of random letters and numbers separated by dashes>` .
+Go back to your check and copy the ping url somewhere so you can easily reuse it later. We will need it for 2 configuration files below. It should look like `https://hc-ping.com/<long string of random letters and numbers separated by dashes>` .
 
 ## Installing Alertmanager
 
