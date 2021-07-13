@@ -1,6 +1,6 @@
 # Guide on how to do alerting on low resources with Prometheus and Healthchecks.io
 
-If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and the need to do some pruning to control that growth.
+If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and the need to do some pruning to control that growth. If you do not currently use Prometheus with Node Exporter to monitor your system, [parts of this guide](https://someresat.medium.com/guide-to-staking-on-ethereum-2-0-ubuntu-pyrmont-lighthouse-a634d3b87393) can be followed to install and configure those tools.
 
 This guide will show you step by step how to do alerting. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04). It will also use Healthchecks.io as a easy way to integrate with different messaging services (Email, SMS, Discord, Slack, Signal, Telegram, etc). I'm not sponsored nor affiliated with Healthchecks.io, but I like what they are doing.
 
@@ -394,3 +394,7 @@ If you have any question or if you need additional support, make sure to get in 
 
 * Discord: [discord.gg/e84CFep](https://discord.gg/e84CFep)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
+
+## Credits
+
+Based on [Somer Esat's guide](https://someresat.medium.com/guide-to-staking-on-ethereum-2-0-ubuntu-pyrmont-lighthouse-a634d3b87393).
