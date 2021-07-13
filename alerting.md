@@ -21,7 +21,7 @@ These steps will install Alertmanager as a systemd service.
 
 Create the alertmanager user.
 
-```
+```console
 $ sudo useradd --no-create-home --shell /bin/false alertmanager
 ```
 
@@ -36,25 +36,25 @@ $ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
 
 Download the latest version from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 .
 
-```
+```console
 $ wget https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown on https://prometheus.io/download/ is the same as the file we just downloaded.
 
-```
+```console
 $ sha256sum alertmanager-0.22.2.linux-amd64.tar.gz
 ```
 
 Extract the archive.
 
-```
+```console
 $ tar xvf alertmanager-0.22.2.linux-amd64.tar.gz
 ```
 
 Copy the binaries to the following locations and set ownership.
 
-```
+```console
 $ sudo cp alertmanager-0.22.2.linux-amd64/alertmanager /usr/local/bin/
 $ sudo cp alertmanager-0.22.2.linux-amd64/amtool /usr/local/bin/
 $ sudo chown alertmanager:alertmanager /usr/local/bin/alertmanager
@@ -63,20 +63,20 @@ $ sudo chown alertmanager:alertmanager /usr/local/bin/amtool
 
 Remove the download leftovers.
 
-```
+```console
 $ rm -rf alertmanager-0.22.2.linux-amd64
 $ rm alertmanager-0.22.2.linux-amd64.tar.gz
 ```
 
 Setup the Alertmanager configuration file. Open the YAML config file for editing.
 
-```
+```console
 $ sudo nano /etc/alertmanager/alertmanager.yml
 ```
 
 Paste the following into the file taking care to **replace the placeholder healthchecks.io ping url by your real ping url** that you created earlier with the added `/fail` at the end. Exit and save the file.
 
-```
+```yaml
 route:
   group_by: ['alertname']
   group_wait: 30s
@@ -99,19 +99,19 @@ inhibit_rules:
 
 Set ownership for the config file.
 
-```
+```console
 $ sudo chown alertmanager:alertmanager /etc/alertmanager/alertmanager.yml
 ```
 
 Setup the Alertmanager systemd service. Open the service definition file.
 
-```
+```console
 $ sudo nano /etc/systemd/system/alertmanager.service
 ```
 
 Paste the following into the file. Exit and save the file.
 
-```
+```ini
 [Unit]
 Description=Alertmanager
 Wants=network-online.target
@@ -134,13 +134,13 @@ WantedBy=multi-user.target
 
 Reload systemd to reflect the changes.
 
-```
+```console
 $ sudo systemctl daemon-reload
 ```
 
 Start the service and check the status to make sure it's running correctly.
 
-```
+```console
 $ sudo systemctl start alertmanager.service
 $ sudo systemctl status alertmanager.service
 ```
@@ -172,7 +172,7 @@ If you did everything right, it should say active (running) in green. If not the
 
 Enable the Alertmanager service to start on boot.
 
-```
+```console
 $ sudo systemctl enable alertmanager.service
 ```
 
@@ -180,13 +180,13 @@ $ sudo systemctl enable alertmanager.service
 
 Edit your prometheus configuration file. It's likely in `/etc/prometheus/prometheus.yml`. If not, adjust accordingly.
 
-```
+```console
 $ sudo nano /etc/prometheus/prometheus.yml
 ```
 
 Make sure you have the following sections in that configuration file. You might already have part of it in comments. If so, just remove the related comments and paste this in there. This section is often located before the `scrape_configs` section.
 
-```
+```yaml
 alerting:
   alertmanagers:
   - static_configs:
@@ -200,13 +200,13 @@ rule_files:
 
 Setup the rules for alerting. Open the rules file.
 
-```
+```console
 # sudo nano /etc/prometheus/alert_rules.yml
 ```
 
 Paste the following base rules into the file. Exit and save the file.
 
-```
+```yaml
 groups:
 - name: alert_rules
   rules:
@@ -241,13 +241,13 @@ This base rules file has 3 rules which you can adjust by modifying the `expr` fi
 
 Set ownership for the config file. If your prometheus service is running under an account that is not `prometheus`, adjust accordingly.
 
-```
+```console
 $ sudo chown prometheus:prometheus /etc/prometheus/alert_rules.yml
 ```
 
 Restart your prometheus service and check the status to make sure it's running correctly. If your prometheus service is not configured to run using systemd with the `prometheus.service` name, adjust accordingly.
 
-```
+```console
 $ sudo systemctl restart prometheus.service
 $ sudo systemctl status prometheus.service
 ```
@@ -282,7 +282,7 @@ If you did everything right, it should say active (running) in green. If not the
 
 Time to test some of these rules. Here is an example to test your *Available disk space* rule. First, check how much space you have left on your disk.
 
-```
+```console
 $ df -h
 ```
 
@@ -311,7 +311,7 @@ tmpfs                              1.6G     0  1.6G   0% /run/user/1000
 
 Here, we can see that the main mount is `/`. It has around 431GB of available disk space. If you want to test the 80GB limit we set in the alerting rules, we can create a dummy file that is 400GB in size with this command.
 
-```
+```console
 $ fallocate -l 400G largespacer.img
 ```
 
@@ -319,7 +319,7 @@ That will leave us only around 31GB of available disk space. Waiting around 2 mi
 
 Once your test is done, you can remove the dummy file with this command.
 
-```
+```console
 $ rm largespacer.img
 ```
 
@@ -331,13 +331,13 @@ Healthchecks.io is more suited for monitoring cron jobs and similar periodic pro
 
 Setup the Healthchecks.io Low Resources systemd service. Open the service definition file.
 
-```
+```console
 $ sudo nano /etc/systemd/system/healthcheckslowresources.service
 ```
 
 Paste the following into the file taking care to **replace the placeholder healthchecks.io ping url by your real ping url** that you created earlier. Exit and save the file.
 
-```
+```ini
 [Unit]
 Description=Healthchecks.io Low Resources
 Wants=healthcheckslowresources.timer
@@ -352,13 +352,13 @@ WantedBy=multi-user.target
 
 Setup the Healthchecks.io Low Resources systemd timer. Open the timer definition file.
 
-```
+```console
 $ sudo nano /etc/systemd/system/healthcheckslowresources.timer
 ```
 
 Paste the following into the file. Exit and save the file.
 
-```
+```ini
 [Unit]
 Description=Healthchecks.io Low Resources timer
 Requires=healthcheckslowresources.service
@@ -373,13 +373,13 @@ WantedBy=timers.target
 
 Reload systemd to reflect the changes.
 
-```
+```console
 $ sudo systemctl daemon-reload
 ```
 
 Start and enable the Healthchecks.io Low Resources systemd timer.
 
-```
+```console
 $ sudo systemctl start healthcheckslowresources.timer
 $ sudo systemctl enable healthcheckslowresources.timer
 ```
