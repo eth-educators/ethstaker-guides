@@ -1,17 +1,17 @@
 # Guide on how to do alerting on low resources with Prometheus and Healthchecks.io
 
-If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting if very useful and that many validators is likely to face is low remaining disk space because of the clients' databases growth and the need to do some pruning to control that growth.
+If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and the need to do some pruning to control that growth.
 
-This guide will show you step by step how to do alerting. It will assume you are using a modern linux distrubition with systemd (like Ubuntu 20.04). It will also use Healthchecks.io as a easy way to integrate with different messaging services (Email, SMS, Discord, Slack, Signal, Telegram, etc). I'm not sponsored nor affiliated with Healthchecks.io, but I like what they are doing.
+This guide will show you step by step how to do alerting. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04). It will also use Healthchecks.io as a easy way to integrate with different messaging services (Email, SMS, Discord, Slack, Signal, Telegram, etc). I'm not sponsored nor affiliated with Healthchecks.io, but I like what they are doing.
 
 ## Setup an account and a check on Healthchecks.io
 
-Create a free account on https://healthchecks.io/ . Reused the initial *My First Check* check or add a new check. Name it "Low Resources". Change the schedule to:
+Create a free account on https://healthchecks.io/ . Reuse the initial *My First Check* check or add a new check. Name it "Low Resources". Change the schedule to:
 
 * Period: 1 week
 * Grace Time: 15 minutes
 
-Adjust the notification methods for that check. By default it will only send notification to the email address you used to create your account. You can add more messaging services by clicking on the *Integrations* element in the main menu at the top.
+Adjust the notification methods for that check. By default it will only send notifications to the email address you used to create your account. You can add more messaging services by clicking on the *Integrations* element in the main menu at the top.
 
 Go back to your check and copy the ping url somewhere so you can easily reuse it later. It should look like `https://hc-ping.com/<long string of random letters and numbers separated by dashes>` .
 
@@ -40,7 +40,7 @@ Download the latest version from https://prometheus.io/download/ . As of this da
 $ wget https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
 ```
 
-Verify the SHA256 Checksum as shown on https://prometheus.io/download/ is the same as the file we just downloaded.
+Verify that the SHA256 Checksum as shown on https://prometheus.io/download/ is the same as the file we just downloaded.
 
 ```
 $ sha256sum alertmanager-0.22.2.linux-amd64.tar.gz
@@ -174,4 +174,79 @@ Enable the Alertmanager service to start on boot.
 
 ```
 $ sudo systemctl enable alertmanager.service
+```
+
+## Configuring Prometheus to use Alertmanager
+
+Edit your prometheus configuration file. It's likely in `/etc/prometheus/prometheus.yml`. If not, adjust accordingly.
+
+```
+$ sudo nano /etc/prometheus/prometheus.yml
+```
+
+Make sure you have the following sections in that configuration file. You might already have part of it in comments. If so, just remove the related comments and paste this in there. This section is often located before the `scrape_configs` section.
+
+```
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+rule_files:
+  - "alert_rules.yml"
+```
+
+## Adding alerting rules
+
+Setup the rules for alerting. Open the rules file.
+
+```
+# sudo nano /etc/prometheus/alert_rules.yml
+```
+
+Paste the following base rules into the file. Exit and save the file.
+
+```
+groups:
+- name: alert_rules
+  rules:
+  - alert: Available_disk_space_too_low
+    expr: node_filesystem_avail_bytes{mountpoint="/"} <= 81920000000
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: Available disk space below 80GB
+  - alert: Available_memory_too_low
+    expr: node_memory_MemAvailable_bytes <= 1024000000
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: Available memory below 1GB
+  - alert: CPU_usage_too_high
+    expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) >= 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: CPU usage above 90%
+```
+
+This base rules file has 3 rules which you can adjust by using the `expr` field.
+
+1. The first rule will alert you when you have less than around 80GB (81920000000 bytes) of available disk space on your `/` mount continuously for 1 minute. If your filesystem and your partitions are configured in a different way where you want to check for a different mount, you will have to change that `expr` field. If you have direct access to your prometheus web interface (often at http://<machine ip>:9090), you can execute the `node_filesystem_avail_bytes` query to view all possible mounts and their current free space. You can also view your current mounts and their free space by running the `$ df -h` command.
+2. The second rule will alert you when you have less than around 1GB (1024000000 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1GB (1024000000 bytes) value in that `expr` field.
+3. The third rule will alert you when your CPU cores are used for more than 90% of their processing power continuously for 5 minutes.
+
+Set ownership for the config file. If your prometheus service is running under an account that is not `prometheus`, adjust accordingly.
+
+```
+$ sudo chown prometheus:prometheus /etc/prometheus/alert_rules.yml
+```
+
+Restart your prometheus service. If you prometheus service is not configured using systemd with the prometheus.service name, adjust accordingly.
+
+```
+$ sudo systemctl restart prometheus.service
 ```
