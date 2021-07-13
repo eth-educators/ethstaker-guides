@@ -27,7 +27,7 @@ $ sudo useradd --no-create-home --shell /bin/false alertmanager
 
 Create the directories with proper ownership.
 
-```bash
+```shell
 $ sudo mkdir /etc/alertmanager
 $ sudo mkdir /var/lib/alertmanager
 $ sudo chown -R alertmanager:alertmanager /etc/alertmanager
