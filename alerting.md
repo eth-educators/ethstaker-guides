@@ -349,7 +349,7 @@ Swap:    4294963200   133431296  4161531904
 You should check the available column in this output. In this example, we have about 10.1GB (10589024256 bytes) of available RAM. We can use the following command to start a dummy process that will use around 9.6GB of memory to reach our less than around 1GB of free RAM threshold.
 
 ```console
-</dev/zero head -c 9600m | tail
+$ </dev/zero head -c 9600m | tail
 ```
 
 This will leave us around 500MB of free RAM. Waiting around 2 minutes should trigger the alert on Healthchecks.io and you should receive an email with the alert details (if you made sure to reset your check first).
