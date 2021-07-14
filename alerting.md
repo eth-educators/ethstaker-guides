@@ -318,17 +318,43 @@ $ fallocate -l 400G largespacer.img
 
 That will leave us only around 31GB of available disk space. Waiting around 2 minutes should trigger the alert on Healthchecks.io and you should receive an email with the alert details.
 
-Once your test is done, you can remove the dummy file with this command.
+Once your *Available disk space* test is done, you can remove the dummy file with this command.
 
 ```console
 $ rm largespacer.img
 ```
 
+Here is an example to test your *Available memory* rule. You might want to reset your check on Healthchecks.io first if you want to test notifications and you just tested your *Available disk space* rule. If so, see how to do it in the next section and come back here.
+
+Check how much memory you have available.
+
+```console
+$ free -b
+```
+
+You should see something like this.
+
+```
+              total        used        free      shared  buff/cache   available
+Mem:    16244113408  5310607360  6606020608      192512  4327485440 10589024256
+Swap:    4294963200   133431296  4161531904
+```
+
+You should check the available column in this output. In this example, we have about 10.1GB (10589024256 bytes) of available RAM. We can use the following command to start a dummy process that will use around 9.6GB of memory to reach our less than around 1GB of free RAM threshold.
+
+```console
+</dev/zero head -c 9600m | tail
+```
+
+This will leave us around 500MB of free RAM. Waiting around 2 minutes should trigger the alert on Healthchecks.io and you should receive an email with the alert details (if you made sure to reset your check first).
+
+Once your *Available memory* test is done, you can terminate the dummy process that is needlessly consuming your memory by typing `CTRL`+`C` in your terminal.
+
 ## Resetting the check on Healthchecks.io
 
-Once the alert is resolved, Alertmanager will call the ping url once more to say it is resolved but the check will remain in a failed state. You can manually reset it on https://healthchecks.io/ by going into the details of your check and by clicking on the *Ping Now!* button.
+Once the alert is resolved, Alertmanager will call the ping url once more to say it is resolved but the check will remain in a failed state (DOWN). You can manually reset it on https://healthchecks.io/ by going into the details of your check and by clicking on the *Ping Now!* button.
 
-Healthchecks.io is more suited for monitoring cron jobs and similar periodic processes. This use of Healthchecks.io is somewhat contrived since we are mostly interested by its ability to easily forward our alerts through their nice integrations. Healthchecks.io will expect a periodic successful call to the check we created so we will provide one with these steps.
+Healthchecks.io is more suited for monitoring cron jobs and similar periodic processes. Even if Prometheus is periodically checking on your rules, it is not periodically calling Healthchecks.io. Alertmanager will only call the fail endpoint of your check when one of your rule is in firing mode. This use of Healthchecks.io is somewhat contrived since we are mostly interested by its ability to easily forward our alerts through their nice integrations. Healthchecks.io will expect a periodic successful call to the check we created so we will provide one with these steps.
 
 Setup the Healthchecks.io Low Resources systemd service. Open the service definition file.
 
