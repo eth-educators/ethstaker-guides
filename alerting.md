@@ -335,21 +335,21 @@ Here is an example to test your *Available memory* rule. You might want to reset
 Check how much memory you have available.
 
 ```console
-$ free -b
+$ free -kh
 ```
 
 You should see something like this.
 
 ```
               total        used        free      shared  buff/cache   available
-Mem:    16244113408  5310607360  6606020608      192512  4327485440 10589024256
-Swap:    4294963200   133431296  4161531904
+Mem:           15Gi       5.5Gi       334Mi       0.0Ki       9.3Gi       9.3Gi
+Swap:         4.0Gi       114Mi       3.9Gi
 ```
 
-You should check the available column in this output. In this example, we have about 10.1GB (10589024256 bytes) of available RAM. We can use the following command to start a dummy process that will use around 9.6GB of memory to reach our less than around 1GB of free RAM threshold.
+You should check the available column in this output. In this example, we have about 9.3GB of available RAM. We can use the following command to start a dummy process that will use around 8.8GB of memory to reach our less than around 1GB of free RAM threshold.
 
 ```console
-$ </dev/zero head -c 9600m | tail
+$ </dev/zero head -c 8800m | tail
 ```
 
 This will leave us around 500MB of free RAM. Waiting around 2 minutes should trigger the alert on Healthchecks.io and you should receive an email with the alert details (if you made sure to reset your check first).
