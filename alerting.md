@@ -34,7 +34,7 @@ $ sudo chown -R alertmanager:alertmanager /etc/alertmanager
 $ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
 ```
 
-Download the latest version from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 .
+Download the latest version of Alertmanager from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 .
 
 ```console
 $ wget https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
