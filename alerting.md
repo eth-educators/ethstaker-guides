@@ -281,7 +281,11 @@ If you did everything right, it should say active (running) in green. If not the
 
 ## Testing your rules
 
-Time to test some of these rules. Here is an example to test your *Available disk space* rule. First, check how much space you have left on your disk.
+Time to test some of these rules.
+
+### Available disk space test
+
+Here is an example to test your *Available disk space* rule. First, check how much space you have left on your disk.
 
 ```console
 $ df -h
@@ -323,6 +327,8 @@ Once your *Available disk space* test is done, you can remove the dummy file wit
 ```console
 $ rm largespacer.img
 ```
+
+### Available memory test
 
 Here is an example to test your *Available memory* rule. You might want to reset your check on Healthchecks.io first if you want to test notifications and you just tested your *Available disk space* rule. If so, see how to do it in the next section and come back here.
 
