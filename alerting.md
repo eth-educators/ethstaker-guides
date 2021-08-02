@@ -1,19 +1,16 @@
-# Guide on how to do alerting on low resources with Prometheus and Healthchecks.io
+# Guide on how to do alerting on low resources with Prometheus and PagerDuty
 
 If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and [the need to do some pruning](https://www.reddit.com/r/ethstaker/comments/n7mnx5/psa_if_youre_running_geth_prune/) to control that growth. If you do not currently use Prometheus with Node Exporter to monitor your system, [parts of this guide](https://someresat.medium.com/guide-to-staking-on-ethereum-2-0-ubuntu-pyrmont-lighthouse-a634d3b87393) can be followed to install and configure those tools before using this guide.
 
-This guide will show you step by step how to do alerting. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04). It will also use Healthchecks.io as a easy way to integrate with different messaging services (Email, SMS, Discord, Slack, Signal, Telegram, etc). I'm not sponsored nor affiliated with Healthchecks.io, but I like what they are doing.
+This guide will show you step by step how to do alerting. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04). It will also use PagerDuty as a easy way to integrate with different messaging services (Email, SMS, Slack, etc) and to manage your incidents.
 
-## Setup an account and a check on Healthchecks.io
+## Setup an account on PagerDuty
 
-Create a free account on https://healthchecks.io/ . Reuse the initial *My First Check* check or add a new check. Name it "Low Resources". Change the schedule to:
+Create an account on https://www.pagerduty.com/ . You can start with the free trial and migrate to the free plan when you are done with the trial.
 
-* Period: 1 week
-* Grace Time: 15 minutes
+When you eventually reach your Incidents dashboard, make sure to click on the initial test incident and manually resolve it. Click your first service and to go the Integrations tab. Click the *+ Add another integration* and choose *Events API V2*. Open up the *Events API V2* section and copy the value in the *Integration Key* field. We will need that API key in one configuration file below. It should look like a bunch of random letters and numbers.
 
-Adjust the notification methods for that check. By default it will only send notifications to the email address you used to create your account. You can add more messaging services by clicking on the *Integrations* element in the main menu at the top.
-
-Go back to your check and copy the ping url somewhere so you can easily reuse it later. We will need the ping url of your check for 2 configuration files below. It should look like `https://hc-ping.com/<long string of random letters and numbers separated by dashes>` .
+There are many different ways of configuring PagerDuty to receive a notification when an incident occurs. Play around and check what is available. By default, you should receive an email. It might be interesting to add an SMS notification in there.
 
 ## Installing Alertmanager
 
@@ -74,7 +71,7 @@ Setup the Alertmanager configuration file. Open the YAML config file for editing
 $ sudo nano /etc/alertmanager/alertmanager.yml
 ```
 
-Paste the following into the file taking care to **replace the placeholder healthchecks.io ping url by your real ping url** that you created earlier with the added `/fail` at the end. Exit and save the file.
+Paste the following into the file taking care to **replace the placeholder PagerDuty API key by your real API key** created in the *Setup an account on PagerDuty* section above (the `<` and `>` characters at the start and at the end of the placeholder should be removed). Exit and save the file.
 
 ```yaml
 route:
@@ -82,12 +79,12 @@ route:
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 1h
-  receiver: 'healthchecks.io'
+  receiver: 'pagerduty'
 
 receivers:
-- name: 'healthchecks.io'
-  webhook_configs:
-  - url: 'https://hc-ping.com/<long id placeholder>/fail'
+- name: 'pagerduty'
+  pagerduty_configs:
+  - routing_key: <PagerDuty API key>
 
 inhibit_rules:
   - source_match:
@@ -320,7 +317,7 @@ Here, we can see that the main mount is `/`. It has around 431GB of available di
 $ fallocate -l 400G largespacer.img
 ```
 
-That will leave us only around 31GB of available disk space. Waiting around 2 minutes should trigger the alert on Healthchecks.io and you should receive an email with the alert details.
+That will leave us only around 31GB of available disk space. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
 
 Once your *Available disk space* test is done, you can remove the dummy file with this command.
 
@@ -330,7 +327,7 @@ $ rm largespacer.img
 
 ### Available memory test
 
-Here is an example to test your *Available memory* rule. You might want to reset your check on Healthchecks.io first if you want to test notifications and you just tested your *Available disk space* rule. If so, see how to do it in the next section and come back here.
+Here is an example to test your *Available memory* rule. Make sure your incident is resolved on PagerDuty first if you just tested your *Available disk space* rule.
 
 Check how much memory you have available.
 
@@ -352,72 +349,13 @@ You should check the available column in this output. In this example, we have a
 $ </dev/zero head -c 8800m | tail
 ```
 
-This will leave us around 500MB of free RAM. Waiting around 2 minutes should trigger the alert on Healthchecks.io and you should receive an email with the alert details (if you made sure to reset your check first).
+This will leave us around 500MB of free RAM. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
 
 Once your *Available memory* test is done, you can terminate the dummy process that is needlessly consuming your memory by typing `CTRL`+`C` in your terminal.
 
-## Resetting the check on Healthchecks.io
+## Resolving the incidents
 
-Once the alert is resolved, Alertmanager will call the ping url once more to say it is resolved but the check will remain in a failed state (DOWN). You can manually reset it on https://healthchecks.io/ by going into the details of your check and by clicking on the *Ping Now!* button.
-
-Healthchecks.io is more suited for monitoring cron jobs and similar periodic processes. Even if Prometheus is periodically checking on your rules, it is not periodically calling Healthchecks.io. Alertmanager will only call the fail endpoint of your check when one of your rule is in firing mode. This use of Healthchecks.io is somewhat contrived since we are mostly interested by its ability to easily forward our alerts through their nice integrations. Healthchecks.io will expect a periodic successful call to the check we created so we will provide one with these steps.
-
-Setup the Healthchecks.io Low Resources systemd service. Open the service definition file.
-
-```console
-$ sudo nano /etc/systemd/system/healthcheckslowresources.service
-```
-
-Paste the following into the file taking care to **replace the placeholder healthchecks.io ping url by your real ping url** that you created earlier. Exit and save the file.
-
-```ini
-[Unit]
-Description=Healthchecks.io Low Resources
-Wants=healthcheckslowresources.timer
-
-[Service]
-Type=oneshot
-ExecStart=curl -m 10 --retry 5 https://hc-ping.com/<long id placeholder>
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Setup the Healthchecks.io Low Resources systemd timer. Open the timer definition file.
-
-```console
-$ sudo nano /etc/systemd/system/healthcheckslowresources.timer
-```
-
-Paste the following into the file. Exit and save the file.
-
-```ini
-[Unit]
-Description=Healthchecks.io Low Resources timer
-Requires=healthcheckslowresources.service
-
-[Timer]
-Unit=healthcheckslowresources.service
-OnCalendar=weekly
-
-[Install]
-WantedBy=timers.target
-```
-
-Reload systemd to reflect the changes.
-
-```console
-$ sudo systemctl daemon-reload
-```
-
-Start and enable the Healthchecks.io Low Resources systemd timer.
-
-```console
-$ sudo systemctl start healthcheckslowresources.timer
-$ sudo systemctl enable healthcheckslowresources.timer
-```
-
-This timer will call and reset your *Low Resources* check every week which is what is expected from the schedule we configured earlier.
+Once the alert is resolved, Alertmanager will call PagerDuty and it should automatically resolve the incident within a few minutes. You can manually acknowledge and resolve any incident on your PagerDuty Incidents dashboard.
 
 That's it. That should give you some good alerting foundation. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.
 
