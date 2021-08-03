@@ -8,9 +8,9 @@ This guide is meant for people with no or little experience in monitoring. It wi
 
 Here are some good reasons why you might want to do monitoring on your machine:
 
-1. Information visibility: You want to expose and be able to easily see your machine details.
-2. Issue tracking and debugging: You want to be able to inspect what happened in the past and see clearly how your machine reacted to some event.
-3. Issue prevention: You want to be able to see potential resources exhaustion ahead of time.
+1. **Information visibility**: You want to expose and be able to easily see your machine details.
+2. **Issue tracking and debugging**: You want to be able to inspect what happened in the past and see clearly how your machine reacted to some event.
+3. **Issue prevention**: You want to be able to see potential resources exhaustion ahead of time.
 
 ## Overview
 
@@ -23,6 +23,10 @@ We will install 3 tools with this guide for monitoring: [Prometheus](https://pro
 **Grafana** is a an open-source project used to visualize metrics. It can be used to create dashboards that easily show the metrics you are interested in. In our setup, it will query the metrics stored on Prometheus to show them in a browser with nice charts and diagrams.
 
 ![Monitoring - Overview](images/monitoring-overview.png)
+
+## What's next?
+
+You might want to add *alerting* to your setup. If so, check out my other [guide on how to do alerting for a validator on low resources with Prometheus and PagerDuty](alerting.md).
 
 ## Support
 
