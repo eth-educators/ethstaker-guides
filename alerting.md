@@ -1,8 +1,16 @@
-# Guide on how to do alerting on low resources with Prometheus and PagerDuty
+# Guide on how to do alerting for a validator on low resources with Prometheus and PagerDuty
 
 If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and [the need to do some pruning](https://www.reddit.com/r/ethstaker/comments/n7mnx5/psa_if_youre_running_geth_prune/) to control that growth. If you do not currently use Prometheus with Node Exporter to monitor your system, [parts of this guide](https://someresat.medium.com/guide-to-staking-on-ethereum-2-0-ubuntu-pyrmont-lighthouse-a634d3b87393) can be followed to install and configure those tools before using this guide.
 
-This guide will show you step by step how to do alerting. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04). It will also use PagerDuty as a easy way to integrate with different messaging services (Email, SMS, Slack, etc) and to manage your incidents.
+This guide is meant for people with no or little experience in alerting. This guide will show you step by step how to do alerting on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD). It will also use PagerDuty as a easy way to integrate with different messaging services (Email, SMS, Slack, etc) and to manage your incidents.
+
+## Why would you want to do alerting?
+
+(TODO)
+
+## Overview
+
+(TODO)
 
 ## Setup an account on PagerDuty
 
