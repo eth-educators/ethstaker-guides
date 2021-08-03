@@ -30,7 +30,7 @@ Create the alertmanager user.
 $ sudo useradd --no-create-home --shell /bin/false alertmanager
 ```
 
-Create the directories with proper ownership.
+Create the configuration and data directories with proper ownership.
 
 ```console
 $ sudo mkdir /etc/alertmanager
@@ -39,7 +39,7 @@ $ sudo chown -R alertmanager:alertmanager /etc/alertmanager
 $ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
 ```
 
-Download the latest version of Alertmanager from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 .
+Download the latest version of Alertmanager from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name.
 
 ```console
 $ wget https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
