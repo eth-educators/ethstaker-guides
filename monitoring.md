@@ -24,6 +24,10 @@ We will install 3 tools with this guide for monitoring: [Prometheus](https://pro
 
 ![Monitoring - Overview](images/monitoring-overview.png)
 
+## Security risks
+
+(TODO)
+
 ## What's next?
 
 You might want to add *alerting* to your setup. If so, check out my other [guide on how to do alerting for a validator on low resources with Prometheus and PagerDuty](alerting.md).

@@ -361,6 +361,10 @@ This will leave us around 500MB of free RAM. Waiting around 2 minutes should tri
 
 Once your *Available memory* test is done, you can terminate the dummy process that is needlessly consuming your memory by typing `CTRL`+`C` in your terminal.
 
+## Security risks
+
+(TODO)
+
 ## Resolving the incidents
 
 Once the alert is resolved, Alertmanager will call PagerDuty and it should automatically resolve the incident within a few minutes. You can manually acknowledge and resolve any incident on your PagerDuty Incidents dashboard.
