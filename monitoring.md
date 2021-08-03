@@ -22,6 +22,8 @@ We will install 3 tools with this guide for monitoring: [Prometheus](https://pro
 
 **Grafana** is a an open-source project used to visualize metrics. It can be used to create dashboards that easily show the metrics you are interested in. In our setup, it will query the metrics stored on Prometheus to show them in a browser with nice charts and diagrams.
 
+![Monitoring - Overview](images/Monitoring - Overview.png)
+
 ## Support
 
 If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
