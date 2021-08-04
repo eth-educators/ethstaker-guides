@@ -237,7 +237,8 @@ $ sudo -u prometheus /usr/local/bin/prometheus \
     --config.file /etc/prometheus/prometheus.yml \
     --storage.tsdb.path /var/lib/prometheus/ \
     --web.console.templates=/etc/prometheus/consoles \
-    --web.console.libraries=/etc/prometheus/console_libraries
+    --web.console.libraries=/etc/prometheus/console_libraries \
+    --web.listen-address="localhost:9090"
 ```
 Output should look something like this. Press Ctrl + C to exit.
 
@@ -271,7 +272,8 @@ ExecStart=/usr/local/bin/prometheus \
     --config.file /etc/prometheus/prometheus.yml \
     --storage.tsdb.path /var/lib/prometheus/ \
     --web.console.templates=/etc/prometheus/consoles \
-    --web.console.libraries=/etc/prometheus/console_libraries
+    --web.console.libraries=/etc/prometheus/console_libraries \
+    --web.listen-address="localhost:9090"
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
