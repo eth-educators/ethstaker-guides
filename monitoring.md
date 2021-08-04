@@ -427,13 +427,46 @@ Lastly, enable Grafana to start on boot.
 $ sudo systemctl enable grafana-server
 ```
 
+## Accessing Grafana and adding your dashboards
+
+(TODO)
+
 ## Adding your Ethereum clients
 
 (TODO)
 
 ## Security risks
 
-(TODO)
+Adding Prometheus, Node exporter and Grafana with this configuration comes with a few additional security risks for your machine.
+
+The first risk comes from the tools themselves. There might be some security issues with them that I am not aware of which might compromise your machine to some malicious actors. A great way to prevent such risk is to keep your system updated. Keeping Grafana updated should be somewhat easy as it was installed with APT. Executing those commands should keep all your system packages updated including Grafana.
+
+```console
+$ sudo apt update
+$ sudo apt upgrade
+```
+
+Keeping Prometheus and Node exporter updated will require more efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Node exporter](#installing-node-exporter) section and at the beginning of the [Installing Prometheus](#installing-prometheus) section.
+
+To restart the Node exporter service after you updated its binary, use this command.
+
+```console
+$ sudo systemctl restart node_exporter
+```
+
+To restart the Prometheus service after you updated its binary, use this command.
+
+```console
+$ sudo systemctl restart prometheus
+```
+
+You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases . You can find all the Node exporter releases and their changelog on https://github.com/prometheus/node_exporter/releases .
+
+The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP servers they are adding and the ports on which they are listening. This guide configured them to only listen on your localhost interface meaning that they cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to these tools from your machine to access your private data for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.
+
+If you want to access Grafana and your dashboards from a remote machine on your local network or from the internet, you could simply use [an SSH tunnel](https://www.tunnelsup.com/how-to-create-ssh-tunnels/) ([with PuTTY on Windows](https://www.ibm.com/support/pages/ssh-tunneling-putty) or [natively on Windows 10](http://woshub.com/ssh-tunnel-port-forward-windows/)).
+
+There might be other kind of risks associated with those tools and this configuration, but I think these two are the main ones.
 
 ## What's next?
 
