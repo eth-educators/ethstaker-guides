@@ -20,6 +20,10 @@ When you eventually reach your Incidents dashboard, make sure to click on the in
 
 There are many different ways of configuring PagerDuty to receive a notification when an incident occurs. Play around and check what is available. By default, you should receive an email. It might be interesting to add an SMS notification in there.
 
+## Executing the commands
+
+Almost all of these commands will be performed in a terminal. Start your *Terminal* application. Any line that starts with the dollar sign (`$`) is a command that need to be executed in your terminal. Do not input the dollar sign (`$`) in your terminal, only the text that comes after that.
+
 ## Installing Alertmanager
 
 These steps will install Alertmanager as a systemd service. 
@@ -39,7 +43,7 @@ $ sudo chown -R alertmanager:alertmanager /etc/alertmanager
 $ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
 ```
 
-Download the latest version of Alertmanager from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name.
+Download the latest version of Alertmanager from https://prometheus.io/download/ . As of this date, the latest version is 0.22.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
 $ wget https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz
