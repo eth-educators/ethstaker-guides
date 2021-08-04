@@ -14,7 +14,7 @@ Here are some good reasons why you might want to do monitoring on your machine:
 
 ## Overview
 
-We will install 3 tools with this guide for monitoring: [Prometheus](https://prometheus.io/docs/introduction/overview/), [Node exporter](https://prometheus.io/docs/guides/node-exporter/) and [Grafana](https://grafana.com/oss/grafana/).
+We will install 3 tools with this guide: [Prometheus](https://prometheus.io/docs/introduction/overview/), [Node exporter](https://prometheus.io/docs/guides/node-exporter/) and [Grafana](https://grafana.com/oss/grafana/).
 
 **Prometheus** is an open-source systems monitoring project. It collects and stores different metrics in a specialized database. It provides all those metrics to any other tool who wants to query them in an flexible, efficient and easy way. In our setup, it will collect metrics from Node Exporter and optionally from Ethereum clients and it will provide them on-demand to Grafana.
 
