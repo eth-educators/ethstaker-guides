@@ -222,7 +222,7 @@ scrape_configs:
       - targets: ['localhost:9100']
 ```
 
-The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node exporter and store all your hardware and OS metrics.
+The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node exporter and store all your hardware and OS metrics in the Prometheus database.
 
 Set ownership for the config file. The prometheus account will own this.
 
