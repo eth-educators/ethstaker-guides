@@ -2,7 +2,7 @@
 
 Monitoring your system resources is an important task for any system administrator using any kind of machine whether you are a professional managing a large data center or simply someone tinkering at home.
 
-This guide is meant for people with no or little experience in monitoring. It will show you step by step how to do monitoring on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD).
+This guide is meant for people with no or little experience in monitoring. It will show you step by step how to do monitoring on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD).
 
 ## Why would you want to do monitoring?
 
@@ -323,6 +323,113 @@ Lastly, enable Prometheus to start on boot.
 ```console
 $ sudo systemctl enable prometheus
 ```
+
+## Installing Grafana
+
+We will use the [Install from APT repository](https://grafana.com/docs/grafana/latest/installation/debian/#install-from-apt-repository) installation guide from Grafana. A benefit of using this method is that it creates the service for you and it uses APT to easily keep Grafana up-to-date.
+
+Install the prerequisites.
+
+```console
+$ sudo apt update -y
+$ sudo apt install -y apt-transport-https software-properties-common wget
+```
+
+Import Grafana PGP key.
+
+```console
+$ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+```
+
+Add Grafana OSS repository for stable releases.
+
+```console
+$ echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+```
+
+Install Grafana from the APT repository.
+
+```console
+$ sudo apt update
+$ sudo apt install grafana
+```
+
+Open the Grafana configuration file.
+
+```console
+$ sudo nano /etc/grafana/grafana.ini
+```
+
+Search for the following section.
+
+```ini
+[server]
+# Protocol (http, https, h2, socket)
+;protocol = http
+
+# The ip address to bind to, empty will bind to all interfaces
+;http_addr =
+```
+
+Modify the configuration file by removing the semicolon (`;`) in front of `http_addr` and by adding `localhost` after the equal sign (`=`). It should look like this. Exit and save.
+
+```ini
+[server]
+# Protocol (http, https, h2, socket)
+;protocol = http
+
+# The ip address to bind to, empty will bind to all interfaces
+http_addr = localhost
+```
+
+Reload systemd to reflect the changes.
+
+```console
+$ sudo systemctl daemon-reload
+```
+
+And then start the service with the following command and check the status to make sure it’s running correctly.
+
+```console
+$ sudo systemctl start grafana-server
+$ sudo systemctl status grafana-server
+```
+
+Output should look something like this.
+
+```
+● grafana-server.service - Grafana instance
+     Loaded: loaded (/lib/systemd/system/grafana-server.service; disabled; vend>
+     Active: active (running) since Wed 2021-08-04 12:59:12 EDT; 4s ago
+       Docs: http://docs.grafana.org
+   Main PID: 13876 (grafana-server)
+      Tasks: 12 (limit: 18440)
+     Memory: 31.2M
+     CGroup: /system.slice/grafana-server.service
+             └─13876 /usr/sbin/grafana-server --config=/etc/grafana/grafana.ini>
+
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+Aug 04 12:59:13 remy-MINIPC-PN50 grafana-server[13876]: t=2021-08-04T12:59:13-0>
+```
+
+If you did everything right, it should say active (running) in green. If not then go back and repeat the steps to fix the problem. Press Q to quit.
+Lastly, enable Grafana to start on boot.
+
+```console
+$ sudo systemctl enable grafana-server
+```
+
+## Adding your Ethereum clients
+
+(TODO)
 
 ## Security risks
 
