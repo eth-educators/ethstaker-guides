@@ -243,9 +243,9 @@ $ sudo -u prometheus /usr/local/bin/prometheus \
 Output should look something like this. Press Ctrl + C to exit.
 
 ```
-level=info ts=2020-08-02T04:56:51.414Z caller=main.go:805 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
-level=info ts=2020-08-02T04:56:51.415Z caller=main.go:833 msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml
-level=info ts=2020-08-02T04:56:51.415Z caller=main.go:652 msg="Server is ready to receive web requests."
+level=info ts=2021-08-04T16:18:42.042Z caller=main.go:981 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
+level=info ts=2021-08-04T16:18:42.042Z caller=main.go:1012 msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml totalDuration=708.063µs remote_storage=3.096µs web_handler=719ns query_engine=1.658µs scrape=94.392µs scrape_sd=59.705µs notify=41.158µs notify_sd=22.063µs rules=2.437µs
+level=info ts=2021-08-04T16:18:42.043Z caller=main.go:796 msg="Server is ready to receive web requests."
 ```
 
 Create a systemd service file to store the service config which tells systemd to run Prometheus as the prometheus user, with the configuration file located in the /etc/prometheus/prometheus.yml directory, and to store its data in the /var/lib/prometheus directory.
@@ -296,7 +296,25 @@ $ sudo systemctl status prometheus
 Output should look something like this.
 
 ```
-(INCLUDE OUTPUT)
+● prometheus.service - Prometheus
+     Loaded: loaded (/etc/systemd/system/prometheus.service; disabled; vendor p>
+     Active: active (running) since Wed 2021-08-04 12:20:56 EDT; 4s ago
+   Main PID: 12061 (prometheus)
+      Tasks: 11 (limit: 18440)
+     Memory: 19.6M
+     CGroup: /system.slice/prometheus.service
+             └─12061 /usr/local/bin/prometheus --config.file /etc/prometheus/pr>
+
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
+Aug 04 12:20:56 remy-MINIPC-PN50 prometheus[12061]: level=info ts=2021-08-04T16>
 ```
 
 If you did everything right, it should say active (running) in green. If not then go back and repeat the steps to fix the problem. Press Q to quit.
