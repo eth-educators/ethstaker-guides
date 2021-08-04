@@ -222,7 +222,7 @@ scrape_configs:
       - targets: ['localhost:9100']
 ```
 
-The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node exporter and store all your hardware and OS metrics in the Prometheus database.
+The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node exporter and it will store all your hardware and OS metrics in its database.
 
 Set ownership for the config file. The prometheus account will own this.
 
@@ -248,7 +248,7 @@ level=info ts=2021-08-04T16:18:42.042Z caller=main.go:1012 msg="Completed loadin
 level=info ts=2021-08-04T16:18:42.043Z caller=main.go:796 msg="Server is ready to receive web requests."
 ```
 
-Create a systemd service file to store the service config which tells systemd to run Prometheus as the prometheus user, with the configuration file located in the /etc/prometheus/prometheus.yml directory, and to store its data in the /var/lib/prometheus directory.
+Create a systemd service file to store the service config which tells systemd to run Prometheus as the prometheus user, with the configuration file located in the `/etc/prometheus/prometheus.yml` directory, and to store its data in the `/var/lib/prometheus directory`.
 
 ```console
 $ sudo nano /etc/systemd/system/prometheus.service
@@ -335,13 +335,13 @@ $ sudo apt update -y
 $ sudo apt install -y apt-transport-https software-properties-common wget
 ```
 
-Import Grafana PGP key.
+Import the Grafana PGP key.
 
 ```console
 $ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 ```
 
-Add Grafana OSS repository for stable releases.
+Add the Grafana OSS APT repository for stable releases.
 
 ```console
 $ echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
