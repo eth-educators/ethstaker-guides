@@ -286,7 +286,7 @@
       "targets": [
         {
           "alias": "alloc",
-          "expr": "system_cpu_sysload",
+          "expr": "system_memory_allocs",
           "format": "time_series",
           "groupBy": [
             {
@@ -320,7 +320,7 @@
         },
         {
           "alias": "used",
-          "expr": "system_cpu_syswait",
+          "expr": "system_memory_used",
           "format": "time_series",
           "groupBy": [
             {
@@ -354,7 +354,7 @@
         },
         {
           "alias": "held",
-          "expr": "system_cpu_procload",
+          "expr": "system_memory_held",
           "format": "time_series",
           "groupBy": [
             {
