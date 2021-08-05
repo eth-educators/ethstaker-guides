@@ -25314,8 +25314,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "execution (p=$percentile)",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "alias": "execution (p=$quantile)",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25326,7 +25326,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.chain/execution.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25336,7 +25336,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25348,8 +25348,8 @@
           ]
         },
         {
-          "alias": "validation (p=$percentile)",
-          "expr": "chain_validation{quantile=\"0.$percentile\"}",
+          "alias": "validation (p=$quantile)",
+          "expr": "chain_validation{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25362,7 +25362,7 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "validation (q=0.$percentile)",
+          "legendFormat": "validation (q=$quantile)",
           "measurement": "geth.chain/validation.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25372,7 +25372,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25384,8 +25384,8 @@
           ]
         },
         {
-          "alias": "commit (p=$percentile)",
-          "expr": "chain_write{quantile=\"0.$percentile\"}",
+          "alias": "commit (p=$quantile)",
+          "expr": "chain_write{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25397,7 +25397,7 @@
           ],
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "commit (q=0.$percentile)",
+          "legendFormat": "commit (q=$quantile)",
           "measurement": "geth.chain/write.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25407,7 +25407,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25419,8 +25419,8 @@
           ]
         },
         {
-          "alias": "account read (p=$percentile)",
-          "expr": "chain_account_reads{quantile=\"0.$percentile\"}",
+          "alias": "account read (p=$quantile)",
+          "expr": "chain_account_reads{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25431,7 +25431,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "account read (q=0.$percentile)",
+          "legendFormat": "account read (q=$quantile)",
           "measurement": "geth.chain/account/reads.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25441,7 +25441,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25453,8 +25453,8 @@
           ]
         },
         {
-          "alias": "account update (p=$percentile)",
-          "expr": "chain_account_updates{quantile=\"0.$percentile\"}",
+          "alias": "account update (p=$quantile)",
+          "expr": "chain_account_updates{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25465,7 +25465,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "account update (q=0.$percentile)",
+          "legendFormat": "account update (q=$quantile)",
           "measurement": "geth.chain/account/updates.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25475,7 +25475,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25487,8 +25487,8 @@
           ]
         },
         {
-          "alias": "account hash (p=$percentile)",
-          "expr": "chain_account_hashes{quantile=\"0.$percentile\"}",
+          "alias": "account hash (p=$quantile)",
+          "expr": "chain_account_hashes{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25499,7 +25499,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "account hashe (q=0.$percentile)",
+          "legendFormat": "account hashe (q=$quantile)",
           "measurement": "geth.chain/account/hashes.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25509,7 +25509,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25521,8 +25521,8 @@
           ]
         },
         {
-          "alias": "account commit (p=$percentile)",
-          "expr": "chain_account_commits{quantile=\"0.$percentile\"}",
+          "alias": "account commit (p=$quantile)",
+          "expr": "chain_account_commits{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25533,7 +25533,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "account commit (q=0.$percentile)",
+          "legendFormat": "account commit (q=$quantile)",
           "measurement": "geth.chain/account/commits.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25543,7 +25543,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25555,8 +25555,8 @@
           ]
         },
         {
-          "alias": "storage read (p=$percentile)",
-          "expr": "chain_storage_reads{quantile=\"0.$percentile\"}",
+          "alias": "storage read (p=$quantile)",
+          "expr": "chain_storage_reads{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25567,7 +25567,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "storage read (q=0.$percentile)",
+          "legendFormat": "storage read (q=$quantile)",
           "measurement": "geth.chain/storage/reads.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25577,7 +25577,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25589,8 +25589,8 @@
           ]
         },
         {
-          "alias": "storage update (p=$percentile)",
-          "expr": "chain_storage_updates{quantile=\"0.$percentile\"}",
+          "alias": "storage update (p=$quantile)",
+          "expr": "chain_storage_updates{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25601,7 +25601,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "storage update (q=0.$percentile)",
+          "legendFormat": "storage update (q=$quantile)",
           "measurement": "geth.chain/storage/updates.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25611,7 +25611,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25623,8 +25623,8 @@
           ]
         },
         {
-          "alias": "storage hash (p=$percentile)",
-          "expr": "chain_storage_hashes{quantile=\"0.$percentile\"}",
+          "alias": "storage hash (p=$quantile)",
+          "expr": "chain_storage_hashes{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25635,7 +25635,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "storage hashe (q=0.$percentile)",
+          "legendFormat": "storage hashe (q=$quantile)",
           "measurement": "geth.chain/storage/hashes.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25645,7 +25645,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25657,8 +25657,8 @@
           ]
         },
         {
-          "alias": "storage commit (p=$percentile)",
-          "expr": "chain_storage_commits{quantile=\"0.$percentile\"}",
+          "alias": "storage commit (p=$quantile)",
+          "expr": "chain_storage_commits{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -25669,7 +25669,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "storage commit (q=0.$percentile)",
+          "legendFormat": "storage commit (q=$quantile)",
           "measurement": "geth.chain/storage/commits.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -25679,7 +25679,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25691,7 +25691,7 @@
           ]
         },
         {
-          "alias": "snapshot account read (p=$percentile)",
+          "alias": "snapshot account read (p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -25715,7 +25715,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25727,7 +25727,7 @@
           ]
         },
         {
-          "alias": "snapshot storage read (p=$percentile)",
+          "alias": "snapshot storage read (p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -25751,7 +25751,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -25763,7 +25763,7 @@
           ]
         },
         {
-          "alias": "snapshot commit (p=$percentile)",
+          "alias": "snapshot commit (p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -25787,7 +25787,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -26429,7 +26429,7 @@
       "targets": [
         {
           "alias": "ingress announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26440,7 +26440,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/announces/in.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26463,7 +26463,7 @@
         },
         {
           "alias": "known announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26474,7 +26474,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/announces/drop.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26497,7 +26497,7 @@
         },
         {
           "alias": "malicious announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26508,7 +26508,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/announces/dos.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26531,7 +26531,7 @@
         },
         {
           "alias": "ingress broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26542,7 +26542,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/broadcasts/in.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26565,7 +26565,7 @@
         },
         {
           "alias": "known broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26576,7 +26576,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/broadcasts/drop.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26599,7 +26599,7 @@
         },
         {
           "alias": "malicious broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26610,7 +26610,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/broadcasts/dos.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26719,7 +26719,7 @@
       "targets": [
         {
           "alias": "ingress announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26730,7 +26730,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/announces/in.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26753,7 +26753,7 @@
         },
         {
           "alias": "known announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26764,7 +26764,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/announces/known.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26787,7 +26787,7 @@
         },
         {
           "alias": "underpriced announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26798,7 +26798,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/announces/underpriced.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26821,7 +26821,7 @@
         },
         {
           "alias": "malicious announcements",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26832,7 +26832,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/announces/dos.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26855,7 +26855,7 @@
         },
         {
           "alias": "ingress broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26866,7 +26866,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/broadcasts/in.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26889,7 +26889,7 @@
         },
         {
           "alias": "known broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26900,7 +26900,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/broadcasts/known.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26923,7 +26923,7 @@
         },
         {
           "alias": "underpriced broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26934,7 +26934,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/broadcasts/underpriced.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26957,7 +26957,7 @@
         },
         {
           "alias": "otherreject broadcasts",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -26968,7 +26968,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/broadcasts/otherreject.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -26991,7 +26991,7 @@
         },
         {
           "alias": "egress requests",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27002,7 +27002,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/request/out.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27025,7 +27025,7 @@
         },
         {
           "alias": "finished requests",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27036,7 +27036,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/request/done.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27059,7 +27059,7 @@
         },
         {
           "alias": "failed requests",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27070,7 +27070,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/request/fail.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27093,7 +27093,7 @@
         },
         {
           "alias": "timed out requests",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27104,7 +27104,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/request/timeout.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27127,7 +27127,7 @@
         },
         {
           "alias": "ingress replies",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27138,7 +27138,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/replies/in.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27161,7 +27161,7 @@
         },
         {
           "alias": "known replies",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27172,7 +27172,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/replies/known.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27195,7 +27195,7 @@
         },
         {
           "alias": "underpriced replies",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27206,7 +27206,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/replies/underpriced.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27229,7 +27229,7 @@
         },
         {
           "alias": "otherreject replies",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27240,7 +27240,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/replies/otherreject.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27349,7 +27349,7 @@
       "targets": [
         {
           "alias": "receive to announce",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27360,7 +27360,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/announces/out.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27370,7 +27370,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -27383,7 +27383,7 @@
         },
         {
           "alias": "receive to broadcast",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27394,7 +27394,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/block/broadcasts/out.timer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27404,7 +27404,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -27503,7 +27503,7 @@
       "targets": [
         {
           "alias": "waiting",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27514,7 +27514,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/waiting/peers.gauge",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27537,7 +27537,7 @@
         },
         {
           "alias": "queueing",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27548,7 +27548,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/queueing/peers.gauge",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27571,7 +27571,7 @@
         },
         {
           "alias": "fetching",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27582,7 +27582,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/fetching/peers.gauge",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27691,7 +27691,7 @@
       "targets": [
         {
           "alias": "waiting",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27702,7 +27702,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/waiting/hashes.gauge",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27725,7 +27725,7 @@
         },
         {
           "alias": "queueing",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27736,7 +27736,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/queueing/hashes.gauge",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27759,7 +27759,7 @@
         },
         {
           "alias": "fetching",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -27770,7 +27770,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.eth/fetcher/transaction/fetching/hashes.gauge",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27879,11 +27879,11 @@
       "targets": [
         {
           "alias": "reorg add meter",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.chain/reorg/add.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -27908,11 +27908,11 @@
         },
         {
           "alias": "reorg drop meter",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.chain/reorg/drop.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28025,11 +28025,11 @@
       "targets": [
         {
           "alias": "Dynamic 0x00",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/dynamic/00-0f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28048,11 +28048,11 @@
         },
         {
           "alias": "Dynamic 0x20",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/dynamic/20-2f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28071,11 +28071,11 @@
         },
         {
           "alias": "Dynamic 0x30",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/dynamic/30-3f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28094,11 +28094,11 @@
         },
         {
           "alias": "Dynamic 0x50",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/dynamic/50-5f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28117,11 +28117,11 @@
         },
         {
           "alias": "Dynamic 0xA0",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/dynamic/a0-af.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28140,11 +28140,11 @@
         },
         {
           "alias": "Dynamic 0xF0",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/dynamic/f0-ff.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28163,11 +28163,11 @@
         },
         {
           "alias": "Static 0x00",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/00-0f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28186,11 +28186,11 @@
         },
         {
           "alias": "Static 0x10",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/10-1f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28209,11 +28209,11 @@
         },
         {
           "alias": "Static 0x20",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/20-2f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28232,11 +28232,11 @@
         },
         {
           "alias": "Static 0x30",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/30-3f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28255,11 +28255,11 @@
         },
         {
           "alias": "Static 0x50",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/50-5f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28280,11 +28280,11 @@
         },
         {
           "alias": "Static 0x60",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/60-6f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28303,11 +28303,11 @@
         },
         {
           "alias": "Static 0x70",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/70-7f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28326,11 +28326,11 @@
         },
         {
           "alias": "Static 0x80",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/80-8f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28349,11 +28349,11 @@
         },
         {
           "alias": "Static 0x90",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/90-9f.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28372,11 +28372,11 @@
         },
         {
           "alias": "Static 0xF0",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/static/f0-ff.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28395,11 +28395,11 @@
         },
         {
           "alias": "Waste",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/waste.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28418,11 +28418,11 @@
         },
         {
           "alias": "Refunds",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/refund.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28441,11 +28441,11 @@
         },
         {
           "alias": "Intrinsic gas",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.gas/intrinsic.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28670,11 +28670,11 @@
       "targets": [
         {
           "alias": "total reorgs",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.chain/reorg/executes.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -28693,11 +28693,11 @@
         },
         {
           "alias": "invalidated transactions",
-          "expr": "chain_execution{quantile=\"0.$percentile\"}",
+          "expr": "chain_execution{quantile=\"$quantile\"}",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 1,
-          "legendFormat": "execution (q=0.$percentile)",
+          "legendFormat": "execution (q=$quantile)",
           "measurement": "geth.chain/reorg/invalidTx.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -30442,7 +30442,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "duration(p$percentile)",
+          "alias": "duration(p$quantile)",
           "groupBy": [
             {
               "params": [
@@ -30460,7 +30460,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33240,7 +33240,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "serve header(p=$percentile)",
+          "alias": "serve header(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33258,7 +33258,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33270,7 +33270,7 @@
           ]
         },
         {
-          "alias": "serve body(p=$percentile)",
+          "alias": "serve body(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33288,7 +33288,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33300,7 +33300,7 @@
           ]
         },
         {
-          "alias": "serve code(p=$percentile)",
+          "alias": "serve code(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33318,7 +33318,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33330,7 +33330,7 @@
           ]
         },
         {
-          "alias": "serve receipt(p=$percentile)",
+          "alias": "serve receipt(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33348,7 +33348,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33360,7 +33360,7 @@
           ]
         },
         {
-          "alias": "serve trie proof(p=$percentile)",
+          "alias": "serve trie proof(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33378,7 +33378,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33390,7 +33390,7 @@
           ]
         },
         {
-          "alias": "serve helper trie(p=$percentile)",
+          "alias": "serve helper trie(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33408,7 +33408,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33420,7 +33420,7 @@
           ]
         },
         {
-          "alias": "serve txs(p=$percentile)",
+          "alias": "serve txs(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33438,7 +33438,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33450,7 +33450,7 @@
           ]
         },
         {
-          "alias": "serve tx status(p=$percentile)",
+          "alias": "serve tx status(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33468,7 +33468,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33594,7 +33594,7 @@
           ]
         },
         {
-          "alias": "Relative cost(p=$percentile)",
+          "alias": "Relative cost(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33612,7 +33612,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33852,7 +33852,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "Served time(p=$percentile)",
+          "alias": "Served time(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33870,7 +33870,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -33882,7 +33882,7 @@
           ]
         },
         {
-          "alias": "Estimated time(p=$percentile)",
+          "alias": "Estimated time(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -33900,7 +33900,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34251,7 +34251,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "header(p=$percentile)",
+          "alias": "header(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34269,7 +34269,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34281,7 +34281,7 @@
           ]
         },
         {
-          "alias": "body(p=$percentile)",
+          "alias": "body(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34299,7 +34299,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34311,7 +34311,7 @@
           ]
         },
         {
-          "alias": "receipt(p=$percentile)",
+          "alias": "receipt(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34329,7 +34329,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34341,7 +34341,7 @@
           ]
         },
         {
-          "alias": "code(p=$percentile)",
+          "alias": "code(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34359,7 +34359,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34371,7 +34371,7 @@
           ]
         },
         {
-          "alias": "trie proof(p=$percentile)",
+          "alias": "trie proof(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34389,7 +34389,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34401,7 +34401,7 @@
           ]
         },
         {
-          "alias": "helper trie(p=$percentile)",
+          "alias": "helper trie(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34419,7 +34419,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34431,7 +34431,7 @@
           ]
         },
         {
-          "alias": "txs(p=$percentile)",
+          "alias": "txs(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34449,7 +34449,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34461,7 +34461,7 @@
           ]
         },
         {
-          "alias": "txstatus(p=$percentile)",
+          "alias": "txstatus(p=$quantile)",
           "groupBy": [
             {
               "params": [
@@ -34479,7 +34479,7 @@
             [
               {
                 "params": [
-                  "p$percentile"
+                  "p$quantile"
                 ],
                 "type": "field"
               },
@@ -34867,47 +34867,47 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "50",
-          "value": "50"
+          "text": "0.5",
+          "value": "0.5"
         },
         "hide": 0,
         "includeAll": false,
-        "label": "Percentile",
+        "label": "Quantile",
         "multi": false,
-        "name": "percentile",
+        "name": "quantile",
         "options": [
           {
             "selected": true,
-            "text": "50",
-            "value": "50"
+            "text": "0.5",
+            "value": "0.5"
           },
           {
             "selected": false,
-            "text": "75",
-            "value": "75"
+            "text": "0.75",
+            "value": "0.75"
           },
           {
             "selected": false,
-            "text": "95",
-            "value": "95"
+            "text": "0.95",
+            "value": "0.95"
           },
           {
             "selected": false,
-            "text": "99",
-            "value": "99"
+            "text": "0.99",
+            "value": "0.99"
           },
           {
             "selected": false,
-            "text": "999",
-            "value": "999"
+            "text": "0.999",
+            "value": "0.999"
           },
           {
             "selected": false,
-            "text": "9999",
-            "value": "9999"
+            "text": "0.9999",
+            "value": "0.9999"
           }
         ],
-        "query": "50, 75, 95, 99, 999, 9999",
+        "query": "0.50, 0.75, 0.95, 0.99, 0.999, 0.9999",
         "skipUrlSync": false,
         "type": "custom"
       }
