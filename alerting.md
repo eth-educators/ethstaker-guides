@@ -1,4 +1,4 @@
-# Guide on how to do alerting for a validator on low resources with Prometheus and PagerDuty
+# Guide on how to do alerting for an Ethereum validator
 
 If you are already using Prometheus with Node Exporter to monitor your system, it might be interesting to add Alertmanager and some rules in there to receive alerts when your machine is low on resources (low available disk space, low available RAM, high CPU usage, etc) so you can inspect and correct an issue before it's too late. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and [the need to do some pruning](https://www.reddit.com/r/ethstaker/comments/n7mnx5/psa_if_youre_running_geth_prune/) to control that growth. If you do not currently use Prometheus with Node Exporter to monitor your system, [parts of this guide](https://someresat.medium.com/guide-to-staking-on-ethereum-2-0-ubuntu-pyrmont-lighthouse-a634d3b87393) can be followed to install and configure those tools before using this guide.
 

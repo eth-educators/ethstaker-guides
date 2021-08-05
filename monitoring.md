@@ -1,4 +1,4 @@
-# Guide on how to do monitoring for a validator using Prometheus, Node Exporter and Grafana
+# Guide on how to do monitoring for an Ethereum validator
 
 Monitoring your system resources is an important task for any system administrator using any kind of machine whether you are a professional managing a large data center or simply someone tinkering at home.
 
@@ -474,7 +474,7 @@ There might be other kind of risks associated with those tools and this configur
 
 ## What's next?
 
-You might want to add *alerting* to your setup. If so, check out my other [guide on how to do alerting for a validator on low resources with Prometheus and PagerDuty](alerting.md).
+You might want to add *alerting* to your setup. If so, check out my other [Guide on how to do alerting for an Ethereum validator](alerting.md).
 
 ## Support
 
