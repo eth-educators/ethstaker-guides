@@ -961,42 +961,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "eth/64 handshake",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x00/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "M",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 handshake",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x00[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1007,7 +973,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 handshake",
           "measurement": "geth.p2p/ingress/eth/65/0x00/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1029,42 +995,8 @@
           ]
         },
         {
-          "alias": "eth/64 new block hash",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x01/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "N",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 new block hash",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x01[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1075,7 +1007,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 new block hash",
           "measurement": "geth.p2p/ingress/eth/65/0x01/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1097,42 +1029,8 @@
           ]
         },
         {
-          "alias": "eth/64 transaction broadcast",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x02/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "O",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 transaction broadcast",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x02[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1143,7 +1041,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 transaction broadcast",
           "measurement": "geth.p2p/ingress/eth/65/0x02/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1164,42 +1062,8 @@
           ]
         },
         {
-          "alias": "eth/64 block header request",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x03/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "P",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 block header request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x03[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1210,7 +1074,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 block header request",
           "measurement": "geth.p2p/ingress/eth/65/0x03/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1231,42 +1095,8 @@
           ]
         },
         {
-          "alias": "eth/64 block header response",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x04/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Q",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 block header response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x04[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1277,7 +1107,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 block header response",
           "measurement": "geth.p2p/ingress/eth/65/0x04/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1298,42 +1128,8 @@
           ]
         },
         {
-          "alias": "eth/64 block body request",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x05/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "R",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 block body request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x05[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1344,7 +1140,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 block body request",
           "measurement": "geth.p2p/ingress/eth/65/0x05/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1365,42 +1161,8 @@
           ]
         },
         {
-          "alias": "eth/64 block body response",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x06/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "S",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 block body response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x06[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1411,7 +1173,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 block body response",
           "measurement": "geth.p2p/ingress/eth/65/0x06/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1432,42 +1194,8 @@
           ]
         },
         {
-          "alias": "eth/64 block propagation",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x07/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "T",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 block propagation",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x07[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1478,7 +1206,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 block propagation",
           "measurement": "geth.p2p/ingress/eth/65/0x07/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1500,7 +1228,7 @@
         },
         {
           "alias": "eth/65 transaction announcement",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x08[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1511,7 +1239,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 transaction announcement",
           "measurement": "geth.p2p/ingress/eth/65/0x08/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1533,7 +1261,7 @@
         },
         {
           "alias": "eth/65 transaction request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x09[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1544,7 +1272,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 transaction request",
           "measurement": "geth.p2p/ingress/eth/65/0x09/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1566,7 +1294,7 @@
         },
         {
           "alias": "eth/65 transaction response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x0a[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1577,7 +1305,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 transaction response",
           "measurement": "geth.p2p/ingress/eth/65/0x0a/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1598,42 +1326,8 @@
           ]
         },
         {
-          "alias": "eth/64 state request",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x0d/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "U",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 state request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x0d[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1644,7 +1338,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 state request",
           "measurement": "geth.p2p/ingress/eth/65/0x0d/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1665,42 +1359,8 @@
           ]
         },
         {
-          "alias": "eth/64 state response",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x0e/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "V",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 state response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x0e[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1711,7 +1371,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 state response",
           "measurement": "geth.p2p/ingress/eth/65/0x0e/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1732,42 +1392,8 @@
           ]
         },
         {
-          "alias": "eth/64 receipt request",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x0f/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "W",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 receipt request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x0f[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1778,7 +1404,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 receipt request",
           "measurement": "geth.p2p/ingress/eth/65/0x0f/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1799,42 +1425,8 @@
           ]
         },
         {
-          "alias": "eth/64 receipt response",
-          "expr": "rate(p2p_ingress[1m])",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            }
-          ],
-          "intervalFactor": 1,
-          "legendFormat": "ingress",
-          "measurement": "geth.p2p/ingress/eth/64/0x10/packets.meter",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "X",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "m1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ]
-        },
-        {
           "alias": "eth/65 receipt response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_65_0x10[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1845,7 +1437,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/65 receipt response",
           "measurement": "geth.p2p/ingress/eth/65/0x10/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1867,7 +1459,7 @@
         },
         {
           "alias": "eth/66 handshake",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x00[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1878,7 +1470,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 handshake",
           "measurement": "geth.p2p/ingress/eth/66/0x00/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1901,7 +1493,7 @@
         },
         {
           "alias": "eth/66 new block hash",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x01[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1912,7 +1504,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 new block hash",
           "measurement": "geth.p2p/ingress/eth/66/0x01/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1935,7 +1527,7 @@
         },
         {
           "alias": "eth/66 transaction broadcast",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x02[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1946,7 +1538,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 transaction broadcast",
           "measurement": "geth.p2p/ingress/eth/66/0x02/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1969,7 +1561,7 @@
         },
         {
           "alias": "eth/66 block header request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x03[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -1980,7 +1572,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 block header request",
           "measurement": "geth.p2p/ingress/eth/66/0x03/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2003,7 +1595,7 @@
         },
         {
           "alias": "eth/66 block header response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x04[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2014,7 +1606,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 block header response",
           "measurement": "geth.p2p/ingress/eth/66/0x04/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2037,7 +1629,7 @@
         },
         {
           "alias": "eth/66 block body request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x05[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2048,7 +1640,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 block body request",
           "measurement": "geth.p2p/ingress/eth/66/0x05/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2071,7 +1663,7 @@
         },
         {
           "alias": "eth/66 block body response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x06[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2082,7 +1674,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 block body response",
           "measurement": "geth.p2p/ingress/eth/66/0x06/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2105,7 +1697,7 @@
         },
         {
           "alias": "eth/66 block propagation",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x07[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2116,7 +1708,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 block propagation",
           "measurement": "geth.p2p/ingress/eth/66/0x07/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2139,7 +1731,7 @@
         },
         {
           "alias": "eth/66 transaction announcement",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x08[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2150,7 +1742,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 transaction announcement",
           "measurement": "geth.p2p/ingress/eth/66/0x08/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2173,7 +1765,7 @@
         },
         {
           "alias": "eth/66 transaction request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x09[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2184,7 +1776,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 transaction request",
           "measurement": "geth.p2p/ingress/eth/66/0x09/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2207,7 +1799,7 @@
         },
         {
           "alias": "eth/66 transaction response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x0a[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2218,7 +1810,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 transaction response",
           "measurement": "geth.p2p/ingress/eth/66/0x0a/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2241,7 +1833,7 @@
         },
         {
           "alias": "eth/66 state request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x0d[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2252,7 +1844,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 state request",
           "measurement": "geth.p2p/ingress/eth/66/0x0d/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2275,7 +1867,7 @@
         },
         {
           "alias": "eth/66 state response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x0e[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2286,7 +1878,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 state response",
           "measurement": "geth.p2p/ingress/eth/66/0x0e/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2308,7 +1900,7 @@
         },
         {
           "alias": "eth/66 receipt request",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x0f[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2319,7 +1911,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 receipt request",
           "measurement": "geth.p2p/ingress/eth/66/0x0f/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -2341,7 +1933,7 @@
         },
         {
           "alias": "eth/66 receipt response",
-          "expr": "rate(p2p_ingress[1m])",
+          "expr": "rate(p2p_ingress_eth_66_0x10[1m])",
           "format": "time_series",
           "groupBy": [
             {
@@ -2352,7 +1944,7 @@
             }
           ],
           "intervalFactor": 1,
-          "legendFormat": "ingress",
+          "legendFormat": "eth/66 receipt response",
           "measurement": "geth.p2p/ingress/eth/66/0x10/packets.meter",
           "orderByTime": "ASC",
           "policy": "default",
@@ -34932,7 +34524,7 @@
     ]
   },
   "timezone": "",
-  "title": "Single Geth",
+  "title": "Geth",
   "uid": "QC1Arp5Wk",
   "version": 183
 }
