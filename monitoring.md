@@ -56,7 +56,7 @@ Extract the archive.
 $ tar xvf node_exporter-1.2.0.linux-amd64.tar.gz
 ```
 
-Copy the binaries to the following locations and set ownership.
+Copy the binary to the following location and set ownership.
 
 ```console
 $ sudo cp node_exporter-1.2.0.linux-amd64/node_exporter /usr/local/bin
@@ -75,6 +75,8 @@ Create a systemd service file to store the service config which tells systemd to
 ```console
 $ sudo nano /etc/systemd/system/node_exporter.service
 ```
+
+Paste the following into the file. Exit and save.
 
 ```ini
 [Unit]
