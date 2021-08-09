@@ -4,6 +4,8 @@ Monitoring your system resources is an important task for any system administrat
 
 This guide is meant for people with no or little experience in monitoring. It will show you step by step how to do monitoring on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD).
 
+A video tutorial of this guide can be seen on https://youtu.be/Jkvyd8k_R9Y .
+
 ## Why would you want to do monitoring?
 
 Here are some good reasons why you might want to do monitoring on your machine:
