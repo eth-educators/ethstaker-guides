@@ -444,6 +444,14 @@ After your first log in, you will be asked to change the password for the admin 
 
 ![Grafana - Home Page](images/grafana-home.jpg)
 
+### Adding the Prometheus data source
+
+Grafana has the ability to connect to multiple data sources. We have to add our Prometheus data source before we can use it. In the left column menu, hover on the *Configuration* menu (it looks like a cog) and click on the *Data sources* element. Click on the *Add data source* button. Select the *Prometheus* data source type. In the URL field, enter `http://localhost:9090`. Click the *Save and test* button at the bottom of the page. If everything is working, you should see a *Data source is working* message.
+
+![Grafana - Adding Prometheus data source](images/grafana-prom-datasource.png)
+
+### Node Exporter dashboard
+
 A default installation does not include any dashboard. Let's add one for the hardware and OS metrics we are getting from Node Exporter. In the left column menu, hover on the *Create* menu (it looks like a plus sign) and click on the *Import* element. In the *Import via grafana.com* field, type `1860` and click on the *Load* button. On this next screen, make sure to select the Prometheus datasource from the dropdown list named *Prometheus*. Click on the *Import* button at the bottom.
 
 ![Grafana - Node Exporter dashboard - Import](images/grafana-ne-import.png)
