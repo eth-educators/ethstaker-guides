@@ -14,11 +14,11 @@ Here are some good reasons why you might want to do monitoring on your machine:
 
 ## Overview
 
-We will install 3 tools with this guide: [Prometheus](https://prometheus.io/docs/introduction/overview/), [Node exporter](https://prometheus.io/docs/guides/node-exporter/) and [Grafana](https://grafana.com/oss/grafana/).
+We will install 3 tools with this guide: [Prometheus](https://prometheus.io/docs/introduction/overview/), [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) and [Grafana](https://grafana.com/oss/grafana/).
 
 **Prometheus** is an open-source systems monitoring project. It collects and stores different metrics in a specialized database. It provides all those metrics to any other tool who wants to query them in an flexible, efficient and easy way. In our setup, it will collect metrics from Node Exporter and optionally from Ethereum clients and it will provide them on-demand to Grafana.
 
-**Node exporter** is an open-source project that expose your hardware and OS metrics. In our setup, it will provide your system metrics to Prometheus.
+**Node Exporter** is an open-source project that expose your hardware and OS metrics. In our setup, it will provide your system metrics to Prometheus.
 
 **Grafana** is a an open-source project used to visualize metrics. It can be used to create dashboards that easily show the metrics you are interested in. In our setup, it will query the metrics stored on Prometheus to show them in a browser with nice charts and diagrams.
 
@@ -30,7 +30,7 @@ Almost all of these commands will be performed in a terminal. Start your *Termin
 
 Executing a command with `sudo` will occasionally ask you for your password. Make sure to enter your account password correctly. You can execute the command again if you fail to enter the correct password.
 
-## Installing Node exporter
+## Installing Node Exporter
 
 Create a user account for the service to run under. This account will not be able to log into the machine. It will only be used to run the service.
 
@@ -38,7 +38,7 @@ Create a user account for the service to run under. This account will not be abl
 $ sudo useradd --no-create-home --shell /bin/false node_exporter
 ```
 
-Download the latest version of Node exporter from https://prometheus.io/download/ . As of this date, the latest stable release version is 1.2.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest version of Node Exporter from https://prometheus.io/download/ . As of this date, the latest stable release version is 1.2.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
 $ wget https://github.com/prometheus/node_exporter/releases/download/v1.2.0/node_exporter-1.2.0.linux-amd64.tar.gz
@@ -70,7 +70,7 @@ $ rm -rf node_exporter-1.2.0.linux-amd64
 $ rm node_exporter-1.2.0.linux-amd64.tar.gz
 ```
 
-Create a systemd service file to store the service config which tells systemd to run Node exporter as the node_exporter user.
+Create a systemd service file to store the service config which tells systemd to run Node Exporter as the node_exporter user.
 
 ```console
 $ sudo nano /etc/systemd/system/node_exporter.service
@@ -226,7 +226,7 @@ scrape_configs:
       - targets: ['localhost:9100']
 ```
 
-The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node exporter and it will store all your hardware and OS metrics in its database.
+The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node Exporter and it will store all your hardware and OS metrics in its database.
 
 Set ownership for the config file. The prometheus account will own this.
 
@@ -433,15 +433,32 @@ $ sudo systemctl enable grafana-server
 
 ## Accessing Grafana and adding your dashboards
 
-(TODO)
+To connect to Grafana, simply launch a browser from your machine and go to http://localhost:3000 . If you are remotely connecting to your machine with SSH or something else, there are a few security and privacy considerations for which you will need something like an SSH tunnel. See the [Remote access to Grafana](#remote-access-to-grafana) section.
 
-## Adding your Ethereum clients
+The default credentials for Grafana are:
+
+* Username: admin
+* Password: admin
+
+After your first log in, you will be asked to change the password for the admin account. Make sure to enter a strong and unique password that you will be able to remember. That should bring you to your Grafana home page.
+
+![Grafana - Home Page](images/grafana-home.jpg)
+
+A default installation of Grafana does not include any dashboard. Let's add one for the hardware and OS metrics we are getting from Node Exporter. In the left column menu, hover on the *Create* menu (it looks like a plus sign) and click on the *Import* element. In the *Import via grafana.com* field, type `1860` and click on the *Load* button. On this next screen, make sure to select the Prometheus datasource from the dropdown list named *Prometheus*. Click on the *Import* button at the bottom.
+
+![Grafana - Node Exporter dashboard - Import](images/grafana-ne-import.png)
+
+This will lead you to a nice dashboard showing you a lot of information regarding your machine including CPU, Memory, Network and Disk usage. You can browse the different sections of this dashboard to see more information.
+
+![Grafana - Node Exporter - Dashboard](images/grafana-ne-dashboard.jpg)
+
+## Adding monitoring for your Ethereum clients
 
 (TODO)
 
 ## Security risks
 
-Adding Prometheus, Node exporter and Grafana with this configuration comes with a few additional security risks for your machine.
+Adding Prometheus, Node Exporter and Grafana with this configuration comes with a few additional security risks for your machine.
 
 The first risk comes from the tools themselves. There might be some security issues with them that I am not aware of which might compromise your machine to some malicious actors. A great way to prevent such risk is to keep your system updated. Keeping Grafana updated should be somewhat easy as it was installed with APT. Executing those commands should keep all your system packages updated including Grafana.
 
@@ -450,9 +467,9 @@ $ sudo apt update
 $ sudo apt upgrade
 ```
 
-Keeping Prometheus and Node exporter updated will require more efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Node exporter](#installing-node-exporter) section and at the beginning of the [Installing Prometheus](#installing-prometheus) section.
+Keeping Prometheus and Node Exporter updated will require more efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Node Exporter](#installing-node-exporter) section and at the beginning of the [Installing Prometheus](#installing-prometheus) section.
 
-To restart the Node exporter service after you updated its binary, use this command.
+To restart the Node Exporter service after you updated its binary, use this command.
 
 ```console
 $ sudo systemctl restart node_exporter
@@ -464,11 +481,13 @@ To restart the Prometheus service after you updated its binary, use this command
 $ sudo systemctl restart prometheus
 ```
 
-You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases . You can find all the Node exporter releases and their changelog on https://github.com/prometheus/node_exporter/releases .
+You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases . You can find all the Node Exporter releases and their changelog on https://github.com/prometheus/node_exporter/releases .
 
 You might never need to update these tools as there might not be any severe or critical issue with them or there might not be an issue that can be easily exploited by a malicious actor with the version you have. However, it's a good practice to monitor releases for the tools you are using and update them regularly.
 
 The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP servers they are adding and the ports on which they are listening. This guide configured them to only listen on your localhost interface meaning that they cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to these tools from your machine to access your private data for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.
+
+### Remote access to Grafana
 
 If you want to access Grafana and your dashboards from a remote machine on your local network or from the internet, you could simply use [an SSH tunnel](https://www.tunnelsup.com/how-to-create-ssh-tunnels/) ([with PuTTY on Windows](https://www.ibm.com/support/pages/ssh-tunneling-putty) or [natively on Windows 10](http://woshub.com/ssh-tunnel-port-forward-windows/)).
 
