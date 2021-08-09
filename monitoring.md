@@ -452,9 +452,23 @@ This will lead you to a nice dashboard showing you a lot of information regardin
 
 ![Grafana - Node Exporter - Dashboard](images/grafana-ne-dashboard.jpg)
 
+When viewing a dashboard, you will notice a few things:
+
+* You can change everything in your dashboards. Panels can be moved, added, removed or changed to show what you prefer or to show it differently.
+* Information is shown for a specific period. In the Node Export dashboard, you will notice a *Last 24 hours* period is selected in a dropdown list in the top right corner. That is your current viewing period which can be changed to your preferences.
+* Information is automatically refreshed. In the Node Export dashboard, you will notice a *1m* delay is selected in a dropdown list in the top right corner. This is your current refreshing delay which can be changed to your preferences.
+
+You can customize your experience in a lot of different ways.
+
 ## Adding monitoring for your Ethereum clients
 
-(TODO)
+Adding monitoring for your other processes like your Ethereum clients usually requires 3 things:
+
+1. Enabling metrics collection and reporting on your client. This is usually done by adding a few flags to the command line arguments use to start your client and restarting your client service.
+2. Configuring Prometheus to poll the metrics from your client. This is done by adding a job in the `scrape_configs` section of the Prometheus configuration file and reloading your Prometheus service.
+3. Importing a new dashboard in Grafana to display those metrics. There are many public Grafana dashboards for a lot of different metrics, but sometimes you have to search hard to find one you like.
+
+(TODO: Finish this section)
 
 ## Security risks
 
