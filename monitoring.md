@@ -564,6 +564,48 @@ Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:3
 ```
 3. Import [the Lighthouse Summary dashboard for Prometheus](https://raw.githubusercontent.com/sigp/lighthouse-metrics/master/dashboards/Summary.json) and [the Lighthouse Validator Monitor dashboard for Prometheus](https://raw.githubusercontent.com/sigp/lighthouse-metrics/master/dashboards/ValidatorMonitor.json) in Grafana.
 
+### Teku
+
+1. Add or make sure the following flags are included in the command line arguments used to start Teku: `--metrics-enabled`. Restart Teku. Make sure Teku is still running properly.
+2. Configure Prometheus to poll the metrics from Teku.
+
+Open your Prometheus configuration file.
+
+```console
+$ sudo nano /etc/prometheus/prometheus.yml
+```
+
+Add the following job in your `scrape_configs` section below all the other jobs. Exit and save.
+
+```yaml
+  - job_name: teku
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['localhost:8008']
+```
+
+Reload Prometheus with this new configuration file.
+
+```console
+$ sudo systemctl reload prometheus.service
+```
+
+Check your Prometheus logs to make sure the new configuration file was loaded correctly.
+
+```console
+$ sudo journalctl -u prometheus.service -n 6
+```
+
+Output should look something like this. Press `q` to exit. Finding the *Completed loading of configuration file* message means your new configuration file was loaded correctly.
+
+```
+Aug 09 12:34:05 remy-MINIPC-PN50 systemd[1]: Reloading Prometheus.
+Aug 09 12:34:05 remy-MINIPC-PN50 systemd[1]: Reloaded Prometheus.
+Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:34:05.304Z caller=main.go:981 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
+Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:34:05.311Z caller=main.go:1012 msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml totalDuration=7.822144ms remote_storage=4.305µs web_handler=6.249µs query_engine=1.734µs scrape=1.831998ms scrape_sd=83.865µs notify=618.619µs notify_sd=51.754µs rules=1.993µs
+```
+3. Import [the Teku dashboard for Prometheus](https://grafana.com/grafana/dashboards/13457) in Grafana.
+
 (TODO: Add more clients and their dashboard)
 
 ## Security risks
