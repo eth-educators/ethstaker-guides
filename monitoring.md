@@ -437,14 +437,14 @@ To connect to Grafana, simply launch a browser from your machine and go to http:
 
 The default credentials for Grafana are:
 
-* Username: admin
-* Password: admin
+* **Username**: admin
+* **Password**: admin
 
 After your first log in, you will be asked to change the password for the admin account. Make sure to enter a strong and unique password that you will be able to remember. That should bring you to your Grafana home page.
 
 ![Grafana - Home Page](images/grafana-home.jpg)
 
-A default installation of Grafana does not include any dashboard. Let's add one for the hardware and OS metrics we are getting from Node Exporter. In the left column menu, hover on the *Create* menu (it looks like a plus sign) and click on the *Import* element. In the *Import via grafana.com* field, type `1860` and click on the *Load* button. On this next screen, make sure to select the Prometheus datasource from the dropdown list named *Prometheus*. Click on the *Import* button at the bottom.
+A default installation does not include any dashboard. Let's add one for the hardware and OS metrics we are getting from Node Exporter. In the left column menu, hover on the *Create* menu (it looks like a plus sign) and click on the *Import* element. In the *Import via grafana.com* field, type `1860` and click on the *Load* button. On this next screen, make sure to select the Prometheus datasource from the dropdown list named *Prometheus*. Click on the *Import* button at the bottom.
 
 ![Grafana - Node Exporter dashboard - Import](images/grafana-ne-import.png)
 
@@ -458,17 +458,67 @@ When viewing a dashboard, you will notice a few things:
 * Information is shown for a specific period. In the Node Export dashboard, you will notice a *Last 24 hours* period is selected in a dropdown list in the top right corner. That is your current viewing period which can be changed to your preferences.
 * Information is automatically refreshed. In the Node Export dashboard, you will notice a *1m* delay is selected in a dropdown list in the top right corner. This is your current refreshing delay which can be changed to your preferences.
 
-You can customize your experience in a lot of different ways.
+You can customize your experience in a lot of different ways. Check out [the Grafana documentation](https://grafana.com/docs/) to learn more about this.
 
 ## Adding monitoring for your Ethereum clients
 
 Adding monitoring for your other processes like your Ethereum clients usually requires 3 things:
 
-1. Enabling metrics collection and reporting on your client. This is usually done by adding a few flags to the command line arguments use to start your client and restarting your client service.
+1. Enabling metrics collection and reporting on your client. This is usually done by adding a few flags to the command line arguments used to start your client and restarting your client service.
 2. Configuring Prometheus to poll the metrics from your client. This is done by adding a job in the `scrape_configs` section of the Prometheus configuration file and reloading your Prometheus service.
 3. Importing a new dashboard in Grafana to display those metrics. There are many public Grafana dashboards for a lot of different metrics, but sometimes you have to search hard to find one you like.
 
-(TODO: Finish this section)
+The following sections will give you the details for each client. Depending on how you installed and configured those clients initially, the exact steps may vary.
+
+### Geth
+
+1. Add or make sure the following flags are included in the command line arguments used to start Geth: `--metrics --metrics.expensive --pprof`. Restart Geth. Make sure Geth is still running properly.
+2. Configure Prometheus to poll the metrics from Geth.
+
+Open your Prometheus configuration file.
+
+```console
+$ sudo nano /etc/prometheus/prometheus.yml
+```
+
+Add the following job in your `scrape_configs` section below all the other jobs. Exit and save.
+
+```yaml
+  - job_name: geth
+    scrape_timeout: 10s
+    metrics_path: /debug/metrics/prometheus
+    static_configs:
+      - targets: ['localhost:6060']
+```
+
+Reload Prometheus with this new configuration file.
+
+```console
+$ sudo systemctl reload prometheus.service
+```
+
+Check your Prometheus logs to make sure the new configuration file was loaded correctly.
+
+```console
+$ sudo journalctl -u prometheus.service -n 6
+```
+
+Output should look something like this. Press `q` to exit. Finding the *Completed loading of configuration file* message means your new configuration file was loaded correctly.
+
+```
+Aug 09 12:34:05 remy-MINIPC-PN50 systemd[1]: Reloading Prometheus.
+Aug 09 12:34:05 remy-MINIPC-PN50 systemd[1]: Reloaded Prometheus.
+Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:34:05.304Z caller=main.go:981 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
+Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:34:05.311Z caller=main.go:1012 msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml totalDuration=7.822144ms remote_storage=4.305µs web_handler=6.249µs query_engine=1.734µs scrape=1.831998ms scrape_sd=83.865µs notify=618.619µs notify_sd=51.754µs rules=1.993µs
+```
+
+3. Import [a good Geth dashboard for Prometheus](https://raw.githubusercontent.com/remyroy/ethstaker/main/dashboards/geth-grafana.json) in Grafana.
+
+### Lighthouse
+
+(TODO)
+
+(TODO: Add more clients)
 
 ## Security risks
 
