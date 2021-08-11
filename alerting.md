@@ -10,7 +10,15 @@ This guide is meant for people with no or little experience in alerting. This gu
 
 ## Overview
 
-(TODO)
+We will install 1 additional tool to your setup that should already be using Prometheus and Node Exporter: [Alertmanager](https://www.prometheus.io/docs/alerting/latest/alertmanager/). We will also be using [PagerDuty](https://www.pagerduty.com/use-cases/it-operations/) as our incident manager and as our tool to get notified. We will configure Prometheus to check for rules that might indicate a problem with your machine. When a rule is triggered or resolved, Prometheus will send that information to Alertmanage which will route it to PagerDuty.
+
+**Prometheus** is an open-source systems monitoring project. It collects and stores different metrics in a specialized database. It can be configured to constantly verify that certain metrics are within our expected margins. In our setup, it will periodically check for rules and forward any unexpected result to Alertmanager.
+
+**Alertmanager** is an open-source project that handles alerts sent by client applications such as Prometheus. In our setup, it will receive alerts that are triggered and resolved from Prometheus and it will route them to PagerDuty.
+
+**PagerDuty** is a large online incident response platform. It can be used for a wide variety of incident management use cases. In our setup, it will receive alerts from Alertmanager and it will notify us when we have an incident with our machine. Optionally, it can be used to manage your incidents in greater detail.
+
+![Alerting - Overview](images/alerting-overview.png)
 
 ## Setup an account on PagerDuty
 
