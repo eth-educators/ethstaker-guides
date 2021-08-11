@@ -375,21 +375,44 @@ This will leave us around 500MB of free RAM. Waiting around 2 minutes should tri
 
 Once your *Available memory* test is done, you can terminate the dummy process that is needlessly consuming your memory by typing `CTRL`+`C` in your terminal.
 
-## Security risks
-
-(TODO)
-
 ## Resolving the incidents
 
 Once the alert is resolved, Alertmanager will call PagerDuty and it should automatically resolve the incident within a few minutes. You can manually acknowledge and resolve any incident on your PagerDuty Incidents dashboard.
 
 That's it. That should give you some good alerting foundation. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.
 
+## Security risks
+
+Adding and using Alertmanager, Prometheus and PagerDuty with this configuration comes with a few additional security risks for your system.
+
+The first risk comes from the tools themselves. There might be some security issues with them that I am not aware of which might compromise your machine to some malicious actors. A great way to prevent such risk is to keep your system updated.
+
+Keeping Prometheus and Alertmanager updated will require some efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Alertmanager](#installing-alertmanager) section. You can find the same related section for Prometheus [on my monitoring guide](monitoring.md#installing-prometheus).
+
+To restart the Alertmanager service after you updated its binary, use this command.
+
+```console
+$ sudo systemctl restart alertmanager.service
+
+To restart the Prometheus service after you updated its binary, use this command.
+
+```console
+$ sudo systemctl restart prometheus.service
+```
+
+You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases . You can find all the Alertmanager releases and their changelog on https://github.com/prometheus/alertmanager/releases .
+
+You might never need to update these tools as there might not be any severe or critical issue with them or there might not be an issue that can be easily exploited by a malicious actor with the version you have. However, it's a good practice to monitor releases for the tools you are using and update them regularly.
+
+There might be some risks associated with using PagerDuty. You should contact them and reach their support if you are concerned about the risks associated with that platform.
+
+(TODO Finish Security Risks section)
+
 ## Support
 
 If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
 
-* Discord: [discord.gg/e84CFep](https://discord.gg/e84CFep)
+* Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
 
 ## Credits
