@@ -393,6 +393,7 @@ To restart the Alertmanager service after you updated its binary, use this comma
 
 ```console
 $ sudo systemctl restart alertmanager.service
+```
 
 To restart the Prometheus service after you updated its binary, use this command.
 
