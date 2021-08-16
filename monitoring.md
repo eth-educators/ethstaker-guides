@@ -228,7 +228,7 @@ scrape_configs:
       - targets: ['localhost:9100']
 ```
 
-The scrape_configs section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: node_exporter. It will poll data from Node Exporter and it will store all your hardware and OS metrics in its database.
+The `scrape_configs` section define the different jobs where Prometheus will poll data from. We have 1 job so far in this configuration file: *node_exporter*. It will poll data from Node Exporter and it will store all your hardware and OS metrics in its database.
 
 Set ownership for the config file. The prometheus account will own this.
 
@@ -435,7 +435,7 @@ $ sudo systemctl enable grafana-server
 
 ## Accessing Grafana and adding your dashboards
 
-To connect to Grafana, simply launch a browser from your machine and go to http://localhost:3000 . If you are remotely connecting to your machine with SSH or something else, there are a few security and privacy considerations for which you will need something like an SSH tunnel. See the [Remote access to Grafana](#remote-access-to-grafana) section.
+To connect to Grafana, simply launch a browser from your machine and go to http://localhost:3000 . If you are remotely connecting to your machine with SSH or something else, there are a few security and privacy considerations for which you will need something like an SSH tunnel. Check out the [Remote access to Grafana](#remote-access-to-grafana) section if you are in this situation.
 
 The default credentials for Grafana are:
 
