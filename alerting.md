@@ -148,7 +148,8 @@ Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/alertmanager \
     --config.file /etc/alertmanager/alertmanager.yml \
-    --storage.path /var/lib/alertmanager/
+    --storage.path /var/lib/alertmanager/ \
+    --web.listen-address="localhost:9093"
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
@@ -384,6 +385,14 @@ Once your *Available memory* test is done, you can terminate the dummy process t
 Once the alert is resolved, Alertmanager will call PagerDuty and it should automatically resolve the incident within a few minutes. You can manually acknowledge and resolve any incident on your PagerDuty Incidents dashboard.
 
 That's it. That should give you some good alerting foundation. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.
+
+## Exploring your metrics
+
+(TODO)
+
+## Adding rules for your Ethereum clients
+
+(TODO)
 
 ## Security risks
 
