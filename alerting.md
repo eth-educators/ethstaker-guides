@@ -6,7 +6,11 @@ This guide is meant for people with no or little experience in alerting. This gu
 
 ## Why would you want to do alerting?
 
-(TODO)
+Here are some good reasons why you might want to do alerting on your machine:
+
+1. **Automatic issue detection**: You want to automatically check for issues with your system.
+2. **Issue prevention**: You want to be able to find out about potential issues ahead of time.
+3. **Issue notification**: You want to be automatically notified when there is an issue with your system.
 
 ## Overview
 
