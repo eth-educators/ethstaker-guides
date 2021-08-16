@@ -420,7 +420,7 @@ You might never need to update these tools as there might not be any severe or c
 
 There might be some risks associated with using PagerDuty. You should contact them and reach their support if you are concerned about the risks associated with that platform.
 
-The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP server it is adding and the port on which it is listening. This guide configured it to only listen on your localhost interface meaning that they cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to Alertmanager from your machine to trigger a false alert for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.
+The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP server it is adding and the port on which it is listening. This guide configured Alertmanager to only listen on your localhost interface meaning that it cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to Alertmanager from your machine to trigger a false alert for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.
 
 There might be other kind of risks associated with those tools and this configuration, but I think these two are the main ones.
 
