@@ -57,7 +57,7 @@ $ sudo chown -R alertmanager:alertmanager /etc/alertmanager
 $ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
 ```
 
-Download the latest version of Alertmanager from https://prometheus.io/download/#alertmanager . As of this date, the latest version is 0.22.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Alertmanager from https://prometheus.io/download/#alertmanager (avoid any pre-release version). As of this date, the latest version is 0.22.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
 $ wget https://github.com/prometheus/alertmanager/releases/download/v0.22.2/alertmanager-0.22.2.linux-amd64.tar.gz

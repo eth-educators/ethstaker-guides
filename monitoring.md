@@ -40,7 +40,7 @@ Create a user account for the service to run under. This account will not be abl
 $ sudo useradd --no-create-home --shell /bin/false node_exporter
 ```
 
-Download the latest version of Node Exporter from https://prometheus.io/download/#node_exporter . As of this date, the latest stable release version is 1.2.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Node Exporter from https://prometheus.io/download/#node_exporter (avoid any pre-release version). As of this date, the latest stable release version is 1.2.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
 $ wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
@@ -156,7 +156,7 @@ $ sudo chown -R prometheus:prometheus /etc/prometheus
 $ sudo chown -R prometheus:prometheus /var/lib/prometheus
 ```
 
-Download the latest version of Prometheus from https://prometheus.io/download/#prometheus . As of this date, the latest stable release version is 2.28.1 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Prometheus from https://prometheus.io/download/#prometheus (avoid any pre-release version). As of this date, the latest stable release version is 2.28.1 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
 $ wget https://github.com/prometheus/prometheus/releases/download/v2.28.1/prometheus-2.28.1.linux-amd64.tar.gz
