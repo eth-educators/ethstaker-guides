@@ -87,9 +87,11 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
+Type=simple
 User=node_exporter
 Group=node_exporter
-Type=simple
+Restart=always
+RestartSec=5
 ExecStart=/usr/local/bin/node_exporter --web.listen-address="localhost:9100"
 
 [Install]
