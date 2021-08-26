@@ -386,14 +386,6 @@ Once the alert is resolved, Alertmanager will call PagerDuty and it should autom
 
 That's it. That should give you some good alerting foundation. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.
 
-## Exploring your metrics
-
-(TODO)
-
-## Adding rules for your Ethereum clients
-
-(TODO)
-
 ## Security risks
 
 Adding and using Alertmanager, Prometheus and PagerDuty with this configuration comes with a few additional security risks for your system.
