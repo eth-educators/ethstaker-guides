@@ -608,7 +608,7 @@ Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:3
 ```
 3. Import [the Lighthouse Summary dashboard for Prometheus](https://raw.githubusercontent.com/sigp/lighthouse-metrics/master/dashboards/Summary.json) and [the Lighthouse Validator Monitor dashboard for Prometheus](https://raw.githubusercontent.com/sigp/lighthouse-metrics/master/dashboards/ValidatorMonitor.json) in Grafana.
 
-As an alternative to those official dashboards from the Sigma Prime team, you can try [a port of the Prysm Validator Dashboard for Lighthouse](https://github.com/SeaMonkey82/PrysmDashboardForLighthouse) from the great Sea Monkey. This dashboard requires a few more instructions and it is assuming more technical knownledge from its users.
+As an alternative to those official dashboards from the Sigma Prime team, you can try [a port of the Prysm Validator Dashboard for Lighthouse](https://github.com/SeaMonkey82/PrysmDashboardForLighthouse) from the great [Sea Monkey](https://seamonkey.tech/). This dashboard requires a few more instructions and it is assuming more technical knownledge from its users.
 
 ### Teku
 
