@@ -743,4 +743,4 @@ If you have any question or if you need additional support, make sure to get in 
 
 ## Credits
 
-Based on [Somer Esat's guide](https://someresat.medium.com/guide-to-staking-on-ethereum-2-0-ubuntu-pyrmont-lighthouse-a634d3b87393).
+Based on [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
