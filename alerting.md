@@ -4,6 +4,8 @@ Knowning when there is a potential problem with your machine or your processes i
 
 This guide is meant for people with no or little experience in alerting. This guide will show you step by step how to do alerting on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD). It will also use PagerDuty as a easy way to integrate with different messaging services (Email, SMS, Slack, etc) and to manage your incidents. If you do not currently use Prometheus with Node Exporter to monitor your system, you can use [my monitoring guide](monitoring.md) to install and configure those tools before using this guide.
 
+A video tutorial of this guide can be seen on https://youtu.be/h2nrVZNofxc .
+
 ## Why would you want to do alerting?
 
 Here are some good reasons why you might want to do alerting on your machine:
