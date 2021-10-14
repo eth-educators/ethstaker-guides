@@ -704,7 +704,7 @@ $ sudo apt update
 $ sudo apt upgrade
 ```
 
-Keeping Prometheus and Node Exporter updated will require more efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Node Exporter](#installing-node-exporter) section and at the beginning of the [Installing Prometheus](#installing-prometheus) section.
+Keeping Prometheus and Node Exporter updated will require more efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Node Exporter](#installing-node-exporter) section and at the beginning of the [Installing Prometheus](#installing-prometheus) section. Easy to use scripts that do all those steps for you are [included below](#prometheus-and-node-exporter-update-scripts).
 
 To restart the Node Exporter service after you updated its binary, use this command.
 
@@ -724,11 +724,34 @@ You might never need to update these tools as there might not be any severe or c
 
 The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP servers they are adding and the ports on which they are listening. This guide configured them to only listen on your localhost interface meaning that they cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to these tools from your machine to access your private data for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.
 
+There might be other kind of risks associated with those tools and this configuration, but I think these two are the main ones.
+
+### Prometheus and Node Exporter update scripts
+
+I created some simple scripts to ease the pain of updating Prometheus and Node Exporter. You can find them in this repository: [update-prometheus.py](scripts/update-prometheus.py) and [update-node-exporter.py](scripts/update-node-exporter.py). Those scripts will check the current installed version and they will compare it with the latest stable release version on Github. If there is a new version available, it will prompt you to update it. Those scripts require a somewhat recent version of Python 3 which should already be installed on your system.
+
+You can easily download those scripts with:
+
+```console
+$ wget https://raw.githubusercontent.com/remyroy/ethstaker/main/scripts/update-prometheus.py
+$ wget https://raw.githubusercontent.com/remyroy/ethstaker/main/scripts/update-node-exporter.py
+```
+
+To run the Prometheus update script, use this command:
+
+```console
+$ python3 update-prometheus.py
+```
+
+To run the Node Exporter update script, use this command:
+
+```console
+$ python3 update-node-exporter.py
+```
+
 ### Remote access to Grafana
 
 If you want to access Grafana and your dashboards from a remote machine on your local network or from the internet, you could simply use [an SSH tunnel](https://www.tunnelsup.com/how-to-create-ssh-tunnels/) ([with PuTTY on Windows](https://www.ibm.com/support/pages/ssh-tunneling-putty) or [natively on Windows 10](http://woshub.com/ssh-tunnel-port-forward-windows/)).
-
-There might be other kind of risks associated with those tools and this configuration, but I think these two are the main ones.
 
 ## What's next?
 

@@ -12,23 +12,22 @@ from distutils.version import LooseVersion
 
 from tempfile import TemporaryDirectory
 
-PROMETHEUS_INSTALLED_PATH = '/usr/local/bin/'
-PROMETHEUS_SERVICE_NAME = 'prometheus.service'
-PROMETHEUS_USER_GROUP = 'prometheus:prometheus'
-PROMETHEUS_DATA_PATH = '/etc/prometheus/'
+NODE_EXPORTER_INSTALLED_PATH = '/usr/local/bin/'
+NODE_EXPORTER_SERVICE_NAME = 'node_exporter.service'
+NODE_EXPORTER_USER_GROUP = 'node_exporter:node_exporter'
 UNKNOWN_VERSION = 'unknown'
 
 GITHUB_REST_API_URL = 'https://api.github.com'
 GITHUB_API_VERSION = 'application/vnd.github.v3+json'
 
-PROMETHEUS_LATEST_RELEASE = '/repos/prometheus/prometheus/releases/latest'
+NODE_EXPORTER_LATEST_RELEASE = '/repos/prometheus/node_exporter/releases/latest'
 
-def get_current_prometheus_version():
+def get_current_node_exporter_version():
     version = UNKNOWN_VERSION
 
     try:
         process_result = subprocess.run([
-            PROMETHEUS_INSTALLED_PATH + 'prometheus', '--version'
+            NODE_EXPORTER_INSTALLED_PATH + 'node_exporter', '--version'
             ], capture_output=True, text=True)
 
         process_output = process_result.stdout
@@ -41,11 +40,11 @@ def get_current_prometheus_version():
 
     return version
 
-def get_latest_prometheus_version():
+def get_latest_node_exporter_version():
     version = UNKNOWN_VERSION
     release_data = {}
 
-    url = GITHUB_REST_API_URL + PROMETHEUS_LATEST_RELEASE
+    url = GITHUB_REST_API_URL + NODE_EXPORTER_LATEST_RELEASE
     headers = {
         'Accept': GITHUB_API_VERSION
     }
@@ -91,8 +90,8 @@ def get_latest_prometheus_version():
 
     return version, release_data
 
-def update_prometheus(release_data):
-    print('Updating Prometheus...')
+def update_node_exporter(release_data):
+    print('Updating Node Exporter...')
     print(f'Downloading latest release archive {release_data["asset_name"]} ...')
 
     with urlopen(release_data['download_url']) as response:
@@ -107,33 +106,17 @@ def update_prometheus(release_data):
 
                 extracted_directory = str(tmpdir) + '/' + release_data["asset_name"][:-7]
 
-                print('Stopping Prometheus service...')
-                subprocess.run(['sudo', 'systemctl', 'stop', PROMETHEUS_SERVICE_NAME])
+                print('Stopping Node Exporter service...')
+                subprocess.run(['sudo', 'systemctl', 'stop', NODE_EXPORTER_SERVICE_NAME])
 
-                print('Updating installed Prometheus binaries...')
-                extracted_prometheus_path = extracted_directory + '/' + 'prometheus'
-                extracted_promtool_path = extracted_directory + '/' + 'promtool'
-                installed_prometheus_path = PROMETHEUS_INSTALLED_PATH + 'prometheus'
-                installed_promtool_path = PROMETHEUS_INSTALLED_PATH + 'promtool'
-                subprocess.run(['sudo', 'cp', extracted_prometheus_path, PROMETHEUS_INSTALLED_PATH])
-                subprocess.run(['sudo', 'cp', extracted_promtool_path, PROMETHEUS_INSTALLED_PATH])
-                subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_prometheus_path])
-                subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_promtool_path])
+                print('Updating installed Node Exporter binary...')
+                extracted_node_exporter_path = extracted_directory + '/' + 'node_exporter'
+                installed_node_exporter_path = NODE_EXPORTER_INSTALLED_PATH + 'node_exporter'
+                subprocess.run(['sudo', 'cp', extracted_node_exporter_path, NODE_EXPORTER_INSTALLED_PATH])
+                subprocess.run(['sudo', 'chown', '-R', NODE_EXPORTER_USER_GROUP, installed_node_exporter_path])
 
-                print('Updating installed Prometheus content...')
-                extracted_consoles_path = extracted_directory + '/' + 'consoles'
-                extracted_console_libraries_path = extracted_directory + '/' + 'console_libraries'
-                installed_consoles_path = PROMETHEUS_DATA_PATH + 'consoles'
-                installed_console_libraries_path = PROMETHEUS_DATA_PATH + 'console_libraries'
-                subprocess.run(['sudo', 'rm', '-rf', installed_consoles_path])
-                subprocess.run(['sudo', 'rm', '-rf', installed_console_libraries_path])
-                subprocess.run(['sudo', 'cp', '-r', extracted_consoles_path, PROMETHEUS_DATA_PATH])
-                subprocess.run(['sudo', 'cp', '-r', extracted_console_libraries_path, PROMETHEUS_DATA_PATH])
-                subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_consoles_path])
-                subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_console_libraries_path])
-
-                print('Restarting Prometheus service...')
-                subprocess.run(['sudo', 'systemctl', 'start', PROMETHEUS_SERVICE_NAME])
+                print('Restarting Node Exporter service...')
+                subprocess.run(['sudo', 'systemctl', 'start', NODE_EXPORTER_SERVICE_NAME])
         else:
             print(f'Unexpected response status from Github: {response.status}')
             return False
@@ -141,23 +124,23 @@ def update_prometheus(release_data):
     return True
 
 def main():
-    current_version = get_current_prometheus_version()
+    current_version = get_current_node_exporter_version()
 
     if not current_version:
-        print(f'Unable to find current Prometheus version. Is Prometheus installed in '
-            f'{PROMETHEUS_INSTALLED_PATH}?')
+        print(f'Unable to find current Node Exporter version. Is Node Exporter installed in '
+            f'{NODE_EXPORTER_INSTALLED_PATH}?')
         quit()
     if current_version == UNKNOWN_VERSION:
-        print('Unable to find current Prometheus version. Cannot parse version output.')
+        print('Unable to find current Node Exporter version. Cannot parse version output.')
         quit()
 
-    latest_version, release_data = get_latest_prometheus_version()
+    latest_version, release_data = get_latest_node_exporter_version()
 
     if not latest_version:
-        print('Unable to find latest Prometheus version. Is your internet working?')
+        print('Unable to find latest Node Exporter version. Is your internet working?')
         quit()
     if latest_version == UNKNOWN_VERSION:
-        print('Unable to find latest Prometheus version. Issue with parsing or connecting to '
+        print('Unable to find latest Node Exporter version. Issue with parsing or connecting to '
             'Github.')
         quit()
     if 'asset_name' not in release_data or 'download_url' not in release_data:
@@ -168,24 +151,24 @@ def main():
     loose_latest_version = LooseVersion(latest_version)
 
     if loose_current_version == loose_latest_version:
-        print(f'Prometheus is up-to-date. (Installed: {current_version}, '
+        print(f'Node Exporter is up-to-date. (Installed: {current_version}, '
             f'Latest: {latest_version})')
     elif loose_current_version > loose_latest_version:
-        print(f'Prometheus is ahead of the latest version. (Installed: {current_version}, '
+        print(f'Node Exporter is ahead of the latest version. (Installed: {current_version}, '
             f'Latest: {latest_version})')
     else:
-        print(f'Prometheus can be updated to the latest version: {latest_version} '
+        print(f'Node Exporter can be updated to the latest version: {latest_version} '
             f'(Installed: {current_version})')
-        answer = input('Would you like to update Prometheus? [Y\\n]: ')
+        answer = input('Would you like to update Node Exporter? [Y\\n]: ')
         answer = answer.strip().lower()
         if answer in ('', 'y', 'yes'):
-            if update_prometheus(release_data):
-                print(f'Prometheus updated to the latest version: {latest_version}')
-                print('You can make sure Prometheus is working properly by checking out your '
+            if update_node_exporter(release_data):
+                print(f'Node Exporter updated to the latest version: {latest_version}')
+                print('You can make sure Node Exporter is working properly by checking out your '
                     'logs with:')
-                print(f'sudo journalctl -ru {PROMETHEUS_SERVICE_NAME}')
+                print(f'sudo journalctl -ru {NODE_EXPORTER_SERVICE_NAME}')
             else:
-                print('Failed to update Prometheus.')
+                print('Failed to update Node Exporter.')
 
 if __name__ == "__main__":
     main()
