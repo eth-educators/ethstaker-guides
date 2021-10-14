@@ -181,8 +181,9 @@ def main():
         if answer in ('', 'y', 'yes'):
             if update_prometheus(release_data):
                 print(f'Prometheus updated to the latest version: {latest_version}')
+                print('')
                 print('You can make sure Prometheus is working properly by checking out your '
-                    'logs with:')
+                    'logs with this command:')
                 print(f'sudo journalctl -ru {PROMETHEUS_SERVICE_NAME}')
             else:
                 print('Failed to update Prometheus.')

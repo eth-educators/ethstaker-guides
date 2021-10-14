@@ -164,8 +164,9 @@ def main():
         if answer in ('', 'y', 'yes'):
             if update_node_exporter(release_data):
                 print(f'Node Exporter updated to the latest version: {latest_version}')
+                print('')
                 print('You can make sure Node Exporter is working properly by checking out your '
-                    'logs with:')
+                    'logs with this command:')
                 print(f'sudo journalctl -ru {NODE_EXPORTER_SERVICE_NAME}')
             else:
                 print('Failed to update Node Exporter.')
