@@ -394,7 +394,7 @@ Adding and using Alertmanager, Prometheus and PagerDuty with this configuration 
 
 The first risk comes from the tools themselves. There might be some security issues with them that I am not aware of which might compromise your machine to some malicious actors. A great way to prevent such risk is to keep your system updated.
 
-Keeping Prometheus and Alertmanager updated will require some efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Alertmanager](#installing-alertmanager) section. You can find the same related section for Prometheus [on my monitoring guide](monitoring.md#installing-prometheus).
+Keeping Prometheus and Alertmanager updated will require some efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the [Installing Alertmanager](#installing-alertmanager) section. You can find the same related section for Prometheus [on my monitoring guide](monitoring.md#installing-prometheus). Easy to use script that do all those steps for you are [included below](#alertmanager-update-scripts).
 
 To restart the Alertmanager service after you updated its binary, use this command.
 
@@ -417,6 +417,22 @@ There might be some risks associated with using PagerDuty. You should contact th
 The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP server it is adding and the port on which it is listening. This guide configured Alertmanager to only listen on your localhost interface meaning that it cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to Alertmanager from your machine to trigger a false alert for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.
 
 There might be other kind of risks associated with those tools and this configuration, but I think these two are the main ones.
+
+### Alertmanager update scripts
+
+I created a simple script to ease the pain of updating Alertmanager. You can find it in this repository: [update-alertmanager.py](scripts/update-alertmanager.py). This script will check the current installed version and it will compare it with the latest stable release version on Github. If there is a new version available, it will prompt you to update it. This script require a somewhat recent version of Python 3 which should already be installed on your system.
+
+You can easily download this script with:
+
+```console
+$ wget https://raw.githubusercontent.com/remyroy/ethstaker/main/scripts/update-alertmanager.py
+```
+
+To run the Alertmanager update script, use this command:
+
+```console
+$ python3 update-alertmanager.py
+```
 
 ## Support
 
