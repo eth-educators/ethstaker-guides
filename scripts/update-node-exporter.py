@@ -30,7 +30,7 @@ def get_current_node_exporter_version():
             NODE_EXPORTER_INSTALLED_PATH + 'node_exporter', '--version'
             ], capture_output=True, text=True)
 
-        process_output = process_result.stdout
+        process_output = process_result.stdout + '\n' + process_result.stderr
         result = re.search(r'version (?P<version>[^ ]+)', process_output)
         if result:
             version = result.group('version')

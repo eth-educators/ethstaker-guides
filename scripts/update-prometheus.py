@@ -31,7 +31,7 @@ def get_current_prometheus_version():
             PROMETHEUS_INSTALLED_PATH + 'prometheus', '--version'
             ], capture_output=True, text=True)
 
-        process_output = process_result.stdout
+        process_output = process_result.stdout + '\n' + process_result.stderr
         result = re.search(r'version (?P<version>[^ ]+)', process_output)
         if result:
             version = result.group('version')
