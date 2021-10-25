@@ -751,7 +751,7 @@ $ python3 update-node-exporter.py
 
 ### Remote access to Grafana
 
-If you want to access Grafana and your dashboards from a remote machine on your local network or from the internet, you could simply use [an SSH tunnel](https://www.tunnelsup.com/how-to-create-ssh-tunnels/) ([with PuTTY on Windows](https://www.ibm.com/support/pages/ssh-tunneling-putty) or [natively on Windows 10](http://woshub.com/ssh-tunnel-port-forward-windows/)).
+If you want to access Grafana and your dashboards from a remote machine on your local network or from the internet, you could simply use [an SSH tunnel](https://www.tunnelsup.com/how-to-create-ssh-tunnels/) ([with PuTTY on Windows](https://www.ibm.com/support/pages/ssh-tunneling-putty) or [natively on Windows 10](http://woshub.com/ssh-tunnel-port-forward-windows/)). There are various other alternatives for remote access that might better suits your needs. A secure HTTPS reverse proxy or a local VPN are possible solutions to this problem but they will be left as an exercise to the reader.
 
 ## What's next?
 
