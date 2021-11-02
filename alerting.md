@@ -378,7 +378,7 @@ You should check the available column in this output. In this example, we have a
 $ </dev/zero head -c 8800m | tail
 ```
 
-This will leave us around 500MB of free RAM. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
+Trying to consume RAM with a dummy process like that can be tricky because of how the operating system manages free memory. If you fail to trigger your rule, try to slowly increment the amount of memory consumed with a new dummy process. This should leave us around 500MB of free RAM. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
 
 Once your *Available memory* test is done, you can terminate the dummy process that is needlessly consuming your memory by typing `CTRL`+`C` in your terminal.
 
