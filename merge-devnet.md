@@ -121,7 +121,9 @@ $ sudo chown -R goeth:goeth /var/lib/goethereum
 Initialize your Geth node with the *merge-devnet-3* genesis file.
 
 ```console
-$ sudo -u goeth /usr/local/bin/geth init ~/consensus-deployment-ansible/merge-devnet-3/custom_config_data/genesis.json --datadir /var/lib/goethereum
+$ sudo -u goeth /usr/local/bin/geth \
+    init ~/consensus-deployment-ansible/merge-devnet-3/custom_config_data/genesis.json \
+    --datadir /var/lib/goethereum
 ```
 
 Create a systemd service config file to configure the Geth node service.
@@ -132,7 +134,7 @@ $ sudo nano /etc/systemd/system/geth.service
 
 Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
 
-```yaml
+```ini
 [Unit]
 Description=Go Ethereum Client - Geth (1337602)
 After=network.target
@@ -144,7 +146,19 @@ Group=goeth
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=geth --cache 2048 --syncmode=full --http --datadir /var/lib/goethereum --metrics --metrics.expensive --pprof --networkid=1337602 --catalyst --http.api="engine,eth,web3,net,debug" --http.corsdomain "*" --http.addr "0.0.0.0"
+ExecStart=/usr/local/bin/geth \
+    --cache 2048 \
+    --syncmode=full \
+    --http \
+    --datadir /var/lib/goethereum \
+    --metrics \
+    --metrics.expensive \
+    --pprof \
+    --networkid=1337602 \
+    --catalyst \
+    --http.api="engine,eth,web3,net,debug" \
+    --http.corsdomain "*" \
+    --http.addr "0.0.0.0"
 
 [Install]
 WantedBy=default.target
