@@ -268,6 +268,10 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 You might want to try some transactions using MetaMask on this testnet. If so, check out [Marius van der Wijden's guide](https://hackmd.io/dFzKxB3ISWO8juUqPpJFfw#Setting-up-Metamask).
 
+## Good references
+
+Check out [the Merge Devnet3 website](https://devnet3.themerge.dev/) for some good references to explorers and faucets.
+
 ## Support
 
 If you have any question or if you need additional support, make sure to get in touch with people involved with this initiative:
