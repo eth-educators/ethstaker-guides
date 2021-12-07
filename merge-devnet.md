@@ -262,7 +262,7 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ## Monitoring your syncing status
 
-If everything went right, you should see those logs from your Geth node service and your Lighthouse beacon node service.
+If everything went right, you should see similar logs from your Geth node service and your Lighthouse beacon node service.
 
 ![Ethereum Client Service - Logs](images/merge-devnet-3-logs.png)
 
