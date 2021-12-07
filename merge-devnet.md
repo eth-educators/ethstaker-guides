@@ -273,7 +273,7 @@ You can also confirm you are at the head by comparing with [a public blockchain 
 
 ### Adding merge-testnet-3 to MetaMask
 
-Now that you have a Geth node, you can use it to add the *merge-devnet-3* testnet in your MetaMask networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configuration this new network in MetaMask. In the end, you will need the full RPC URL.
+Now that you have a Geth node, you can use it to add the *merge-devnet-3* testnet in your MetaMask networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configure this new network in MetaMask. In the end, you will need the full RPC URL.
 
 * If you are on the same machine (your Geth node is running on the same machine as your browser with the MetaMask extension), use: `localhost`, The RPC URL in that case would be: `http://localhost:8545`.
 * If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machine on your local network. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
