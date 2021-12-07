@@ -284,23 +284,23 @@ In MetaMask, click on network dropdown list and click the `Add Network` button.
 
 Fill out those fields:
 
-* Network Name: merge-devnet-3
-* New RPC URL: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP)
-* Chain ID: 1337602
+* **Network Name**: merge-devnet-3
+* **New RPC URL**: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP address)
+* **Chain ID**: 1337602
 
 And click on the `Save` button.
 
 ![MetaMask - Entering new network details](images/metamask-merge-devnet-3-step2.png)
 
-**TODO**
+It should switch to that new network by default. If not, select the `merge-devnet-3` in the network dropdown list.
 
 ## Requesting testnet funds
 
-**TODO**
+Go to [the public faucet](https://faucet.devnet3.themerge.dev/), request some funds and wait for them to appear in your MetaMask wallet. Don't use a known wallet address for this. Create a temporary account if you need one.
 
 ## Performing a simple transaction on merge-testnet-3
 
-**TODO**
+With the `merge-devnet-3` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.devnet3.themerge.dev/) to see if it worked.
 
 ## Good references
 
