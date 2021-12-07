@@ -282,6 +282,16 @@ In MetaMask, click on network dropdown list and click the `Add Network` button.
 
 ![MetaMask - Adding a new network](images/metamask-merge-devnet-3-step1.png)
 
+Fill out those fields:
+
+Network Name: merge-devnet-3
+New RPC URL: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP)
+Chain ID: 1337602
+
+And click on the `Save` button.
+
+![MetaMask - Entering new network details](images/metamask-merge-devnet-3-step2.png)
+
 **TODO**
 
 ## Requesting testnet funds
