@@ -76,13 +76,13 @@ $ sudo cp ./build/bin/geth /usr/local/bin
 $ cd ~
 ```
 
-## Building and Installing Lighthouse kintsugi
+## Building and Installing Lighthouse unstable
 
-Clone the official Lighthouse repository and switch to the `kintsugi` branch.
+Clone the official Lighthouse repository and switch to the `unstable` branch.
 
 ```console
 $ cd ~
-$ git clone -b kintsugi https://github.com/sigp/lighthouse.git
+$ git clone -b unstable https://github.com/sigp/lighthouse.git
 ```
 
 Build this special Lighthouse version.
@@ -190,7 +190,50 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ## Configuring your Lighthouse beacon node
 
-**TODO**
+Create a dedicated user for running the Lighthouse beacon node, create a directory for holding the data, copy testnet files and assign the proper permissions.
+
+```console
+$ sudo useradd --no-create-home --shell /bin/false lighthousebeacon
+$ sudo mkdir -p /var/lib/lighthouse
+$ sudo cp -r ~/consensus-deployment-ansible/merge-devnet-3 /var/lib/lighthouse
+$ sudo chown -R lighthousebeacon:lighthousebeacon /var/lib/lighthouse
+```
+
+Create a systemd service config file to configure the Geth node service.
+
+```console
+$ sudo nano /etc/systemd/system/lighthousebeacon.service
+```
+
+Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+
+```ini
+[Unit]
+Description=Lighthouse Ethereum Client Beacon Node (merge-devnet-3)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=lighthousebeacon
+Group=lighthousebeacon
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/lighthouse bn \
+    --spec mainnet \
+    --datadir /var/lib/lighthouse \
+    --eth1 \
+    --http \
+    --http-allow-sync-stalled \
+    --merge \
+    --execution-endpoints http://127.0.0.1:8545 \
+    --metrics --boot-nodes="enr:-Iq4QKuNB_wHmWon7hv5HntHiSsyE1a6cUTK1aT7xDSU_hNTLW3R4mowUboCsqYoh1kN9v3ZoSu_WuvW9Aw0tQ0Dxv6GAXxQ7Nv5gmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk" \
+    --testnet-dir /var/lib/lighthouse/merge-devnet-3/custom_config_data
+
+[Install]
+WantedBy=multi-user.target
+```
+
 
 ## What's next?
 
