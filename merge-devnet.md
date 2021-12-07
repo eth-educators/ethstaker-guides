@@ -284,9 +284,9 @@ In MetaMask, click on network dropdown list and click the `Add Network` button.
 
 Fill out those fields:
 
-Network Name: merge-devnet-3
-New RPC URL: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP)
-Chain ID: 1337602
+* Network Name: merge-devnet-3
+* New RPC URL: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP)
+* Chain ID: 1337602
 
 And click on the `Save` button.
 
