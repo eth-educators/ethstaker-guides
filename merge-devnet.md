@@ -26,7 +26,7 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install git build-essential cmake wget curl
+$ sudo apt -y install git build-essential cmake wget curl ccze
 ```
 
 Install a recent version of go.
@@ -99,7 +99,82 @@ $ sudo cp ~/.cargo/bin/lighthouse /usr/local/bin
 $ cd ~
 ```
 
+## Obtaining the testnet configuration files
+
+Clone Parithosh Jayanthi's testnet files repository.
+
+```console
+$ cd ~
+$ git clone https://github.com/parithosh/consensus-deployment-ansible.git
+```
+
 ## Initializing and configuring your Geth node
+
+Create a dedicated user for running Geth, create a directory for holding the data and assign the proper permissions.
+
+```console
+$ sudo useradd --no-create-home --shell /bin/false goeth
+$ sudo mkdir -p /var/lib/goethereum
+$ sudo chown -R goeth:goeth /var/lib/goethereum
+```
+
+Initialize your Geth node with the *merge-devnet-3* genesis file.
+
+```console
+$ sudo -u goeth /usr/local/bin/geth init ~/consensus-deployment-ansible/merge-devnet-3/custom_config_data/genesis.json --datadir /var/lib/goethereum
+```
+
+Create a systemd service config file to configure the Geth node service.
+
+```console
+$ sudo nano /etc/systemd/system/geth.service
+```
+
+Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+
+```yaml
+[Unit]
+Description=Go Ethereum Client - Geth (1337602)
+After=network.target
+Wants=network.target
+
+[Service]
+User=goeth
+Group=goeth
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=geth --cache 2048 --syncmode=full --http --datadir /var/lib/goethereum --metrics --metrics.expensive --pprof --networkid=1337602 --catalyst --http.api="engine,eth,web3,net,debug" --http.corsdomain "*" --http.addr "0.0.0.0"
+
+[Install]
+WantedBy=default.target
+```
+
+Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
+
+```console
+$ sudo systemctl daemon-reload
+$ sudo systemctl start geth.service
+$ sudo systemctl status geth.service
+```
+
+It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the geth service).
+
+Enable the geth service to automatically start on reboot.
+
+```console
+$ sudo systemctl enable geth.service
+```
+
+You can watch the live messages from your Geth node logs using this command.
+
+```console
+$ sudo journalctl -f -u geth.service -o cat | ccze -A
+```
+
+Press `Ctrl` + `C` to stop showing those messages.
+
+## Configuring your Lighthouse beacon node
 
 **TODO**
 
