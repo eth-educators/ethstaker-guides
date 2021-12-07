@@ -2,7 +2,9 @@
 
 [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) is an Ethereum community initiative to test [the merge upgrade](https://ethereum.org/en/eth2/merge/) with various testnets. It is being spear headed by [Marius van der Wijden](https://twitter.com/vdWijden) and [Parithosh Jayanthi](https://twitter.com/parithosh_j). It is meant to test the recent experimental features added to various Ethereum clients supporting this protocol upgrade.
 
-This guide is meant for people with some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *merge-devnet-3* by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
+This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *merge-devnet-3* by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
+
+The *merge-devnet-3* testnet is likely to be short-lived.
 
 ## Overview
 
@@ -234,6 +236,33 @@ ExecStart=/usr/local/bin/lighthouse bn \
 WantedBy=multi-user.target
 ```
 
+Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
+
+```console
+$ sudo systemctl daemon-reload
+$ sudo systemctl start lighthousebeacon.service
+$ sudo systemctl status lighthousebeacon.service
+```
+
+It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Lighthouse beacon node service).
+
+Enable the Lighthouse beacon node service to automatically start on reboot.
+
+```console
+$ sudo systemctl enable lighthousebeacon.service
+```
+
+You can watch the live messages from your Lighthouse beacon node logs using this command.
+
+```console
+$ sudo journalctl -f -u lighthousebeacon.service -o cat | ccze -A
+```
+
+Press `Ctrl` + `C` to stop showing those messages.
+
+## Monitoring your syncing status
+
+**TODO**
 
 ## What's next?
 
