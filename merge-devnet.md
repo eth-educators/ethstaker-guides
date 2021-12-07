@@ -262,7 +262,11 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ## Monitoring your syncing status
 
-**TODO**
+If everything went right, you should see those logs from your Geth node service and your Lighthouse beacon node service.
+
+![Ethereum Client Service - Logs](images/merge-devnet-3-logs.png)
+
+You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.devnet3.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
 
 ## What's next?
 
