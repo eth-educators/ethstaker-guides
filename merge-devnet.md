@@ -269,7 +269,9 @@ If everything went right, you should see similar logs from your Geth node servic
 
 You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.devnet3.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
 
-## Adding merge-testnet-3 to MetaMask
+## Trying the merge-testnet-3 testnet and performing transactions
+
+### Adding merge-testnet-3 to MetaMask
 
 Now that you have a Geth node, you can use it to add the *merge-devnet-3* testnet in your MetaMask networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configuration this new network in MetaMask. In the end, you will need the full RPC URL.
 
@@ -294,11 +296,11 @@ And click on the `Save` button.
 
 It should switch to that new network by default. If not, select the `merge-devnet-3` in the network dropdown list.
 
-## Requesting testnet funds
+### Requesting testnet funds
 
 Go to [the public faucet](https://faucet.devnet3.themerge.dev/), request some funds and wait for them to appear in your MetaMask wallet. Don't use a known wallet address for this. Create a temporary account if you need one.
 
-## Performing a simple transaction on merge-testnet-3
+### Performing a simple transaction on merge-testnet-3
 
 With the `merge-devnet-3` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.devnet3.themerge.dev/) to see if it worked.
 
