@@ -269,9 +269,28 @@ If everything went right, you should see similar logs from your Geth node servic
 
 You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.devnet3.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
 
-## What's next?
+## Adding merge-testnet-3 to MetaMask
 
-You might want to try some transactions using MetaMask on this testnet. If so, check out [Marius van der Wijden's guide](https://hackmd.io/dFzKxB3ISWO8juUqPpJFfw#Setting-up-Metamask).
+Now that you have a Geth node, you can use it to add the *merge-devnet-3* testnet in your MetaMask networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configuration this new network in MetaMask. In the end, you will need the full RPC URL.
+
+* If you are on the same machine (your Geth node is running on the same machine as your browser with the MetaMask extension), use: `localhost`, The RPC URL in that case would be: `http://localhost:8545`.
+* If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machine on your local network. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
+* If your machine is running remotely on a VPS, in the cloud or some third party hosting, it might be somewhat dangerous to expose the port to your Geth node (8545), but you could configure your firewall to expose it and connect to that public IP address. The RPC URL would be something like: `http://<publicIP>:8545` where `<publicIP>` is replaced with the public IP of your machine.
+* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.devnet3.themerge.dev/`.
+
+In MetaMask, click on network dropdown list and click the `Add Network` button.
+
+![MetaMask - Adding a new network](images/metamask-merge-devnet-3-step1.png)
+
+**TODO**
+
+## Requesting testnet funds
+
+**TODO**
+
+## Performing a simple transaction on merge-testnet-3
+
+**TODO**
 
 ## Good references
 
