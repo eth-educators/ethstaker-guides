@@ -304,6 +304,10 @@ Go to [the public faucet](https://faucet.devnet3.themerge.dev/), request some fu
 
 With the `merge-devnet-3` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.devnet3.themerge.dev/) to see if it worked.
 
+## What's next?
+
+You performs a lot of different tasks to help with the [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) initiave. Check out [the program structure](https://hackmd.io/WKpg6SNzQbi1jVKNgrSgWg). There are differents tasks for all technical abilities.
+
 ## Good references
 
 Check out [the Merge Devnet3 website](https://devnet3.themerge.dev/) for some good references to explorers and faucets.
