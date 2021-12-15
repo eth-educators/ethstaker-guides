@@ -78,13 +78,13 @@ $ sudo cp ./build/bin/geth /usr/local/bin
 $ cd ~
 ```
 
-## Building and Installing Lighthouse unstable
+## Building and Installing Lighthouse merge-devnet-3
 
-Clone the official Lighthouse repository and switch to the `unstable` branch.
+Clone the official Lighthouse repository and switch to the `merge-devnet-3` branch.
 
 ```console
 $ cd ~
-$ git clone -b unstable https://github.com/sigp/lighthouse.git
+$ git clone -b merge-devnet-3 https://github.com/sigp/lighthouse.git
 ```
 
 Build this special Lighthouse version.
@@ -303,6 +303,10 @@ Go to [the public faucet](https://faucet.devnet3.themerge.dev/), request some fu
 ### Performing a simple transaction on merge-testnet-3
 
 With the `merge-devnet-3` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.devnet3.themerge.dev/) to see if it worked.
+
+## What's next?
+
+You performs a lot of different tasks to help with the [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) initiave. Check out [the program structure](https://hackmd.io/WKpg6SNzQbi1jVKNgrSgWg). There are different tasks for all technical abilities.
 
 ## Good references
 
