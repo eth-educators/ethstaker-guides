@@ -55,13 +55,13 @@ Add the rust toolchains to your path.
 $ source $HOME/.cargo/env
 ```
 
-## Building and Installing Geth merge-devnet-4
+## Building and Installing Geth merge-devnet-3
 
-Clone Marius van der Wijden's Geth repository and switch to the `merge-devnet-4` branch.
+Clone Marius van der Wijden's Geth repository and switch to the `merge-devnet-3` branch.
 
 ```console
 $ cd ~
-$ git clone -b merge-devnet-4 https://github.com/MariusVanDerWijden/go-ethereum.git
+$ git clone -b merge-devnet-3 https://github.com/MariusVanDerWijden/go-ethereum.git
 ```
 
 Build this special Geth version.
