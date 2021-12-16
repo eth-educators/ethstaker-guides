@@ -265,7 +265,7 @@ If everything went right, you should see similar logs from your Geth node servic
 
 ![Ethereum Client Service - Logs](images/merge-kintsugi-logs.png)
 
-You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.devnet3.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
+You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.kintsugi.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
 
 ## Trying the Kintsugi testnet and performing transactions
 
@@ -276,31 +276,31 @@ Now that you have a Geth node, you can use it to add the *Kintsugi* testnet in y
 * If you are on the same machine (your Geth node is running on the same machine as your browser with the MetaMask extension), use: `localhost`, The RPC URL in that case would be: `http://localhost:8545`.
 * If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machine on your local network. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
 * If your machine is running remotely on a VPS, in the cloud or some third party hosting, it might be somewhat dangerous to expose the port to your Geth node (8545), but you could configure your firewall to expose it and connect to that public IP address. The RPC URL would be something like: `http://<publicIP>:8545` where `<publicIP>` is replaced with the public IP of your machine.
-* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.devnet3.themerge.dev/`.
+* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.kintsugi.themerge.dev/`.
 
 In MetaMask, click on network dropdown list and click the `Add Network` button.
 
-![MetaMask - Adding a new network](images/metamask-Kintsugi-step1.png)
+![MetaMask - Adding a new network](images/metamask-merge-kintsugi-step1.png)
 
 Fill out those fields:
 
 * **Network Name**: Kintsugi
 * **New RPC URL**: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP address)
-* **Chain ID**: 1337602
+* **Chain ID**: 1337702
 
 And click on the `Save` button.
 
-![MetaMask - Entering new network details](images/metamask-Kintsugi-step2.png)
+![MetaMask - Entering new network details](images/metamask-merge-kintsugi-step2.png)
 
 It should switch to that new network by default. If not, select the `Kintsugi` in the network dropdown list.
 
 ### Requesting testnet funds
 
-Go to [the public faucet](https://faucet.devnet3.themerge.dev/), request some funds and wait for them to appear in your MetaMask wallet. Don't use a known wallet address for this. Create a temporary account if you need one.
+Go to [the public faucet](https://faucet.kintsugi.themerge.dev/), request some funds and wait for them to appear in your MetaMask wallet. Don't use a known wallet address for this. Create a temporary account if you need one.
 
 ### Performing a simple transaction on Kintsugi
 
-With the `Kintsugi` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.devnet3.themerge.dev/) to see if it worked.
+With the `Kintsugi` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.kintsugi.themerge.dev/) to see if it worked.
 
 ## What's next?
 
@@ -308,7 +308,7 @@ You performs a lot of different tasks to help with the [*#TestingTheMerge*](http
 
 ## Good references
 
-Check out [the Merge Devnet3 website](https://devnet3.themerge.dev/) for some good references to explorers and faucets.
+Check out [the Kintsugi website](https://kintsugi.themerge.dev/) for some good references to explorers and faucets.
 
 ## Support
 
