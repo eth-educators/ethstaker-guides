@@ -31,7 +31,7 @@ Install prerequisites commonly available.
 $ sudo apt -y install git build-essential cmake wget curl ccze jq
 ```
 
-Install a recent version of go.
+Install a recent version of Go.
 
 ```console
 $ wget https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
@@ -41,7 +41,7 @@ $ echo 'PATH="$PATH:/usr/local/go/bin"' >> ~/.profile
 $ rm go1.17.5.linux-amd64.tar.gz
 ```
 
-Install a recent version of rust.
+Install a recent version of Rust.
 
 ```console
 $ curl https://sh.rustup.rs -sSf | sh
@@ -49,7 +49,7 @@ $ curl https://sh.rustup.rs -sSf | sh
 
 Type `1` and `Enter` to select option 1 *Proceed with installation (default)*.
 
-Add the rust toolchains to your path.
+Add the Rust toolchains to your PATH.
 
 ```console
 $ source $HOME/.cargo/env
@@ -273,14 +273,14 @@ You can also confirm you are at the head by comparing with [a public blockchain 
 
 ### Adding Kintsugi to MetaMask
 
-Now that you have a Geth node, you can use it to add the *Kintsugi* testnet in your MetaMask networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configure this new network in MetaMask. In the end, you will need the full RPC URL.
+Now that you have a Geth node, you can use it to add the *Kintsugi* testnet in your [MetaMask](https://metamask.io/) networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configure this new network in MetaMask. In the end, you will need the full RPC URL.
 
 * If you are on the same machine (your Geth node is running on the same machine as your browser with the MetaMask extension), use: `localhost`, The RPC URL in that case would be: `http://localhost:8545`.
-* If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machine on your local network. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
-* If your machine is running remotely on a VPS, in the cloud or some third party hosting, it might be somewhat dangerous to expose the port to your Geth node (8545), but you could configure your firewall to expose it and connect to that public IP address. The RPC URL would be something like: `http://<publicIP>:8545` where `<publicIP>` is replaced with the public IP of your machine.
-* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.kintsugi.themerge.dev/`.
+* If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machines on local networks. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
+* If your machine is running remotely on a VPS, in the cloud or on some third party hosting, it might be somewhat dangerous to expose the port to your Geth node (8545), but you could configure your firewall to expose it and connect to that public IP address. The RPC URL would be something like: `http://<publicIP>:8545` where `<publicIP>` is replaced with the public IP of your machine.
+* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.kintsugi.themerge.dev/` for your RPC URL.
 
-In MetaMask, click on network dropdown list and click the `Add Network` button.
+In MetaMask, click on the network dropdown list and click the *Add Network* button.
 
 ![MetaMask - Adding a new network](images/metamask-merge-kintsugi-step1.png)
 
@@ -290,11 +290,11 @@ Fill out those fields:
 * **New RPC URL**: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP address)
 * **Chain ID**: 1337702
 
-And click on the `Save` button.
+And click on the *Save* button.
 
 ![MetaMask - Entering new network details](images/metamask-merge-kintsugi-step2.png)
 
-It should switch to that new network by default. If not, select the `Kintsugi` in the network dropdown list.
+It should switch to that new network by default. If not, select `Kintsugi` in the network dropdown list.
 
 ### Requesting testnet funds
 
@@ -306,7 +306,7 @@ With the `Kintsugi` network selected in MetaMask and some funds in your wallet, 
 
 ## Adding a validator
 
-You will need to funds [from the faucet first](https://faucet.kintsugi.themerge.dev/) in a regular MetaMask account if you did not get some yet. Do not use real ETH or a known wallet address for this. Make sure you are using a new regular account in MetaMask for all of this.
+You will need funds [from the faucet](https://faucet.kintsugi.themerge.dev/) in a regular MetaMask account if you do not have some already. Do not use real ETH or a known wallet address for this. Make sure you are using a new regular account in MetaMask for all of this.
 
 ### Creating your validator keys and performing the deposit
 
@@ -333,7 +333,7 @@ $ eth2-val-tools mnemonic && echo
 $ eth2-val-tools mnemonic && echo
 ```
 
-Next, we need your MetaMask account **wallet address** and **private key**. Make sure you have a wallet address with at least 32 Kintsugi ETH or more (it's a little more than 32 actually if you account for the gas fees). If you do not have such a wallet address in MetaMask, [request some testnet funds first](#requesting-testnet-funds).
+We need your MetaMask account **wallet address** and **private key** to perform the deposit. Make sure you have a wallet address with at least 32 Kintsugi ETH or more (it's a little more than 32 actually if you account for the gas fees). If you do not have such a wallet address in MetaMask, [request some testnet funds first](#requesting-testnet-funds).
 
 Getting your wallet address is as easy as clicking on the account at the top in MetaMask. It will be copied to your clipboard. Take note of your wallet address. We will need it later on.
 
@@ -394,7 +394,7 @@ There are 4 fields you need to fill with the values we created above:
 * **ETH1_FROM_ADDR**: Enter your wallet address from MetaMask. It should start with `0x`. Make sure to keep the starting and ending double quote before and after your value.
 * **ETH1_FROM_PRIV**: Enter your account private key from MetaMask. You will need to add `0x` in front of your value. Make sure to keep the starting and ending double quote before and after your value.
 
-It should end up looking like this (don't use those values, they will not work for you, they are simply meant to show you what your `secrets.env` file will look like in the end).
+It should end up looking like this (don't use those values, they will not work for you, they are simply meant to show what your `secrets.env` file will look like in the end).
 
 ```bash
 # sets the deposit amount to use
