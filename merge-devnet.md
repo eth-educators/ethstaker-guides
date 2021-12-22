@@ -468,7 +468,7 @@ eth2-val-tools deposit-data \
   --amount=$DEPOSIT_AMOUNT \
   --fork-version=$FORK_VERSION \
   --withdrawals-mnemonic="$WITHDRAWALS_MNEMONIC" \
-  --validators-mnemonic="$VALIDATORS_MNEMONIC" > $DEPOSIT_DATAS_FILE_LOCATION.txt
+  --validators-mnemonic="$VALIDATORS_MNEMONIC" > $DEPOSIT_DATAS_FILE_LOCATION
 
 
 # Iterate through lines, each is a json of the deposit data and some metadata
@@ -486,7 +486,7 @@ while read x; do
       --privatekey="$ETH1_FROM_PRIV"
    echo "Sent deposit for validator $account_name $pubkey"
    sleep 3
-done < "$DEPOSIT_DATAS_FILE_LOCATION.txt"
+done < "$DEPOSIT_DATAS_FILE_LOCATION"
 ```
 
 Make this new script executable and run it to generate your keystore, your deposit data and perform the deposit.
