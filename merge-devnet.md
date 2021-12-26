@@ -34,6 +34,10 @@ Install prerequisites commonly available.
 $ sudo apt -y install git build-essential cmake wget curl ccze jq
 ```
 
+```console
+$ sudo apt-get install clang
+```
+
 Install a recent version of Go.
 
 ```console
