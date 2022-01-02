@@ -20,7 +20,7 @@ We will install 3 tools with this guide: [Prometheus](https://prometheus.io/docs
 
 **Prometheus** is an open-source systems monitoring project. It collects and stores different metrics in a specialized database. It provides all those metrics to any other tool who wants to query them in an flexible, efficient and easy way. In our setup, it will collect metrics from Node Exporter and optionally from Ethereum clients and it will provide them on-demand to Grafana.
 
-**Node Exporter** is an open-source project that expose your hardware and OS metrics. In our setup, it will provide your system metrics to Prometheus.
+**Node Exporter** is an open-source project that exposes your hardware and OS metrics. In our setup, it will provide your system metrics to Prometheus.
 
 **Grafana** is a an open-source project used to visualize metrics. It can be used to create dashboards that easily show the metrics you are interested in. In our setup, it will query the metrics stored on Prometheus to show them in a browser with nice charts and diagrams.
 
