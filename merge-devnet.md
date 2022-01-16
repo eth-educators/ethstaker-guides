@@ -317,7 +317,7 @@ Install eth2-val-tools and ethereal.
 
 ```console
 $ go install github.com/protolambda/eth2-val-tools@latest
-$ go install github.com/wealdtech/ethereal@latest
+$ go install github.com/wealdtech/ethereal/v2@latest
 ```
 
 That last command can take a few minutes. Please be patient.
