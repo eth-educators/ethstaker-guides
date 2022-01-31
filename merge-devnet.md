@@ -120,6 +120,7 @@ Create a dedicated user for running Geth, create a directory for holding the dat
 ```console
 $ sudo useradd --no-create-home --shell /bin/false goeth
 $ sudo mkdir -p /var/lib/goethereum
+$ sudo cp /home/elopio/consensus-deployment-ansible/kintsugi-testnet/custom_config_data/genesis.json /var/lib/goethereum/
 $ sudo chown -R goeth:goeth /var/lib/goethereum
 ```
 
@@ -127,7 +128,7 @@ Initialize your Geth node with the *Kintsugi* genesis file.
 
 ```console
 $ sudo -u goeth /usr/local/bin/geth \
-    init ~/consensus-deployment-ansible/kintsugi-testnet/custom_config_data/genesis.json \
+    init /var/lib/goethereum/genesis.json \
     --datadir /var/lib/goethereum
 ```
 
