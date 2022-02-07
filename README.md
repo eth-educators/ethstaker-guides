@@ -1,6 +1,6 @@
 # ethstaker
 
-Random documents for the Eth Staker community.
+Random documents for the ETHStaker community.
 
 ## Guides
 
