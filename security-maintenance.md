@@ -4,7 +4,7 @@ Your staking machine is unsafe like many others, but we can help it. Just like w
 
 The following suggestions are general tips that can apply to many different environments and use cases. Security can be subjective. What feels safe or safer for someone can be quite different from someone else. As you start looking at these risks from different angles, you may find alternative solutions that have their own pros and cons.
 
-This is not an exhaustive list of all the security practices someone who runs a validator or who handles cryptocurrencies should use. We have [a reference section with additional general security pratices](#other-good-security-references) you should be looking at as well.
+This is not an exhaustive list of all the security practices someone who runs a validator or who handles cryptocurrencies should use. We have [a reference section with additional security pratices](#good-security-and-maintenance-references) you should be looking at as well.
 
 ## Using a good operating system
 
@@ -76,9 +76,11 @@ Ubuntu and Canonical offers a live patching service called [Livepatch](https://u
 
 * Physical data theft
 
-## Other good security references
+## Good security and maintenance references
 
 * [Protecting Yourself and Your Funds](https://support.mycrypto.com/staying-safe/protecting-yourself-and-your-funds) by [Jennicide](https://twitter.com/Jennicide) and [MyCrypto](https://mycrypto.com/).
+* [Security Best Practices for a ETH staking validator node](https://www.coincashew.com/coins/overview-eth/guide-or-security-best-practices-for-a-eth2-validator-beaconchain-node) by [CoinCashew](https://www.coincashew.com/).
+* [Ethereum 2.0 Node Security Discussion](https://youtu.be/hHtvCGlPz-o) by [CryptoManufaktur](https://www.cryptomanufaktur.io/).
 
 ## Support
 
