@@ -49,6 +49,10 @@ Installing a modern Linux operating system on your own machine is often as simpl
 
 ## Securing the machine you use to remote connect with
 
+**Risks**
+
+* Unauthorized or unintented remote access to your machine.
+
 ## Performing your system updates regularly
 
 ## Performing your application updates regularly
@@ -58,9 +62,13 @@ Installing a modern Linux operating system on your own machine is often as simpl
 **Risks**
 
 * Using a kernel that has vulnerabilities between updates or reboots.
-* Missing important rewards during reboots.
+* Missing important staking rewards during reboots.
 
 Ubuntu and Canonical offers a live patching service called [Livepatch](https://ubuntu.com/security/livepatch).
+
+## Limiting the installed applications and running processes
+
+## Limiting the users who can access your machine
 
 ## Using disk encryption
 
