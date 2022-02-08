@@ -53,7 +53,14 @@ Installing a modern Linux operating system on your own machine is often as simpl
 
 ## Performing your application updates regularly
 
-## Activating livepatch
+## Using a live patching service
+
+**Risks**
+
+* Using a kernel that has vulnerabilities between updates or reboots.
+* Missing important rewards during reboots.
+
+Ubuntu and Canonical offers a live patching service called [Livepatch](https://ubuntu.com/security/livepatch).
 
 ## Using disk encryption
 
