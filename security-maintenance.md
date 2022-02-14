@@ -82,6 +82,7 @@ Ubuntu and Canonical offers a live patching service called [Livepatch](https://u
 * [Security Best Practices for a ETH staking validator node](https://www.coincashew.com/coins/overview-eth/guide-or-security-best-practices-for-a-eth2-validator-beaconchain-node) by [CoinCashew](https://www.coincashew.com/).
 * [Ethereum 2.0 Node Security Discussion](https://youtu.be/hHtvCGlPz-o) by [CryptoManufaktur](https://www.cryptomanufaktur.io/).
 * [MyCrypto’s Security Guide For Dummies And Smart People Too](https://blog.mycrypto.com/mycrypto-s-security-guide-for-dummies-and-smart-people-too) by [MyCrypto](https://mycrypto.com/).
+* [Guide: Crypto Wallet Tips 101 - Do's and Don'ts](https://www.coincashew.com/wallets/guide-wallet-tips-101-dos-and-donts) by [CoinCashew](https://www.coincashew.com/).
 
 ## Support
 
