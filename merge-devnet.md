@@ -285,6 +285,8 @@ You can also confirm you are at the head by comparing with [a public blockchain 
 
 Now that you have a Geth node, you can use it to add the *Kiln* testnet in your [MetaMask](https://metamask.io/) networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configure this new network in MetaMask. In the end, you will need the full RPC URL.
 
+If you just want to use the public RPC and make it easier on yourself, you can simply go to [the official Kiln website](https://kiln.themerge.dev/) and click on the *Add network to MetaMask* button. If you do, you can skip all of this section.
+
 * If you are on the same machine (your Geth node is running on the same machine as your browser with the MetaMask extension), use: `localhost`, The RPC URL in that case would be: `http://localhost:8545`.
 * If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machines on local networks. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
 * If your machine is running remotely on a VPS, in the cloud or on some third party hosting, it might be somewhat dangerous to expose the port to your Geth node (8545), but you could configure your firewall to expose it and connect to that public IP address. The RPC URL would be something like: `http://<publicIP>:8545` where `<publicIP>` is replaced with the public IP of your machine.
@@ -298,7 +300,7 @@ Fill out those fields:
 
 * **Network Name**: Kiln
 * **New RPC URL**: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP address)
-* **Chain ID**: 1337702
+* **Chain ID**: 1337802
 
 And click on the *Save* button.
 
