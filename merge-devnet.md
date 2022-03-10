@@ -201,7 +201,6 @@ Create a dedicated user for running the Lighthouse beacon node, create a directo
 ```console
 $ sudo useradd --no-create-home --shell /bin/false lighthousebeacon
 $ sudo mkdir -p /var/lib/lighthouse
-$ sudo cp -r ~/consensus-deployment-ansible/kiln-testnet /var/lib/lighthouse
 $ sudo chown -R lighthousebeacon:lighthousebeacon /var/lib/lighthouse
 ```
 
@@ -226,19 +225,26 @@ Group=lighthousebeacon
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse bn \
-    --spec mainnet \
+    --network kiln \
     --datadir /var/lib/lighthouse \
     --staking \
     --http-allow-sync-stalled \
     --merge \
-    --execution-endpoints http://127.0.0.1:8545 \
+    --eth1-endpoints http://127.0.0.1:8545 \
+    --execution-endpoints http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
-    --boot-nodes="enr:-Iq4QKuNB_wHmWon7hv5HntHiSsyE1a6cUTK1aT7xDSU_hNTLW3R4mowUboCsqYoh1kN9v3ZoSu_WuvW9Aw0tQ0Dxv6GAXxQ7Nv5gmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk" \
-    --testnet-dir /var/lib/lighthouse/kiln-testnet/custom_config_data
+    --jwt-secrets="/tmp/jwtsecret" \
+    --boot-nodes="enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
 
 [Install]
 WantedBy=multi-user.target
+```
+
+Make the JWT secret readable by all so our beacon node client can access it.
+
+```console
+$ sudo chmod +r /tmp/jwtsecret
 ```
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
