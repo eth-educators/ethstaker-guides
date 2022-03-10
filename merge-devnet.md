@@ -321,202 +321,29 @@ You will need funds [from the faucet](https://faucet.kiln.themerge.dev/) in a re
 
 ### Creating your validator keys and performing the deposit
 
-Install eth2-val-tools and ethereal.
+There are 2 great tools to create your validator keys:
 
-```console
-$ go install github.com/protolambda/eth2-val-tools@latest
-$ go install github.com/wealdtech/ethereal/v2@latest
-```
+* GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/eth2.0-deposit-cli) (previously known as eth2.0-deposit-cli)
 
-That last command can take a few minutes. Please be patient.
+If you choose the *Wagyu Key Gen* application, make sure to select the *Kiln* network and follow the instructions provided.
 
-Setup PATH for these new tools.
-
-```console
-$ export PATH=$PATH:~/go/bin
-$ echo 'PATH="$PATH:~/go/bin"' >> ~/.profile
-```
-
-Generate 2 mnemonics with these commands. Take note of those mnemonics somewhere. We will need them later on.
-
-```console
-$ eth2-val-tools mnemonic && echo
-$ eth2-val-tools mnemonic && echo
-```
-
-We need your MetaMask account **wallet address** and **private key** to perform the deposit. Make sure you have a wallet address with at least 32 Kiln ETH or more (it's a little more than 32 actually if you account for the gas fees). If you do not have such a wallet address in MetaMask, [request some testnet funds first](#requesting-testnet-funds).
-
-Getting your wallet address is as easy as clicking on the account at the top in MetaMask. It will be copied to your clipboard. Take note of your wallet address. We will need it later on.
-
-![MetaMask - Copying wallet address](images/metamask-merge-kiln-wallet-address.png)
-
-To access your account private key, you need to click on the 3 dots on the right side of your account name and click on *Account details*.
-
-![MetaMask - Reaching your account details](images/metamask-merge-kiln-account-details.png)
-
-Click on the *Export Private Key* button.
-
-![MetaMask - Export private key button](images/metamask-merge-kiln-export-private-key.png)
-
-Enter your MetaMask password and click on the *Confirm* button.
-
-![MetaMask - Export private key button](images/metamask-merge-kiln-show-private-keys.png)
-
-Your private key will be shown. Copy and paste it somewhere and take note of your private key. We will need it in the next step.
-
-![MetaMask - Confirm show private keys](images/metamask-merge-kiln-private-key.png)
-
-Create a new file called `secrets.env`. This file will contain everything we need to generate your deposit data, your keystore and perform the deposit using your MetaMask account.
+If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
 
 ```console
 $ cd ~
-$ nano secrets.env
+$ wget https://github.com/ethereum/eth2.0-deposit-cli/releases/download/v2.0.0/staking_deposit-cli-e2a7c94-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-e2a7c94-linux-amd64.tar.gz
+$ cd staking_deposit-cli-e2a7c94-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain kiln
+$ ls -d $PWD/validator_keys/*
 ```
 
-Paste the following initial values into the file. 
+Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
 
-```bash
-# sets the deposit amount to use
-DEPOSIT_AMOUNT=32000000000
-# sets the genesis fork version of the testnet
-FORK_VERSION="0x60000069"
-# sets the mnemonic to derive the keys from
-VALIDATORS_MNEMONIC=""
-# sets the mnemonic for withdrawal credentials
-WITHDRAWALS_MNEMONIC=""
-# temporary location to store the deposit data
-DEPOSIT_DATAS_FILE_LOCATION="/tmp/deposit_data.txt"
-# sets the deposit contract address
-DEPOSIT_CONTRACT_ADDRESS="0x4242424242424242424242424242424242424242"
-# sets the eth1 address from which the transaction will be made
-ETH1_FROM_ADDR=""
-# sets the eth1 private key used to sign the transaction
-ETH1_FROM_PRIV=""
-# forces the deposit since the deposit contract will not be recognized by the tool
-FORCE_DEPOSIT=true
-# sets an RPC endpoint to submit the transaction to
-ETH1_RPC=https://rpc.kiln.themerge.dev
-```
+Next we will do the deposit using the Kiln launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
 
-There are 4 fields you need to fill with the values we created above:
-
-* **VALIDATORS_MNEMONIC**: Enter one of the mnemonic you created in there. Make sure to keep the starting and ending double quote before and after your value.
-* **WITHDRAWALS_MNEMONIC**: Enter the second mnemonic you created in there. Make sure to keep the starting and ending double quote before and after your value.
-* **ETH1_FROM_ADDR**: Enter your wallet address from MetaMask. It should start with `0x`. Make sure to keep the starting and ending double quote before and after your value.
-* **ETH1_FROM_PRIV**: Enter your account private key from MetaMask. You will need to add `0x` in front of your value. Make sure to keep the starting and ending double quote before and after your value.
-
-It should end up looking like this (don't use those values, they will not work for you, they are simply meant to show what your `secrets.env` file will look like in the end).
-
-```bash
-# sets the deposit amount to use
-DEPOSIT_AMOUNT=32000000000
-# sets the genesis fork version of the testnet
-FORK_VERSION="0x60000069"
-# sets the mnemonic to derive the keys from
-VALIDATORS_MNEMONIC="negative grab siege canyon ask exact opinion void season acquire case tray urban bachelor wash ring jump adjust green capital march biology gaze enrich"
-# sets the mnemonic for withdrawal credentials
-WITHDRAWALS_MNEMONIC="pencil improve galaxy void source icon habit noodle version slide media cause game grief summer indicate forget modify desert badge assist bamboo ignore live"
-# temporary location to store the deposit data
-DEPOSIT_DATAS_FILE_LOCATION="/tmp/deposit_data.txt"
-# sets the deposit contract address
-DEPOSIT_CONTRACT_ADDRESS="0x4242424242424242424242424242424242424242"
-# sets the eth1 address from which the transaction will be made
-ETH1_FROM_ADDR="0x844bFAce3DF6BF2faBd5f6409D55f7Ccf364fB93"
-# sets the eth1 private key used to sign the transaction
-ETH1_FROM_PRIV="0xf75581af4b149439a9d1459ce536d7c8ab9a780757a21d3d706a278561a0478e"
-# forces the deposit since the deposit contract will not be recognized by the tool
-FORCE_DEPOSIT=true
-# sets an RPC endpoint to submit the transaction to
-ETH1_RPC=https://rpc.kiln.themerge.dev
-```
-
-Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
-
-Create a new file called `devnet_deposits.sh`.
-
-```console
-$ cd ~
-$ nano devnet_deposits.sh
-```
-
-Paste the following script into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
-
-```bash
-#!/bin/bash
-
-echo "USE AT YOUR OWN RISK"
-read -p "Are you sure you've double checked the values and want to make this deposit? " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-fi
-
-source secrets.env
-
-if [[ -z "${ETH1_FROM_ADDR}" ]]; then
-  echo "need ETH1_FROM_ADDR environment var"
-  exit 1 || return 1
-fi
-if [[ -z "${ETH1_FROM_PRIV}" ]]; then
-  echo "need ETH1_FROM_PRIV environment var"
-  exit 1 || return 1
-fi
-
-
-eth2-val-tools keystores \
-  --source-min=0 \
-  --source-max=1 \
-  --source-mnemonic="$VALIDATORS_MNEMONIC"
-
-
-eth2-val-tools deposit-data \
-  --source-min=0 \
-  --source-max=1 \
-  --amount=$DEPOSIT_AMOUNT \
-  --fork-version=$FORK_VERSION \
-  --withdrawals-mnemonic="$WITHDRAWALS_MNEMONIC" \
-  --validators-mnemonic="$VALIDATORS_MNEMONIC" > $DEPOSIT_DATAS_FILE_LOCATION
-
-
-# Iterate through lines, each is a json of the deposit data and some metadata
-while read x; do
-   account_name="$(echo "$x" | jq '.account')"
-   pubkey="$(echo "$x" | jq '.pubkey')"
-   echo "Sending deposit for validator $account_name $pubkey"
-   ethereal beacon deposit \
-      --allow-unknown-contract=$FORCE_DEPOSIT \
-      --address="$DEPOSIT_CONTRACT_ADDRESS" \
-      --connection=$ETH1_RPC \
-      --data="$x" \
-      --value="$DEPOSIT_ACTUAL_VALUE" \
-      --from="$ETH1_FROM_ADDR" \
-      --privatekey="$ETH1_FROM_PRIV"
-   echo "Sent deposit for validator $account_name $pubkey"
-   sleep 3
-done < "$DEPOSIT_DATAS_FILE_LOCATION"
-```
-
-Make this new script executable and run it to generate your keystore, your deposit data and perform the deposit.
-
-```console
-$ chmod +x devnet_deposits.sh
-$ ./devnet_deposits.sh
-```
-
-Answer `y` at the first question and press `Enter`.
-
-If everything went right, you should see something like this.
-
-```console
-USE AT YOUR OWN RISK
-Are you sure you've double checked the values and want to make this deposit? y
-Sending deposit for validator "m/12381/3600/0/0/0" "95b5d2e88616406d4ed48e0b2813d3cfef4b72970b3fc2461c4c510e3d903999075ea07e285a9b86141278310dda125b"
-0xeb98ba862faffd60280e7aeef37055465bd7de90f23bf0bc09cc0fc0df071d5a
-Sent deposit for validator "m/12381/3600/0/0/0" "95b5d2e88616406d4ed48e0b2813d3cfef4b72970b3fc2461c4c510e3d903999075ea07e285a9b86141278310dda125b"
-```
-
-The `95b5d2e88616406d4ed48e0b2813d3cfef4b72970b3fc2461c4c510e3d903999075ea07e285a9b86141278310dda125b` value here is the validator public key. Your own validator public key should be different.
+Go to [the Kiln launchpad](https://kiln.launchpad.ethereum.org/en/). Follow the instructions, make sure *Kiln* is the selected network in MetaMask and use the deposit file to perform your deposit.
 
 You can check that your deposit transaction went through on [the transaction explorer](https://explorer.kiln.themerge.dev/address/0x4242424242424242424242424242424242424242/transactions).
 
