@@ -152,6 +152,7 @@ Group=goeth
 Type=simple
 Restart=always
 RestartSec=5
+TimeoutStopSec=180
 ExecStart=/usr/local/bin/geth \
     --syncmode=full \
     --http \
@@ -358,22 +359,13 @@ $ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/vali
 $ sudo chmod 700 /var/lib/lighthouse/validators
 ```
 
-The password to your keystore should be in a file located at `~/assigned_data/secrets/<pubkey>` where `<pubkey>` is replaced with the public key of your validator. Find out what is your keystore password before trying to import it. List the file that contains your keystore password and show its content on screen.
-
-```console
-$ ls ~/assigned_data/secrets
-$ cat ~/assigned_data/secrets/<pubkey> && echo
-```
-
-Take note of that keystore password. You will need it in the next step.
-
-Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank.
+Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank. Make sure to replace `/path/to/keystores` with the actual path to your keystores created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit).
 
 ```console
 $ sudo /usr/local/bin/lighthouse account validator import \
-    --directory ~/assigned_data/keys \
+    --directory /path/to/keystores \
     --datadir /var/lib/lighthouse \
-    --testnet-dir /var/lib/lighthouse/kiln-testnet/custom_config_data
+    --network kiln
 $ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
 ```
 
@@ -398,7 +390,7 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse vc \
-    --testnet-dir /var/lib/lighthouse/kiln-testnet/custom_config_data \
+    --network kiln \
     --datadir /var/lib/lighthouse \
     --metrics
 
