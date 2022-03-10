@@ -1,17 +1,17 @@
-# Guide on how to join the Kintsugi testnet
+# Guide on how to join the Kiln testnet
 
 [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) is an Ethereum community initiative to test [the merge upgrade](https://ethereum.org/en/eth2/merge/) with various testnets. It is being spear headed by [Marius van der Wijden](https://twitter.com/vdWijden) and [Parithosh Jayanthi](https://twitter.com/parithosh_j). It is meant to test the recent experimental features added to various Ethereum clients supporting this protocol upgrade.
 
-This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Kintsugi* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
+This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Kiln* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
-A video tutorial of this guide can be seen on:
+An old video tutorial of this guide for Kintsugi can be seen on:
 
 * Part 1: https://youtu.be/r31aeGPoy1o
 * Part 2: https://youtu.be/_RyqEFnhmDo
 
 ## Overview
 
-We will build special versions of Geth and Lighthouse and we will configure them to connect to the *Kintsugi* testnet.
+We will build special versions of Geth and Lighthouse and we will configure them to connect to the *Kiln* testnet.
 
 ## Executing the commands
 
@@ -37,11 +37,11 @@ $ sudo apt -y install git build-essential pkg-config cmake clang wget curl ccze 
 Install a recent version of Go.
 
 ```console
-$ wget https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
-$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz
+$ wget https://go.dev/dl/go1.17.8.linux-amd64.tar.gz
+$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.17.8.linux-amd64.tar.gz
 $ export PATH=$PATH:/usr/local/go/bin
 $ echo 'PATH="$PATH:/usr/local/go/bin"' >> ~/.profile
-$ rm go1.17.5.linux-amd64.tar.gz
+$ rm go1.17.8.linux-amd64.tar.gz
 ```
 
 Install a recent version of Rust.
@@ -58,13 +58,13 @@ Add the Rust toolchains to your PATH.
 $ source $HOME/.cargo/env
 ```
 
-## Building and Installing Geth merge-kintsugi
+## Building and Installing Geth merge-kiln-v2
 
-Clone Marius van der Wijden's Geth repository and switch to the `merge-kintsugi` branch.
+Clone Marius van der Wijden's Geth repository and switch to the `merge-kiln-v2` branch.
 
 ```console
 $ cd ~
-$ git clone -b merge-kintsugi https://github.com/MariusVanDerWijden/go-ethereum.git
+$ git clone -b merge-kiln-v2 https://github.com/MariusVanDerWijden/go-ethereum.git
 ```
 
 Build this special Geth version.
@@ -106,11 +106,11 @@ $ cd ~
 
 ## Obtaining the testnet configuration files
 
-Clone Parithosh Jayanthi's testnet files repository.
+Clone eth-clients's merge testnets repository.
 
 ```console
 $ cd ~
-$ git clone https://github.com/parithosh/consensus-deployment-ansible.git
+$ git clone https://github.com/eth-clients/merge-testnets.git
 ```
 
 ## Initializing and configuring your Geth node
@@ -120,11 +120,11 @@ Create a dedicated user for running Geth, create a directory for holding the dat
 ```console
 $ sudo useradd --no-create-home --shell /bin/false goeth
 $ sudo mkdir -p /var/lib/goethereum
-$ sudo cp ~/consensus-deployment-ansible/kintsugi-testnet/custom_config_data/genesis.json /var/lib/goethereum/
+$ sudo cp ~/merge-testnets/kiln/genesis.json /var/lib/goethereum/
 $ sudo chown -R goeth:goeth /var/lib/goethereum
 ```
 
-Initialize your Geth node with the *Kintsugi* genesis file.
+Initialize your Geth node with the *Kiln* genesis file.
 
 ```console
 $ sudo -u goeth /usr/local/bin/geth \
@@ -142,7 +142,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Go Ethereum Client - Geth (1337702)
+Description=Go Ethereum Client - Geth (1337802)
 After=network.target
 Wants=network.target
 
@@ -153,18 +153,18 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/geth \
-    --cache 2048 \
     --syncmode=full \
     --http \
     --datadir /var/lib/goethereum \
     --metrics \
     --metrics.expensive \
     --pprof \
-    --networkid=1337702 \
-    --catalyst \
+    --networkid=1337802 \
     --http.api="engine,eth,web3,net,debug" \
     --http.corsdomain "*" \
-    --http.addr "0.0.0.0"
+    --http.addr "0.0.0.0" \
+    --authrpc.jwtsecret=/tmp/jwtsecret \
+    --bootnodes "enode://c354db99124f0faf677ff0e75c3cbbd568b2febc186af664e0c51ac435609badedc67a18a63adb64dacc1780a28dcefebfc29b83fd1a3f4aa3c0eb161364cf94@164.92.130.5:30303"
 
 [Install]
 WantedBy=default.target
@@ -201,7 +201,7 @@ Create a dedicated user for running the Lighthouse beacon node, create a directo
 ```console
 $ sudo useradd --no-create-home --shell /bin/false lighthousebeacon
 $ sudo mkdir -p /var/lib/lighthouse
-$ sudo cp -r ~/consensus-deployment-ansible/kintsugi-testnet /var/lib/lighthouse
+$ sudo cp -r ~/consensus-deployment-ansible/kiln-testnet /var/lib/lighthouse
 $ sudo chown -R lighthousebeacon:lighthousebeacon /var/lib/lighthouse
 ```
 
@@ -215,7 +215,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Beacon Node (Kintsugi)
+Description=Lighthouse Ethereum Client Beacon Node (Kiln)
 Wants=network-online.target
 After=network-online.target
 
@@ -235,7 +235,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --metrics \
     --validator-monitor-auto \
     --boot-nodes="enr:-Iq4QKuNB_wHmWon7hv5HntHiSsyE1a6cUTK1aT7xDSU_hNTLW3R4mowUboCsqYoh1kN9v3ZoSu_WuvW9Aw0tQ0Dxv6GAXxQ7Nv5gmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk" \
-    --testnet-dir /var/lib/lighthouse/kintsugi-testnet/custom_config_data
+    --testnet-dir /var/lib/lighthouse/kiln-testnet/custom_config_data
 
 [Install]
 WantedBy=multi-user.target
@@ -269,48 +269,48 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 If everything went right, you should see similar logs from your Geth node service and your Lighthouse beacon node service.
 
-![Ethereum Client Service - Logs](images/merge-kintsugi-logs.png)
+![Ethereum Client Service - Logs](images/merge-kiln-logs.png)
 
-You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.kintsugi.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
+You can also confirm you are at the head by comparing with [a public blockchain explorer](https://beaconchain.kiln.themerge.dev/). The latest slot number should match what you see in your Lighthouse beacon node logs.
 
-## Trying the Kintsugi testnet and performing transactions
+## Trying the Kiln testnet and performing transactions
 
-### Adding Kintsugi to MetaMask
+### Adding Kiln to MetaMask
 
-Now that you have a Geth node, you can use it to add the *Kintsugi* testnet in your [MetaMask](https://metamask.io/) networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configure this new network in MetaMask. In the end, you will need the full RPC URL.
+Now that you have a Geth node, you can use it to add the *Kiln* testnet in your [MetaMask](https://metamask.io/) networks and try a few transactions. You will need your machine IP address, the one on which you installed and configured your Geth node, to configure this new network in MetaMask. In the end, you will need the full RPC URL.
 
 * If you are on the same machine (your Geth node is running on the same machine as your browser with the MetaMask extension), use: `localhost`, The RPC URL in that case would be: `http://localhost:8545`.
 * If you are on a local network (your Geth node is running on a separate dedicated machine or virtual machine on your local network), use: the IP address of that machine on your local network. You can type `ip address` to find out that IP address. It often starts with `192.168` for machines on local networks. If you see something like `inet 192.168.1.115/24` with that command, it means the IP address is `192.168.1.115`. The RPC URL in that case would be `http://192.168.1.115:8545`.
 * If your machine is running remotely on a VPS, in the cloud or on some third party hosting, it might be somewhat dangerous to expose the port to your Geth node (8545), but you could configure your firewall to expose it and connect to that public IP address. The RPC URL would be something like: `http://<publicIP>:8545` where `<publicIP>` is replaced with the public IP of your machine.
-* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.kintsugi.themerge.dev/` for your RPC URL.
+* If you really don't know how to get that machine IP address, you can use a public endpoint like `https://rpc.kiln.themerge.dev/` for your RPC URL.
 
 In MetaMask, click on the network dropdown list and click the *Add Network* button.
 
-![MetaMask - Adding a new network](images/metamask-merge-kintsugi-step1.png)
+![MetaMask - Adding a new network](images/metamask-merge-kiln-step1.png)
 
 Fill out those fields:
 
-* **Network Name**: Kintsugi
+* **Network Name**: Kiln
 * **New RPC URL**: The RPC URL to your machine Geth endpoint or a public endpoint (see above on how to find out your RPC URL with your machine IP address)
 * **Chain ID**: 1337702
 
 And click on the *Save* button.
 
-![MetaMask - Entering new network details](images/metamask-merge-kintsugi-step2.png)
+![MetaMask - Entering new network details](images/metamask-merge-kiln-step2.png)
 
-It should switch to that new network by default. If not, select `Kintsugi` in the network dropdown list.
+It should switch to that new network by default. If not, select `Kiln` in the network dropdown list.
 
 ### Requesting testnet funds
 
-Go to [the public faucet](https://faucet.kintsugi.themerge.dev/), request some funds and wait for them to appear in your MetaMask wallet. Don't use a known wallet address for this. Create a temporary account if you need one. The faucet is known to fail once in a while. If you see any error when requesting, try again in a few minutes. It should eventually work.
+Go to [the public faucet](https://faucet.kiln.themerge.dev/), request some funds and wait for them to appear in your MetaMask wallet. Don't use a known wallet address for this. Create a temporary account if you need one. The faucet is known to fail once in a while. If you see any error when requesting, try again in a few minutes. It should eventually work.
 
-### Performing a simple transaction on Kintsugi
+### Performing a simple transaction on Kiln
 
-With the `Kintsugi` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.kintsugi.themerge.dev/) to see if it worked.
+With the `Kiln` network selected in MetaMask and some funds in your wallet, you should now be able to perform transactions on this testnet. Try sending some of those funds to another wallet. Check [the transactions explorer](https://explorer.kiln.themerge.dev/) to see if it worked.
 
 ## Adding a validator
 
-You will need funds [from the faucet](https://faucet.kintsugi.themerge.dev/) in a regular MetaMask account if you do not have some already. Do not use real ETH or a known wallet address for this. Make sure you are using a new regular account in MetaMask for all of this.
+You will need funds [from the faucet](https://faucet.kiln.themerge.dev/) in a regular MetaMask account if you do not have some already. Do not use real ETH or a known wallet address for this. Make sure you are using a new regular account in MetaMask for all of this.
 
 ### Creating your validator keys and performing the deposit
 
@@ -337,27 +337,27 @@ $ eth2-val-tools mnemonic && echo
 $ eth2-val-tools mnemonic && echo
 ```
 
-We need your MetaMask account **wallet address** and **private key** to perform the deposit. Make sure you have a wallet address with at least 32 Kintsugi ETH or more (it's a little more than 32 actually if you account for the gas fees). If you do not have such a wallet address in MetaMask, [request some testnet funds first](#requesting-testnet-funds).
+We need your MetaMask account **wallet address** and **private key** to perform the deposit. Make sure you have a wallet address with at least 32 Kiln ETH or more (it's a little more than 32 actually if you account for the gas fees). If you do not have such a wallet address in MetaMask, [request some testnet funds first](#requesting-testnet-funds).
 
 Getting your wallet address is as easy as clicking on the account at the top in MetaMask. It will be copied to your clipboard. Take note of your wallet address. We will need it later on.
 
-![MetaMask - Copying wallet address](images/metamask-merge-kintsugi-wallet-address.png)
+![MetaMask - Copying wallet address](images/metamask-merge-kiln-wallet-address.png)
 
 To access your account private key, you need to click on the 3 dots on the right side of your account name and click on *Account details*.
 
-![MetaMask - Reaching your account details](images/metamask-merge-kintsugi-account-details.png)
+![MetaMask - Reaching your account details](images/metamask-merge-kiln-account-details.png)
 
 Click on the *Export Private Key* button.
 
-![MetaMask - Export private key button](images/metamask-merge-kintsugi-export-private-key.png)
+![MetaMask - Export private key button](images/metamask-merge-kiln-export-private-key.png)
 
 Enter your MetaMask password and click on the *Confirm* button.
 
-![MetaMask - Export private key button](images/metamask-merge-kintsugi-show-private-keys.png)
+![MetaMask - Export private key button](images/metamask-merge-kiln-show-private-keys.png)
 
 Your private key will be shown. Copy and paste it somewhere and take note of your private key. We will need it in the next step.
 
-![MetaMask - Confirm show private keys](images/metamask-merge-kintsugi-private-key.png)
+![MetaMask - Confirm show private keys](images/metamask-merge-kiln-private-key.png)
 
 Create a new file called `secrets.env`. This file will contain everything we need to generate your deposit data, your keystore and perform the deposit using your MetaMask account.
 
@@ -388,7 +388,7 @@ ETH1_FROM_PRIV=""
 # forces the deposit since the deposit contract will not be recognized by the tool
 FORCE_DEPOSIT=true
 # sets an RPC endpoint to submit the transaction to
-ETH1_RPC=https://rpc.kintsugi.themerge.dev
+ETH1_RPC=https://rpc.kiln.themerge.dev
 ```
 
 There are 4 fields you need to fill with the values we created above:
@@ -420,7 +420,7 @@ ETH1_FROM_PRIV="0xf75581af4b149439a9d1459ce536d7c8ab9a780757a21d3d706a278561a047
 # forces the deposit since the deposit contract will not be recognized by the tool
 FORCE_DEPOSIT=true
 # sets an RPC endpoint to submit the transaction to
-ETH1_RPC=https://rpc.kintsugi.themerge.dev
+ETH1_RPC=https://rpc.kiln.themerge.dev
 ```
 
 Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
@@ -511,7 +511,7 @@ Sent deposit for validator "m/12381/3600/0/0/0" "95b5d2e88616406d4ed48e0b2813d3c
 
 The `95b5d2e88616406d4ed48e0b2813d3cfef4b72970b3fc2461c4c510e3d903999075ea07e285a9b86141278310dda125b` value here is the validator public key. Your own validator public key should be different.
 
-You can check that your deposit transaction went through on [the transaction explorer](https://explorer.kintsugi.themerge.dev/address/0x4242424242424242424242424242424242424242/transactions).
+You can check that your deposit transaction went through on [the transaction explorer](https://explorer.kiln.themerge.dev/address/0x4242424242424242424242424242424242424242/transactions).
 
 ### Configuring your Lighthouse validator client
 
@@ -539,7 +539,7 @@ Import your keystore that includes your validator key for the Lighthouse validat
 $ sudo /usr/local/bin/lighthouse account validator import \
     --directory ~/assigned_data/keys \
     --datadir /var/lib/lighthouse \
-    --testnet-dir /var/lib/lighthouse/kintsugi-testnet/custom_config_data
+    --testnet-dir /var/lib/lighthouse/kiln-testnet/custom_config_data
 $ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
 ```
 
@@ -553,7 +553,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Validator Client (Kintsugi)
+Description=Lighthouse Ethereum Client Validator Client (Kiln)
 Wants=network-online.target
 After=network-online.target
 
@@ -564,7 +564,7 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse vc \
-    --testnet-dir /var/lib/lighthouse/kintsugi-testnet/custom_config_data \
+    --testnet-dir /var/lib/lighthouse/kiln-testnet/custom_config_data \
     --datadir /var/lib/lighthouse \
     --metrics
 
@@ -602,7 +602,7 @@ You performs a lot of different tasks to help with the [*#TestingTheMerge*](http
 
 ## Good references
 
-Check out [the Kintsugi website](https://kintsugi.themerge.dev/) for some good references to explorers and faucets.
+Check out [the Kiln website](https://kiln.themerge.dev/) for some good references to explorers and faucets.
 
 ## Support
 
@@ -614,4 +614,4 @@ If you have any question or if you need additional support, make sure to get in 
 ## Credits
 
 Based on [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
-Based on [Marius van der Wijden's guide](https://hackmd.io/dFzKxB3ISWO8juUqPpJFfw).
+Based on [Ethereum community's guide](https://notes.ethereum.org/qrDBhhydTsyKFmGaBl2COQ).
