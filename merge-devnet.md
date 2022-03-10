@@ -31,7 +31,7 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install git build-essential pkg-config cmake clang wget curl ccze jq
+$ sudo apt -y install git build-essential pkg-config cmake clang wget curl ccze
 ```
 
 Install a recent version of Go.
