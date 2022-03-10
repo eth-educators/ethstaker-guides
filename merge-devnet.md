@@ -230,7 +230,6 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --staking \
     --http-allow-sync-stalled \
     --merge \
-    --eth1-endpoints http://127.0.0.1:8545 \
     --execution-endpoints http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
