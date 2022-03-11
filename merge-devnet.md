@@ -164,7 +164,7 @@ ExecStart=/usr/local/bin/geth \
     --http.api="engine,eth,web3,net,debug" \
     --http.corsdomain "*" \
     --http.addr "0.0.0.0" \
-    --authrpc.jwtsecret=/tmp/jwtsecret \
+    --authrpc.jwtsecret=/var/lib/goethereum/jwtsecret \
     --bootnodes "enode://c354db99124f0faf677ff0e75c3cbbd568b2febc186af664e0c51ac435609badedc67a18a63adb64dacc1780a28dcefebfc29b83fd1a3f4aa3c0eb161364cf94@164.92.130.5:30303"
 
 [Install]
@@ -234,7 +234,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --execution-endpoints http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
-    --jwt-secrets="/tmp/jwtsecret" \
+    --jwt-secrets="/var/lib/goethereum/jwtsecret" \
     --boot-nodes="enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
 
 [Install]
@@ -244,7 +244,7 @@ WantedBy=multi-user.target
 Make the JWT secret readable by all so our beacon node client can access it.
 
 ```console
-$ sudo chmod +r /tmp/jwtsecret
+$ sudo chmod +r /var/lib/goethereum/jwtsecret
 ```
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
