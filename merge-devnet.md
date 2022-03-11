@@ -4,10 +4,7 @@
 
 This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Kiln* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
-An old video tutorial of this guide for Kintsugi can be seen on:
-
-* Part 1: https://youtu.be/r31aeGPoy1o
-* Part 2: https://youtu.be/_RyqEFnhmDo
+An video tutorial of this guide can be seen on https://youtu.be/caaV4oMmWe8
 
 ## Overview
 
