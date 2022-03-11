@@ -165,6 +165,7 @@ ExecStart=/usr/local/bin/geth \
     --http.corsdomain "*" \
     --http.addr "0.0.0.0" \
     --authrpc.jwtsecret=/var/lib/goethereum/jwtsecret \
+    --override.terminaltotaldifficulty 20000000000000 \
     --bootnodes "enode://c354db99124f0faf677ff0e75c3cbbd568b2febc186af664e0c51ac435609badedc67a18a63adb64dacc1780a28dcefebfc29b83fd1a3f4aa3c0eb161364cf94@164.92.130.5:30303"
 
 [Install]
@@ -235,6 +236,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --metrics \
     --validator-monitor-auto \
     --jwt-secrets="/var/lib/goethereum/jwtsecret" \
+    --terminal-total-difficulty-override=20000000000000 \
     --boot-nodes="enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
 
 [Install]
