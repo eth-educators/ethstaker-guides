@@ -391,6 +391,7 @@ RestartSec=5
 ExecStart=/usr/local/bin/lighthouse vc \
     --network kiln \
     --datadir /var/lib/lighthouse \
+    --graffiti EthStaker \
     --metrics
 
 [Install]
