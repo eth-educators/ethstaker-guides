@@ -4,7 +4,7 @@
 
 This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Kiln* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
-An video tutorial of this guide can be seen on https://youtu.be/caaV4oMmWe8
+A video tutorial of this guide can be seen on https://youtu.be/caaV4oMmWe8
 
 ## Overview
 
@@ -374,7 +374,7 @@ Create a systemd service config file to configure the Lighthouse validator clien
 $ sudo nano /etc/systemd/system/lighthousevalidator.service
 ```
 
-Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`). Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address where you want to receive the transaction tips.
 
 ```ini
 [Unit]
@@ -392,7 +392,8 @@ ExecStart=/usr/local/bin/lighthouse vc \
     --network kiln \
     --datadir /var/lib/lighthouse \
     --graffiti EthStaker \
-    --metrics
+    --metrics \
+    --suggested-fee-recipient 0x0000000000000000000000000000000000000000
 
 [Install]
 WantedBy=multi-user.target

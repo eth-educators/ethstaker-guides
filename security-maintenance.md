@@ -75,6 +75,7 @@ Ubuntu and Canonical offers a live patching service called [Livepatch](https://u
 **Risks**
 
 * Physical data theft
+* Unintended slashing
 
 ## Good security and maintenance references
 
