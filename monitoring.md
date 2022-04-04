@@ -753,6 +753,12 @@ $ python3 update-node-exporter.py
 
 If you want to access Grafana and your dashboards from a remote machine on your local network or from the internet, you could simply use [an SSH tunnel](https://www.tunnelsup.com/how-to-create-ssh-tunnels/) ([with PuTTY on Windows](https://www.ibm.com/support/pages/ssh-tunneling-putty) or [natively on Windows 10](http://woshub.com/ssh-tunnel-port-forward-windows/)). There are various other alternatives for remote access that might better suits your needs. A secure HTTPS reverse proxy or a local VPN are possible solutions to this problem but they will be left as an exercise to the reader.
 
+If you are using the main `ssh` CLI client, you can often simply add the following flag and value `-L 3000:127.0.0.1:3000` when connecting to create that SSH tunnel. After doing so, you will be able to connect to http://localhost:3000/ from your client machine, the one you are connecting from, to access Grafana. In the end, it might look like:
+
+```console
+$ ssh -L 3000:127.0.0.1:3000 [user@]hostname[:port]
+```
+
 ## What's next?
 
 You might want to add *alerting* to your setup. If so, check out my other [Guide on how to do alerting for an Ethereum validator](alerting.md).
