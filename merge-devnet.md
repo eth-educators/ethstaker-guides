@@ -61,7 +61,7 @@ Clone Marius van der Wijden's Geth repository and switch to the `merge-kiln-v2` 
 
 ```console
 $ cd ~
-$ git clone -b merge-kiln-v2 https://github.com/MariusVanDerWijden/go-ethereum.git
+$ git clone -b master https://github.com/ethereum/go-ethereum.git
 ```
 
 Build this special Geth version.
