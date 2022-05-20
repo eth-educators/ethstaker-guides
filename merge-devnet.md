@@ -84,7 +84,7 @@ Clone the official Lighthouse repository and switch to the `unstable` branch.
 
 ```console
 $ cd ~
-$ git clone -b unstable https://github.com/sigp/lighthouse.git
+$ git clone -b stable https://github.com/sigp/lighthouse.git
 ```
 
 Build this special Lighthouse version.
