@@ -8,7 +8,7 @@ A video tutorial of this guide can be seen on https://youtu.be/caaV4oMmWe8
 
 ## Overview
 
-We will build special versions of Geth and Lighthouse and we will configure them to connect to the *Kiln* testnet.
+We will use the latest version of Geth and Lighthouse and we will configure them to connect to the *Kiln* testnet.
 
 ## Executing the commands
 
@@ -28,105 +28,44 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install git build-essential pkg-config cmake clang wget curl ccze
+$ sudo apt -y install software-properties-common wget curl ccze
 ```
 
-Install a recent version of Go.
+## Installing Geth
+
+Add the Ethereum PPA and install the Geth package.
 
 ```console
-$ wget https://go.dev/dl/go1.17.8.linux-amd64.tar.gz
-$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.17.8.linux-amd64.tar.gz
-$ export PATH=$PATH:/usr/local/go/bin
-$ echo 'PATH="$PATH:/usr/local/go/bin"' >> ~/.profile
-$ rm go1.17.8.linux-amd64.tar.gz
+$ sudo add-apt-repository -y ppa:ethereum/ethereum
+$ sudo apt -y install geth
 ```
 
-Install a recent version of Rust.
+## Installing Lighthouse
 
-```console
-$ curl https://sh.rustup.rs -sSf | sh
-```
-
-Type `1` and `Enter` to select option 1 *Proceed with installation (default)*.
-
-Add the Rust toolchains to your PATH.
-
-```console
-$ source $HOME/.cargo/env
-```
-
-## Building and Installing Geth merge-kiln-v2
-
-Clone Marius van der Wijden's Geth repository and switch to the `merge-kiln-v2` branch.
+Download [the latest release version for Lighthouse](https://github.com/sigp/lighthouse/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
 
 ```console
 $ cd ~
-$ git clone -b merge-kiln-v2 https://github.com/MariusVanDerWijden/go-ethereum.git
+$ wget https://github.com/sigp/lighthouse/releases/download/v2.3.0-rc.0/lighthouse-v2.3.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v2.3.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v2.3.0-rc.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
-Build this special Geth version.
+Install this Lighthouse version globally.
 
 ```console
-$ cd go-ethereum
-$ make geth
+$ sudo cp ~/lighthouse /usr/local/bin
+$ rm ~/lighthouse
 ```
 
-Wait for building to finish and install this special Geth version globally.
-
-```console
-$ sudo cp ./build/bin/geth /usr/local/bin
-$ cd ~
-```
-
-## Building and Installing Lighthouse unstable
-
-Clone the official Lighthouse repository and switch to the `unstable` branch.
-
-```console
-$ cd ~
-$ git clone -b unstable https://github.com/sigp/lighthouse.git
-```
-
-Build this special Lighthouse version.
-
-```console
-$ cd lighthouse
-$ make
-```
-
-Wait for building to finish and install this special Lighthouse version globally.
-
-```console
-$ sudo cp ~/.cargo/bin/lighthouse /usr/local/bin
-$ cd ~
-```
-
-## Obtaining the testnet configuration files
-
-Clone eth-clients's merge testnets repository.
-
-```console
-$ cd ~
-$ git clone https://github.com/eth-clients/merge-testnets.git
-```
-
-## Initializing and configuring your Geth node
+## Configuring your Geth node
 
 Create a dedicated user for running Geth, create a directory for holding the data and assign the proper permissions.
 
 ```console
 $ sudo useradd --no-create-home --shell /bin/false goeth
 $ sudo mkdir -p /var/lib/goethereum
-$ sudo cp ~/merge-testnets/kiln/genesis.json /var/lib/goethereum/
 $ sudo chown -R goeth:goeth /var/lib/goethereum
-```
-
-Initialize your Geth node with the *Kiln* genesis file.
-
-```console
-$ sudo -u goeth /usr/local/bin/geth \
-    init /var/lib/goethereum/genesis.json \
-    --datadir /var/lib/goethereum
 ```
 
 Create a systemd service config file to configure the Geth node service.
@@ -139,7 +78,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Go Ethereum Client - Geth (1337802)
+Description=Go Ethereum Client - Geth (Kiln)
 After=network.target
 Wants=network.target
 
@@ -150,19 +89,17 @@ Type=simple
 Restart=always
 RestartSec=5
 TimeoutStopSec=180
-ExecStart=/usr/local/bin/geth \
-    --syncmode=full \
+ExecStart=geth \
+    --kiln \
     --http \
     --datadir /var/lib/goethereum \
     --metrics \
     --metrics.expensive \
     --pprof \
-    --networkid=1337802 \
     --http.api="engine,eth,web3,net,debug" \
     --http.corsdomain "*" \
     --http.addr "0.0.0.0" \
     --authrpc.jwtsecret=/var/lib/goethereum/jwtsecret \
-    --override.terminaltotaldifficulty 20000000000000 \
     --bootnodes "enode://c354db99124f0faf677ff0e75c3cbbd568b2febc186af664e0c51ac435609badedc67a18a63adb64dacc1780a28dcefebfc29b83fd1a3f4aa3c0eb161364cf94@164.92.130.5:30303"
 
 [Install]
@@ -233,7 +170,6 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --metrics \
     --validator-monitor-auto \
     --jwt-secrets="/var/lib/goethereum/jwtsecret" \
-    --terminal-total-difficulty-override=20000000000000 \
     --boot-nodes="enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk"
 
 [Install]
@@ -324,7 +260,7 @@ You will need funds [from the faucet](https://faucet.kiln.themerge.dev/) in a re
 There are 2 great tools to create your validator keys:
 
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
-* CLI based: [staking-deposit-cli](https://github.com/ethereum/eth2.0-deposit-cli) (previously known as eth2.0-deposit-cli)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
 If you choose the *Wagyu Key Gen* application, make sure to select the *Kiln* network and follow the instructions provided.
 
@@ -332,9 +268,9 @@ If you choose the *staking-deposit-cli* application, here is how to create your 
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/eth2.0-deposit-cli/releases/download/v2.0.0/staking_deposit-cli-e2a7c94-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-e2a7c94-linux-amd64.tar.gz
-$ cd staking_deposit-cli-e2a7c94-linux-amd64/
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
+$ cd staking_deposit-cli-9ab0b05-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain kiln
 $ ls -d $PWD/validator_keys/*
 ```
