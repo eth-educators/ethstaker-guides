@@ -234,7 +234,7 @@ Make sure the test networks are shown in MetaMask. In the Network dropdown contr
 
 ### Requesting testnet funds
 
-You can request Ropsten ETH from [Egor Egorov's public faucet](https://faucet.egorfine.com/) or from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-ropsten-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/ropsten) as well. You will need at least 32 Ropsten ETH if you want to do a validator deposit for Ropsten.
+You can request Ropsten ETH from [Egor Egorov's public faucet](https://faucet.egorfine.com/) or from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-ropsten-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/ropsten) as well. You will need at least 32 Ropsten ETH if you want to do a validator deposit for Ropsten. The EthStaker Discord faucet will give you 32.5 Ropsten ETH in one go.
 
 ## Adding a validator
 
