@@ -103,7 +103,7 @@ ExecStart=geth \
 WantedBy=default.target
 ```
 
-Notice the `override.terminaltotaldifficulty` configuration option in this service definition. Right now, that TTD value (100000000000000000000000) will not be reached. It is a very large value that will need to be changed before June 8th 2022, when the Merge is expected to happen, for the actual real value. That new value will be published a few hours before the merge on Ropsten.
+Notice the `override.terminaltotaldifficulty` configuration option in this service definition. Right now, that TTD value (100000000000000000000000) will not be reached. It is a very large value **that will need to be changed before June 8th 2022**, when the Merge is expected to happen, for the actual real value. That new value will be published a few hours before the merge on Ropsten.
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
 
@@ -175,7 +175,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
 WantedBy=multi-user.target
 ```
 
-Notice the `terminal-total-difficulty-override` configuration option in this service definition. Right now, that TTD value (100000000000000000000000) will not be reached. It is a very large value that will need to be changed before June 8th 2022, when the Merge is expected to happen, for the actual real value. That new value will be published a few hours before the merge on Ropsten.
+Notice the `terminal-total-difficulty-override` configuration option in this service definition. Right now, that TTD value (100000000000000000000000) will not be reached. It is a very large value **that will need to be changed before June 8th 2022**, when the Merge is expected to happen, for the actual real value. That new value will be published a few hours before the merge on Ropsten.
 
 Make the JWT secret readable by all so our beacon node client can access it.
 
