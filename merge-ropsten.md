@@ -116,13 +116,13 @@ ExecStart=geth \
     --http.api="engine,eth,web3,net,debug" \
     --http.corsdomain "*" \
     --authrpc.jwtsecret=/var/lib/goethereum/jwtsecret \
-    --override.terminaltotaldifficulty 100000000000000000000000
+    --override.terminaltotaldifficulty 50000000000000000
 
 [Install]
 WantedBy=default.target
 ```
 
-Notice the `override.terminaltotaldifficulty` configuration option in this service definition. Right now, that TTD value (100000000000000000000000) will not be reached. It is a very large value **that will need to be changed before June 8th 2022**, when the Merge is expected to happen, for the actual real value. That new value will be published a few hours before the merge on Ropsten.
+Notice the `override.terminaltotaldifficulty` configuration option in this service definition. This TTD value (50000000000000000) was recently decided [by the community](https://blog.ethereum.org/2022/06/03/ropsten-merge-ttd/).
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
 
@@ -188,13 +188,13 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --metrics \
     --validator-monitor-auto \
     --jwt-secrets="/var/lib/goethereum/jwtsecret" \
-    --terminal-total-difficulty-override 100000000000000000000000
+    --terminal-total-difficulty-override 50000000000000000
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-Notice the `terminal-total-difficulty-override` configuration option in this service definition. Right now, that TTD value (100000000000000000000000) will not be reached. It is a very large value **that will need to be changed before June 8th 2022**, when the Merge is expected to happen, for the actual real value. That new value will be published a few hours before the merge on Ropsten.
+Notice the `terminal-total-difficulty-override` configuration option in this service definition. This TTD value (50000000000000000) was recently decided [by the community](https://blog.ethereum.org/2022/06/03/ropsten-merge-ttd/).
 
 Make the JWT secret readable by all so our beacon node client can access it.
 
