@@ -6,7 +6,7 @@ This guide is meant for people with little or some experience in running Ethereu
 
 ## Overview
 
-We will use the latest version of Geth and Lighthouse and we will configure them to connect to the *Ropsten* testnet.
+We will use the latest version for Geth and the unstable version for Lighthouse. We will configure them to connect to the *Ropsten* testnet.
 
 ## Executing the commands
 
@@ -26,7 +26,21 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install software-properties-common wget curl ccze
+$ sudo apt -y install git build-essential pkg-config cmake clang software-properties-common wget curl ccze
+```
+
+Install a recent version of Rust.
+
+```console
+$ curl https://sh.rustup.rs -sSf | sh
+```
+
+Type `1` and `Enter` to select option 1 *Proceed with installation (default)*.
+
+Add the Rust toolchains to your PATH.
+
+```console
+$ source $HOME/.cargo/env
 ```
 
 ## Installing Geth
@@ -38,22 +52,27 @@ $ sudo add-apt-repository -y ppa:ethereum/ethereum
 $ sudo apt -y install geth
 ```
 
-## Installing Lighthouse
+## Building and Installing Lighthouse unstable
 
-Download [the latest release version for Lighthouse](https://github.com/sigp/lighthouse/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
+Clone the official Lighthouse repository and switch to the `unstable` branch.
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v2.3.0/lighthouse-v2.3.0-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v2.3.0-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v2.3.0-x86_64-unknown-linux-gnu.tar.gz
+$ git clone -b unstable https://github.com/sigp/lighthouse.git
 ```
 
-Install this Lighthouse version globally.
+Build this special Lighthouse version.
 
 ```console
-$ sudo cp ~/lighthouse /usr/local/bin
-$ rm ~/lighthouse
+$ cd lighthouse
+$ make
+```
+
+Wait for building to finish and install this special Lighthouse version globally.
+
+```console
+$ sudo cp ~/.cargo/bin/lighthouse /usr/local/bin
+$ cd ~
 ```
 
 ## Configuring your Geth node
