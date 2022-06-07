@@ -164,6 +164,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --network kiln \
     --datadir /var/lib/lighthouse \
     --staking \
+    --http-allow-sync-stalled \
     --merge \
     --execution-endpoints http://127.0.0.1:8551 \
     --metrics \
