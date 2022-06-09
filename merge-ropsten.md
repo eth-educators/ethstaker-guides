@@ -293,7 +293,7 @@ Create a systemd service config file to configure the Lighthouse validator clien
 $ sudo nano /etc/systemd/system/lighthousevalidator.service
 ```
 
-Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`). Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address where you want to receive the transaction tips.
+Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`). Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address that you control where you want to receive the transaction tips.
 
 ```ini
 [Unit]

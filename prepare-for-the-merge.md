@@ -82,11 +82,11 @@ The communication between your consensus client and your execution client is goi
 
 You are likely going to need to use a new configuration option for this endpoint or at least update it on your consensus client beacon node. The default port for the Engine API is 8551 and the default port for the JSON-RPC API is 8545. You might not need to change any configuration option on your execution client, but you will likely need to modify your beacon node configuration. Here are the common values you will likely need to add or modify for each consensus client assuming your execution client engine API endpoint is at `http://localhost:8551`:
 
-- Prysm Beacon Node: `--http-web3provider http://localhost:8551`
+- Prysm beacon node: `--http-web3provider http://localhost:8551`
 - Nimbus: `--web3-url=http://localhost:8551`
-- Lodestar: `--execution.urls http://localhost:8551`
+- Lodestar beacon node: `--execution.urls http://localhost:8551`
 - Teku: `--ee-endpoint http://localhost:8551`
-- Lighthouse: `--execution-endpoints http://localhost:8551`
+- Lighthouse beacon node: `--execution-endpoints http://localhost:8551`
 
 As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
@@ -117,17 +117,31 @@ As usual, when changing the configuration for your execution client, you will ne
 
 ### Configure your consensus client to use the JWT token file
 
-- Prysm Beacon Node: `--jwt-secret /var/lib/ethereum/jwttoken`
+- Prysm beacon node: `--jwt-secret /var/lib/ethereum/jwttoken`
 - Nimbus: `--jwt-secret=/var/lib/ethereum/jwttoken`
-- Lodestar: `--jwt-secret /var/lib/ethereum/jwttoken`
+- Lodestar beacon node: `--jwt-secret /var/lib/ethereum/jwttoken`
 - Teku: `--ee-jwt-secret-file /var/lib/ethereum/jwttoken`
-- Lighthouse: `--jwt-secrets /var/lib/ethereum/jwttoken`
+- Lighthouse beacon node: `--jwt-secrets /var/lib/ethereum/jwttoken`
 
 As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
 ## Configuring your fee recipient address
 
+After the Merge, validators will replace miners in building blocks and getting the associated rewards. The validators will receive the tips from each included transaction on their proposed block. For this, they will need to configure a fee recipient address. This will represent the address where tips are sent to when your validator propose a block. Those fees will be available right away for any transaction.
+
+This address can be configured at different layers depending on which client you are using. It can be at the execution client layer, at the consensus beacon node layer, it can be at the consensus validator client layer and it can even be for each different validator key. Here are the common values to configure this on the consensus client. Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address that you control where you want to receive the transaction tips.
+
+- Prysm: `--suggested-fee-recipient 0x0000000000000000000000000000000000000000`
+- Nimbus: `--suggested-fee-recipient=0x0000000000000000000000000000000000000000`
+- Lodestar validator: `--defaultFeeRecipient 0x0000000000000000000000000000000000000000`
+- Teku: `--validators-proposer-default-fee-recipient=0x0000000000000000000000000000000000000000`
+- Lighthouse: `--suggested-fee-recipient 0x0000000000000000000000000000000000000000`
+
+As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
+
 ## Choosing and configuring an MEV solution
+
+TODO
 
 ## Support
 
