@@ -27,15 +27,17 @@ Running your own execution client is going to be required after the Merge for an
 
 If you are running your own execution client and using a public infrastructure provider as a fallback endpoint, that fallback endpoint will not work after the merge. Using multiple execution clients after the Merge is going to be slightly more complex. This is out of scope for this guide.
 
-The 2 main concerns for an Ethereum validator when running your own execution client is disk usage and bandwidth usage. It is not uncommon for an execution client to use more than 650GB on to store its data. If your disk size is less than 2TB for storing everything, you should consider migrating to a disk which is at least 2TB in size.
+The 2 main concerns for an Ethereum validator when running your own execution client is disk usage and bandwidth usage.
 
 ### Installing and configuring a new execution client
 
-If you are not currently running your own execution client and if you used a guide or a tool to setup your staking machine, you should first look again to see if they have a section on how to setup an execution client.
+If you are not currently running your own execution client and if you used a guide or a tool to setup your staking machine, you should first look again to see if they have a section on how to setup an execution client. If you don't know where to start, check out [the client setup tools and guides](https://ethereum.org/en/staking/solo/#node-and-client-tools). [Our support](#support) can also help you here.
 
 ### Managing your execution client disk usage
 
-Pruning your execution client database is a good strategy for managing your execution client disk usage. If you are using Geth, [you should prune it regularly](https://gist.github.com/yorickdowne/3323759b4cbf2022e191ab058a4276b2) and you should prune it just before the Merge. Geth currently only offers offline prunning that takes a few hours to complete. Having an offline execution client after the Merge will result in your validator failing to perform all its duties meaning that you will lose rewards during that time.
+It is not uncommon for an execution client to use more than 650GB to store its data on Mainnet. If your disk size is less than 2TB for storing everything, you should consider migrating to a disk which is at least 2TB in size. You could possibly still manage to run an effective Ethereum validator with only a 1TB disk but that is going to require a lot of efforts which might not be worth it for the price difference of a new disk. Alternatives include adding another disk to your machine if it has an available slot or running your execution client on another machine on your local network. Make sure to get in touch with [our support](#support) if you are interested in those alternatives.
+
+Pruning your execution client database is a good strategy for managing your execution client disk usage. If you are using Geth, [you should prune it regularly](https://gist.github.com/yorickdowne/3323759b4cbf2022e191ab058a4276b2) and you should prune it just before the Merge. Geth currently only offers offline prunning that takes a few hours to complete. You should know that having an offline execution client after the Merge will result in your validator failing to perform all its duties meaning that you will lose rewards during that time.
 
 Other execution clients have different strategies for managing data growth. Some are leaner in terms of disk size usage to get started with and some include online automatic pruning. You should consider running [a minority execution client](#execution-client-diversity).
 
@@ -43,7 +45,7 @@ I suggest you implement [monitoring](monitoring.md) and [alerting](alerting.md) 
 
 ### Managing your execution client bandwidth usage
 
-
+An execution client will use a lot of bandwidth. Reducing the number of peers is one way of reducing bandwidth usage. It comes with some risks and the con of potentially being out of sync at the wrong time and making your Ethereum validator lose some rewards. The default configuration option for the number of peers should be your baseline value.
 
 ### Execution client diversity
 
