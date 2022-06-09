@@ -51,30 +51,30 @@ An execution client will use a lot of bandwidth. Reducing the number of peers is
 
 Geth is currently the supermajority execution client. It is used to build almost all blocks right now. This is not currently a big issue but it will become one after the Merge. You should consider running [a minority execution client](https://clientdiversity.org/). We have some great execution clients that work well for an Ethereum validator that should be considered:
 
-- [Erigon](https://github.com/ledgerwatch/erigon#erigon)
-- [Besu](https://hyperledger.org/use/besu)
-- [Nethermind](http://nethermind.io/)
+- [Erigon](https://github.com/ledgerwatch/erigon#erigon) ([Discord](https://github.com/ledgerwatch/erigon#erigon-discord-server))
+- [Besu](https://hyperledger.org/use/besu) ([Discord](https://discord.com/invite/hyperledger))
+- [Nethermind](http://nethermind.io/) ([Discord](https://discord.com/invite/PaCMRFdvWT))
 
 ## Updating your Ethereum clients
 
 There are new specification changes that were added recently that will be needed for the Merge. If you have not updated your Ethereum clients regularly, you will need to update them before the Merge.
 
-If you used a guide or a tool to setup your staking machine, you should first check out with that guide or tool on how you can update your Ethereum clients. If they don't have any section on how to do it, you can check with each client's documentation or get touch with [our support](#support).
+If you used a guide or a tool to setup your staking machine, you should first check out with that guide or tool on how you can update your Ethereum clients. If they don't have any section on how to do it, you can check with each client or get touch with [our support](#support).
 
 ### Execution clients
 
-- [Geth](https://geth.ethereum.org/)
-- [Erigon](https://github.com/ledgerwatch/erigon#erigon)
-- [Besu](https://hyperledger.org/use/besu)
-- [Nethermind](http://nethermind.io/)
+- [Geth](https://geth.ethereum.org/) ([Discord](https://discord.com/invite/nthXNEv))
+- [Erigon](https://github.com/ledgerwatch/erigon#erigon) ([Discord](https://github.com/ledgerwatch/erigon#erigon-discord-server))
+- [Besu](https://hyperledger.org/use/besu) ([Discord](https://discord.com/invite/hyperledger))
+- [Nethermind](http://nethermind.io/) ([Discord](https://discord.com/invite/PaCMRFdvWT))
 
 ### Consensus clients
 
-- [Prysm](https://prysmaticlabs.com/)
-- [Nimbus](https://nimbus.team/)
-- [Lodestar](https://lodestar.chainsafe.io/)
-- [Teku](https://consensys.net/knowledge-base/ethereum-2/teku/)
-- [Lighthouse](https://lighthouse.sigmaprime.io/)
+- [Prysm](https://prysmaticlabs.com/) ([Discord](https://discord.gg/YMVYzv6))
+- [Nimbus](https://nimbus.team/) ([Discord](https://discord.gg/qnjVyhatUa))
+- [Lodestar](https://lodestar.chainsafe.io/) ([Discord](https://discord.gg/yjyvFRP))
+- [Teku](https://consensys.net/knowledge-base/ethereum-2/teku/) ([Discord](https://discord.gg/9mCVSY6))
+- [Lighthouse](https://lighthouse.sigmaprime.io/) ([Discord](https://discord.gg/cyAszAh))
 
 ## Using the new configuration options for your Ethereum clients
 
