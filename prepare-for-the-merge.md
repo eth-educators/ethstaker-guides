@@ -23,6 +23,36 @@ The current planned date for the Merge protocol upgrade to happen is ~Q3/Q4 2022
 
 ## Running your own execution client
 
+Running your own execution client is going to be required after the Merge for an Ethereum validator. Some Ethereum validators are entirely relying on public infrastructure like Infura or Alchemy for their execution data. If you are in this case, you will need to install and configure your own execution client.
+
+If you are running your own execution client and using a public infrastructure provider as a fallback endpoint, that fallback endpoint will not work after the merge. Using multiple execution clients after the Merge is going to be slightly more complex. This is out of scope for this guide.
+
+The 2 main concerns for an Ethereum validator when running your own execution client is disk usage and bandwidth usage. It is not uncommon for an execution client to use more than 650GB on to store its data. If your disk size is less than 2TB for storing everything, you should consider migrating to a disk which is at least 2TB in size.
+
+### Installing and configuring a new execution client
+
+If you are not currently running your own execution client and if you used a guide or a tool to setup your staking machine, you should first look again to see if they have a section on how to setup an execution client.
+
+### Managing your execution client disk usage
+
+Pruning your execution client database is a good strategy for managing your execution client disk usage. If you are using Geth, [you should prune it regularly](https://gist.github.com/yorickdowne/3323759b4cbf2022e191ab058a4276b2) and you should prune it just before the Merge. Geth currently only offers offline prunning that takes a few hours to complete. Having an offline execution client after the Merge will result in your validator failing to perform all its duties meaning that you will lose rewards during that time.
+
+Other execution clients have different strategies for managing data growth. Some are leaner in terms of disk size usage to get started with and some include online automatic pruning. You should consider running [a minority execution client](#execution-client-diversity).
+
+I suggest you implement [monitoring](monitoring.md) and [alerting](alerting.md) to help you find out when you are low on available disk space.
+
+### Managing your execution client bandwidth usage
+
+
+
+### Execution client diversity
+
+Geth is currently the supermajority execution client. It is used to build almost all blocks right now. This is not currently a big issue but it will become one after the Merge. You should consider running [a minority execution client](https://clientdiversity.org/). We have some great execution clients that work well for an Ethereum validator that should be considered:
+
+- [Erigon](https://github.com/ledgerwatch/erigon#erigon)
+- [Besu](https://hyperledger.org/use/besu)
+- [Nethermind](http://nethermind.io/)
+
 ## Updating your Ethereum clients
 
 ## Using the new configuration options for your Ethereum clients
