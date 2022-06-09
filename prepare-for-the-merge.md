@@ -57,6 +57,25 @@ Geth is currently the supermajority execution client. It is used to build almost
 
 ## Updating your Ethereum clients
 
+There are new specification changes that were added recently that will be needed for the Merge. If you have not updated your Ethereum clients regularly, you will need to update them before the Merge.
+
+If you used a guide or a tool to setup your staking machine, you should first check out with that guide or tool on how you can update your Ethereum clients. If they don't have any section on how to do it, you can check with each client's documentation or get touch with [our support](#support).
+
+### Execution clients
+
+- [Geth](https://geth.ethereum.org/)
+- [Erigon](https://github.com/ledgerwatch/erigon#erigon)
+- [Besu](https://hyperledger.org/use/besu)
+- [Nethermind](http://nethermind.io/)
+
+### Consensus clients
+
+- [Prysm](https://prysmaticlabs.com/)
+- [Nimbus](https://nimbus.team/)
+- [Lodestar](https://lodestar.chainsafe.io/)
+- [Teku](https://consensys.net/knowledge-base/ethereum-2/teku/)
+- [Lighthouse](https://lighthouse.sigmaprime.io/)
+
 ## Using the new configuration options for your Ethereum clients
 
 ## Configuring a JWT token file
@@ -67,7 +86,7 @@ Geth is currently the supermajority execution client. It is used to build almost
 
 ## Support
 
-If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
+If you have any question or if you need additional support, make sure to get in touch with the EthStaker community on:
 
 * Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
