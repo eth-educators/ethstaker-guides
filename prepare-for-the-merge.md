@@ -16,19 +16,22 @@ The current planned date for the Merge protocol upgrade to happen is ~Q3/Q4 2022
 
 1. Make sure you are running your own execution client.
 2. Make sure your Ethereum clients are updated.
-3. Make sure you have a configured JWT token file for the engine API.
-4. Make sure you have a configured fee recipient address.
-5. Make sure you have a good MEV solution if you want one.
+3. Make sure you are using the new configuration options for your Ethereum clients.
+4. Make sure you have a configured JWT token file for the engine API.
+5. Make sure you have a configured fee recipient address.
+6. Make sure you have a configured MEV solution if you want one.
 
 ## Running your own execution client
 
 ## Updating your Ethereum clients
 
+## Using the new configuration options for your Ethereum clients
+
 ## Configuring a JWT token file
 
-## Configuring your fee recipient address.
+## Configuring your fee recipient address
 
-## Choosing an MEV solution
+## Choosing and configuring an MEV solution
 
 ## Support
 
