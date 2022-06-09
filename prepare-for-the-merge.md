@@ -96,7 +96,7 @@ The new Engine API used to communicate between the execution client and the cons
 
 ### Creating the JWT token file
 
-Create a JWT token file in a neutral location and make it readable to everyone. It will assume we will store the JWT token file in `/var/lib/ethereum/jwttoken`.
+Create a JWT token file in a neutral location and make it readable to everyone. We will the `/var/lib/ethereum/jwttoken` location to store the JWT token file.
 
 ```
 $ sudo mkdir -p /var/lib/ethereum
