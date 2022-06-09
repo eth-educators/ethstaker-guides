@@ -82,13 +82,48 @@ The communication between your consensus client and your execution client is goi
 
 You are likely going to need to use a new configuration option for this endpoint or at least update it on your consensus client beacon node. The default port for the Engine API is 8551 and the default port for the JSON-RPC API is 8545. You might not need to change any configuration option on your execution client, but you will likely need to modify your beacon node configuration. Here are the common values you will likely need to add or modify for each consensus client assuming your execution client engine API endpoint is at `http://localhost:8551`:
 
-- Prysm Beacon Node: `--http-web3provider=http://localhost:8551`
+- Prysm Beacon Node: `--http-web3provider http://localhost:8551`
 - Nimbus: `--web3-url=http://localhost:8551`
 - Lodestar: `--execution.urls http://localhost:8551`
-- Teku: `--ee-endpoint=http://localhost:8551`
+- Teku: `--ee-endpoint http://localhost:8551`
 - Lighthouse: `--execution-endpoints http://localhost:8551`
 
+As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
+
 ## Configuring a JWT token file
+
+The new Engine API used to communicate between the execution client and the consensus client requires [authentication](https://github.com/ethereum/execution-apis/blob/main/src/engine/authentication.md) which is provided with a JWT token stored in a file. There are various ways to configure this. Here is a simple one.
+
+### Creating the JWT token file
+
+Create a JWT token file in a neutral location and make it readable to everyone. It will assume we will store the JWT token file in `/var/lib/ethereum/jwttoken`.
+
+```
+$ sudo mkdir -p /var/lib/ethereum
+$ openssl rand -hex 32 | tr -d "\n" | sudo tee /var/lib/ethereum/jwttoken
+$ sudo chmod +r /var/lib/ethereum/jwttoken
+```
+
+### Configure your execution client to use the JWT token file
+
+Each execution client will need a different configuration option for the JWT token file. Here are the common values:
+
+- Geth: `--authrpc.jwtsecret /var/lib/ethereum/jwttoken`
+- Erigon: `--authrpc.jwtsecret /var/lib/ethereum/jwttoken`
+- Besu: `--engine-jwt-secret=/var/lib/ethereum/jwttoken`
+- Nethermind: `--JsonRpc.JwtSecretFile=/var/lib/ethereum/jwttoken`
+
+As usual, when changing the configuration for your execution client, you will need to reload this configuration and probably restart the client.
+
+### Configure your consensus client to use the JWT token file
+
+- Prysm Beacon Node: `--jwt-secret /var/lib/ethereum/jwttoken`
+- Nimbus: `--jwt-secret=/var/lib/ethereum/jwttoken`
+- Lodestar: `--jwt-secret /var/lib/ethereum/jwttoken`
+- Teku: `--ee-jwt-secret-file /var/lib/ethereum/jwttoken`
+- Lighthouse: `--jwt-secrets /var/lib/ethereum/jwttoken`
+
+As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
 ## Configuring your fee recipient address
 
