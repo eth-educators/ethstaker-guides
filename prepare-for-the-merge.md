@@ -145,6 +145,8 @@ This address can be configured at different layers depending on which client you
 
 As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
+There are some privacy implications in using a fee recipient address. That address will be forever linked with your validator when it proposes a block. If you want to maximize your privacy, you should use your validator deposit address as your fee recipient address since it is already linked with your validator.
+
 ## Choosing and configuring an MEV solution
 
 [Maximal extractable value (MEV)](https://ethereum.org/en/developers/docs/mev/) refers to the maximum value that can be extracted from block production in excess of the standard block reward and gas fees by including, excluding, and changing the order of transactions in a block. After the Merge, there will be an opportunity for Ethereum validators to get that value. If you want to get that value, you will need to install some additional software and configure your consensus client to communication with that software when the time comes to propose a block.
