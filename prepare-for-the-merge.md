@@ -37,6 +37,8 @@ The 2 main concerns for an Ethereum validator when running your own execution cl
 
 If you are not currently running your own execution client and if you used a guide or a tool to setup your staking machine, you should first check to see if that guide or tool has a section on how to setup an execution client. If you don't know where to start, check out [the client setup tools and guides](https://ethereum.org/en/staking/solo/#node-and-client-tools). [Our support](#support) can also help you here.
 
+Syncing an execution from nothing can take a few hours or a few days. Make sure to install and configure your execution client at least a week before the Merge to be safe.
+
 ### Managing your execution client disk usage
 
 It is not uncommon for an execution client to use more than 650GB to store its data on Mainnet. If your disk size is less than 2TB for storing everything, you should consider migrating and replacing that disk with one which is at least 2TB in size. You could possibly still manage to run an effective Ethereum validator with only a 1TB disk but that is going to require a lot of efforts which might not be worth it for the price difference of a new disk. Alternatives include adding another a new disk to your machine if it has an available slot or running your execution client on another machine on your local network. Make sure to get in touch with [our support](#support) if you are interested in those alternatives.
