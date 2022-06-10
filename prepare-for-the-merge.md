@@ -4,6 +4,10 @@
 
 This guide is meant for people who are managing and maintaining staking machines. It will explain which steps or actions you should take in order to be ready for the Merge.
 
+# This is a draft
+
+This document is still a draft. You should wait to apply these changes before more is known about the Merge. You should wait until we are closer to the Merge. This document is subject to change.
+
 ## Why would you want to prepare for the Merge?
 
 There are some risks your staking machine will stop performing its duties if you are not well prepared. There are some risks your Ethereum validator will miss some rewards if you are not well prepared.
