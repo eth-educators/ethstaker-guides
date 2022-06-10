@@ -145,7 +145,7 @@ This address can be configured at different layers depending on which client you
 
 As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
-There are some privacy implications in using a fee recipient address. That address will be forever linked with your validator when it proposes a block after the Merge. If you want to maximize your privacy, you should use your validator deposit address as your fee recipient address since it is already linked with your validator.
+There are some privacy implications in using a fee recipient address. That address will be forever linked with your validator when it proposes a block after the Merge. If you want to maximize your privacy, you should use your validator deposit address as your fee recipient address if you still have control over it since it is already linked with your validator.
 
 ## Choosing and configuring an MEV solution
 
