@@ -223,6 +223,34 @@ rule_files:
   - "alert_rules.yml"
 ```
 
+## Configuring node_exporter to collect systemd metrics
+
+Edit your node_exporter systemd service file. It's likely in `/etc/systemd/system/node_exporter.service`. If not, adjust accordingly.
+
+```console
+$ sudo nano /etc/systemd/system/node_exporter.service
+```
+
+Add the `--collector.systemd` flag to `ExecStart`. Now it will look something like:
+
+```ini
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=node_exporter
+Group=node_exporter
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/node_exporter --web.listen-address="localhost:9100" --collector.systemd
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ## Adding alerting rules
 
 Setup the rules for alerting. Open the rules file.
@@ -258,6 +286,27 @@ groups:
       severity: critical
     annotations:
       summary: CPU usage above 90%
+  - alert: execution_client_not_running
+    expr: node_systemd_unit_state{name="execution_client.service",state="active"} < 1
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: execution_client has failed to start in systemd
+  - alert: beacon_client_not_running
+    expr: node_systemd_unit_state{name="beacon_client.service",state="active"} < 1
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: beacon_client has failed to start in systemd
+  - alert: validator_client_not_running
+    expr: node_systemd_unit_state{name="validator_client.service",state="active"} < 1
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: validator_client has failed to start in systemd
 ```
 
 This base rules file has 3 rules which you can adjust by modifying the `expr` field's value.
@@ -265,6 +314,9 @@ This base rules file has 3 rules which you can adjust by modifying the `expr` fi
 1. The first rule will alert you when you have less than around 80GB (81920000000 bytes) of available disk space on your `/` mount continuously for 1 minute. If your filesystem and your partitions are configured in a different way where you want to check for a different mount, you will have to change that `expr` field. If you have direct access to your prometheus web interface (often at `http://<machine ip>:9090`), you can execute the `node_filesystem_avail_bytes` query to view all possible mounts and their current free space. You can also view your current mounts and their free space by running the `$ df -h` command.
 2. The second rule will alert you when you have less than around 1GB (1024000000 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1GB (1024000000 bytes) threshold value in that `expr` field.
 3. The third rule will alert you when your CPU cores are used for more than 90% of their processing power continuously for 5 minutes.
+4. The fourth rule will alert you when your execution client fails to start in systemd after 1 minute. You should replace `execution_client` in the alert rule with the name of your execution client's systemd service name (for example `geth`).
+5. The fifth rule will alert you when your beacon chain client fails to start in systemd after 1 minute. You should replace `beacon_client` in the alert rule with the name of your beacon chain client's systemd service name (for example `lighthousebeacon`).
+6. The fifth rule will alert you when your validator client fails to start in systemd after 1 minute. You should replace `validator_client` in the alert rule with the name of your beacon chain client's systemd service name (for example `lighthousevalidator`).
 
 Set ownership for the config file. If your prometheus service is running under an account that is not `prometheus`, adjust accordingly.
 
@@ -381,6 +433,60 @@ $ </dev/zero head -c 8800m | tail
 Trying to consume RAM with a dummy process like that can be tricky because of how the operating system manages free memory. If you fail to trigger your rule, try to slowly increment the amount of memory consumed with a new dummy process. This should leave us around 500MB of free RAM. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
 
 Once your *Available memory* test is done, you can terminate the dummy process that is needlessly consuming your memory by typing `CTRL`+`C` in your terminal.
+
+### Execution Client systemd failure test
+
+Here is an example to test your *Execution Client systemd Failure* rule. Make sure your incident is resolved on PagerDuty first if you just tested your *Execution Client systemd Failure* rule.
+
+Stop your execution client via systemd (note that you should replace `execution_client` with the name of your execution client's systemd service name (for example: `geth`):
+
+```console
+$ sudo systemctl stop execution_client
+```
+
+Waiting around 1 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
+
+After resolving the incident, restart the execution client:
+
+```console
+$ sudo systemctl start execution_client
+```
+
+### Beacon Chain Client systemd failure test
+
+Here is an example to test your *Beacon Chain Client systemd Failure* rule. Make sure your incident is resolved on PagerDuty first if you just tested your *Beacon Chain Client systemd Failure* rule.
+
+Stop your beacon chain client via systemd (note that you should replace `beacon_client` with the name of your beacon chain client's systemd service name (for example: `lighthousebeacon`):
+
+```console
+$ sudo systemctl stop beacon_client
+```
+
+Waiting around 1 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
+
+After resolving the incident, restart the beacon chain client:
+
+```console
+$ sudo systemctl start beacon_client
+```
+
+### Validator Client systemd failure test
+
+Here is an example to test your *Validator Client systemd Failure* rule. Make sure your incident is resolved on PagerDuty first if you just tested your *Validator Client systemd Failure* rule.
+
+Stop your validator client via systemd (note that you should replace `validator_client` with the name of your validator client's systemd service name (for example: `lighthousevalidator`):
+
+```console
+$ sudo systemctl stop validator_client
+```
+
+Waiting around 1 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.
+
+After resolving the incident, restart the beacon chain client:
+
+```console
+$ sudo systemctl start validator_client
+```
 
 ## Resolving the incidents
 
