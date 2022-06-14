@@ -151,6 +151,8 @@ There are some privacy implications in using a fee recipient address. That addre
 
 [Maximal extractable value (MEV)](https://ethereum.org/en/developers/docs/mev/) refers to the maximum value that can be extracted from block production in excess of the standard block reward and gas fees by including, excluding, and changing the order of transactions in a block. After the Merge, there will be an opportunity for Ethereum validators to get that value. If you want to get that value, you will need to install some additional software and configure your consensus client to communication with that software when the time comes to propose a block.
 
+A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
+
 TODO: Finish this section
 
 ## Support
