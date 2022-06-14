@@ -161,3 +161,7 @@ If you have any question or if you need additional support, make sure to get in 
 
 * Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
+
+## Credits
+
+Based on [CoinCashew's Ethereum Merge Upgrade Checklist for Home Stakers and Validators](https://www.coincashew.com/coins/overview-eth/ethereum-merge-upgrade-checklist-for-home-stakers-and-validators).
