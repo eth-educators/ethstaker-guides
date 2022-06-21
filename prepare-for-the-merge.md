@@ -6,7 +6,9 @@ This guide is meant for people who are managing and maintaining staking machines
 
 # This is a draft
 
-This document is still a draft. You should wait to apply these changes before more is known about the Merge. You should wait until we are closer to the Merge. This document is subject to change.
+This document is still a draft. You should wait to apply these changes before more is known about the Merge. You should wait until we are closer to the Merge and a TTD is announced for Mainnet. One issue is that some execution client will not open their Engine API until there is a configured TTD.
+
+This document is subject to change.
 
 ## Why would you want to prepare for the Merge?
 
