@@ -4,11 +4,9 @@
 
 This guide is meant for people who are managing and maintaining staking machines. It will explain which steps or actions you should take in order to be ready for the Merge.
 
-# This is a draft
+# It's early to prepare for the merge
 
-This document is still a draft. You should wait to apply these changes before more is known about the Merge. You should wait until we are closer to the Merge and a TTD is announced for Mainnet. One issue is that some execution client will not open their Engine API until there is a configured TTD.
-
-This document is subject to change.
+You should wait to apply most of these changes before more is known about the Merge. You should wait until we are closer to the Merge and a [Terminal Total Difficulty (TTD)](https://ethereum.stackexchange.com/questions/129860/what-is-terminal-total-difficulty-ttd) is announced for Mainnet. One issue is that some execution client will not open their Engine API until there is a configured TTD. New client updates are likely to be released after a TTD is announced and before the Merge. Running your own execution client should be done in advance to account for the time it takes to sync and to account for the time it takes to upgrade your hardware if needed.
 
 ## Why would you want to prepare for the Merge?
 
