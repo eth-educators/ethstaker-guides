@@ -14,7 +14,7 @@ There are some risks your staking machine will stop performing its duties if you
 
 ## When is the Merge going to happen on Mainnet?
 
-The current planned date for the Merge protocol upgrade to happen is ~Q3/Q4 2022. There is some uncertainty around the actual date it will happen. Make sure to follow [the official Ethereum blog](https://blog.ethereum.org/) and watch for announcements there.
+The current planned date for the Merge protocol upgrade to happen is ~Q3/Q4 2022. There is some uncertainty around the actual date it will happen. Make sure to follow [the official Ethereum blog](https://blog.ethereum.org/) and watch for announcements there. You can also subscribe to [this newsletter](https://groups.google.com/u/1/a/ethereum.org/g/announcements).
 
 ## Overview
 
