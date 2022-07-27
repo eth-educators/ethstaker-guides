@@ -2,11 +2,11 @@
 
 [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) is an Ethereum community initiative to test [the merge upgrade](https://ethereum.org/en/eth2/merge/) with various testnets. It is being spear headed by [Marius van der Wijden](https://twitter.com/vdWijden) and [Parithosh Jayanthi](https://twitter.com/parithosh_j). It is meant to test the recent experimental features added to various Ethereum clients supporting this protocol upgrade.
 
-This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Ropsten* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
+This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Ropsten* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04 or Ubuntu 22.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
 ## Overview
 
-We will use the latest version for Geth and the unstable version for Lighthouse. We will configure them to connect to the *Ropsten* testnet.
+We will use the latest version for Geth and the latest version for Lighthouse. We will configure them to connect to the *Ropsten* testnet.
 
 ## Executing the commands
 
@@ -26,21 +26,7 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install git build-essential pkg-config cmake clang software-properties-common wget curl ccze
-```
-
-Install a recent version of Rust.
-
-```console
-$ curl https://sh.rustup.rs -sSf | sh
-```
-
-Type `1` and `Enter` to select option 1 *Proceed with installation (default)*.
-
-Add the Rust toolchains to your PATH.
-
-```console
-$ source $HOME/.cargo/env
+$ sudo apt -y install software-properties-common wget curl ccze
 ```
 
 ## Installing Geth
@@ -52,27 +38,32 @@ $ sudo add-apt-repository -y ppa:ethereum/ethereum
 $ sudo apt -y install geth
 ```
 
-## Building and Installing Lighthouse unstable
+## Installing Lighthouse
 
-Clone the official Lighthouse repository and switch to the `unstable` branch.
+Download [the latest release version for Lighthouse](https://github.com/sigp/lighthouse/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
 
 ```console
 $ cd ~
-$ git clone -b unstable https://github.com/sigp/lighthouse.git
+$ wget https://github.com/sigp/lighthouse/releases/download/v2.4.0/lighthouse-v2.4.0-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v2.4.0-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v2.4.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
-Build this special Lighthouse version.
+Install this Lighthouse version globally.
 
 ```console
-$ cd lighthouse
-$ make
+$ sudo cp ~/lighthouse /usr/local/bin
+$ rm ~/lighthouse
 ```
 
-Wait for building to finish and install this special Lighthouse version globally.
+## Creating the JWT token file
 
-```console
-$ sudo cp ~/.cargo/bin/lighthouse /usr/local/bin
-$ cd ~
+Create a JWT token file in a neutral location and make it readable to everyone. We will use the `/var/lib/ethereum/jwttoken` location to store the JWT token file.
+
+```
+$ sudo mkdir -p /var/lib/ethereum
+$ openssl rand -hex 32 | tr -d "\n" | sudo tee /var/lib/ethereum/jwttoken
+$ sudo chmod +r /var/lib/ethereum/jwttoken
 ```
 
 ## Configuring your Geth node
@@ -113,16 +104,11 @@ ExecStart=geth \
     --metrics \
     --metrics.expensive \
     --pprof \
-    --http.api="engine,eth,web3,net,debug" \
-    --http.corsdomain "*" \
-    --authrpc.jwtsecret=/var/lib/goethereum/jwtsecret \
-    --override.terminaltotaldifficulty 50000000000000000
+    --authrpc.jwtsecret=/var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=default.target
 ```
-
-Notice the `override.terminaltotaldifficulty` configuration option in this service definition. This TTD value (50000000000000000) was recently decided [by the community](https://blog.ethereum.org/2022/06/03/ropsten-merge-ttd/).
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
 
@@ -182,24 +168,14 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --network ropsten \
     --datadir /var/lib/lighthouse \
     --staking \
-    --http-allow-sync-stalled \
-    --merge \
     --execution-endpoints http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
-    --jwt-secrets="/var/lib/goethereum/jwtsecret" \
-    --terminal-total-difficulty-override 50000000000000000
+    --checkpoint-sync-url=https://ropsten.checkpoint-sync.ethdevops.io \
+    --jwt-secrets=/var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=multi-user.target
-```
-
-Notice the `terminal-total-difficulty-override` configuration option in this service definition. This TTD value (50000000000000000) was recently decided [by the community](https://blog.ethereum.org/2022/06/03/ropsten-merge-ttd/).
-
-Make the JWT secret readable by all so our beacon node client can access it.
-
-```console
-$ sudo chmod +r /var/lib/goethereum/jwtsecret
 ```
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
