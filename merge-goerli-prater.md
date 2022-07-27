@@ -2,7 +2,7 @@
 
 [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) is an Ethereum community initiative to test [the merge upgrade](https://ethereum.org/en/eth2/merge/) with various testnets. It is being spear headed by [Marius van der Wijden](https://twitter.com/vdWijden) and [Parithosh Jayanthi](https://twitter.com/parithosh_j). It is meant to test the recent experimental features added to various Ethereum clients supporting this protocol upgrade.
 
-This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Ropsten* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04 or Ubuntu 22.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
+This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Goerli/Prater* merge testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04 or Ubuntu 22.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
 ## Overview
 
@@ -154,7 +154,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Beacon Node (Ropsten)
+Description=Lighthouse Ethereum Client Beacon Node (Prater)
 Wants=network-online.target
 After=network-online.target
 
@@ -165,27 +165,17 @@ Group=lighthousebeacon
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse bn \
-    --network ropsten \
+    --network prater \
     --datadir /var/lib/lighthouse \
     --staking \
-    --http-allow-sync-stalled \
-    --merge \
     --execution-endpoints http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
-    --jwt-secrets="/var/lib/goethereum/jwtsecret" \
-    --terminal-total-difficulty-override 50000000000000000
+    --checkpoint-sync-url=https://goerli.checkpoint-sync.ethdevops.io \
+    --jwt-secrets=/var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=multi-user.target
-```
-
-Notice the `terminal-total-difficulty-override` configuration option in this service definition. This TTD value (50000000000000000) was recently decided [by the community](https://blog.ethereum.org/2022/06/03/ropsten-merge-ttd/).
-
-Make the JWT secret readable by all so our beacon node client can access it.
-
-```console
-$ sudo chmod +r /var/lib/goethereum/jwtsecret
 ```
 
 Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
@@ -212,15 +202,11 @@ $ sudo journalctl -f -u lighthousebeacon.service -o cat | ccze -A
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## Trying the Ropsten testnet
-
-### Adding Ropsten to MetaMask
-
-Make sure the test networks are shown in MetaMask. In the Network dropdown control, you might need to click on the *Show/hide test networks* link. Switch to the Ropsten network.
+## Trying the Goerli/Prater merge testnet
 
 ### Requesting testnet funds
 
-You can request Ropsten ETH from [Egor Egorov's public faucet](https://faucet.egorfine.com/) or from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-ropsten-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/ropsten) as well. You will need at least 32 Ropsten ETH if you want to do a validator deposit for Ropsten. The EthStaker Discord faucet will give you 32.5 Ropsten ETH in one go.
+You can request Goerli ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-goerli-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/goerli) as well. You will need at least 32 Goerli ETH if you want to do a validator deposit for Goerli. The EthStaker Discord faucet will give you 32.05 Goerli ETH in one go.
 
 ## Adding a validator
 
@@ -231,7 +217,7 @@ There are 2 great tools to create your validator keys:
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
 * CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
-If you choose the *Wagyu Key Gen* application, make sure to select the *Ropsten* network and follow the instructions provided.
+If you choose the *Wagyu Key Gen* application, make sure to select the *Prater* network and follow the instructions provided.
 
 If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
 
@@ -240,17 +226,17 @@ $ cd ~
 $ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ cd staking_deposit-cli-9ab0b05-linux-amd64/
-$ ./deposit new-mnemonic --num_validators 1 --chain ropsten
+$ ./deposit new-mnemonic --num_validators 1 --chain prater
 $ ls -d $PWD/validator_keys/*
 ```
 
 Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
 
-Next we will do the deposit using the Ropsten launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
+Next we will do the deposit using the Prater launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
 
-Go to [the Ropsten launchpad](https://ropsten.launchpad.ethereum.org/en/). Follow the instructions, make sure *Ropsten* is the selected network in MetaMask and use the deposit file to perform your deposit.
+Go to [the Prater launchpad](https://prater.launchpad.ethereum.org/en/). Follow the instructions, make sure *Prater* is the selected network in MetaMask and use the deposit file to perform your deposit.
 
-You can check that your deposit transaction went through on [the transaction explorer](https://ropsten.etherscan.io/address/0x6f22fFbC56eFF051aECF839396DD1eD9aD6BBA9D).
+You can check that your deposit transaction went through on [the transaction explorer](https://goerli.etherscan.io/address/0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b).
 
 ### Configuring your Lighthouse validator client
 
@@ -283,7 +269,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Validator Client (Ropsten)
+Description=Lighthouse Ethereum Client Validator Client (Prater)
 Wants=network-online.target
 After=network-online.target
 
