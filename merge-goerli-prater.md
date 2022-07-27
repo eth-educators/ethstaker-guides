@@ -255,7 +255,7 @@ Import your keystore that includes your validator key for the Lighthouse validat
 $ sudo /usr/local/bin/lighthouse account validator import \
     --directory /path/to/keystores \
     --datadir /var/lib/lighthouse \
-    --network ropsten
+    --network prater
 $ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
 ```
 
@@ -280,7 +280,7 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse vc \
-    --network ropsten \
+    --network prater \
     --datadir /var/lib/lighthouse \
     --graffiti EthStaker \
     --metrics \
