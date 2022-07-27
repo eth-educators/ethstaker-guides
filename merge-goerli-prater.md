@@ -167,12 +167,12 @@ RestartSec=5
 ExecStart=/usr/local/bin/lighthouse bn \
     --network prater \
     --datadir /var/lib/lighthouse \
-    --staking \
-    --execution-endpoints http://127.0.0.1:8551 \
+    --http \
+    --execution-endpoint http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
     --checkpoint-sync-url=https://goerli.checkpoint-sync.ethdevops.io \
-    --jwt-secrets=/var/lib/ethereum/jwttoken
+    --execution-jwt=/var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=multi-user.target
