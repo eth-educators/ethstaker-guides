@@ -252,7 +252,7 @@ ExecStart=/usr/local/bin/teku/bin/teku \
     --validator-keys /var/lib/teku/validator_keys:/var/lib/teku/validator_keys \
     --rest-api-enabled true \
     --ee-endpoint http://127.0.0.1:8551 \
-    --metrics-enabled \
+    --metrics-enabled true \
     --validators-graffiti EthStaker \
     --validators-proposer-default-fee-recipient 0x0000000000000000000000000000000000000000 \
     --initial-state https://goerli.checkpoint-sync.ethdevops.io/eth/v2/debug/beacon/states/finalized \
