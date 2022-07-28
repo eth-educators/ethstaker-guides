@@ -235,6 +235,13 @@ List the files in the validator keys directory and make sure you have a correspo
 $ sudo ls /var/lib/teku/validator_keys
 ```
 
+Download a checkpoint state for quick sync.
+
+```console
+$ sudo curl -o /var/lib/teku/finalized-state.ssz -H 'Accept: application/octet-stream' https://goerli.checkpoint-sync.ethdevops.io/eth/v2/debug/beacon/states/finalized
+$ sudo chown teku:teku /var/lib/teku/finalized-state.ssz
+```
+
 Create a systemd service config file to configure the Teku node service.
 
 ```console
@@ -264,7 +271,7 @@ ExecStart=/usr/local/bin/teku/bin/teku \
     --metrics-enabled true \
     --validators-graffiti EthStaker \
     --validators-proposer-default-fee-recipient 0x0000000000000000000000000000000000000000 \
-    --initial-state https://goerli.checkpoint-sync.ethdevops.io/eth/v2/debug/beacon/states/finalized \
+    --initial-state /var/lib/teku/finalized-state.ssz \
     --ee-jwt-secret-file /var/lib/ethereum/jwttoken
 
 [Install]
