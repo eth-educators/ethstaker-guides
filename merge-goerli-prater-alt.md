@@ -198,7 +198,7 @@ $ sudo mkdir -p /var/lib/teku
 $ sudo chown -R teku:teku /var/lib/teku
 ```
 
-Create a directory for validator keys and copy your keystore file(s). Make sure to replace `/path/to/keystore` with the actual path to your keystore created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit). Perform the cp command for each keystore you have. You will typically only have 1 for the Goerli/Prater merge testnet.
+Create a directory for validator keys and copy your keystore file(s). Make sure to replace `/path/to/keystore` with the actual path to your keystore created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit) (only copy the keystore files, the ones that starts with `keystore-` and ends with `.json`). Perform the cp command for each keystore you have. You will typically only have 1 for the Goerli/Prater merge testnet.
 
 ```console
 $ sudo mkdir -p /var/lib/teku/validator_keys
