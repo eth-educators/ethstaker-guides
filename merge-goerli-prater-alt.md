@@ -117,12 +117,12 @@ Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/besu/bin/besu \
     --network=goerli \
-    --rpc-http-enabled \
+    --rpc-http-enabled=true \
     --engine-rpc-port=8551 \
     --engine-host-allowlist=localhost,127.0.0.1 \
     --data-path=/var/lib/besu \
     --data-storage-format=BONSAI \
-    --metrics-enabled \
+    --metrics-enabled=true \
     --engine-jwt-secret=/var/lib/ethereum/jwttoken
 
 [Install]
