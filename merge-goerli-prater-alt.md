@@ -153,7 +153,13 @@ $ sudo journalctl -f -u besu.service -o cat | ccze -A
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## Creating your validator keys and performing the deposit
+## Trying the Goerli/Prater merge testnet
+
+### Requesting testnet funds
+
+You can request Goerli ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-goerli-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/goerli) as well. You will need at least 32 Goerli ETH if you want to do a validator deposit for Goerli. The EthStaker Discord faucet will give you 32.05 Goerli ETH in one go.
+
+### Creating your validator keys and performing the deposit
 
 There are 2 great tools to create your validator keys:
 
@@ -168,7 +174,6 @@ If you choose the *staking-deposit-cli* application, here is how to create your 
 $ cd ~
 $ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ cd staking_deposit-cli-9ab0b05-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain prater
 $ ls -d $PWD/validator_keys/*
@@ -227,7 +232,7 @@ Create a systemd service config file to configure the Teku node service.
 $ sudo nano /etc/systemd/system/teku.service
 ```
 
-Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`). Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address that you control where you want to receive the transaction tips.
 
 ```ini
 [Unit]
@@ -241,15 +246,17 @@ User=teku
 Group=teku
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/lighthouse bn \
+ExecStart=/usr/local/bin/teku/bin/teku \
     --network prater \
-    --datadir /var/lib/lighthouse \
-    --http \
-    --execution-endpoint http://127.0.0.1:8551 \
-    --metrics \
-    --validator-monitor-auto \
-    --checkpoint-sync-url=https://goerli.checkpoint-sync.ethdevops.io \
-    --execution-jwt=/var/lib/ethereum/jwttoken
+    --data-path /var/lib/teku \
+    --validator-keys /var/lib/teku/validator_keys:/var/lib/teku/validator_keys \
+    --rest-api-enabled true \
+    --ee-endpoint http://127.0.0.1:8551 \
+    --metrics-enabled \
+    --validators-graffiti EthStaker \
+    --validators-proposer-default-fee-recipient 0x0000000000000000000000000000000000000000 \
+    --initial-state https://goerli.checkpoint-sync.ethdevops.io/eth/v2/debug/beacon/states/finalized \
+    --ee-jwt-secret-file /var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=multi-user.target
@@ -259,134 +266,22 @@ Reload systemd to reflect the changes and start the service. Check status to mak
 
 ```console
 $ sudo systemctl daemon-reload
-$ sudo systemctl start lighthousebeacon.service
-$ sudo systemctl status lighthousebeacon.service
+$ sudo systemctl start teku.service
+$ sudo systemctl status teku.service
 ```
 
-It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Lighthouse beacon node service).
+It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Teku node service).
 
-Enable the Lighthouse beacon node service to automatically start on reboot.
+Enable the Teku node service to automatically start on reboot.
 
 ```console
-$ sudo systemctl enable lighthousebeacon.service
+$ sudo systemctl enable teku.service
 ```
 
-You can watch the live messages from your Lighthouse beacon node logs using this command. Make sure nothing suspicious shows up in your logs.
+You can watch the live messages from your Teku node logs using this command. Make sure nothing suspicious shows up in your logs.
 
 ```console
-$ sudo journalctl -f -u lighthousebeacon.service -o cat | ccze -A
-```
-
-Press `Ctrl` + `C` to stop showing those messages.
-
-## Trying the Goerli/Prater merge testnet
-
-### Requesting testnet funds
-
-You can request Goerli ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-goerli-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/goerli) as well. You will need at least 32 Goerli ETH if you want to do a validator deposit for Goerli. The EthStaker Discord faucet will give you 32.05 Goerli ETH in one go.
-
-## Adding a validator
-
-### Creating your validator keys and performing the deposit
-
-There are 2 great tools to create your validator keys:
-
-* GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
-* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
-
-If you choose the *Wagyu Key Gen* application, make sure to select the *Prater* network and follow the instructions provided.
-
-If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
-
-```console
-$ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ cd staking_deposit-cli-9ab0b05-linux-amd64/
-$ ./deposit new-mnemonic --num_validators 1 --chain prater
-$ ls -d $PWD/validator_keys/*
-```
-
-Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
-
-Next we will do the deposit using the Prater launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
-
-Go to [the Prater launchpad](https://prater.launchpad.ethereum.org/en/). Follow the instructions, make sure *Prater* is the selected network in MetaMask and use the deposit file to perform your deposit.
-
-You can check that your deposit transaction went through on [the transaction explorer](https://goerli.etherscan.io/address/0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b).
-
-### Configuring your Lighthouse validator client
-
-Create a dedicated user for running the Lighthouse validator client, create a directory for holding the data and assign the proper permissions.
-
-```console
-$ sudo useradd --no-create-home --shell /bin/false lighthousevalidator
-$ sudo mkdir -p /var/lib/lighthouse/validators
-$ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
-$ sudo chmod 700 /var/lib/lighthouse/validators
-```
-
-Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank. Make sure to replace `/path/to/keystores` with the actual path to your keystores created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit).
-
-```console
-$ sudo /usr/local/bin/lighthouse account validator import \
-    --directory /path/to/keystores \
-    --datadir /var/lib/lighthouse \
-    --network prater
-$ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
-```
-
-Create a systemd service config file to configure the Lighthouse validator client service.
-
-```console
-$ sudo nano /etc/systemd/system/lighthousevalidator.service
-```
-
-Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`). Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address that you control where you want to receive the transaction tips.
-
-```ini
-[Unit]
-Description=Lighthouse Ethereum Client Validator Client (Prater)
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-User=lighthousevalidator
-Group=lighthousevalidator
-Type=simple
-Restart=always
-RestartSec=5
-ExecStart=/usr/local/bin/lighthouse vc \
-    --network prater \
-    --datadir /var/lib/lighthouse \
-    --graffiti EthStaker \
-    --metrics \
-    --suggested-fee-recipient 0x0000000000000000000000000000000000000000
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
-
-```console
-$ sudo systemctl daemon-reload
-$ sudo systemctl start lighthousevalidator.service
-$ sudo systemctl status lighthousevalidator.service
-```
-
-It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Lighthouse validator client service).
-
-Enable the Lighthouse validator client service to automatically start on reboot.
-
-```console
-$ sudo systemctl enable lighthousevalidator.service
-```
-
-You can watch the live messages from your Lighthouse validator client logs using this command.
-
-```console
-$ sudo journalctl -f -u lighthousevalidator.service -o cat | ccze -A
+$ sudo journalctl -f -u teku.service -o cat | ccze -A
 ```
 
 Press `Ctrl` + `C` to stop showing those messages.
