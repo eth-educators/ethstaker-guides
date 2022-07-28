@@ -1,4 +1,4 @@
-# Guide on how to join the Goerli/Prater merge testnet
+# Guide on how to join the Goerli/Prater merge testnet (Besu/Teku)
 
 [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) is an Ethereum community initiative to test [the merge upgrade](https://ethereum.org/en/eth2/merge/) with various testnets. It is being spear headed by [Marius van der Wijden](https://twitter.com/vdWijden) and [Parithosh Jayanthi](https://twitter.com/parithosh_j). It is meant to test the recent experimental features added to various Ethereum clients supporting this protocol upgrade.
 
