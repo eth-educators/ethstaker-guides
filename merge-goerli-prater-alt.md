@@ -174,6 +174,7 @@ If you choose the *staking-deposit-cli* application, here is how to create your 
 $ cd ~
 $ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
+$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ cd staking_deposit-cli-9ab0b05-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain prater
 $ ls -d $PWD/validator_keys/*
