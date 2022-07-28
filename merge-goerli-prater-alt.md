@@ -6,7 +6,7 @@ This guide is meant for people with little or some experience in running Ethereu
 
 ## Overview
 
-We will use the latest version for Besu and the latest version for Teku. We will configure them to connect to the *Goerli/Prater* merge testnet. This is an alternative guide to [the main one who uses the Besu/Lighthouse combo](merge-goerli-prater.md) for its clients.
+We will use the latest version for Besu and the latest version for Teku. We will configure them to connect to the *Goerli/Prater* merge testnet. This is an alternative guide to [the main one who uses the Geth/Lighthouse combo](merge-goerli-prater.md) for its clients.
 
 ## Executing the commands
 
