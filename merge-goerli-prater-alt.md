@@ -59,7 +59,7 @@ $ rm -rf ./besu-22.7.0-RC3
 
 ## Installing Teku
 
-Download [the latest release version for Teku](https://github.com/ConsenSys/teku/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link from the *Downloads* section of the release description. It should be a file that ends with `tar.gz` and it should **not** bt the one called 'Source code'.
+Download [the latest release version for Teku](https://github.com/ConsenSys/teku/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link from the *Downloads* section of the release description. It should be a file that ends with `tar.gz` and it should **not** be the one called 'Source code'.
 
 ```console
 $ cd ~
