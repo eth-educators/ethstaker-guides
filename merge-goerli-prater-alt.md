@@ -208,7 +208,7 @@ $ ls /var/lib/teku/validator_keys
 Create your password file(s). For each `keystore_m*.json` file, create an equivalently named password file. The name of that password file should be the same one as your keystore file except the extension should be `.txt` and the content should be your keystore password. Before you execute the next command replace `<jsonfilename>` with the name of the json file.
 
 ```console
-sudo nano /var/lib/teku/validator_keys/<jsonfilename>.txt
+$ sudo nano /var/lib/teku/validator_keys/<jsonfilename>.txt
 ```
 
 Type your keystore password into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
