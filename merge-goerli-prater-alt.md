@@ -6,7 +6,7 @@ This guide is meant for people with little or some experience in running Ethereu
 
 ## Overview
 
-We will use the latest version for Geth and the latest version for Lighthouse. We will configure them to connect to the *Goerli/Prater* merge testnet. There is an alternative guide to this one [who uses the Besu/Teku combo](merge-goerli-prater-alt.md) for its clients.
+We will use the latest version for Besu and the latest version for Teku. We will configure them to connect to the *Goerli/Prater* merge testnet. This is an alternative guide to [the main one who uses the Besu/Lighthouse combo](merge-goerli-prater.md) for its clients.
 
 ## Executing the commands
 
@@ -26,34 +26,53 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install software-properties-common wget curl ccze
+$ sudo apt -y install software-properties-common wget curl ccze apt-transport-https libjemalloc-dev
 ```
 
-## Installing Geth
-
-Add the Ethereum PPA and install the Geth package.
+Install Adoptium JDK (Java).
 
 ```console
-$ sudo add-apt-repository -y ppa:ethereum/ethereum
-$ sudo apt -y install geth
+$ sudo mkdir -p /etc/apt/keyrings
+$ wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
+$ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+$ sudo apt -y update
+$ sudo apt -y install temurin-17-jdk
 ```
 
-## Installing Lighthouse
+## Installing Besu
 
-Download [the latest release version for Lighthouse](https://github.com/sigp/lighthouse/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
+Download [the latest release version for Besu](https://github.com/hyperledger/besu/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link that ends with `tar.gz`.
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v2.4.0/lighthouse-v2.4.0-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v2.4.0-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v2.4.0-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://hyperledger.jfrog.io/artifactory/besu-binaries/besu/22.7.0-RC3/besu-22.7.0-RC3.tar.gz
+$ tar xvf besu-22.7.0-RC3.tar.gz
+$ rm besu-22.7.0-RC3.tar.gz
 ```
 
-Install this Lighthouse version globally.
+Install this Besu version globally.
 
 ```console
-$ sudo cp ~/lighthouse /usr/local/bin
-$ rm ~/lighthouse
+$ sudo cp -a ./besu-22.7.0-RC3 /usr/local/bin/besu
+$ rm -rf ./besu-22.7.0-RC3
+```
+
+## Installing Teku
+
+Download [the latest release version for Teku](https://github.com/ConsenSys/teku/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link from the *Downloads* section of the release change. It should be a file that ends with `tar.gz`.
+
+```console
+$ cd ~
+$ wget https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/22.7.0/teku-22.7.0.tar.gz
+$ tar xvf teku-22.7.0.tar.gz
+$ rm teku-22.7.0.tar.gz
+```
+
+Install this Teku version globally.
+
+```console
+$ sudo cp -a ./teku-22.7.0 /usr/local/bin/teku
+$ rm -rf ./teku-22.7.0
 ```
 
 ## Creating the JWT token file
@@ -66,45 +85,45 @@ $ openssl rand -hex 32 | tr -d "\n" | sudo tee /var/lib/ethereum/jwttoken
 $ sudo chmod +r /var/lib/ethereum/jwttoken
 ```
 
-## Configuring your Geth node
+## Configuring your Besu node
 
-Create a dedicated user for running Geth, create a directory for holding the data and assign the proper permissions.
+Create a dedicated user for running Besu, create a directory for holding the data and assign the proper permissions.
 
 ```console
-$ sudo useradd --no-create-home --shell /bin/false goeth
-$ sudo mkdir -p /var/lib/goethereum
-$ sudo chown -R goeth:goeth /var/lib/goethereum
+$ sudo useradd --no-create-home --shell /bin/false besu
+$ sudo mkdir -p /var/lib/besu
+$ sudo chown -R besu:besu /var/lib/besu
 ```
 
-Create a systemd service config file to configure the Geth node service.
+Create a systemd service config file to configure the Besu node service.
 
 ```console
-$ sudo nano /etc/systemd/system/geth.service
+$ sudo nano /etc/systemd/system/besu.service
 ```
 
 Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
 
 ```ini
 [Unit]
-Description=Go Ethereum Client - Geth (Goerli)
+Description=Besu Ethereum Client (Goerli)
 After=network.target
 Wants=network.target
 
 [Service]
-User=goeth
-Group=goeth
+User=besu
+Group=besu
 Type=simple
 Restart=always
 RestartSec=5
-TimeoutStopSec=180
-ExecStart=geth \
-    --goerli \
-    --http \
-    --datadir /var/lib/goethereum \
-    --metrics \
-    --metrics.expensive \
-    --pprof \
-    --authrpc.jwtsecret=/var/lib/ethereum/jwttoken
+ExecStart=/usr/local/bin/besu/bin/besu \
+    --network=goerli \
+    --rpc-http-enabled \
+    --engine-rpc-port=8551 \
+    --engine-host-allowlist=localhost,127.0.0.1 \
+    --data-path=/var/lib/besu \
+    --data-storage-format=BONSAI \
+    --metrics-enabled \
+    --engine-jwt-secret=/var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=default.target
@@ -114,54 +133,112 @@ Reload systemd to reflect the changes and start the service. Check status to mak
 
 ```console
 $ sudo systemctl daemon-reload
-$ sudo systemctl start geth.service
-$ sudo systemctl status geth.service
+$ sudo systemctl start besu.service
+$ sudo systemctl status besu.service
 ```
 
-It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the geth service).
+It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the besu service).
 
-Enable the geth service to automatically start on reboot.
+Enable the besu service to automatically start on reboot.
 
 ```console
-$ sudo systemctl enable geth.service
+$ sudo systemctl enable besu.service
 ```
 
-You can watch the live messages from your Geth node logs using this command. Make sure nothing suspicious shows up in your logs.
+You can watch the live messages from your Besu node logs using this command. Make sure nothing suspicious shows up in your logs.
 
 ```console
-$ sudo journalctl -f -u geth.service -o cat | ccze -A
+$ sudo journalctl -f -u besu.service -o cat | ccze -A
 ```
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## Configuring your Lighthouse beacon node
+## Creating your validator keys and performing the deposit
 
-Create a dedicated user for running the Lighthouse beacon node, create a directory for holding the data, copy testnet files and assign the proper permissions.
+There are 2 great tools to create your validator keys:
+
+* GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
+
+If you choose the *Wagyu Key Gen* application, make sure to select the *Prater* network and follow the instructions provided.
+
+If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
 
 ```console
-$ sudo useradd --no-create-home --shell /bin/false lighthousebeacon
-$ sudo mkdir -p /var/lib/lighthouse
-$ sudo chown -R lighthousebeacon:lighthousebeacon /var/lib/lighthouse
+$ cd ~
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
+$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
+$ cd staking_deposit-cli-9ab0b05-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain prater
+$ ls -d $PWD/validator_keys/*
 ```
 
-Create a systemd service config file to configure the Lighthouse beacon node service.
+Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
+
+Next we will do the deposit using the Prater launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
+
+Go to [the Prater launchpad](https://prater.launchpad.ethereum.org/en/). Follow the instructions, make sure *Prater* is the selected network in MetaMask and use the deposit file to perform your deposit.
+
+You can check that your deposit transaction went through on [the transaction explorer](https://goerli.etherscan.io/address/0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b).
+
+## Configuring your Teku node
+
+Create a dedicated user for running the Teku node, create a directory for holding the data, copy testnet files and assign the proper permissions.
 
 ```console
-$ sudo nano /etc/systemd/system/lighthousebeacon.service
+$ sudo useradd --no-create-home --shell /bin/false teku
+$ sudo mkdir -p /var/lib/teku
+$ sudo chown -R teku:teku /var/lib/teku
+```
+
+Create a directory for validator keys and copy your keystore file(s). Make sure to replace `/path/to/keystore` with the actual path to your keystore created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit). Perform the cp command for each keystore you have. You will typically only have 1 for the Goerli/Prater merge testnet.
+
+```console
+$ sudo mkdir -p /var/lib/teku/validator_keys
+$ sudo cp /path/to/keystore /var/lib/teku/validator_keys
+$ ls /var/lib/teku/validator_keys
+```
+
+Create your password file(s). For each `keystore_m*.json` file, create an equivalently named password file. The name of that password file should be the same one as your keystore file except the extension should be `.txt` and the content should be your keystore password. Before you execute the next command replace `<jsonfilename>` with the name of the json file.
+
+```console
+sudo nano /var/lib/teku/validator_keys/<jsonfilename>.txt
+```
+
+Type your keystore password into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+
+Assign the proper permissions to the validator keys directory.
+
+```console
+$ sudo chown -R teku:teku /var/lib/teku/validator_keys
+$ sudo chmod -R 700 /var/lib/teku/validator_keys
+```
+
+List the files in the validator keys directory and make sure you have a corresponding `.txt` file with your keystore password in it for each keystore file you have.
+
+```console
+$ sudo ls /var/lib/teku/validator_keys
+```
+
+Create a systemd service config file to configure the Teku node service.
+
+```console
+$ sudo nano /etc/systemd/system/teku.service
 ```
 
 Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Beacon Node (Prater)
+Description=Teku Ethereum Client (Prater)
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=simple
-User=lighthousebeacon
-Group=lighthousebeacon
+User=teku
+Group=teku
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse bn \
@@ -225,7 +302,6 @@ If you choose the *staking-deposit-cli* application, here is how to create your 
 $ cd ~
 $ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
 $ cd staking_deposit-cli-9ab0b05-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain prater
 $ ls -d $PWD/validator_keys/*
