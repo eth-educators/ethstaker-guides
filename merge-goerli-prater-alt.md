@@ -117,6 +117,7 @@ Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/besu/bin/besu \
     --network=goerli \
+    --sync-mode=X_CHECKPOINT \
     --rpc-http-enabled=true \
     --engine-rpc-port=8551 \
     --engine-host-allowlist=localhost,127.0.0.1 \
