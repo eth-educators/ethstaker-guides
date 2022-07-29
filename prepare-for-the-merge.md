@@ -153,7 +153,78 @@ There are some privacy implications in using a fee recipient address. That addre
 
 A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
-TODO: Finish this section
+### Install mev-boost
+
+Check their [release page](https://github.com/flashbots/mev-boost/releases) for a current version. If there is a binary file, `wget` that, `chmod +x` it and `mv` it to `/usr/local/bin/mev-boost`.
+
+As of July 2022 mev-boost needs to be installed with Go or run in docker. We will install with Go.
+
+This will only work **after** Goerli has merged and a relay has been published.
+
+
+```
+sudo apt update && sudo apt -y install golang-go
+go install github.com/flashbots/mev-boost@latest
+sudo cp ~/go/bin/mev-boost /usr/local/bin/
+```
+
+Create a systemd file for it. mev-boost is only available on `localhost`, is stateless and does not use P2P ports. We can be Coincashew-esque and run it as the local user.
+
+First set the relay you are going to use
+
+`export MEV_RELAY=https://THE_RELAY_URL`
+
+Then create the systemd service file. The variables will be substituted. If you don't want to use `cat` and heredoc,
+do the substitution yourself.
+
+```
+cat > ~/mev-boost.service << EOF 
+[Unit]
+Description     = Flashbots mev-boost relay proxy
+Wants           = network-online.target
+After           = network-online.target 
+
+[Service]
+User            = $USER
+ExecStart       = /usr/local/bin/mev-boost -goerli -relays $MEV_RELAY
+Restart         = on-failure
+RestartSec      = 3
+TimeoutSec      = 300
+
+[Install]
+WantedBy    = multi-user.target
+EOF
+```
+
+Move it in place: `sudo cp ~/mev-boost.service /etc/systemd/system/`
+
+Tell systemd it exists: `sudo systemctl daemon-reload`
+
+Start it: `sudo systemctl start mev-boost`
+
+Verify it works, otherwise fix what went wrong: `sudo systemctl status mev-boost`
+
+Make sure it starts on boot: `sudo systemctl enable mev-boost`
+
+Clean up after yourself: `unset MEV_RELAY`
+
+### Configure your consensus and validator client to use mev-boost
+
+Add this flag to the `ExecStart` of your consensus client service. Note that client flags can be in flux
+through August 2022, when in doubt consult each client's `--help`.
+
+- Prysm consensus: `--http-mev-relay=http://127.0.0.1:18550`
+- Prysm validator: `--enable-builder`
+- Nimbus combined: `--payload-builder=http://127.0.0.1:18550`
+- Lodestar consensus: `--builder.enabled --builder.urls http://127.0.0.1:18550`
+- Lodestar validator: `--builder.enabled`
+- Teku combined: `--Xvalidators-registration-default-enabled=true --Xeb-endpoint=http://127.0.0.1:18550`
+- Lighthouse consensus: `--builder http://127.0.0.1:18550` 
+- Lighthouse validator: `--private-tx-proposals`
+
+Tell systemd you made the changes: `sudo systemd daemon-reload`
+
+And restart the service(s) you changed: `sudo systemd restart SERVICENAME`
 
 ## Support
 
