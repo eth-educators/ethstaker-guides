@@ -127,7 +127,7 @@ As usual, when changing the configuration for your execution client, you will ne
 - Nimbus: `--jwt-secret=/var/lib/ethereum/jwttoken`
 - Lodestar beacon node: `--jwt-secret /var/lib/ethereum/jwttoken`
 - Teku: `--ee-jwt-secret-file /var/lib/ethereum/jwttoken`
-- Lighthouse beacon node: `--jwt-secrets /var/lib/ethereum/jwttoken`
+- Lighthouse beacon node: `--execution-jwt /var/lib/ethereum/jwttoken`
 
 As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
