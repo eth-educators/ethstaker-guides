@@ -171,8 +171,8 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --execution-endpoint http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
-    --checkpoint-sync-url=https://goerli.checkpoint-sync.ethdevops.io \
-    --execution-jwt=/var/lib/ethereum/jwttoken
+    --checkpoint-sync-url https://goerli.checkpoint-sync.ethdevops.io \
+    --execution-jwt /var/lib/ethereum/jwttoken
 
 [Install]
 WantedBy=multi-user.target
