@@ -92,7 +92,7 @@ You are likely going to need to use a new configuration option for this endpoint
 - Nimbus: `--web3-url=http://localhost:8551`
 - Lodestar beacon node: `--execution.urls http://localhost:8551`
 - Teku: `--ee-endpoint http://localhost:8551`
-- Lighthouse beacon node: `--execution-endpoints http://localhost:8551`
+- Lighthouse beacon node: `--execution-endpoint http://localhost:8551`
 
 As usual, when changing the configuration for your consensus client, you will need to reload this configuration and probably restart the client.
 
