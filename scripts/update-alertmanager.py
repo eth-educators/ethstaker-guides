@@ -8,9 +8,14 @@ import shutil
 from urllib.request import Request, urlopen
 from urllib.error import URLError
 
-from distutils.version import LooseVersion
-
 from tempfile import TemporaryDirectory
+
+try:
+    from packaging.version import parse as parse_version
+except ModuleNotFoundError:
+    print('Cannot find the packaging module. Try installing it with: '
+        'sudo apt install python3-packaging')
+    quit()
 
 ALERTMANAGER_INSTALLED_PATH = '/usr/local/bin/'
 ALERTMANAGER_SERVICE_NAME = 'alertmanager.service'
@@ -151,8 +156,8 @@ def main():
         print('Unable to find downloadable asset in Github response.')
         quit()
 
-    loose_current_version = LooseVersion(current_version)
-    loose_latest_version = LooseVersion(latest_version)
+    loose_current_version = parse_version(current_version)
+    loose_latest_version = parse_version(latest_version)
 
     if loose_current_version == loose_latest_version:
         print(f'Alertmanager is up-to-date. (Installed: {current_version}, '
