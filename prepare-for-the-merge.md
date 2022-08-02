@@ -172,7 +172,7 @@ Create a systemd file for it. mev-boost is only available on `localhost`, is sta
 
 First set the relay you are going to use
 
-`export MEV_RELAY=https://THE_RELAY_URL`
+`export MEV_RELAY=https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net`
 
 Then create the systemd service file. The variables will be substituted. If you don't want to use `cat` and heredoc,
 do the substitution yourself.
@@ -210,8 +210,8 @@ Clean up after yourself: `unset MEV_RELAY`
 
 ### Configure your consensus and validator client to use mev-boost
 
-Add this flag to the `ExecStart` of your consensus client service. Note that client flags can be in flux
-through August 2022, when in doubt consult each client's `--help`.
+Add this flag to the `ExecStart` of your consensus client and, if needed, validator client service. Note that client flags can be in flux
+through August 2022. When in doubt consult each client's `--help`.
 
 - Prysm consensus: `--http-mev-relay=http://127.0.0.1:18550`
 - Prysm validator: `--enable-builder`
