@@ -45,16 +45,16 @@ Download [the latest release version for Besu](https://github.com/hyperledger/be
 
 ```console
 $ cd ~
-$ wget https://hyperledger.jfrog.io/artifactory/besu-binaries/besu/22.7.0-RC3/besu-22.7.0-RC3.tar.gz
-$ tar xvf besu-22.7.0-RC3.tar.gz
-$ rm besu-22.7.0-RC3.tar.gz
+$ wget https://hyperledger.jfrog.io/artifactory/besu-binaries/besu/22.7.0/besu-22.7.0.tar.gz
+$ tar xvf besu-22.7.0.tar.gz
+$ rm besu-22.7.0.tar.gz
 ```
 
 Install this Besu version globally.
 
 ```console
-$ sudo cp -a ./besu-22.7.0-RC3 /usr/local/bin/besu
-$ rm -rf ./besu-22.7.0-RC3
+$ sudo cp -a ./besu-22.7.0 /usr/local/bin/besu
+$ rm -rf ./besu-22.7.0
 ```
 
 ## Installing Teku
