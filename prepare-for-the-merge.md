@@ -170,9 +170,9 @@ sudo cp ~/go/bin/mev-boost /usr/local/bin/
 
 Create a systemd file for it. mev-boost is only available on `localhost`, is stateless and does not use P2P ports. We can be Coincashew-esque and run it as the local user.
 
-First set the relay you are going to use
+First set the relay you are going to use. For relay notes and URLs see [Flashbots](https://docs.google.com/document/d/17JrY4pK_ftqg8C9cxn7Rk8vByvQjAVPB4z0cAJGUQL0/edit) and [bloXroute](https://docs.google.com/document/d/17JrY4pK_ftqg8C9cxn7Rk8vByvQjAVPB4z0cAJGUQL0)
 
-`export MEV_RELAY=https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net`
+`export MEV_RELAY=https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net,https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.max-profit.builder.goerli.blxrbdn.com`
 
 Then create the systemd service file. The variables will be substituted. If you don't want to use `cat` and heredoc,
 do the substitution yourself.
