@@ -117,9 +117,12 @@ Each execution client will need a different configuration option for the JWT tok
 - Geth: `--authrpc.jwtsecret /var/lib/ethereum/jwttoken`
 - Erigon: `--authrpc.jwtsecret /var/lib/ethereum/jwttoken`
 - Besu: `--engine-jwt-secret=/var/lib/ethereum/jwttoken`
+- Besu on mainnet: `--engine-rpc-enabled --engine-jwt-secret=/var/lib/ethereum/jwttoken`
 - Nethermind: `--JsonRpc.JwtSecretFile=/var/lib/ethereum/jwttoken`
 
 As usual, when changing the configuration for your execution client, you will need to reload this configuration and probably restart the client.
+
+> Besu requires `--engine-rpc-enabled` when no TTD has been configured for the network. Once mainnet has an announced TTD, this flag is no longer necessary
 
 ### Configure your consensus client to use the JWT token file
 
