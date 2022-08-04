@@ -63,16 +63,16 @@ Download [the latest release version for Teku](https://github.com/ConsenSys/teku
 
 ```console
 $ cd ~
-$ wget https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/22.7.0/teku-22.7.0.tar.gz
-$ tar xvf teku-22.7.0.tar.gz
-$ rm teku-22.7.0.tar.gz
+$ wget https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/22.8.0/teku-22.8.0.tar.gz
+$ tar xvf teku-22.8.0.tar.gz
+$ rm teku-22.8.0.tar.gz
 ```
 
 Install this Teku version globally.
 
 ```console
-$ sudo cp -a ./teku-22.7.0 /usr/local/bin/teku
-$ rm -rf ./teku-22.7.0
+$ sudo cp -a ./teku-22.8.0 /usr/local/bin/teku
+$ rm -rf ./teku-22.8.0
 ```
 
 ## Creating the JWT token file
