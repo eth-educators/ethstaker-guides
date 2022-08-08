@@ -221,7 +221,7 @@ through August 2022. When in doubt consult each client's `--help`.
 - Nimbus combined: `--payload-builder=http://127.0.0.1:18550`
 - Lodestar consensus: `--builder.enabled --builder.urls http://127.0.0.1:18550`
 - Lodestar validator: `--builder.enabled`
-- Teku combined: `--Xvalidators-registration-default-enabled=true --Xeb-endpoint=http://127.0.0.1:18550`
+- Teku combined: `--validators-builder-registration-default-enabled --builder-endpoint=http://127.0.0.1:18550`
 - Lighthouse consensus: `--builder http://127.0.0.1:18550` 
 - Lighthouse validator: `--private-tx-proposals`
 
