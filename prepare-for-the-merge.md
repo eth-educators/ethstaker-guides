@@ -164,11 +164,12 @@ As of August 2022 mev-boost needs to be installed with Go or run in docker. We w
 
 This will only work **after** Goerli has merged and a relay has been published.
 
-> This requires Go 1.16 or later. Ubuntu 20.04 ships with 1.13. Either [manually install 1.18](https://nextgentips.com/2021/12/23/how-to-install-go-1-18-on-ubuntu-20-04/) or get to Ubuntu 22.04 first: `sudo do-release-upgrade`
+This requires Go 1.16 or later. Ubuntu 20.04 ships with 1.13. Either [manually install 1.18](https://nextgentips.com/2021/12/23/how-to-install-go-1-18-on-ubuntu-20-04/) or get to Ubuntu 22.04 first: `sudo do-release-upgrade`
 
+If on Ubuntu 22.04: `sudo apt update && sudo apt -y install golang-go`
 
+Once Go has been installed:
 ```
-sudo apt update && sudo apt -y install golang-go
 go install github.com/flashbots/mev-boost@latest
 sudo cp ~/go/bin/mev-boost /usr/local/bin/
 ```
