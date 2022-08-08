@@ -160,9 +160,11 @@ A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
 Check their [release page](https://github.com/flashbots/mev-boost/releases) for a current version. If there is a binary file, `wget` that, `chmod +x` it and `mv` it to `/usr/local/bin/mev-boost`.
 
-As of July 2022 mev-boost needs to be installed with Go or run in docker. We will install with Go.
+As of August 2022 mev-boost needs to be installed with Go or run in docker. We will install with Go.
 
 This will only work **after** Goerli has merged and a relay has been published.
+
+> This requires Go 1.16 or later. Ubuntu 20.04 ships with 1.13. Either [manually install 1.18](https://nextgentips.com/2021/12/23/how-to-install-go-1-18-on-ubuntu-20-04/) or get to Ubuntu 22.04 first: `sudo do-release-upgrade`
 
 
 ```
