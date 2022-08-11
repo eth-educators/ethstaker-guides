@@ -156,61 +156,81 @@ There are some privacy implications in using a fee recipient address. That addre
 
 A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
-### Install mev-boost
+### Installing mev-boost
 
-Check their [release page](https://github.com/flashbots/mev-boost/releases) for a current version. If there is a binary release, use it.
+Install [a recent version of Go](https://go.dev/doc/install). [Go is also available](https://go.dev/dl/) for architectures that are different than linux AMD64. Adjust if needed.
 
-As of August 2022 mev-boost has no binary release and needs to be installed with Go or run in docker. We will install with Go.
-
-This requires Go 1.16 or later. Ubuntu 20.04 ships with 1.13. Either [manually install 1.18](https://nextgentips.com/2021/12/23/how-to-install-go-1-18-on-ubuntu-20-04/) or get to Ubuntu 22.04 first: `sudo do-release-upgrade`
-
-If on Ubuntu 22.04: `sudo apt update && sudo apt -y install golang-go`
-
-Once Go has been installed:
-```
-go install github.com/flashbots/mev-boost@latest
-sudo cp ~/go/bin/mev-boost /usr/local/bin/
+```console
+$ cd ~
+$ wget https://go.dev/dl/go1.19.linux-amd64.tar.gz
+$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+$ export PATH=$PATH:/usr/local/go/bin
+$ echo 'PATH="$PATH:/usr/local/go/bin"' >> ~/.profile
+$ rm go1.19.linux-amd64.tar.gz
 ```
 
-Create a systemd file for it. mev-boost is only available on `localhost`, is stateless and does not use P2P ports. We can be Coincashew-esque and run it as the local user.
+Create a user account for the service to run under. This account will not be able to log into the machine. It will only be used to run the service.
 
-First set the relay you are going to use. For relay notes and URLs see [Flashbots](https://docs.google.com/document/d/17JrY4pK_ftqg8C9cxn7Rk8vByvQjAVPB4z0cAJGUQL0/edit) and [bloXroute](https://docs.google.com/document/d/17JrY4pK_ftqg8C9cxn7Rk8vByvQjAVPB4z0cAJGUQL0)
-
-`export MEV_RELAY=https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net,https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.max-profit.builder.goerli.blxrbdn.com`
-
-Then create the systemd service file. The variables will be substituted. If you don't want to use `cat` and heredoc,
-do the substitution yourself.
-
+```console
+$ sudo useradd --no-create-home --shell /bin/false mevboost
 ```
-cat > ~/mev-boost.service << EOF 
+
+Install mev-boost globally.
+
+```console
+$ go install github.com/flashbots/mev-boost@latest
+$ sudo cp ~/go/bin/mev-boost /usr/local/bin
+$ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
+```
+
+Create a systemd service file to store the service config which tells systemd to run mev-boost as the mevboost user.
+
+```console
+$ sudo nano /etc/systemd/system/mevboost.service
+```
+
+Paste the following into the file to run mev-boost on Goerli. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+
+```ini
 [Unit]
-Description     = Flashbots mev-boost relay proxy
-Wants           = network-online.target
-After           = network-online.target 
+Description=mev-boost (Goerli)
+Wants=network-online.target
+After=network-online.target
 
 [Service]
-User            = $USER
-ExecStart       = /usr/local/bin/mev-boost -goerli -relays $MEV_RELAY
-Restart         = on-failure
-RestartSec      = 3
-TimeoutSec      = 300
+Type=simple
+User=mevboost
+Group=mevboost
+Restart=always
+RestartSec=5
+ExecStart=mev-boost \
+    -goerli \
+    -relay-check \
+    -relays https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net,https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.max-profit.builder.goerli.blxrbdn.com
 
 [Install]
-WantedBy    = multi-user.target
-EOF
+WantedBy=multi-user.target
 ```
 
-Move it in place: `sudo cp ~/mev-boost.service /etc/systemd/system/`
+Reload systemd to reflect the changes.
 
-Tell systemd it exists: `sudo systemctl daemon-reload`
+```console
+$ sudo systemctl daemon-reload
+```
 
-Start it: `sudo systemctl start mev-boost`
+And then start the service with the following command and check the status to make sure it’s running correctly.
 
-Verify it works, otherwise fix what went wrong: `sudo systemctl status mev-boost`
+```console
+$ sudo systemctl start mevboost
+$ sudo systemctl status mevboost
+```
 
-Make sure it starts on boot: `sudo systemctl enable mev-boost`
+If you did everything right, it should say active (running) in green. If not then go back and repeat the steps to fix the problem. Press Q to quit.
+Lastly, enable mev-boost to start on boot.
 
-Clean up after yourself: `unset MEV_RELAY`
+```console
+$ sudo systemctl enable mevboost
+```
 
 ### Configure your consensus and validator client to use mev-boost
 
