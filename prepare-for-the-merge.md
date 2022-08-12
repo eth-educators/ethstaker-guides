@@ -246,9 +246,9 @@ through August 2022. When in doubt consult each client's `--help`.
 - Lighthouse consensus: `--builder http://127.0.0.1:18550` 
 - Lighthouse validator: `--builder-proposals`
 
-Tell systemd you made the changes: `sudo systemd daemon-reload`
+Tell systemd you made the changes: `sudo systemctl daemon-reload`
 
-And restart the service(s) you changed: `sudo systemd restart SERVICENAME`
+And restart the service(s) you changed: `sudo systemctl restart SERVICENAME`
 
 ## Support
 
