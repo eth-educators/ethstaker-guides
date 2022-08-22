@@ -8,7 +8,7 @@ This guide is meant for people who are managing and maintaining staking machines
 
 You should wait to apply most of these changes before more is known about the Merge. You should wait until we are closer to the Merge and a [Terminal Total Difficulty (TTD)](https://ethereum.stackexchange.com/questions/129860/what-is-terminal-total-difficulty-ttd) is announced for Mainnet. One issue is that some execution client will not open their Engine API until there is a configured TTD. New client updates are likely to be released after a TTD is announced and before the Merge. Running your own execution client should be done in advance to account for the time it takes to sync and to account for the time it takes to upgrade your hardware if needed.
 
-Here are the clients that are ready for the merge on Mainnet and their version. You need to update your clients to these versions or later before [the Merge on Mainnet](https://blog.ethereum.org/2022/08/12/finalized-no-36/).
+Here are the clients that are ready for the merge on Mainnet and their version. You **must** update your clients to these versions or later before [the Merge on Mainnet](https://blog.ethereum.org/2022/08/12/finalized-no-36/).
 
 #### Execution clients that are ready for the Merge on Mainnet
 
