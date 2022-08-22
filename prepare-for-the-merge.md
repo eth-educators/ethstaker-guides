@@ -15,7 +15,7 @@ Here are the clients that are ready for the merge on Mainnet and their version. 
 - [Geth](https://geth.ethereum.org/): v1.10.22 (or later)
 - [Nethermind](http://nethermind.io/): v1.14.0 (or later)
 - [Besu](https://hyperledger.org/use/besu): v22.7.1 (or later)
-- [Erigon](https://github.com/ledgerwatch/erigon#erigon): No official release yet (*To be announced*)
+- [Erigon](https://github.com/ledgerwatch/erigon#erigon): v2022.08.02-alpha (or later)
 
 #### Consensus clients that are ready for the Merge on Mainnet
 
