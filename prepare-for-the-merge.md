@@ -167,6 +167,14 @@ As usual, when changing the configuration for your consensus client, you will ne
 
 There are some privacy implications in using a fee recipient address. That address will be forever linked with your validator when it proposes a block after the Merge. If you want to maximize your privacy, you should use your validator deposit address as your fee recipient address if you still have control over it since it is already linked with your validator.
 
+Here are the detailed configuration options for the fee recipient for each client and their documentation.
+
+- [Prysm](https://docs.prylabs.network/docs/execution-node/fee-recipient)
+- [Nimbus](https://nimbus.guide/suggested-fee-recipient.html)
+- [Lodestar](https://chainsafe.github.io/lodestar/usage/validator-management/#configuring-the-fee-recipient-address)
+- [Teku](https://docs.teku.consensys.net/en/latest/HowTo/Prepare-for-The-Merge/#configure-the-fee-recipient)
+- [Lighthouse](https://lighthouse-book.sigmaprime.io/suggested-fee-recipient.html)
+
 ## Choosing and configuring an MEV solution
 
 [Maximal extractable value (MEV)](https://ethereum.org/en/developers/docs/mev/) refers to the maximum value that can be extracted from block production in excess of the standard block reward and gas fees by including, excluding, and changing the order of transactions in a block. After the Merge, there will be an opportunity for Ethereum validators to get that value. If you want to get that value, you will need to install some additional software and configure your consensus client [to communicate with that software](https://github.com/flashbots/mev-boost/#mev-boost) when the time comes to propose a block.
