@@ -4,9 +4,26 @@
 
 This guide is meant for people who are managing and maintaining staking machines. It will explain which steps or actions you should take in order to be ready for the Merge.
 
-# It's early to prepare for the merge
+# Only some clients are ready for the Merge on Mainnet
 
 You should wait to apply most of these changes before more is known about the Merge. You should wait until we are closer to the Merge and a [Terminal Total Difficulty (TTD)](https://ethereum.stackexchange.com/questions/129860/what-is-terminal-total-difficulty-ttd) is announced for Mainnet. One issue is that some execution client will not open their Engine API until there is a configured TTD. New client updates are likely to be released after a TTD is announced and before the Merge. Running your own execution client should be done in advance to account for the time it takes to sync and to account for the time it takes to upgrade your hardware if needed.
+
+Here are the clients that are ready for the merge on Mainnet and their version. You need to update your clients to these versions or later before [the Merge on Mainnet](https://blog.ethereum.org/2022/08/12/finalized-no-36/).
+
+#### Execution clients that are ready for the Merge on Mainnet
+
+- [Geth](https://geth.ethereum.org/): v1.10.22 (or later)
+- [Nethermind](http://nethermind.io/): v1.14.0 (or later)
+- [Erigon](https://github.com/ledgerwatch/erigon#erigon): No official release yet (*To be announced*)
+- [Besu](https://hyperledger.org/use/besu): No official release yet (*To be announced*)
+
+#### Consensus clients that are ready for the Merge on Mainnet
+
+- [Teku](https://consensys.net/knowledge-base/ethereum-2/teku/): v22.8.1 (or later)
+- [Lighthouse](https://lighthouse.sigmaprime.io/): v3.0.0 (or later)
+- [Prysm](https://prysmaticlabs.com/): No official release yet (*To be announced*)
+- [Nimbus](https://nimbus.team/): No official release yet (*To be announced*)
+- [Lodestar](https://lodestar.chainsafe.io/): No official release yet (*To be announced*)
 
 ## Why would you want to prepare for the Merge?
 
