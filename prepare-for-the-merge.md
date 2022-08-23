@@ -29,7 +29,9 @@ There are some risks your staking machine will stop performing its duties if you
 
 ## When is the Merge going to happen on Mainnet?
 
-The current planned date for the Merge protocol upgrade to happen is ~Q3/Q4 2022. There is some uncertainty around the actual date it will happen. Make sure to follow [the official Ethereum blog](https://blog.ethereum.org/) and watch for announcements there. You can also subscribe to [this newsletter](https://groups.google.com/u/1/a/ethereum.org/g/announcements).
+The Merge on Mainnet is happening in [a few different steps](https://blog.ethereum.org/2022/08/12/finalized-no-36/#%EF%B8%8F-all-hands-on-deck-%EF%B8%8F). The first one will happen on **September 6th 2022 at 11:34:47am UTC**. It's a fork called Bellatrix to prepare for the Merge. The final and definitive step will happen around **September 15th 2022**. The uncertainty around the exact date and time depends in part on the current miners and the overall Ethereum network hash rate.
+
+Make sure to follow [the official Ethereum blog](https://blog.ethereum.org/) and watch for announcements there. You can also subscribe to [this newsletter](https://groups.google.com/u/1/a/ethereum.org/g/announcements).
 
 ## Overview
 
