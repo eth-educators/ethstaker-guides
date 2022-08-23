@@ -4,15 +4,13 @@
 
 This guide is meant for people who are managing and maintaining staking machines. It will explain which steps or actions you should take in order to be ready for the Merge.
 
-# Only some clients are ready for the Merge on Mainnet
+# Ethereum client updates are mandatory for the Merge on Mainnet
 
-You should wait to apply most of these changes before more is known about the Merge. You should wait until we are closer to the Merge and a [Terminal Total Difficulty (TTD)](https://ethereum.stackexchange.com/questions/129860/what-is-terminal-total-difficulty-ttd) is announced for Mainnet. One issue is that some execution client will not open their Engine API until there is a configured TTD. New client updates are likely to be released after a TTD is announced and before the Merge. Running your own execution client should be done in advance to account for the time it takes to sync and to account for the time it takes to upgrade your hardware if needed.
-
-Here are the clients that are ready for the merge on Mainnet and their version. You **must** update your clients to these versions or later before [the Merge on Mainnet](https://blog.ethereum.org/2022/08/12/finalized-no-36/).
+Here are the clients that are ready for the merge on Mainnet and their version. You **must** update your clients to these versions or later before [the Merge on Mainnet](https://blog.ethereum.org/2022/08/12/finalized-no-36/). You **must** update your clients before **September 6th 2022 at 11:34:47am UTC**.
 
 #### Execution clients that are ready for the Merge on Mainnet
 
-- [Geth](https://geth.ethereum.org/): v1.10.22 (or later)
+- [Geth](https://geth.ethereum.org/): v1.10.22 (or later). There is a regression issue with v1.10.22. You should wait until that is fixed in a new release before updating.
 - [Nethermind](http://nethermind.io/): v1.14.0 (or later)
 - [Besu](https://hyperledger.org/use/besu): v22.7.1 (or later)
 - [Erigon](https://github.com/ledgerwatch/erigon#erigon): v2022.08.02-alpha (or later)
@@ -23,7 +21,7 @@ Here are the clients that are ready for the merge on Mainnet and their version. 
 - [Lighthouse](https://lighthouse.sigmaprime.io/): v3.0.0 (or later)
 - [Prysm](https://prysmaticlabs.com/): v3.0.0 (or later)
 - [Nimbus](https://nimbus.team/): v22.8.0 (or later)
-- [Lodestar](https://lodestar.chainsafe.io/): No official release yet (*To be announced*)
+- [Lodestar](https://lodestar.chainsafe.io/): v1.0.0 (or later)
 
 ## Why would you want to prepare for the Merge?
 
