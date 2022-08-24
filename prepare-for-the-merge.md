@@ -255,9 +255,8 @@ And restart the service(s) you changed: `sudo systemctl restart SERVICENAME`
 When a new version is released, you can update mev-boost.
 
 ```console
-$ cd ~/mev-boost && git pull
-$ CGO_CFLAGS="-O -DBLST_PORTABLE" go build
-$ sudo cp ./mev-boost /usr/local/bin
+$ CGO_CFLAGS="-O -DBLST_PORTABLE" go install github.com/flashbots/mev-boost@latest
+$ sudo cp ~/go/bin/mev-boost /usr/local/bin
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 ```
 
