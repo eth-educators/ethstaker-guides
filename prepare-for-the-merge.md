@@ -159,7 +159,7 @@ This address can be configured at different layers depending on which client you
 
 - Prysm: `--suggested-fee-recipient 0x0000000000000000000000000000000000000000`
 - Nimbus: `--suggested-fee-recipient=0x0000000000000000000000000000000000000000`
-- Lodestar validator: `--defaultFeeRecipient 0x0000000000000000000000000000000000000000`
+- Lodestar validator: `--suggestedFeeRecipient 0x0000000000000000000000000000000000000000`
 - Teku: `--validators-proposer-default-fee-recipient=0x0000000000000000000000000000000000000000`
 - Lighthouse: `--suggested-fee-recipient 0x0000000000000000000000000000000000000000`
 
@@ -265,8 +265,8 @@ through August 2022. When in doubt consult each client's `--help`.
 - Prysm consensus: `--http-mev-relay=http://127.0.0.1:18550`
 - Prysm validator: `--enable-builder`
 - Nimbus combined: `--payload-builder=http://127.0.0.1:18550`
-- Lodestar consensus: `--builder.enabled --builder.urls http://127.0.0.1:18550`
-- Lodestar validator: `--builder.enabled`
+- Lodestar consensus: `--builder --builder.urls http://127.0.0.1:18550`
+- Lodestar validator: `--builder`
 - Teku combined: `--validators-builder-registration-default-enabled=true --builder-endpoint=http://127.0.0.1:18550`
 - Lighthouse consensus: `--builder http://127.0.0.1:18550` 
 - Lighthouse validator: `--builder-proposals`
