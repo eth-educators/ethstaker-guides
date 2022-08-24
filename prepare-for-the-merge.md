@@ -203,7 +203,7 @@ $ sudo useradd --no-create-home --shell /bin/false mevboost
 Install mev-boost globally.
 
 ```console
-$ go install github.com/flashbots/mev-boost@latest
+$ CGO_CFLAGS="-O -DBLST_PORTABLE" go install github.com/flashbots/mev-boost@latest
 $ sudo cp ~/go/bin/mev-boost /usr/local/bin
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 ```
@@ -274,6 +274,16 @@ through August 2022. When in doubt consult each client's `--help`.
 Tell systemd you made the changes: `sudo systemctl daemon-reload`
 
 And restart the service(s) you changed: `sudo systemctl restart SERVICENAME`
+
+### Update mev-boost
+
+When a new version is released, you can update mev-boost.
+
+```console
+$ CGO_CFLAGS="-O -DBLST_PORTABLE" go install github.com/flashbots/mev-boost@latest
+$ sudo cp ~/go/bin/mev-boost /usr/local/bin
+$ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
+```
 
 ## Support
 
