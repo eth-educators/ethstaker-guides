@@ -105,7 +105,7 @@ The communication between your consensus client and your execution client is goi
 
 You are likely going to need to use a new configuration option for this endpoint or at least update it on your consensus client beacon node. The default port for the Engine API is 8551 and the default port for the JSON-RPC API is 8545. You might not need to change any configuration option on your execution client, but you will likely need to modify your beacon node configuration. Here are the common values you will likely need to add or modify for each consensus client assuming your execution client engine API endpoint is at `http://localhost:8551`:
 
-- Prysm beacon node: `--http-web3provider http://localhost:8551`
+- Prysm beacon node: `--execution-endpoint http://localhost:8551`
 - Nimbus: `--web3-url=http://localhost:8551`
 - Lodestar beacon node: `--execution.urls http://localhost:8551`
 - Teku: `--ee-endpoint http://localhost:8551`
