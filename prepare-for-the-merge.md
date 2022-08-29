@@ -181,7 +181,11 @@ Here are the detailed configuration options for the fee recipient for each clien
 
 A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
-### Installing mev-boost
+### What about MEV on Mainnet?
+
+You should wait until public relays are published before trying to install and configure any MEV solution for Mainnet. We suggest you try it on Goerli/Prater in the meantime.
+
+### Installing mev-boost on Goerli/Prater
 
 Install [a recent version of Go](https://go.dev/doc/install). [Go is also available](https://go.dev/dl/) for architectures that are different than linux AMD64. Adjust if needed.
 
