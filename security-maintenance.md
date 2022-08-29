@@ -15,11 +15,11 @@ This is not an exhaustive list of all the security practices someone who runs a 
 * Using an operating system that has weak support or that has a weak community.
 * Using an operating system that exposes you to unnecessary risks.
 
-If you do not know which operating system (OS) to use for your staking machine, use [Ubuntu 20.04 Desktop](https://ubuntu.com/download/desktop). If you are familiar with the command line interface (CLI) and manually typing commands in a terminal, I suggest you use [Ubuntu 20.04 Server](https://ubuntu.com/download/server). Ubuntu 20.04 is [a long term support (LTS) release](https://ubuntu.com/blog/what-is-an-ubuntu-lts-release). It will be supported until 2030 which gives you a peace of mind.
+If you do not know which operating system (OS) to use for your staking machine, use [Ubuntu 22.04 Desktop](https://ubuntu.com/download/desktop). If you are familiar with the command line interface (CLI) and manually typing commands in a terminal, I suggest you use [Ubuntu 22.04 Server](https://ubuntu.com/download/server). Ubuntu 22.04 is [a long term support (LTS) release](https://ubuntu.com/blog/what-is-an-ubuntu-lts-release). It will be supported until 2032 which gives you a peace of mind.
 
 While you can use MacOS or Windows to run your staking machine, I would recommend against it. They will expose you to additional risks and they are harder to manage in terms of security and general maintenance.
 
-There are various other good Linux distributions that can work, but the rest of this guide will assume you are using Ubuntu 20.04. If you know what you are doing and you are familiar with Linux, you should still be able to follow even if you used another modern Linux distribution.
+There are various other good Linux distributions that can work, but the rest of this guide will assume you are using Ubuntu 22.04. If you know what you are doing and you are familiar with Linux, you should still be able to follow even if you used another modern Linux distribution.
 
 Installing a modern Linux operating system on your own machine is often as simple as:
 
