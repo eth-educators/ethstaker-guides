@@ -41,6 +41,8 @@ Installing a modern Linux operating system on your own machine is often as simpl
 
 * Unauthorized or unintented remote access to your machine.
 
+If you are using SSH to remotely access your machine, you should [configure your server to authenticate with keys and disable password authentication](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server).
+
 ## Securing your network with a firewall
 
 **Risks**
