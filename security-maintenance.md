@@ -66,7 +66,7 @@ If you are using SSH to remotely access your machine, you should [configure your
 * Using a kernel that has vulnerabilities between updates or reboots.
 * Missing important staking rewards during reboots.
 
-Ubuntu and Canonical offers a live patching service called [Livepatch](https://ubuntu.com/security/livepatch).
+Ubuntu and Canonical offers a live patching service called [Livepatch](https://ubuntu.com/security/livepatch) which is free for up to 3 machines.
 
 ## Limiting the installed applications and running processes
 
