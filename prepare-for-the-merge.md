@@ -203,7 +203,7 @@ $ sudo useradd --no-create-home --shell /bin/false mevboost
 Install mev-boost globally.
 
 ```console
-$ CGO_CFLAGS="-O -DBLST_PORTABLE" go install github.com/flashbots/mev-boost@latest
+$ CGO_CFLAGS="-O -D__BLST_PORTABLE__" go install github.com/flashbots/mev-boost@latest
 $ sudo cp ~/go/bin/mev-boost /usr/local/bin
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 ```
