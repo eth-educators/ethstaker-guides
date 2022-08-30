@@ -20,7 +20,7 @@ Here are the clients that are ready for the merge on Mainnet and their version. 
 - [Teku](https://consensys.net/knowledge-base/ethereum-2/teku/): v22.8.1 (or later)
 - [Lighthouse](https://lighthouse.sigmaprime.io/): v3.0.0 (or later)
 - [Prysm](https://prysmaticlabs.com/): v3.0.0 (or later)
-- [Nimbus](https://nimbus.team/): v22.8.0 (or later)
+- [Nimbus](https://nimbus.team/): v22.8.1 (or later)
 - [Lodestar](https://lodestar.chainsafe.io/): v1.0.0 (or later)
 
 ## Why would you want to prepare for the Merge?
