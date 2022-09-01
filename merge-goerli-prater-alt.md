@@ -116,6 +116,7 @@ Type=simple
 Restart=always
 RestartSec=5
 TimeoutStopSec=180
+LimitNOFILE=8388608
 ExecStart=/usr/local/bin/besu/bin/besu \
     --network=goerli \
     --sync-mode=X_CHECKPOINT \
