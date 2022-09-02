@@ -181,11 +181,7 @@ Here are the detailed configuration options for the fee recipient for each clien
 
 A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
-### What about MEV on Mainnet?
-
-You should wait until public relays are published before trying to install and configure any MEV solution for Mainnet. We suggest you try it on Goerli/Prater in the meantime.
-
-### Installing mev-boost on Goerli/Prater
+### Installing mev-boost on Mainnet
 
 Install [a recent version of Go](https://go.dev/doc/install). [Go is also available](https://go.dev/dl/) for architectures that are different than linux AMD64. Adjust if needed.
 
@@ -218,11 +214,11 @@ Create a systemd service file to store the service config which tells systemd to
 $ sudo nano /etc/systemd/system/mevboost.service
 ```
 
-Paste the following into the file to run mev-boost on Goerli. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+Paste the following into the file to run mev-boost on Mainnet. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
 
 ```ini
 [Unit]
-Description=mev-boost (Goerli)
+Description=mev-boost (Mainnet)
 Wants=network-online.target
 After=network-online.target
 
@@ -233,13 +229,15 @@ Group=mevboost
 Restart=always
 RestartSec=5
 ExecStart=mev-boost \
-    -goerli \
+    -mainnet \
     -relay-check \
-    -relays https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net,https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.max-profit.builder.goerli.blxrbdn.com
+    -relays https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. In the configuration above, it only has the *Flashbots MEV-Boost Mainnet Relay*.
 
 Reload systemd to reflect the changes.
 
@@ -285,8 +283,10 @@ When a new version is released, you can update mev-boost.
 
 ```console
 $ CGO_CFLAGS="-O -D__BLST_PORTABLE__" go install github.com/flashbots/mev-boost@latest
+$ sudo systemctl stop mevboost
 $ sudo cp ~/go/bin/mev-boost /usr/local/bin
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
+$ sudo systemctl start mevboost
 ```
 
 ## Support
