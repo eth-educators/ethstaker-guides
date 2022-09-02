@@ -179,6 +179,8 @@ Here are the detailed configuration options for the fee recipient for each clien
 
 [Maximal extractable value (MEV)](https://ethereum.org/en/developers/docs/mev/) refers to the maximum value that can be extracted from block production in excess of the standard block reward and gas fees by including, excluding, and changing the order of transactions in a block. After the Merge, there will be an opportunity for Ethereum validators to get that value. If you want to get that value, you will need to install some additional software and configure your consensus client [to communicate with that software](https://github.com/flashbots/mev-boost/#mev-boost) when the time comes to propose a block.
 
+The use of mev-boost and obtaining MEV by a validator is entirely optional. A validator might want to avoid obtaining MEV for any reason. There are plenty of good reasons to avoid MEV. It is a decision left to each staker. However, if you want to maximize your profits, you should consider obtaining that additional value.
+
 A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
 ### Installing mev-boost on Mainnet
