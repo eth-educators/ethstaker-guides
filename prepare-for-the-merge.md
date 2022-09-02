@@ -202,6 +202,13 @@ Create a user account for the service to run under. This account will not be abl
 $ sudo useradd --no-create-home --shell /bin/false mevboost
 ```
 
+Install common build tools to build mev-boost. If you are on Ubuntu or on most Debian derivatives, you can use these commands:
+
+```console
+$ sudo apt -y update
+$ sudo apt -y install build-essential
+```
+
 Install mev-boost globally.
 
 ```console
