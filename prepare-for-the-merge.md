@@ -277,7 +277,7 @@ through August 2022. When in doubt consult each client's `--help`.
 
 - Prysm consensus: `--http-mev-relay=http://127.0.0.1:18550`
 - Prysm validator: `--enable-builder`
-- Nimbus combined: `--payload-builder=http://127.0.0.1:18550`
+- Nimbus combined: `--payload-builder=true --payload-builder-url=http://127.0.0.1:18550`
 - Lodestar consensus: `--builder --builder.urls http://127.0.0.1:18550`
 - Lodestar validator: `--builder`
 - Teku combined: `--validators-builder-registration-default-enabled=true --builder-endpoint=http://127.0.0.1:18550`
