@@ -189,11 +189,11 @@ Install [a recent version of Go](https://go.dev/doc/install). [Go is also availa
 
 ```console
 $ cd ~
-$ wget https://go.dev/dl/go1.19.linux-amd64.tar.gz
-$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+$ wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz
+$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz
 $ export PATH=$PATH:/usr/local/go/bin
 $ echo 'PATH="$PATH:/usr/local/go/bin"' >> ~/.profile
-$ rm go1.19.linux-amd64.tar.gz
+$ rm go1.19.1.linux-amd64.tar.gz
 ```
 
 Create a user account for the service to run under. This account will not be able to log into the machine. It will only be used to run the service.
