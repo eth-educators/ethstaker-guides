@@ -223,7 +223,7 @@ Create a systemd service file to store the service config which tells systemd to
 $ sudo nano /etc/systemd/system/mevboost.service
 ```
 
-Paste the following into the file to run mev-boost on Mainnet. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+Paste the following into the file to run mev-boost on Mainnet. You **must** replace `https://example.com` in this configuration with one or many existing relays. We have [a list of relays for Mainnet](MEV-relays-list.md) you can explore. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
 
 ```ini
 [Unit]
@@ -240,17 +240,17 @@ RestartSec=5
 ExecStart=mev-boost \
     -mainnet \
     -relay-check \
-    -relays https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xad0a8bb54565c2211cee576363f3a347089d2f07cf72679d16911d740262694cadb62d7fd7483f27afd714ca0f1b9118@bloxroute.ethical.blxrbdn.com
+    -relays https://example.com
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. In the configuration above, it currently has the *Flashbots MEV-Boost Mainnet Relay* and the *BloXroute Mainnet Ethical Relay*.
+You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`.
 
 Selecting your relays **can be an important decision** for some stakers. Some relay might sensor transactions. Some relay might be more *ethical* in terms of which strategies they accept or not. You should do your own diligence when selecting which relay you want to use.
 
-Reload systemd to reflect the changes.
+Reload systemd to reflect the changes. If you edit that file again to add or remove relays, you need will to reload systemd again to reflect the changes before restarting your mev-boost service.
 
 ```console
 $ sudo systemctl daemon-reload
