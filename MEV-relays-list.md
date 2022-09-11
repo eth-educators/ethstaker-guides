@@ -2,6 +2,8 @@
 
 Here is a list of MEV relays for the Ethereum Mainnet network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the one that gives you the most profit.
 
+Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
+
 | Operator | Notes | Relay URL |
 |----------|-------|-----------|
 | [Flashbots](https://www.flashbots.net/) | | `https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net` |
