@@ -223,7 +223,7 @@ Create a systemd service file to store the service config which tells systemd to
 $ sudo nano /etc/systemd/system/mevboost.service
 ```
 
-Paste the following into the file to run mev-boost on Mainnet. You **must** replace `https://example.com` in this configuration with one or many existing relays. We have [a list of relays for Mainnet](MEV-relays-list.md) you can explore. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
+Paste the following into the file to run mev-boost on Mainnet. You **must** replace `https://example.com` in this configuration with one or many existing relays. We have [a list of relays for Mainnet](MEV-relay-list.md) you can explore. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`).
 
 ```ini
 [Unit]
