@@ -151,7 +151,8 @@ RestartSec=5
 ExecStart=/usr/local/bin/alertmanager \
     --config.file /etc/alertmanager/alertmanager.yml \
     --storage.path /var/lib/alertmanager/ \
-    --web.listen-address="localhost:9093"
+    --web.listen-address="localhost:9093" \
+    --cluster.listen-address=""
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
