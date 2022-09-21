@@ -97,7 +97,7 @@ Type=simple
 Restart=always
 RestartSec=5
 TimeoutStopSec=180
-ExecStart=geth \
+ExecStart=/usr/bin/geth \
     --goerli \
     --http \
     --datadir /var/lib/goethereum \
