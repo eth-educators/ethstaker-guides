@@ -183,7 +183,7 @@ The use of mev-boost and obtaining MEV by a validator is entirely optional. A va
 
 A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
-### Installing mev-boost on Mainnet
+### Installing mev-boost
 
 Create a user account for the service to run under. This account will not be able to log into the machine. It will only be used to run the service.
 
