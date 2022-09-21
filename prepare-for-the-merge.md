@@ -185,35 +185,31 @@ A preview of MEV and mev-boost can be seen on https://youtu.be/sZYJiLxp9ow
 
 ### Installing mev-boost on Mainnet
 
-Install [a recent version of Go](https://go.dev/doc/install). [Go is also available](https://go.dev/dl/) for architectures that are different than linux AMD64. Adjust if needed.
-
-```console
-$ cd ~
-$ wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz
-$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz
-$ export PATH=$PATH:/usr/local/go/bin
-$ echo 'PATH="$PATH:/usr/local/go/bin"' >> ~/.profile
-$ rm go1.19.1.linux-amd64.tar.gz
-```
-
 Create a user account for the service to run under. This account will not be able to log into the machine. It will only be used to run the service.
 
 ```console
 $ sudo useradd --no-create-home --shell /bin/false mevboost
 ```
 
-Install common build tools to build mev-boost. If you are on Ubuntu or on most Debian derivatives, you can use these commands:
+Download the latest stable version of mev-boost from https://github.com/flashbots/mev-boost/releases (avoid any pre-release version). As of this date, the latest stable release version is 1.3.1 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should likely end with *linux_amd64.tar.gz* (for linux and AMD64 instructions set). Use a different archive if you are on a different architecture or a different operating system.
 
 ```console
-$ sudo apt -y update
-$ sudo apt -y install build-essential
+$ cd ~
+$ wget https://github.com/flashbots/mev-boost/releases/download/v1.3.1/mev-boost_1.3.1_linux_amd64.tar.gz
 ```
 
-Install mev-boost globally.
+Verify that the SHA256 Checksum as shown [in the checksums.txt file](https://github.com/flashbots/mev-boost/releases) is the same as the file we just downloaded.
 
 ```console
-$ CGO_CFLAGS="-O -D__BLST_PORTABLE__" go install github.com/flashbots/mev-boost@latest
-$ sudo cp ~/go/bin/mev-boost /usr/local/bin
+$ sha256sum mev-boost_1.3.1_linux_amd64.tar.gz
+```
+
+Extract the archive. Install mev-boost globally and remove the download leftovers.
+
+```console
+$ tar xvf mev-boost_1.3.1_linux_amd64.tar.gz
+$ sudo cp mev-boost /usr/local/bin
+$ rm mev-boost LICENSE README.md mev-boost_1.3.1_linux_amd64.tar.gz
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 ```
 
@@ -263,6 +259,8 @@ $ sudo systemctl start mevboost
 $ sudo systemctl status mevboost
 ```
 
+If mev-boost crashes with `"SIGILL: illegal instruction"` then you need to use [a portable build](https://github.com/flashbots/mev-boost#troubleshooting).
+
 If you did everything right, it should say active (running) in green. If not then go back and repeat the steps to fix the problem. Press Q to quit.
 Lastly, enable mev-boost to start on boot.
 
@@ -290,12 +288,16 @@ And restart the service(s) you changed: `sudo systemctl restart SERVICENAME`
 
 ### Update mev-boost
 
-When a new version is released, you can update mev-boost.
+When a new version is released, you can update mev-boost. Find the latest stable version of mev-boost from https://github.com/flashbots/mev-boost/releases. Download the archive. The file name should likely end with *linux_amd64.tar.gz* (for linux and AMD64 instructions set). Use a different archive if you are on a different architecture or a different operating system. Verify the archive checksum, extract the archive, stop the service, install mev-boost globally, remove the download leftovers and restart the service.
 
 ```console
-$ CGO_CFLAGS="-O -D__BLST_PORTABLE__" go install github.com/flashbots/mev-boost@latest
+$ cd ~
+$ wget https://github.com/flashbots/mev-boost/releases/download/v1.3.1/mev-boost_1.3.1_linux_amd64.tar.gz
+$ sha256sum mev-boost_1.3.1_linux_amd64.tar.gz
+$ tar xvf mev-boost_1.3.1_linux_amd64.tar.gz
 $ sudo systemctl stop mevboost
-$ sudo cp ~/go/bin/mev-boost /usr/local/bin
+$ sudo cp mev-boost /usr/local/bin
+$ rm mev-boost LICENSE README.md mev-boost_1.3.1_linux_amd64.tar.gz
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 $ sudo systemctl start mevboost
 ```
