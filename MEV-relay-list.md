@@ -18,6 +18,11 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 [2]: https://twitter.com/bantg/status/1559948198508118016
 [3]: https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators
 
+## External relay monitoring
+
+* [MEV Relays](https://mev-relays.beaconstate.info/) from beaconstate.info and 1337
+* [mevboost.org](https://www.mevboost.org/) by Anish
+
 # MEV relay list for Goerli testnet
 
 Here is a list of MEV relays for the Ethereum Goerli test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
