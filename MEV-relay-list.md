@@ -24,6 +24,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [mevboost.org](https://www.mevboost.org/) by Anish Agnihotri
 * [MEV Watch](https://www.mevwatch.info/) by Labrys
 * [Relays](https://beaconcha.in/relays) from beaconcha.in
+* [Transparency dashboard](https://transparency.flashbots.net/) by Flashbots
 
 # MEV relay list for Goerli testnet
 
