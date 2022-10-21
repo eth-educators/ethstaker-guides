@@ -19,7 +19,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 
 ## External relay monitoring
 
-* [MEV Relays](https://mev-relays.beaconstate.info/) by 1337
+* [Uptime Monitor](https://mev-relays.beaconstate.info/) by 1337
 * [mevboost.org](https://www.mevboost.org/) by Anish Agnihotri
 * [mevboost.pics](https://www.mevboost.pics/) by Toni Wahrstätter
 * [Tornado Warnings](https://tornado-warning.info/) by Toni Wahrstätter
