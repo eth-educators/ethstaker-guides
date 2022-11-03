@@ -1,4 +1,4 @@
-# ethstaker
+# EthStaker Guides
 
 Random documents for the ETHStaker community.
 
