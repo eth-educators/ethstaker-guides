@@ -27,6 +27,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [Tornado Warnings](https://tornado-warning.info/) by Toni Wahrstätter
 * [MEV Watch](https://www.mevwatch.info/) by Labrys
 * [Relays](https://beaconcha.in/relays) from beaconcha.in
+* [Relay Scan](https://www.relayscan.io) from Chris Hager
 * [Transparency dashboard](https://transparency.flashbots.net/) by Flashbots
 
 # MEV relay list for Goerli testnet
