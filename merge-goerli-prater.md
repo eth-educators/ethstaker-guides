@@ -44,9 +44,9 @@ Download [the latest release version for Lighthouse](https://github.com/sigp/lig
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v2.5.0/lighthouse-v2.5.0-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v2.5.0-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v2.5.0-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/sigp/lighthouse/releases/download/v3.2.1/lighthouse-v3.2.1-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v3.2.1-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v3.2.1-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Lighthouse version globally.
