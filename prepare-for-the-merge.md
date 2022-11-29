@@ -235,6 +235,7 @@ Restart=always
 RestartSec=5
 ExecStart=mev-boost \
     -mainnet \
+    -min-bid 0.05 \
     -relay-check \
     -relays https://example.com
 
