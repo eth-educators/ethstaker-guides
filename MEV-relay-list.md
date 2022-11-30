@@ -33,7 +33,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [Relays](https://beaconcha.in/relays) from beaconcha.in
 * [Relay Scan](https://www.relayscan.io) from Chris Hager
 * [Transparency dashboard](https://transparency.flashbots.net/) by Flashbots
-* [Relay Monitor](https://app.metrika.co/dashboard/ethereum/relay-monitor/north-america-east?tr=30m) by Metrika
+* [Relay Monitor](https://app.metrika.co/dashboard/ethereum/relay-monitor/north-america-east?tr=30m) by Metrika (beta)
 
 # MEV relay list for Goerli testnet
 
