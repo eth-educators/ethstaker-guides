@@ -34,6 +34,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [Relay Scan](https://www.relayscan.io) from Chris Hager
 * [Transparency dashboard](https://transparency.flashbots.net/) by Flashbots
 * [Relay Monitor](https://app.metrika.co/dashboard/ethereum/relay-monitor/north-america-east?tr=30m) by Metrika (beta)
+* [Rated Network](https://www.rated.network/relays?network=mainnet) by Rated Network
 
 # MEV relay list for Goerli testnet
 
