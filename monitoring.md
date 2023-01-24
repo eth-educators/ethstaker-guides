@@ -346,13 +346,13 @@ $ sudo apt install -y apt-transport-https software-properties-common wget
 Import the Grafana PGP key.
 
 ```console
-$ wget -q -O - https://packages.grafana.com/gpg.key | sudo tee /etc/apt/trusted.gpg.d/grafana.asc
+$ sudo wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
 ```
 
 Add the Grafana OSS APT repository for stable releases.
 
 ```console
-$ echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+$ echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 ```
 
 Install Grafana from the APT repository.
