@@ -4,7 +4,7 @@ Your staking machine is unsafe like many others, but we can help it. Just like w
 
 The following suggestions are general tips that can apply to many different environments and use cases. Security can be subjective. What feels safe or safer for someone can be quite different from someone else. As you start looking at these risks from different angles, you may find alternative solutions that have their own pros and cons.
 
-This is not an exhaustive list of all the security practices someone who runs a validator or who handles cryptocurrencies should use. We have [a reference section with additional security pratices](#good-security-and-maintenance-references) you should be looking at as well.
+This is not an exhaustive list of all the security practices someone who runs a validator or who handles cryptocurrencies should use. We have [a reference section with additional security practices](#good-security-and-maintenance-references) you should be looking at as well.
 
 ## Using a good operating system
 
@@ -39,7 +39,7 @@ Installing a modern Linux operating system on your own machine is often as simpl
 
 **Risks**
 
-* Unauthorized or unintented remote access to your machine.
+* Unauthorized or unintended remote access to your machine.
 
 If you are using SSH to remotely access your machine, you should [configure your server to authenticate with keys and disable password authentication](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server).
 
@@ -47,13 +47,13 @@ If you are using SSH to remotely access your machine, you should [configure your
 
 **Risks**
 
-* Unauthorized or unintented remote access to your machine.
+* Unauthorized or unintended remote access to your machine.
 
 ## Securing the machine you use to remote connect with
 
 **Risks**
 
-* Unauthorized or unintented remote access to your machine.
+* Unauthorized or unintended remote access to your machine.
 
 ## Performing your system updates regularly
 

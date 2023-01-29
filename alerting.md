@@ -42,7 +42,7 @@ Executing a command with `sudo` will occasionally ask you for your password. Mak
 
 ## Installing Alertmanager
 
-These steps will install Alertmanager as a systemd service. 
+These steps will install Alertmanager as a systemd service.
 
 Create the alertmanager user.
 
@@ -409,7 +409,7 @@ To restart the Prometheus service after you updated its binary, use this command
 $ sudo systemctl restart prometheus.service
 ```
 
-You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases . You can find all the Alertmanager releases and their changelog on https://github.com/prometheus/alertmanager/releases .
+You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases. You can find all the Alertmanager releases and their changelog on https://github.com/prometheus/alertmanager/releases.
 
 You might never need to update these tools as there might not be any severe or critical issue with them or there might not be an issue that can be easily exploited by a malicious actor with the version you have. However, it's a good practice to monitor releases for the tools you are using and update them regularly.
 
