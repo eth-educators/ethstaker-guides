@@ -311,10 +311,10 @@ $ sudo chmod 700 /var/lib/lighthouse/validators
 Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank. Make sure to replace `/path/to/keystores` with the actual path to your keystores created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit).
 
 ```console
-$ sudo /usr/local/bin/lighthouse account validator import \
+$ sudo lighthouse-capella account validator import \
     --directory /path/to/keystores \
     --datadir /var/lib/lighthouse \
-    --network prater
+    --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data
 $ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
 ```
 
@@ -328,7 +328,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Validator Client (Prater)
+Description=Lighthouse Ethereum Client Validator Client (Zhejiang)
 Wants=network-online.target
 After=network-online.target
 
@@ -338,8 +338,8 @@ Group=lighthousevalidator
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/lighthouse vc \
-    --network prater \
+ExecStart=lighthouse-capella vc \
+    --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data \
     --datadir /var/lib/lighthouse \
     --graffiti EthStaker \
     --metrics \
@@ -375,7 +375,7 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ## What's next?
 
-TODO
+Instructions for withdrawal and BLS to execution changes testing are coming up later.
 
 ## Support
 
