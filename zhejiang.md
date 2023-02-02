@@ -381,7 +381,7 @@ Instructions for withdrawal and BLS to execution changes testing are coming up l
 
 If you have any question or if you need additional support, make sure to get in touch with people involved with this:
 
-* EthStaker Discord: [discord.io/ethstaker](https://discord.io/ethstaker) in the #zhejiang-🔑 channel
+* EthStaker Discord: [discord.io/ethstaker](https://discord.io/ethstaker) in the #zhejiang-🔑 channel.
 * Eth R&D Discord: [discord.gg/qGpsxSA](https://discord.gg/qGpsxSA) in the #testing channel under the *Shanghai* category.
 
 ## Credits
