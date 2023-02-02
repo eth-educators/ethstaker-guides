@@ -260,11 +260,11 @@ $ sudo journalctl -f -u lighthousebeacon.service -o cat | ccze -A
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## Trying the Goerli/Prater merge testnet
+## Trying the Zhejiang testnet
 
 ### Requesting testnet funds
 
-You can request Goerli ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-goerli-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/goerli) as well. You will need at least 32 Goerli ETH if you want to do a validator deposit for Goerli. The EthStaker Discord faucet will give you 32.05 Goerli ETH in one go.
+You can request Zhejiang ETH from [the main faucet](https://faucet.zhejiang.ethpandaops.io/). You can request Zhejiang ETH from [pk910's faucet](https://zhejiang-faucet.pk910.de/). You can request Zhejiang ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-zhejiang-eth💸 channel. You will need at least 32 Zhejiang ETH if you want to do a validator deposit for Zhejiang.
 
 ## Adding a validator
 
@@ -275,27 +275,27 @@ There are 2 great tools to create your validator keys:
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
 * CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
-If you choose the *Wagyu Key Gen* application, make sure to select the *Prater* network and follow the instructions provided.
+If you choose the *Wagyu Key Gen* application, make sure to select the *Zhejiang* network and follow the instructions provided.
 
 If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ cd staking_deposit-cli-9ab0b05-linux-amd64/
-$ ./deposit new-mnemonic --num_validators 1 --chain prater
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.4.0/staking_deposit-cli-ef89710-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-ef89710-linux-amd64.tar.gz
+$ rm staking_deposit-cli-ef89710-linux-amd64.tar.gz
+$ cd staking_deposit-cli-ef89710-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain zhejiang
 $ ls -d $PWD/validator_keys/*
 ```
 
 Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
 
-Next we will do the deposit using the Prater launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
+Next we will do the deposit using the Zhejiang launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
 
-Go to [the Prater launchpad](https://prater.launchpad.ethereum.org/en/). Follow the instructions, make sure *Prater* is the selected network in MetaMask and use the deposit file to perform your deposit.
+Go to [the Zhejiang launchpad](https://zhejiang.launchpad.ethereum.org/). Follow the instructions, make sure *Zhejiang* is the selected network in MetaMask (if you don't have that network in your dropdown list, go to https://zhejiang.ethpandaops.io/ and click the *Add network to Metamask*) and use the deposit file to perform your deposit.
 
-You can check that your deposit transaction went through on [the transaction explorer](https://goerli.etherscan.io/address/0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b).
+You can check that your deposit transaction went through on [the transaction explorer](https://blockscout.com/eth/zhejiang-testnet/address/0x4242424242424242424242424242424242424242).
 
 ### Configuring your Lighthouse validator client
 
