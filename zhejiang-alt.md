@@ -26,7 +26,7 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install software-properties-common wget curl ccze apt-transport-https libjemalloc-dev
+$ sudo apt -y install software-properties-common wget curl ccze apt-transport-https libjemalloc-dev git
 ```
 
 Install Adoptium JDK (Java).
@@ -39,40 +39,49 @@ $ sudo apt -y update
 $ sudo apt -y install temurin-17-jdk
 ```
 
-## Installing Besu
+## Zhejiang configuration details
 
-Download [the latest release version for Besu](https://github.com/hyperledger/besu/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link that ends with `tar.gz`.
+Obtain the Zhejiang configuration files and make them accessible.
 
 ```console
 $ cd ~
-$ wget https://hyperledger.jfrog.io/artifactory/besu-binaries/besu/22.7.0/besu-22.7.0.tar.gz
-$ tar xvf besu-22.7.0.tar.gz
-$ rm besu-22.7.0.tar.gz
+$ git clone https://github.com/ethpandaops/withdrawals-testnet.git
+$ sudo mkdir -p /var/lib/ethereum/zhejiang
+$ sudo cp -R ~/withdrawals-testnet/zhejiang-testnet/custom_config_data /var/lib/ethereum/zhejiang
+```
+
+## Building and installing Besu
+
+Obtain the latest development version for Besu and build it.
+
+```console
+$ cd ~
+$ git clone --recursive https://github.com/hyperledger/besu
+$ cd besu
+$ ./gradlew installDist
 ```
 
 Install this Besu version globally.
 
 ```console
-$ sudo cp -a ./besu-22.7.0 /usr/local/bin/besu
-$ rm -rf ./besu-22.7.0
+$ sudo cp -R ~/besu/build/install/besu /usr/local/bin/besu-dev
 ```
 
-## Installing Teku
+## Building and installing Teku
 
-Download [the latest release version for Teku](https://github.com/ConsenSys/teku/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link from the *Downloads* section of the release description. It should be a file that ends with `tar.gz` and it should **not** be the one called 'Source code'.
+Obtain the latest development version for Teku and build it.
 
 ```console
 $ cd ~
-$ wget https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/22.8.0/teku-22.8.0.tar.gz
-$ tar xvf teku-22.8.0.tar.gz
-$ rm teku-22.8.0.tar.gz
+$ git clone https://github.com/ConsenSys/teku.git
+$ cd teku
+$ ./gradlew installDist
 ```
 
 Install this Teku version globally.
 
 ```console
-$ sudo cp -a ./teku-22.8.0 /usr/local/bin/teku
-$ rm -rf ./teku-22.8.0
+$ sudo cp -R ~/teku/build/install/teku /usr/local/bin/teku-dev
 ```
 
 ## Creating the JWT token file
