@@ -86,12 +86,12 @@ $ sudo cp -R ~/teku/build/install/teku /usr/local/bin/teku-dev
 
 ## Creating the JWT token file
 
-Create a JWT token file in a neutral location and make it readable to everyone. We will use the `/var/lib/ethereum/jwttoken` location to store the JWT token file.
+Create a JWT token file in a neutral location and make it readable to everyone. We will use the `/var/lib/ethereum/zhejiang/jwttoken` location to store the JWT token file.
 
 ```
-$ sudo mkdir -p /var/lib/ethereum
-$ openssl rand -hex 32 | tr -d "\n" | sudo tee /var/lib/ethereum/jwttoken
-$ sudo chmod +r /var/lib/ethereum/jwttoken
+$ sudo mkdir -p /var/lib/ethereum/zhejiang
+$ openssl rand -hex 32 | tr -d "\n" | sudo tee /var/lib/ethereum/zhejiang/jwttoken
+$ sudo chmod +r /var/lib/ethereum/zhejiang/jwttoken
 ```
 
 ## Configuring your Besu node
@@ -114,7 +114,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Besu Ethereum Client (Goerli)
+Description=Besu Ethereum Client (Zhejiang)
 After=network.target
 Wants=network.target
 
@@ -126,16 +126,17 @@ Restart=always
 RestartSec=5
 TimeoutStopSec=180
 LimitNOFILE=8388608
-ExecStart=/usr/local/bin/besu/bin/besu \
-    --network=goerli \
-    --sync-mode=X_CHECKPOINT \
+ExecStart=/usr/local/bin/besu-dev/bin/besu \
+    --network-id=1337803 \
+    --genesis-file=/var/lib/ethereum/zhejiang/custom_config_data/besu.json \
+    --sync-mode=FULL \
     --rpc-http-enabled=true \
     --engine-rpc-port=8551 \
     --engine-host-allowlist=localhost,127.0.0.1 \
     --data-path=/var/lib/besu \
     --data-storage-format=BONSAI \
     --metrics-enabled=true \
-    --engine-jwt-secret=/var/lib/ethereum/jwttoken
+    --engine-jwt-secret=/var/lib/ethereum/zhejiang/jwttoken
 
 [Install]
 WantedBy=default.target
@@ -165,11 +166,13 @@ $ sudo journalctl -f -u besu.service -o cat | ccze -A
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## Trying the Goerli/Prater merge testnet
+## Trying the Zhejiang testnet
 
 ### Requesting testnet funds
 
-You can request Goerli ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-goerli-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/goerli) as well. You will need at least 32 Goerli ETH if you want to do a validator deposit for Goerli. The EthStaker Discord faucet will give you 32.05 Goerli ETH in one go.
+You can request Zhejiang ETH from [the main faucet](https://faucet.zhejiang.ethpandaops.io/). You can request Zhejiang ETH from [pk910's faucet](https://zhejiang-faucet.pk910.de/). You can request Zhejiang ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-zhejiang-eth💸 channel. You will need at least 32 Zhejiang ETH if you want to do a validator deposit for Zhejiang.
+
+## Adding a validator
 
 ### Creating your validator keys and performing the deposit
 
@@ -178,27 +181,27 @@ There are 2 great tools to create your validator keys:
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
 * CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
-If you choose the *Wagyu Key Gen* application, make sure to select the *Prater* network and follow the instructions provided.
+If you choose the *Wagyu Key Gen* application, make sure to select the *Zhejiang* network and follow the instructions provided.
 
 If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ cd staking_deposit-cli-9ab0b05-linux-amd64/
-$ ./deposit new-mnemonic --num_validators 1 --chain prater
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.4.0/staking_deposit-cli-ef89710-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-ef89710-linux-amd64.tar.gz
+$ rm staking_deposit-cli-ef89710-linux-amd64.tar.gz
+$ cd staking_deposit-cli-ef89710-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain zhejiang
 $ ls -d $PWD/validator_keys/*
 ```
 
 Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
 
-Next we will do the deposit using the Prater launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
+Next we will do the deposit using the Zhejiang launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
 
-Go to [the Prater launchpad](https://prater.launchpad.ethereum.org/en/). Follow the instructions, make sure *Prater* is the selected network in MetaMask and use the deposit file to perform your deposit.
+Go to [the Zhejiang launchpad](https://zhejiang.launchpad.ethereum.org/). Follow the instructions, make sure *Zhejiang* is the selected network in MetaMask (if you don't have that network in your dropdown list, go to https://zhejiang.ethpandaops.io/ and click the *Add network to Metamask*) and use the deposit file to perform your deposit.
 
-You can check that your deposit transaction went through on [the transaction explorer](https://goerli.etherscan.io/address/0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b).
+You can check that your deposit transaction went through on [the transaction explorer](https://blockscout.com/eth/zhejiang-testnet/address/0x4242424242424242424242424242424242424242).
 
 ## Configuring your Teku node
 
@@ -264,7 +267,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Teku Ethereum Client (Prater)
+Description=Teku Ethereum Client (Zhejiang)
 Wants=network-online.target
 After=network-online.target
 
@@ -274,7 +277,7 @@ User=teku
 Group=teku
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/teku/bin/teku \
+ExecStart=/usr/local/bin/teku-dev/bin/teku \
     --network prater \
     --data-path /var/lib/teku \
     --validator-keys /var/lib/teku/validator_keys:/var/lib/teku/validator_keys \
@@ -316,16 +319,16 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ## What's next?
 
-You performs a lot of different tasks to help with the [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) initiave. Check out [the program structure](https://hackmd.io/WKpg6SNzQbi1jVKNgrSgWg). There are different tasks for all technical abilities.
+Instructions for withdrawal and BLS to execution changes testing are coming up later.
 
 ## Support
 
-If you have any question or if you need additional support, make sure to get in touch with people involved with this initiative:
+If you have any question or if you need additional support, make sure to get in touch with people involved with this:
 
-* EthStaker Discord: [discord.io/ethstaker](https://discord.io/ethstaker) in the #ropsten channel
-* Eth R&D Discord: [discord.gg/qGpsxSA](https://discord.gg/qGpsxSA) in the #testing channel under the *Merge* category.
+* EthStaker Discord: [discord.io/ethstaker](https://discord.io/ethstaker) in the #zhejiang-🔑 channel.
+* Eth R&D Discord: [discord.gg/qGpsxSA](https://discord.gg/qGpsxSA) in the #testing channel under the *Shanghai* category.
 
 ## Credits
 
 Based on [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
-Based on [Ethereum community's guide](https://notes.ethereum.org/qrDBhhydTsyKFmGaBl2COQ).
+Based on [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang).
