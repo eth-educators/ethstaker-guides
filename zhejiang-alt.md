@@ -136,7 +136,8 @@ ExecStart=/usr/local/bin/besu-dev/bin/besu \
     --data-path=/var/lib/besu \
     --data-storage-format=BONSAI \
     --metrics-enabled=true \
-    --engine-jwt-secret=/var/lib/ethereum/zhejiang/jwttoken
+    --engine-jwt-secret=/var/lib/ethereum/zhejiang/jwttoken \
+    --bootnodes="enode://691c66d0ce351633b2ef8b4e4ef7db9966915ca0937415bd2b408df22923f274873b4d4438929e029a13a680140223dcf701cabe22df7d8870044321022dfefa@64.225.78.1:30303,enode://89347b9461727ee1849256d78e84d5c86cc3b4c6c5347650093982b726d71f3d08027e280b399b7b6604ceeda863283dcfe1a01e93728b4883114e9f8c7cc8ef@146.190.238.212:30303,enode://c2892072efe247f21ed7ebea6637ade38512a0ae7c5cffa1bf0786d5e3be1e7f40ff71252a21b36aa9de54e49edbcfc6962a98032adadfa29c8524262e484ad3@165.232.84.160:30303,enode://71e862580d3177a99e9837bd9e9c13c83bde63d3dba1d5cea18e89eb2a17786bbd47a8e7ae690e4d29763b55c205af13965efcaf6105d58e118a5a8ed2b0f6d0@68.183.13.170:30303,enode://2f6cf7f774e4507e7c1b70815f9c0ccd6515ee1170c991ce3137002c6ba9c671af38920f5b8ab8a215b62b3b50388030548f1d826cb6c2b30c0f59472804a045@161.35.147.98:30303"
 
 [Install]
 WantedBy=default.target
@@ -250,13 +251,6 @@ List the files in the validator keys directory and make sure you have a correspo
 $ sudo ls /var/lib/teku/validator_keys
 ```
 
-Download a checkpoint state for quick sync.
-
-```console
-$ sudo curl -o /var/lib/teku/finalized-state.ssz -H 'Accept: application/octet-stream' https://goerli.checkpoint-sync.ethdevops.io/eth/v2/debug/beacon/states/finalized
-$ sudo chown teku:teku /var/lib/teku/finalized-state.ssz
-```
-
 Create a systemd service config file to configure the Teku node service.
 
 ```console
@@ -278,7 +272,8 @@ Group=teku
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/teku-dev/bin/teku \
-    --network prater \
+    --network /var/lib/ethereum/zhejiang/custom_config_data/config.yaml \
+    --initial-state /var/lib/ethereum/zhejiang/custom_config_data/genesis.ssz \
     --data-path /var/lib/teku \
     --validator-keys /var/lib/teku/validator_keys:/var/lib/teku/validator_keys \
     --rest-api-enabled true \
@@ -286,8 +281,9 @@ ExecStart=/usr/local/bin/teku-dev/bin/teku \
     --metrics-enabled true \
     --validators-graffiti EthStaker \
     --validators-proposer-default-fee-recipient 0x0000000000000000000000000000000000000000 \
-    --initial-state /var/lib/teku/finalized-state.ssz \
-    --ee-jwt-secret-file /var/lib/ethereum/jwttoken
+    --ee-jwt-secret-file /var/lib/ethereum/zhejiang/jwttoken \
+    --p2p-discovery-bootnodes="enr:-Iq4QMCTfIMXnow27baRUb35Q8iiFHSIDBJh6hQM5Axohhf4b6Kr_cOCu0htQ5WvVqKvFgY28893DHAg8gnBAXsAVqmGAX53x8JggmlkgnY0gmlwhLKAlv6Jc2VjcDI1NmsxoQK6S-Cii_KmfFdUJL2TANL3ksaKUnNXvTCv1tLwXs0QgIN1ZHCCIyk,enr:-Ly4QOS00hvPDddEcCpwA1cMykWNdJUK50AjbRgbLZ9FLPyBa78i0NwsQZLSV67elpJU71L1Pt9yqVmE1C6XeSI-LV8Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDuKNezAAAAckYFAAAAAAAAgmlkgnY0gmlwhEDhTgGJc2VjcDI1NmsxoQIgMUMFvJGlr8dI1TEQy-K78u2TJE2rWvah9nGqLQCEGohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA,enr:-MK4QMlRAwM7E8YBo6fqP7M2IWrjFHP35uC4pWIttUioZWOiaTl5zgZF2OwSxswTQwpiVCnj4n56bhy4NJVHSe682VWGAYYDHkp4h2F0dG5ldHOIAAAAAAAAAACEZXRoMpDuKNezAAAAckYFAAAAAAAAgmlkgnY0gmlwhJK-7tSJc2VjcDI1NmsxoQLDq7LlsXIXAoJXPt7rqf6CES1Q40xPw2yW0RQ-Ly5S1YhzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA,enr:-MS4QCgiQisRxtzXKlBqq_LN1CRUSGIpDKO4e2hLQsffp0BrC3A7-8F6kxHYtATnzcrsVOr8gnwmBnHYTFvE9UmT-0EHh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDuKNezAAAAckYFAAAAAAAAgmlkgnY0gmlwhKXoVKCJc2VjcDI1NmsxoQK6J-uvOXMf44iIlilx1uPWGRrrTntjLEFR2u-lHcHofIhzeW5jbmV0c4gAAAAAAAAAAIN0Y3CCIyiDdWRwgiMo,enr:-LK4QOQd-elgl_-dcSoUyHDbxBFNgQ687lzcKJiSBtpCyPQ0DinWSd2PKdJ4FHMkVLWD-oOquXPKSMtyoKpI0-Wo_38Bh2F0dG5ldHOIAAAAAAAAAACEZXRoMpDuKNezAAAAckYFAAAAAAAAgmlkgnY0gmlwhES3DaqJc2VjcDI1NmsxoQNIf37JZx-Lc8pnfDwURcHUqLbIEZ1RoxjZuBRtEODseYN0Y3CCIyiDdWRwgiMo,enr:-KG4QLNORYXUK76RPDI4rIVAqX__zSkc5AqMcwAketVzN9YNE8FHSu1im3qJTIeuwqI5JN5SPVsiX7L9nWXgWLRUf6sDhGV0aDKQ7ijXswAAAHJGBQAAAAAAAIJpZIJ2NIJpcIShI5NiiXNlY3AyNTZrMaECpA_KefrVAueFWiLLDZKQPPVOxMuxGogPrI474FaS-x2DdGNwgiMog3VkcIIjKA" \
+    --p2p-static-peers="/ip4/64.225.78.1/tcp/9000/p2p/16Uiu2HAkwbLbPXhPua835ErpoywHmgog4oydobcj3uKtww8UmW3b,/ip4/146.190.238.212/tcp/9000/p2p/16Uiu2HAm8bVLELrPczXQesjUYF8EetaKokgrdgZKj8814ZiGNggk,/ip4/165.232.84.160/tcp/9000/p2p/16Uiu2HAm7xM7nYVz3U9iWGH6NwExZTWtJGGeZ7ejQrcuUFUwtQmH,/ip4/68.183.13.170/udp/9000/p2p/16Uiu2HAmHXzTmWAtVexas5YskEpbcyDQ5Qck3jdLgErWumjKExUx"
 
 [Install]
 WantedBy=multi-user.target
