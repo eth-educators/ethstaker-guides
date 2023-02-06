@@ -6,7 +6,7 @@ This guide is meant for people with little or some experience in running Ethereu
 
 ## Overview
 
-We will build the latest development version for Geth and a special capella version for Lighthouse. We will configure them to connect to the *Zhejiang* testnet. There will be an alternative guide to this one who will use the Besu/Teku combo for its clients (TBC).
+We will build the latest development version for Geth and a special capella version for Lighthouse. We will configure them to connect to the *Zhejiang* testnet. There is an alternative guide to this one [who uses the Besu/Teku combo](zhejiang-alt.md) for its clients.
 
 ## Executing the commands
 
