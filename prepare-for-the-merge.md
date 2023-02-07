@@ -1,6 +1,6 @@
 # Guide on how to prepare a staking machine for the Merge
 
-[The Merge](https://ethereum.org/en/upgrades/merge/) is a protocol upgrade that is being rolled out on all Ethereum networks being kept around. This procotol upgrade will be rolled out on Mainnet. Ethereum validators will need to take some measures and some actions to make sure their staking machine will work during this upgrade and that they will keep running well after the upgrade. Tests are already underway and [the Merge upgrade has been applied to testnets](https://wenmerge.com/) already.
+[The Merge](https://ethereum.org/en/upgrades/merge/) is a protocol upgrade that is being rolled out on all Ethereum networks being kept around. This protocol upgrade will be rolled out on Mainnet. Ethereum validators will need to take some measures and some actions to make sure their staking machine will work during this upgrade and that they will keep running well after the upgrade. Tests are already underway and [the Merge upgrade has been applied to testnets](https://wenmerge.com/) already.
 
 This guide is meant for people who are managing and maintaining staking machines. It will explain which steps or actions you should take in order to be ready for the Merge.
 
@@ -60,7 +60,7 @@ Syncing an execution from nothing can take a few hours or a few days. Make sure 
 
 It is not uncommon for an execution client to use more than 650GB to store its data on Mainnet. If your disk size is less than 2TB for storing everything, you should consider migrating and replacing that disk with one which is at least 2TB in size. You could possibly still manage to run an effective Ethereum validator with only a 1TB disk but that is going to require a lot of efforts which might not be worth it for the price difference of a new disk. Alternatives include adding another a new disk to your machine if it has an available slot or running your execution client on another machine on your local network. Make sure to get in touch with [our support](#support) if you are interested in those alternatives.
 
-Pruning your execution client database is a good strategy for managing your execution client disk usage. If you are using Geth, [you should prune it regularly](https://gist.github.com/yorickdowne/3323759b4cbf2022e191ab058a4276b2) and you should prune it just before the Merge. Geth currently only offers offline prunning that takes a few hours to complete. You should know that having an offline execution client after the Merge will result in your validator failing to perform all its duties meaning that you will lose rewards during that time.
+Pruning your execution client database is a good strategy for managing your execution client disk usage. If you are using Geth, [you should prune it regularly](https://gist.github.com/yorickdowne/3323759b4cbf2022e191ab058a4276b2) and you should prune it just before the Merge. Geth currently only offers offline pruning that takes a few hours to complete. You should know that having an offline execution client after the Merge will result in your validator failing to perform all its duties meaning that you will lose rewards during that time.
 
 Other execution clients have different strategies for managing data growth. Some are leaner in terms of disk size usage to get started with and some include automatic online pruning. You should consider running [a minority execution client](#execution-client-diversity).
 
@@ -101,7 +101,7 @@ If you used a guide or a tool to setup your staking machine, you should first ch
 
 ## Using the new configuration options for your Ethereum clients
 
-The communication between your consensus client and your execution client is going to change with the Merge. They will use this [new Engine API](https://github.com/ethereum/execution-apis/tree/main/src/engine) which will be served at a port independant from the JSON-RPC API currently in use.
+The communication between your consensus client and your execution client is going to change with the Merge. They will use this [new Engine API](https://github.com/ethereum/execution-apis/tree/main/src/engine) which will be served at a port independent from the JSON-RPC API currently in use.
 
 You are likely going to need to use a new configuration option for this endpoint or at least update it on your consensus client beacon node. The default port for the Engine API is 8551 and the default port for the JSON-RPC API is 8545. You might not need to change any configuration option on your execution client, but you will likely need to modify your beacon node configuration. Here are the common values you will likely need to add or modify for each consensus client assuming your execution client engine API endpoint is at `http://localhost:8551`:
 
