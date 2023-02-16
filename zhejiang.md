@@ -412,7 +412,7 @@ A concret example of this would be something like this.
 ./deposit --language=english generate-bls-to-execution-change \
   --chain=zhejiang \
   --mnemonic="midnight stuff system off insane pen normal sunny century staff unfold youth spread myth ranch pony never media appear curve mule diamond century unfold" \
-  --bls_withdrawal_credentials_list="00f48911b8ac7c05407d21f206253bff655d848fb99a9d3a0caaf35171c04bf5" \
+  --bls_withdrawal_credentials_list="0x00f48911b8ac7c05407d21f206253bff655d848fb99a9d3a0caaf35171c04bf5" \
   --validator_start_index=0 \
   --validator_indices=62180 \
   --execution_address="0x56883e030E000fccfD22fC14Fa021568045d48FE"
