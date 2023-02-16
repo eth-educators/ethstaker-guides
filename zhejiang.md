@@ -375,7 +375,7 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ## Adding a withdrawal address
 
-In order to add a withdrawal address on a validator, you need to perform a BLS to execution change. Ideally, you want to perform this on an offline machine that never was online and never will be such as a live OS booted from a USB drive ([tails](https://tails.boum.org/) is a nice operating system for this). This is to protect your mnemonic and to avoid potentially compromising it. For testing purposes where there is nothing of real value at stake like on Zhejiang, you can avoid this precaution.
+In order to add a withdrawal address on a validator, you need to perform a BLS to execution change. Ideally, you want to perform this on an offline machine that was never online and never will be such as a live OS booted from a USB drive ([tails](https://tails.boum.org/) is a nice operating system for this). This is to protect your mnemonic and to avoid potentially compromising it. For testing purposes where there is nothing of real value at stake like on Zhejiang, you can avoid this precaution.
 
 Download and extract a special version of staking-deposit-cli.
 
