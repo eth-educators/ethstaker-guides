@@ -443,7 +443,7 @@ Lighthouse comes with a nice tool to perform a voluntary exit. You will need you
 $ sudo cat /var/lib/lighthouse/validators/validator_definitions.yml
 ```
 
-Once you have the path to your keystore and the password, call the `account validator exit` command and following the instructions from there. Make sure to replace `<path-to-keystore-file>` with the actual path to your keystone.
+Once you have the path to your keystore and the password, call the `account validator exit` command and following the instructions from there. Make sure to replace `<path-to-keystore-file>` with the actual path to your keystore.
 
 ```
 $ sudo lighthouse-capella account validator exit \
