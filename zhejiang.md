@@ -452,7 +452,7 @@ $ sudo lighthouse-capella account validator exit \
   --testnet-dir /var/lib/ethereum/zhejiang-testnet/custom_config_data
 ```
 
-Exit and withdrawal take some times before happening. To learn more about these delays and the various validator states, check out the great [ladislaus blog post](https://mirror.xyz/ladislaus.eth/wmoBbUBes2Wp1_6DvP6slPabkyujSU7MZOFOC3QpErs) on this.
+Voluntary exits and withdrawals take a while before actually completing even after performing this step. To learn more about these delays and the various validator states, check out the great [ladislaus blog post](https://mirror.xyz/ladislaus.eth/wmoBbUBes2Wp1_6DvP6slPabkyujSU7MZOFOC3QpErs) on this.
 
 ## Support
 
