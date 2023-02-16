@@ -277,7 +277,7 @@ There are 2 great tools to create your validator keys:
 
 If you choose the *Wagyu Key Gen* application, make sure to select the *Zhejiang* network and follow the instructions provided.
 
-If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
+If you choose the *staking-deposit-cli* application, here is how to create your validator keys (without a withdrawal address):
 
 ```console
 $ cd ~
@@ -373,9 +373,67 @@ $ sudo journalctl -f -u lighthousevalidator.service -o cat | ccze -A
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## What's next?
+## Adding a withdrawal address
 
-Instructions for withdrawal and BLS to execution changes testing are coming up later.
+In order to add a withdrawal address on a validator, you need to perform a BLS to execution change. Ideally, you want to perform this on an offline machine that never was online and never will be such as a live OS booted from a USB drive ([tails](https://tails.boum.org/) is a nice operating system for this). This is to protect your mnemonic and to avoid potentially compromising it. For testing purposes where there is nothing of real value at stake like on Zhejiang, you can avoid this precaution.
+
+Download and extract a special version of staking-deposit-cli.
+
+```console
+$ cd ~
+$ wget https://github.com/ethereum/staking-deposit-cli/files/10709746/staking_deposit-cli-d83c312-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-d83c312-linux-amd64.tar.gz
+```
+
+Find all the following information for the next commmand:
+
+1. Your mnemonic.
+2. Your validator index. This should be 0 if you only created 1 validator from this mnemonic.
+3. Your BLS withdrawal credentials. This can be found on the [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). Search for your validator by public key, validator indice or deposit address. On your validator page, click on the deposits tab. The withdrawal credentials should be right there. It should start with `0x00` meaning that your validator does not currently have a withdrawal address.
+4. Your validator indice. This is a number assigned to your validator by the consensus layer during activation. You can also find this on [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). It's the number at the top when you reach your validator page.
+5. Your withdraw address where you want your rewards and eventually your deposit to go to.
+
+Run the following command by replacing every `<number>` element with the information above.
+
+```console
+$ cd ~/staking_deposit-cli-d83c312-linux-amd64
+$ ./deposit --language=english generate-bls-to-execution-change \
+  --chain=zhejiang \
+  --mnemonic="<1>" \
+  --bls_withdrawal_credentials_list="<3>" \
+  --validator_start_index=<2> \
+  --validator_indices=<4> \
+  --execution_address="<5>"
+```
+
+A concret example of this would be something like this.
+
+```
+./deposit --language=english generate-bls-to-execution-change \
+  --chain=zhejiang \
+  --mnemonic="midnight stuff system off insane pen normal sunny century staff unfold youth spread myth ranch pony never media appear curve mule diamond century unfold" \
+  --bls_withdrawal_credentials_list="00f48911b8ac7c05407d21f206253bff655d848fb99a9d3a0caaf35171c04bf5" \
+  --validator_start_index=0 \
+  --validator_indices=62180 \
+  --execution_address="0x56883e030E000fccfD22fC14Fa021568045d48FE"
+```
+
+During this command execution, you will be asked to enter your withdraw address again. Double check you have the correct and enter it again. It will end with a message like this one.
+
+```
+Success!
+Your SignedBLSToExecutionChange JSON file can be found at: /home/<username>/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes
+```
+
+Display the content of that file.
+
+```
+$ awk '{print}' $HOME/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes/*.json
+```
+
+Use the beaconcha.in tool to broadcast your BLS to execution change. Go to https://zhejiang.beaconcha.in/tools/broadcast and paste the content of your file that was just displayed. Refresh your validator page on the [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). It should eventually show a withdrawal address associated with your validator and `0x01` withdrawal credentials.
+
+## Performing a volontary exit
 
 ## Support
 
@@ -387,4 +445,4 @@ If you have any question or if you need additional support, make sure to get in 
 ## Credits
 
 Based on [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
-Based on [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang).
+Based on [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang). Based on [How to use staking-deposit-cli to generate SignedBLSToExecutionChange](https://notes.ethereum.org/@launchpad/btec).
