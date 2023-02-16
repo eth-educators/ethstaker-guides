@@ -427,13 +427,32 @@ Your SignedBLSToExecutionChange JSON file can be found at: /home/<username>/stak
 
 Display the content of that file.
 
-```
+```console
 $ awk '{print}' $HOME/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes/*.json
 ```
 
 Use the beaconcha.in tool to broadcast your BLS to execution change. Go to https://zhejiang.beaconcha.in/tools/broadcast and paste the content of your file that was just displayed. Refresh your validator page on the [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). It should eventually show a withdrawal address associated with your validator and `0x01` withdrawal credentials.
 
 ## Performing a volontary exit
+
+Once you have a withdrawal address associated with your validator, you can try and perform a volontary exit to receive your full deposit and all the remaining rewards.
+
+Lighthouse comes with a nice tool to perform a voluntary exit. You will need your validator keystore file and associated password. If you don't have it anymore, it's stored on disk. You can find all this information by calling this command. It will show you the path to your keystore(s) and the associated password.
+
+```console
+$ sudo cat /var/lib/lighthouse/validators/validator_definitions.yml
+```
+
+Once you have the path to your keystore and the password, call the `account validator exit` command and following the instructions from there. Make sure to replace `<path-to-keystore-file>` with the actual path to your keystone.
+
+```
+$ sudo lighthouse-capella account validator exit \
+  --keystore <path-to-keystore-file> \
+  --beacon-node http://localhost:5052 \
+  --testnet-dir /var/lib/ethereum/zhejiang-testnet/custom_config_data
+```
+
+Exit and withdrawal take some times before happening. To learn more about these delays and the various validator states, check out the great [ladislaus blog post](https://mirror.xyz/ladislaus.eth/wmoBbUBes2Wp1_6DvP6slPabkyujSU7MZOFOC3QpErs) on this.
 
 ## Support
 
@@ -445,4 +464,4 @@ If you have any question or if you need additional support, make sure to get in 
 ## Credits
 
 Based on [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
-Based on [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang). Based on [How to use staking-deposit-cli to generate SignedBLSToExecutionChange](https://notes.ethereum.org/@launchpad/btec).
+Based on [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang). Based on [How to use staking-deposit-cli to generate SignedBLSToExecutionChange](https://notes.ethereum.org/@launchpad/btec). Based on [Voluntary exits from the Lighthouse Book](https://lighthouse-book.sigmaprime.io/voluntary-exit.html).
