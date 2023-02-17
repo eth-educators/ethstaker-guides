@@ -463,5 +463,9 @@ If you have any question or if you need additional support, make sure to get in 
 
 ## Credits
 
-Based on [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
-Based on [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang). Based on [How to use staking-deposit-cli to generate SignedBLSToExecutionChange](https://notes.ethereum.org/@launchpad/btec). Based on [Voluntary exits from the Lighthouse Book](https://lighthouse-book.sigmaprime.io/voluntary-exit.html).
+Based on the following documents:
+
+- [Somer Esat's guide](https://github.com/SomerEsat/ethereum-staking-guide).
+- [How to run a node on the Zhejiang testnet?](https://notes.ethereum.org/@launchpad/zhejiang).
+- [How to use staking-deposit-cli to generate SignedBLSToExecutionChange](https://notes.ethereum.org/@launchpad/btec).
+- [Voluntary exits from the Lighthouse Book](https://lighthouse-book.sigmaprime.io/voluntary-exit.html).
