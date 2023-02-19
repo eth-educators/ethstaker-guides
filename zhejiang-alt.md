@@ -377,7 +377,21 @@ Use the beaconcha.in tool to broadcast your BLS to execution change. Go to https
 
 Once you have a withdrawal address associated with your validator, you can try and perform a volontary exit to receive your full deposit and all the remaining rewards.
 
-TODO!
+Teku comes with a nice tool to perform a voluntary exit. You will need your validator keystore file and associated password file. If you don't have it anymore, it's stored on disk. You can find all this information by calling this command. It will show you the path to your keystore(s) and the associated password file(s).
+
+```console
+$ sudo ls /var/lib/teku/validator_keys
+```
+
+That directory should have a password file for each keystore as created in the [Configuring your Teku node](#configuring-your-teku-node) section. The password file is the one that ends with the `.txt` extension and the keystore file is the one that ends with the `.json` extension. Once you have the path to your keystore and the password file, call the `voluntary-exit` command and follow the instructions from there. Make sure to replace `<path-to-keystore-file>` with the actual path to your keystore and `<path-to-password-file>` with the actual path to your password file.
+
+```
+$ sudo /usr/local/bin/teku-dev/bin/teku voluntary-exit \
+  --beacon-node-api-endpoint=http://127.0.0.1:5051 \
+  --validator-keys=<path-to-keystore-file>:<path-to-password-file>
+```
+
+Voluntary exits and withdrawals take a while before actually completing even after performing this step. To learn more about these delays and the various validator states, check out the great [ladislaus blog post](https://mirror.xyz/ladislaus.eth/wmoBbUBes2Wp1_6DvP6slPabkyujSU7MZOFOC3QpErs) on this.
 
 ## Support
 
