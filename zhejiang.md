@@ -274,7 +274,7 @@ You can request Zhejiang ETH from [the main faucet](https://faucet.zhejiang.ethp
 There are 2 great tools to create your validator keys:
 
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
-* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli/pull/313)
 
 If you choose the *Wagyu Key Gen* application, make sure to select the *Zhejiang* network and follow the instructions provided.
 
