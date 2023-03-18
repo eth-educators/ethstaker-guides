@@ -434,9 +434,9 @@ $ awk '{print}' $HOME/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_c
 
 Use the beaconcha.in tool to broadcast your BLS to execution change. Go to https://zhejiang.beaconcha.in/tools/broadcast and paste the content of your file that was just displayed. Refresh your validator page on the [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). It should eventually show a withdrawal address associated with your validator and `0x01` withdrawal credentials.
 
-## Performing a volontary exit
+## Performing a voluntary exit
 
-Once you have a withdrawal address associated with your validator, you can try and perform a volontary exit to receive your full deposit and all the remaining rewards.
+Once you have a withdrawal address associated with your validator, you can try and perform a voluntary exit to receive your full deposit and all the remaining rewards.
 
 Lighthouse comes with a nice tool to perform a voluntary exit. You will need your validator keystore file and associated password. If you don't have it anymore, it's stored on disk. You can find all this information by calling this command. It will show you the path to your keystore(s) and the associated password.
 
