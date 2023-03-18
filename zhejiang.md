@@ -450,7 +450,7 @@ Once you have the path to your keystore and the password, call the `account vali
 $ sudo lighthouse-capella account validator exit \
   --keystore <path-to-keystore-file> \
   --beacon-node http://localhost:5052 \
-  --testnet-dir /var/lib/ethereum/zhejiang-testnet/custom_config_data
+  --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data
 ```
 
 Voluntary exits and withdrawals take a while before actually completing even after performing this step. To learn more about these delays and the various validator states, check out the great [ladislaus blog post](https://mirror.xyz/ladislaus.eth/wmoBbUBes2Wp1_6DvP6slPabkyujSU7MZOFOC3QpErs) on this.
