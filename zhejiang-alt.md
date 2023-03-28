@@ -6,7 +6,7 @@ This guide is meant for people with little or some experience in running Ethereu
 
 ## Overview
 
-We will build the latest development version for Besu and the latest development version for Teku. We will configure them to connect to the *Zhejiang* testnet. This is an alternative guide to [the main one who uses the Geth/Lighthouse combo](zhejiang.md) for its clients.
+We will use recent versions for Besu and for Teku. We will configure them to connect to the *Zhejiang* testnet. This is an alternative guide to [the main one who uses the Geth/Lighthouse combo](zhejiang.md) for its clients.
 
 ## Executing the commands
 
@@ -50,38 +50,40 @@ $ sudo mkdir -p /var/lib/ethereum/zhejiang
 $ sudo cp -R ~/withdrawals-testnet/zhejiang-testnet/custom_config_data /var/lib/ethereum/zhejiang
 ```
 
-## Building and installing Besu
+## Installing Besu
 
-Obtain the latest development version for Besu and build it.
+Download [the latest release version for Besu](https://github.com/hyperledger/besu/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link that ends with `tar.gz`.
 
 ```console
 $ cd ~
-$ git clone --recursive https://github.com/hyperledger/besu
-$ cd besu
-$ ./gradlew installDist
+$ wget https://hyperledger.jfrog.io/hyperledger/besu-binaries/besu/23.1.2/besu-23.1.2.tar.gz
+$ tar xvf besu-23.1.2.tar.gz
+$ rm besu-23.1.2.tar.gz
 ```
 
 Install this Besu version globally.
 
 ```console
-$ sudo cp -R ~/besu/build/install/besu /usr/local/bin/besu-dev
+$ sudo cp -a ./besu-23.1.2 /usr/local/bin/besu
+$ rm -rf ./besu-23.1.2
 ```
 
-## Building and installing Teku
+## Installing Teku
 
-Obtain the latest development version for Teku and build it.
+Download [the latest release version for Teku](https://github.com/ConsenSys/teku/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the download link from the *Downloads* section of the release description. It should be a file that ends with `tar.gz` and it should **not** be the one called 'Source code'.
 
 ```console
 $ cd ~
-$ git clone https://github.com/ConsenSys/teku.git
-$ cd teku
-$ ./gradlew installDist
+$ wget https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/23.3.1/teku-23.3.1.tar.gz
+$ tar xvf teku-23.3.1.tar.gz
+$ rm teku-23.3.1.tar.gz
 ```
 
 Install this Teku version globally.
 
 ```console
-$ sudo cp -R ~/teku/build/install/teku /usr/local/bin/teku-dev
+$ sudo cp -a ./teku-23.3.1 /usr/local/bin/teku
+$ rm -rf ./teku-23.3.1
 ```
 
 ## Creating the JWT token file
@@ -126,7 +128,7 @@ Restart=always
 RestartSec=5
 TimeoutStopSec=180
 LimitNOFILE=8388608
-ExecStart=/usr/local/bin/besu-dev/bin/besu \
+ExecStart=/usr/local/bin/besu/bin/besu \
     --network-id=1337803 \
     --genesis-file=/var/lib/ethereum/zhejiang/custom_config_data/besu.json \
     --sync-mode=FULL \
@@ -180,7 +182,7 @@ You can request Zhejiang ETH from [the main faucet](https://faucet.zhejiang.ethp
 There are 2 great tools to create your validator keys:
 
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
-* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli/pull/313)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
 If you choose the *Wagyu Key Gen* application, make sure to select the *Zhejiang* network and follow the instructions provided.
 
@@ -188,10 +190,10 @@ If you choose the *staking-deposit-cli* application, here is how to create your 
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.4.0/staking_deposit-cli-ef89710-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-ef89710-linux-amd64.tar.gz
-$ rm staking_deposit-cli-ef89710-linux-amd64.tar.gz
-$ cd staking_deposit-cli-ef89710-linux-amd64/
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ rm staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ cd staking_deposit-cli-d7b5304-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain zhejiang
 $ ls -d $PWD/validator_keys/*
 ```
@@ -271,7 +273,7 @@ User=teku
 Group=teku
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/teku-dev/bin/teku \
+ExecStart=/usr/local/bin/teku/bin/teku \
     --network /var/lib/ethereum/zhejiang/custom_config_data/config.yaml \
     --data-path /var/lib/teku \
     --validator-keys /var/lib/teku/validator_keys:/var/lib/teku/validator_keys \
@@ -321,8 +323,9 @@ Download and extract a special version of staking-deposit-cli.
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/files/10709746/staking_deposit-cli-d83c312-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-d83c312-linux-amd64.tar.gz
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ rm staking_deposit-cli-d7b5304-linux-amd64.tar.gz
 ```
 
 Find all the following information for the next commmand:
@@ -336,7 +339,7 @@ Find all the following information for the next commmand:
 Run the following command by replacing every `<number>` element with the information above.
 
 ```console
-$ cd ~/staking_deposit-cli-d83c312-linux-amd64
+$ cd ~/staking_deposit-cli-d7b5304-linux-amd64
 $ ./deposit --language=english generate-bls-to-execution-change \
   --chain=zhejiang \
   --mnemonic="<1>" \
@@ -362,13 +365,13 @@ During this command execution, you will be asked to enter your withdraw address 
 
 ```
 Success!
-Your SignedBLSToExecutionChange JSON file can be found at: /home/<username>/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes
+Your SignedBLSToExecutionChange JSON file can be found at: /home/<username>/staking_deposit-cli-d7b5304-linux-amd64/bls_to_execution_changes
 ```
 
 Display the content of that file.
 
 ```console
-$ awk '{print}' $HOME/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes/*.json
+$ awk '{print}' $HOME/staking_deposit-cli-d7b5304-linux-amd64/bls_to_execution_changes/*.json
 ```
 
 Use the beaconcha.in tool to broadcast your BLS to execution change. Go to https://zhejiang.beaconcha.in/tools/broadcast and paste the content of your file that was just displayed. Refresh your validator page on the [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). It should eventually show a withdrawal address associated with your validator and `0x01` withdrawal credentials.
@@ -386,7 +389,7 @@ $ sudo ls /var/lib/teku/validator_keys
 That directory should have a password file for each keystore as created in the [Configuring your Teku node](#configuring-your-teku-node) section. The password file is the one that ends with the `.txt` extension and the keystore file is the one that ends with the `.json` extension. Once you have the path to your keystore and the password file, call the `voluntary-exit` command and follow the instructions from there. Make sure to replace `<path-to-keystore-file>` with the actual path to your keystore and `<path-to-password-file>` with the actual path to your password file.
 
 ```
-$ sudo /usr/local/bin/teku-dev/bin/teku voluntary-exit \
+$ sudo /usr/local/bin/teku/bin/teku voluntary-exit \
   --beacon-node-api-endpoint=http://127.0.0.1:5051 \
   --validator-keys=<path-to-keystore-file>:<path-to-password-file>
 ```
