@@ -6,7 +6,7 @@ This guide is meant for people with little or some experience in running Ethereu
 
 ## Overview
 
-We will build the latest development version for Geth and a special capella version for Lighthouse. We will configure them to connect to the *Zhejiang* testnet. There is an alternative guide to this one [who uses the Besu/Teku combo](zhejiang-alt.md) for its clients.
+We will use recent versions for Geth and for Lighthouse. We will configure them to connect to the *Zhejiang* testnet. There is an alternative guide to this one [who uses the Besu/Teku combo](zhejiang-alt.md) for its clients.
 
 ## Executing the commands
 
@@ -26,39 +26,7 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install software-properties-common wget curl ccze git gcc g++ make cmake pkg-config llvm-dev libclang-dev clang protobuf-compiler build-essential
-```
-
-Install a recent version of Go.
-
-```console
-$ cd ~
-$ wget https://go.dev/dl/go1.20.linux-amd64.tar.gz
-$ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz
-$ rm go1.20.linux-amd64.tar.gz
-$ export PATH=/usr/local/go/bin:$PATH
-$ cat << 'EOF' >> ~/.profile
-
-# set PATH so it includes Go bin directory
-if [ -d "/usr/local/go/bin" ] ; then
-    PATH="/usr/local/go/bin:$PATH"
-fi
-EOF
-```
-
-Install a recent version of Rust.
-
-```console
-$ cd ~
-$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-You will be prompted with a menu and a few selections. Press `1` and `↵ Enter` to proceed with the default installation.
-
-Setup your environment for Rust.
-
-```console
-$ source "$HOME/.cargo/env"
+$ sudo apt -y install software-properties-common wget curl ccze git
 ```
 
 ## Zhejiang configuration details
@@ -72,38 +40,31 @@ $ sudo mkdir -p /var/lib/ethereum/zhejiang
 $ sudo cp -R ~/withdrawals-testnet/zhejiang-testnet/custom_config_data /var/lib/ethereum/zhejiang
 ```
 
-## Building and installing Geth
+## Installing Geth
 
-Obtain the latest development version for Geth and build it.
+Add the Ethereum PPA and install the Geth package.
+
+```console
+$ sudo add-apt-repository -y ppa:ethereum/ethereum
+$ sudo apt -y install geth
+```
+
+## Installing Lighthouse
+
+Download [the latest release version for Lighthouse](https://github.com/sigp/lighthouse/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
 
 ```console
 $ cd ~
-$ git clone https://github.com/ethereum/go-ethereum.git
-$ cd go-ethereum
-$ make geth
-```
-
-Install the Geth binary globally.
-
-```console
-$ sudo cp ~/go-ethereum/build/bin/geth /usr/local/bin/geth-dev
-```
-
-## Building and installing Geth Lighthouse
-
-Obtain the special capella version for Lighthouse and build it.
-
-```console
-$ cd ~
-$ git clone -b capella https://github.com/sigp/lighthouse.git
-$ cd lighthouse
-$ make
+$ wget https://github.com/sigp/lighthouse/releases/download/v4.0.1/lighthouse-v4.0.1-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v4.0.1-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v4.0.1-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Lighthouse version globally.
 
 ```console
-$ sudo cp ~/.cargo/bin/lighthouse /usr/local/bin/lighthouse-capella
+$ sudo cp ~/lighthouse /usr/local/bin
+$ rm ~/lighthouse
 ```
 
 ## Creating the JWT token file
@@ -129,7 +90,7 @@ $ sudo chown -R goeth:goeth /var/lib/goethereum
 Initialize the Geth database with the Zhejiang configuration details.
 
 ```console
-$ sudo -u goeth geth-dev --datadir /var/lib/goethereum init /var/lib/ethereum/zhejiang/custom_config_data/genesis.json
+$ sudo -u goeth geth --datadir /var/lib/goethereum init /var/lib/ethereum/zhejiang/custom_config_data/genesis.json
 ```
 
 Create a systemd service config file to configure the Geth node service.
@@ -153,7 +114,7 @@ Type=simple
 Restart=always
 RestartSec=5
 TimeoutStopSec=180
-ExecStart=geth-dev \
+ExecStart=geth \
     --networkid=1337803 \
     --http \
     --datadir /var/lib/goethereum \
@@ -222,7 +183,7 @@ User=lighthousebeacon
 Group=lighthousebeacon
 Restart=always
 RestartSec=5
-ExecStart=lighthouse-capella bn \
+ExecStart=lighthouse bn \
     --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data \
     --datadir /var/lib/lighthouse \
     --http \
@@ -274,7 +235,7 @@ You can request Zhejiang ETH from [the main faucet](https://faucet.zhejiang.ethp
 There are 2 great tools to create your validator keys:
 
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
-* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli/pull/313)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
 If you choose the *Wagyu Key Gen* application, make sure to select the *Zhejiang* network and follow the instructions provided.
 
@@ -282,10 +243,10 @@ If you choose the *staking-deposit-cli* application, here is how to create your 
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.4.0/staking_deposit-cli-ef89710-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-ef89710-linux-amd64.tar.gz
-$ rm staking_deposit-cli-ef89710-linux-amd64.tar.gz
-$ cd staking_deposit-cli-ef89710-linux-amd64/
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ rm staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ cd staking_deposit-cli-d7b5304-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain zhejiang
 $ ls -d $PWD/validator_keys/*
 ```
@@ -312,7 +273,7 @@ $ sudo chmod 700 /var/lib/lighthouse/validators
 Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank. Make sure to replace `/path/to/keystores` with the actual path to your keystores created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit).
 
 ```console
-$ sudo lighthouse-capella account validator import \
+$ sudo lighthouse account validator import \
     --directory /path/to/keystores \
     --datadir /var/lib/lighthouse \
     --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data
@@ -339,7 +300,7 @@ Group=lighthousevalidator
 Type=simple
 Restart=always
 RestartSec=5
-ExecStart=lighthouse-capella vc \
+ExecStart=lighthouse vc \
     --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data \
     --datadir /var/lib/lighthouse \
     --graffiti EthStaker \
@@ -447,7 +408,7 @@ $ sudo cat /var/lib/lighthouse/validators/validator_definitions.yml
 Once you have the path to your keystore and the password, call the `account validator exit` command and follow the instructions from there. Make sure to replace `<path-to-keystore-file>` with the actual path to your keystore.
 
 ```
-$ sudo lighthouse-capella account validator exit \
+$ sudo lighthouse account validator exit \
   --keystore <path-to-keystore-file> \
   --beacon-node http://localhost:5052 \
   --testnet-dir /var/lib/ethereum/zhejiang/custom_config_data
