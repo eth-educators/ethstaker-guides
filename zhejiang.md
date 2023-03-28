@@ -345,6 +345,7 @@ Download and extract a recent version of [staking-deposit-cli](https://github.co
 $ cd ~
 $ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
 $ tar xvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ rm staking_deposit-cli-d7b5304-linux-amd64.tar.gz
 ```
 
 Find all the following information for the next commmand:
