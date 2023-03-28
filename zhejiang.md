@@ -339,12 +339,12 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 In order to add a withdrawal address on a validator, you need to perform a BLS to execution change. Ideally, you want to perform this on an offline machine that was never online and never will be such as a live OS booted from a USB drive ([tails](https://tails.boum.org/) is a nice operating system for this). This is to protect your mnemonic and to avoid potentially compromising it. For testing purposes where there is nothing of real value at stake like on Zhejiang, you can avoid this precaution.
 
-Download and extract a special version of staking-deposit-cli.
+Download and extract a recent version of [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli).
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/files/10709746/staking_deposit-cli-d83c312-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-d83c312-linux-amd64.tar.gz
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
 ```
 
 Find all the following information for the next commmand:
@@ -358,7 +358,7 @@ Find all the following information for the next commmand:
 Run the following command by replacing every `<number>` element with the information above.
 
 ```console
-$ cd ~/staking_deposit-cli-d83c312-linux-amd64
+$ cd ~/staking_deposit-cli-d7b5304-linux-amd64
 $ ./deposit --language=english generate-bls-to-execution-change \
   --chain=zhejiang \
   --mnemonic="<1>" \
@@ -384,13 +384,13 @@ During this command execution, you will be asked to enter your withdraw address 
 
 ```
 Success!
-Your SignedBLSToExecutionChange JSON file can be found at: /home/<username>/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes
+Your SignedBLSToExecutionChange JSON file can be found at: /home/<username>/staking_deposit-cli-d7b5304-linux-amd64/bls_to_execution_changes
 ```
 
 Display the content of that file.
 
 ```console
-$ awk '{print}' $HOME/staking_deposit-cli-d83c312-linux-amd64/bls_to_execution_changes/*.json
+$ awk '{print}' $HOME/staking_deposit-cli-d7b5304-linux-amd64/bls_to_execution_changes/*.json
 ```
 
 Use the beaconcha.in tool to broadcast your BLS to execution change. Go to https://zhejiang.beaconcha.in/tools/broadcast and paste the content of your file that was just displayed. Refresh your validator page on the [Zhejiang beaconcha.in website](https://zhejiang.beaconcha.in/). It should eventually show a withdrawal address associated with your validator and `0x01` withdrawal credentials.
