@@ -54,6 +54,16 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Aestus](https://aestus.live) |  | `https://0xab78bf8c781c58078c3beb5710c57940874dd96aef2835e7742c866b4c7c0406754376c2c8285a36c630346aa5c5f833@goerli.aestus.live` |
 | [Ultra Sound](https://relay-stag.ultrasound.money) |  | `https://0xb1559beef7b5ba3127485bbbb090362d9f497ba64e177ee2c8e7db74746306efad687f2cf8574e38d70067d40ef136dc@relay-stag.ultrasound.money` |
 
+# MEV relay list for Sepolia testnet
+
+Here is a list of MEV relays for the Ethereum Sepolia test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
+
+Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
+
+| Operator | Notes | Relay URL |
+|----------|-------|-----------|
+| [Flashbots](https://www.flashbots.net/) | | `https://0x845bd072b7cd566f02faeb0a4033ce9399e42839ced64e8b2adcfc859ed1e8e1a5a293336a49feac6d9a5edb779be53a@boost-relay-sepolia.flashbots.net` |
+
 # Configuring MEV boost software
 
 If you need help installing and configuring mev-boost on your machine, check out our [Guide on how to prepare a staking machine for the Merge](https://github.com/eth-educators/ethstaker-guides/blob/main/prepare-for-the-merge.md#choosing-and-configuring-an-mev-solution)
