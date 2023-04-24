@@ -4,6 +4,10 @@
 
 This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Zhejiang* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04 or Ubuntu 22.04, but it should work on most recent debian derivatives) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
+# DEPRECATED
+
+Zhejiang is now a **depracated network**. If you want to test a staking setup, you can use Goerli and the `#cheap-goerli-validator` process in [EthStaker Discord](https://discord.io/ethstake). For any other use case, there are probably better tools or networks to use.
+
 ## Overview
 
 We will use recent versions for Besu and for Teku. We will configure them to connect to the *Zhejiang* testnet. This is an alternative guide to [the main one who uses the Geth/Lighthouse combo](zhejiang.md) for its clients.
