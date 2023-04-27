@@ -37,6 +37,8 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [Relay Monitor](https://app.metrika.co/dashboard/ethereum/relay-monitor/north-america-east?tr=30m) by Metrika (beta)
 * [Rated Network](https://www.rated.network/relays?network=mainnet) by Rated Network
 * [Inclusion Watch](https://www.inclusion.watch) by donnoh.eth and emiliano.eth
+* [Valitraitors](https://valitraitors.info/) by Brainbot
+* [Neutrality Watch](https://eth.neutralitywatch.com/) specifically analyses Lido operators. [Github](https://github.com/mikgur/Ethereum-censorability-monitor).
 
 # MEV relay list for Goerli testnet
 
