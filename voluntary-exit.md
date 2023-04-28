@@ -38,7 +38,7 @@ For most of this guide, we will use ethdo *version 1.30.0*. You should use the l
 
 ## Preparing for offline generation
 
-Using ethdo, we will connect to a beacon node endpoint and create a file called `offline-preparation.json` to be used later. If you do not have direct access to your own beacon node endpoint, ethdo will fallback using its own public endpoint assuming you are connected to the internet.
+Using ethdo, we will connect to a beacon node endpoint and create a file named `offline-preparation.json` to be used later. If you do not have direct access to your own beacon node endpoint, ethdo will fallback using its own public endpoint assuming you are connected to the internet.
 
 ### On Windows
 
@@ -171,7 +171,7 @@ Here is a concrete example of using this command.
 ./ethdo validator exit --validator="Validators/459921" --passphrase="temp" --json --offline > 459921-exit.json
 ```
 
-In this example, it would result in a file called `459921-exit.json` in your home folder for performing the voluntary exit of the validator that is using the imported keystore file.
+In this example, it would result in a file named `459921-exit.json` in your home folder for performing the voluntary exit of the validator that is using the imported keystore file.
 
 Copy that resulting file back on your second USB stick. We will need it on the next step to broadcast the voluntary exit.
 
@@ -195,7 +195,7 @@ Here is a concrete example of using this command.
 ./ethdo validator exit --validator=459921 --json --offline --mnemonic="silent hill auto ability front sting tunnel empower venture once wise local suffer repeat deny deliver hawk silk wedding random coil you town narrow" > 459921-exit.json
 ```
 
-In this example, it would result in a file called `459921-exit.json` in your home folder for performing the voluntary exit of validator 459921.
+In this example, it would result in a file named `459921-exit.json` in your home folder for performing the voluntary exit of validator 459921.
 
 Copy that resulting file back on your second USB stick. We will need it on the next step to broadcast the voluntary exit.
 
