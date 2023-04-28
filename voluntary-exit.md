@@ -89,7 +89,30 @@ TODO
 
 ### On Linux
 
-TODO
+Open a terminal. Download the etho archive and the associated hash file.
+
+```console
+wget https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz
+wget https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256
+```
+
+Make sure ethdo checksum matches.
+
+```console
+sha256sum ethdo-1.30.0-linux-amd64.tar.gz
+cat ethdo-1.30.0-linux-amd64.tar.gz.sha256
+```
+
+Both of these output values should have matching checksum. As of today and for version `1.30.0`, they should both be `6fbe587f522ad2eb8d6ce22dfdb15f7d163b491a670bf50e5acf12dd0f58125c`. If they do not match, there might be a security issue and you should seek further support.
+
+Extract the ethdo archive and generate the preparation file.
+
+```
+tar xvf ethdo-1.30.0-linux-amd64.tar.gz
+./ethdo validator exit --prepare-offline
+```
+
+You should see a message saying *offline-preparation.json generated* if everything worked fine.
 
 ### Finalizing your documents
 
