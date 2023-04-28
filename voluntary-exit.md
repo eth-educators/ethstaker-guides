@@ -44,7 +44,7 @@ Using ethdo, we will connect to a beacon node endpoint and create a file named `
 
 Open a powershell command prompt, press `⊞ Win`+`R`, type `powershell` and press `↵ Enter`. You will see a blue or black window where you can type commands.
 
-Download the etho archive and the associated hash file.
+Download the etho archive and the associated checksum file.
 
 ```powershell
 iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-windows-exe.zip -outfile ethdo-1.30.0-windows-exe.zip
@@ -85,7 +85,7 @@ start .
 
 ### On macOS
 
-Open a terminal. Download the etho archive and the associated hash file.
+Open a terminal. Download the etho archive and the associated checksum file.
 
 ```console
 curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-darwin-amd64.tar.gz
@@ -125,7 +125,7 @@ open .
 
 ### On Linux
 
-Open a terminal. Download the etho archive and the associated hash file.
+Open a terminal. Download the etho archive and the associated checksum file.
 
 ```console
 wget https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz
