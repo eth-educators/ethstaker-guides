@@ -1,0 +1,170 @@
+# Guide on how to perform a voluntary exit for your validator
+
+At some point during a normal validator's lifecycle, you will want to exit and potentially obtain your balance back, the initial deposit plus any remaining rewards, assuming you have a withdrawal address associated with your validator. This document will guide you through some steps to perform a voluntary exit of your validator.
+
+This guide is meant for people who are staking on Ethereum either through their own node or with a non-custodial service. It will explain in details which steps or actions you should take in order to perform a voluntary exit.
+
+There are a lot of different ways to perform a voluntary exit. Each consensus client has their own documentation on this. This guide will focus on using [ethdo](https://github.com/wealdtech/ethdo) and [the beaconcha.in website](https://beaconcha.in/) to perform this task for simplicity. Check out the documentation for each client to learn more about how to do this natively.
+
+- [Prysm](https://docs.prylabs.network/docs/wallet/exiting-a-validator)
+- [Nimbus](https://nimbus.guide/voluntary-exit.html)
+- [Lodestar](https://chainsafe.github.io/lodestar/reference/cli/#validator-voluntary-exit)
+- [Teku](https://docs.teku.consensys.net/HowTo/Voluntary-Exit)
+- [Lighthouse](https://lighthouse-book.sigmaprime.io/voluntary-exit.html)
+
+## Overview
+
+We will use 3 tools with this guide: [ethdo](https://github.com/wealdtech/ethdo), [the beaconcha.in broadcast tool](https://beaconcha.in/tools/broadcast) and [Tails](https://tails.boum.org/).
+
+**ethdo** is a command-line tool for managing common tasks in Ethereum. In this guide, we will use it to sign your voluntary exit from all the validator details we will provide.
+
+**beaconcha.in** is an open-source Ethereum explorer. In this guide, we will use it to broadcast the voluntary exit using their *Broadcast Signed Messages* tool.
+
+**Tails** is a portable operating system that protects against surveillance and malicious actors. In this guide, we will use it to perform all the sensible operations offline to prevent exposing your secrets.
+
+The first step will be to prepare and generate a file for offline signing using ethdo. The second step will be to boot a computer into Tails, sign and generate your voluntary exit file using ethdo. The third step will be to broadcast this voluntary exit. You will need 2 USB sticks, one to boot the Tails operating system from and the second one to hold ethdo and the documents we will need. You will also need a PC that supports [AMD64 instructions](https://tails.boum.org/doc/about/requirements/index.en.html) to boot into.
+
+### Required details
+
+To perform a voluntary exit, you need the validator signing key. This can be obtained through 2 main ways, either with *your mnemonic*, the 24 words used to create your validator keys, or with *the keystore file and the associated password*. If you do not have either of them, you are likely out of luck and you are unlikely to ever be able to perform a voluntary exit.
+
+You will also need the validator public key or the validator index as identified by the beacon chain. Both of these can be found on [the beaconcha.in website](https://beaconcha.in/). You can find your validator's page by searching by public key, deposit address, validator index or a few other ways. From there, you should be able to find your validator index or public key at the top of the validator's page.
+
+**NEVER** enter your mnemonic into a machine that was or will be online. This would potentially expose you to a malicious actor stealing your money.
+
+### Tooling
+
+For most of this guide, we will use ethdo *version 1.30.0*. You should use the latest stable version available from https://github.com/wealdtech/ethdo/releases and adapt this guide to that latest version if a new version is released.
+
+## Preparing for offline generation
+
+Using ethdo, we will connect to a beacon node endpoint and create a file called `offline-preparation.json` to be used later. If you do not have direct access to your own beacon node endpoint, ethdo will fallback using its own public endpoint assuming you are connected to the internet.
+
+### On Windows
+
+Open a powershell command prompt, press `⊞ Win`+`R`, type `powershell` and press `↵ Enter`. You will see a blue or black window where you can type commands.
+
+Download the etho archive and the associated hash file.
+
+```powershell
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-windows-exe.zip -outfile ethdo-1.30.0-windows-exe.zip
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-windows-exe-zip.sha256 -outfile ethdo-1.30.0-windows-exe-zip.sha256
+```
+
+Compute the archive hash value and compare it to the expected value.
+
+```powershell
+Get-FileHash .\ethdo-1.30.0-windows-exe.zip | Select -Property @{n='hash';e={$_.hash.tolower()}} | Select -ExpandProperty "hash"
+cat .\ethdo-1.30.0-windows-exe-zip.sha256
+```
+
+Both of these output values should match. As of today and for version `1.30.0`, they should both be `d2e84e8f9ab96820afe72cb206aa3abfd6bfccac152e709100af56e30c07b0e9`. If they do not match, there might be a security issue and you should seek further support.
+
+Extract the ethdo archive and generate the preparation file.
+
+```powershell
+Expand-Archive .\ethdo-1.30.0-windows-exe.zip
+cd .\ethdo-1.30.0-windows-exe\
+.\ethdo.exe validator exit --prepare-offline
+```
+
+You should see a message saying *offline-preparation.json generated* if everything worked fine.
+
+Download the Linux version of ethdo as well to prepare for when we will need to execute this offline on Tails.
+
+```powershell
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz -outfile ethdo-1.30.0-linux-amd64.tar.gz
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256 -outfile ethdo-1.30.0-linux-amd64.tar.gz.sha256
+```
+
+Open an explorer window in this current directory.
+
+```powershell
+start .
+```
+
+Copy those files on a clean USB stick.
+
+- `offline-preparation.json`
+- `ethdo-1.30.0-linux-amd64.tar.gz`
+- `ethdo-1.30.0-linux-amd64.tar.gz.sha256`
+
+### On macOS
+
+TODO
+
+### On Linux
+
+TODO
+
+### Finalizing your documents
+
+If you want to use your keystore file and the associated password to generate your voluntary exit file, make sure to copy the keystore file on the same USB stick that you put the `offline-preparation.json` file. Try avoiding entering the associated password in a file on the same USB stick in clear text.
+
+If instead you want to use your mnemonic to generate your voluntary exit, avoid entering it in a file on your USB stick. Try to keep it away from any electronic document and any electronic medium. If you have it on a paper or in steel, keep it close as we will need it in the next step.
+
+## Signing and generating your voluntary exit file
+
+Install Tails on an empty USB stick by following [the instructions from their website](https://tails.boum.org/install/index.en.html). Unplug any wired connection and restart a machine on your Tails USB stick. During start, you will be asked to select your language, keyboard layout and formats. Click *Start Tails* to reach the Desktop.
+
+Plug in your second USB stick and copy all the documents and tools we included in the home folder.
+
+### Verifying and extracting ethdo
+
+Start a terminal. Make sure ethdo checksum matches.
+
+```console
+sha256sum ethdo-1.30.0-linux-amd64.tar.gz
+cat ethdo-1.30.0-linux-amd64.tar.gz.sha256
+```
+
+Both of these output values should have matching checksum. As of today and for version `1.30.0`, they should both be `6fbe587f522ad2eb8d6ce22dfdb15f7d163b491a670bf50e5acf12dd0f58125c`. If they do not match, there might be a security issue and you should seek further support.
+
+Extract the ethdo archive.
+
+```
+tar xvf ethdo-1.30.0-linux-amd64.tar.gz
+```
+
+From here you can either use [your keystore file and the associated password](#generating-a-voluntary-exit-using-your-keystore-file-and-the-associated-password) or use [your mnemonic](#generating-a-voluntary-exit-using-your-mnemonic) to generate your voluntary exit file.
+
+### Generating a voluntary exit using your keystore file and the associated password
+
+TODO
+
+### Generating a voluntary exit using your mnemonic
+
+There are 3 inputs for the next command.
+
+1. Your validator index as identified on the beacon chain or your validator public key. This is going to be *VALIDATOR_INDEX* in the template.
+2. Your mnemonic. This is going to be *MNEMONIC* in the template.
+3. The resulting filename. This is going to be *RESULTING_FILENAME* in the template.
+
+As a template, it looks like:
+
+```console
+./ethdo validator exit --validator=VALIDATOR_INDEX --json --offline --mnemonic="MNEMONIC" > RESULTING_FILENAME
+```
+
+Here is a concrete example of using this command.
+
+```console
+./ethdo validator exit --validator=459921 --json --offline --mnemonic="silent hill auto ability front sting tunnel empower venture once wise local suffer repeat deny deliver hawk silk wedding random coil you town narrow" > 459921-exit.json
+```
+
+In this example, it would result in a file called `459921-exit.json` in your home folder for performing the voluntary exit of validator 459921.
+
+Copy that resulting file back on your second USB stick. We will need it on the next step to broadcast the voluntary exit.
+
+## Broadcasting your voluntary exit
+
+Shut down Tails and go back to your main connected machine. Plug your second USB stick. Browse to https://beaconcha.in/tools/broadcast, the beaconcha.in broadcast tool. Drag and drop or select your voluntary exit json file on that website from your USB stick. Click the *Submit & Broadcast* button. 
+
+Your validator will enter the exit queue and it will eventually fully exit the network. Make sure to let your validator run and perform its regular duties as long as it's not fully exited.
+
+## Support
+
+If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
+
+* Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
+* Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
