@@ -77,17 +77,11 @@ iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-li
 iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256 -outfile ethdo-1.30.0-linux-amd64.tar.gz.sha256
 ```
 
-Open an explorer window in this current directory.
+Open an explorer window in this current directory to easily access the files we just obtained.
 
 ```powershell
 start .
 ```
-
-Copy those files on your second USB stick.
-
-- `offline-preparation.json`
-- `ethdo-1.30.0-linux-amd64.tar.gz`
-- `ethdo-1.30.0-linux-amd64.tar.gz.sha256`
 
 ### On macOS
 
@@ -98,6 +92,12 @@ TODO
 TODO
 
 ### Finalizing your documents
+
+Copy those files on your second USB stick.
+
+- `offline-preparation.json`
+- `ethdo-1.30.0-linux-amd64.tar.gz`
+- `ethdo-1.30.0-linux-amd64.tar.gz.sha256`
 
 If you want to use your keystore file and the associated password to generate your voluntary exit file, make sure to copy the keystore file on the same USB stick that you put the `offline-preparation.json` file. Try avoiding entering the associated password in a file on the same USB stick in clear text.
 
