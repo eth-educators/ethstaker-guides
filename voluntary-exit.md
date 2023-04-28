@@ -85,7 +85,43 @@ start .
 
 ### On macOS
 
-TODO
+Open a terminal. Download the etho archive and the associated hash file.
+
+```console
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-darwin-amd64.tar.gz
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-darwin-amd64.tar.gz.sha256
+```
+
+Make sure ethdo checksum matches.
+
+```console
+shasum -a 256 ethdo-1.30.0-darwin-amd64.tar.gz
+cat ethdo-1.30.0-darwin-amd64.tar.gz.sha256
+```
+
+Both of these output values should have matching checksum. As of today and for version `1.30.0`, they should both be `5a86e99f2c9babbde2a5bf1e72289e3cd5c6e60705d0011e9f394f3297b30126`. If they do not match, there might be a security issue and you should seek further support.
+
+Extract the ethdo archive and generate the preparation file.
+
+```console
+tar xvf ethdo-1.30.0-darwin-amd64.tar.gz
+./ethdo validator exit --prepare-offline
+```
+
+You should see a message saying *offline-preparation.json generated* if everything worked fine.
+
+Download the Linux version of ethdo as well to prepare for when we will need to execute this offline on Tails.
+
+```console
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256
+```
+
+Open an finder window in this current directory to easily access the files we just obtained.
+
+```console
+open .
+```
 
 ### On Linux
 
@@ -107,7 +143,7 @@ Both of these output values should have matching checksum. As of today and for v
 
 Extract the ethdo archive and generate the preparation file.
 
-```
+```console
 tar xvf ethdo-1.30.0-linux-amd64.tar.gz
 ./ethdo validator exit --prepare-offline
 ```
@@ -145,7 +181,7 @@ Both of these output values should have matching checksum. As of today and for v
 
 Extract the ethdo archive.
 
-```
+```console
 tar xvf ethdo-1.30.0-linux-amd64.tar.gz
 ```
 
