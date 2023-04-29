@@ -189,45 +189,22 @@ From here you can either use [your keystore file and the associated password](#g
 
 ### Generating a voluntary exit using your keystore file and the associated password
 
-Create a wallet to hold your validator keys.
+There are 3 inputs for the next command that will generate your voluntary exit file.
 
-```console
-./ethdo wallet create --wallet="Validators"
-```
-
-There are 3 inputs for the next command that will import your keystore key.
-
-1. A local name for this validator. You can use anything here but I suggest you use your validator index as identified on the beacon chain. This is going to be *LOCAL_NAME* in the template.
-2. Your keystore filename. This is going to be *KEYSTORE_FILENAME* in the template.
-3. Your keystore password. This is going to be *KEYSTORE_PASSWORD* in the template.
+1. Your keystore filename. This is going to be *KEYSTORE_FILENAME* in the template.
+2. Your keystore password. This is going to be *KEYSTORE_PASSWORD* in the template.
+3. The resulting filename. This is going to be *RESULTING_FILENAME* in the template.
 
 As a template, the command call looks like:
 
 ```console
-./ethdo account import --account="Validators/LOCAL_NAME" --keystore=KEYSTORE_FILENAME --keystore-passphrase="KEYSTORE_PASSWORD" --passphrase="temp" --allow-weak-passphrases
+./ethdo validator exit --validator="KEYSTORE_FILENAME" --passphrase="KEYSTORE_PASSWORD" --json --offline > RESULTING_FILENAME
 ```
 
 Here is a concrete example of using this command.
 
 ```console
-./ethdo account import --account="Validators/459921" --keystore=keystore-m_12381_3600_0_0_0-1679368539.json --keystore-passphrase="testing123" --passphrase="temp" --allow-weak-passphrases
-```
-
-There are 2 inputs for the next command that will generate your voluntary exit file.
-
-1. A local name for this validator. It should be the same one as the one you used in the previous command. This is going to be *LOCAL_NAME* in the template.
-2. The resulting filename. This is going to be *RESULTING_FILENAME* in the template.
-
-As a template, the command call looks like:
-
-```console
-./ethdo validator exit --validator="Validators/LOCAL_NAME" --passphrase="temp" --json --offline > RESULTING_FILENAME
-```
-
-Here is a concrete example of using this command.
-
-```console
-./ethdo validator exit --validator="Validators/459921" --passphrase="temp" --json --offline > 459921-exit.json
+./ethdo validator exit --validator="keystore-m_12381_3600_0_0_0-1679368539.json" --passphrase="testing123" --json --offline > 459921-exit.json
 ```
 
 In this example, it would result in a file named `459921-exit.json` in your home folder for performing the voluntary exit of the validator that is using the imported keystore file.
