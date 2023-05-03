@@ -198,13 +198,13 @@ There are 3 inputs for the next command that will generate your voluntary exit f
 As a template, the command call looks like:
 
 ```console
-./ethdo validator exit --validator="KEYSTORE_FILENAME" --passphrase="KEYSTORE_PASSWORD" --json --offline > RESULTING_FILENAME
+./ethdo validator exit --validator="KEYSTORE_FILENAME" --passphrase='KEYSTORE_PASSWORD' --json --offline > RESULTING_FILENAME
 ```
 
 Here is a concrete example of using this command.
 
 ```console
-./ethdo validator exit --validator="keystore-m_12381_3600_0_0_0-1679368539.json" --passphrase="testing123" --json --offline > 459921-exit.json
+./ethdo validator exit --validator="keystore-m_12381_3600_0_0_0-1679368539.json" --passphrase='testing123' --json --offline > 459921-exit.json
 ```
 
 In this example, it would result in a file named `459921-exit.json` in your home folder for performing the voluntary exit of the validator that is using the imported keystore file.
