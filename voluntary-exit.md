@@ -241,6 +241,27 @@ Shut down Tails and go back to your main connected machine. Plug your second USB
 
 Your validator will enter the exit queue and it will eventually fully exit the network. Make sure to let your validator run and perform its regular duties as long as it's not fully exited.
 
+### Using a beacon node for broadcasting
+
+If you have access to a beacon node, a consensus client currently in sync with an exposed beacon node API endpoint, you can manually submit your voluntary exit with that beacon node. That alternative process is usually harder than just using beaconcha.in broadcast tool. If you have a node running under Linux this can be done with the curl tool on the command line interface. You will need your voluntary exit file on the machine where you want to execute this command.
+
+There are 2 inputs for the next command that will broadcast your voluntary exit using a beacon node.
+
+1. Your beacon node API endpoint URL. This is going to be *BEACON_NODE* in the template.
+2. The path to your voluntary exit file. This is going to be *EXIT_FILE* in the template.
+
+As a template, the command call looks like:
+
+```console
+curl -X POST BEACON_NODE/eth/v1/beacon/pool/voluntary_exits -H "Content-Type: application/json" -d @EXIT_FILE
+```
+
+Here is a concrete example of using this command.
+
+```console
+curl -X POST http://localhost:5052/eth/v1/beacon/pool/voluntary_exits -H "Content-Type: application/json" -d @459921-exit.json
+```
+
 ## Support
 
 If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
