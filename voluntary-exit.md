@@ -239,7 +239,7 @@ Copy that resulting file back on your second USB stick. We will need it on the n
 
 Shut down Tails and go back to your main connected machine. Plug your second USB stick. Browse to https://beaconcha.in/tools/broadcast, the beaconcha.in broadcast tool. Drag and drop or select your voluntary exit json file on that website from your USB stick. Click the *Submit & Broadcast* button. 
 
-Your validator will enter the exit queue and it will eventually fully exit the network. Make sure to let your validator run and perform its regular duties as long as it's not fully exited.
+Your validator will enter the exit queue and it will eventually fully exit the network. Your validator is expected to perform its duties even after you broadcast your voluntary exit. Make sure to let your validator run and perform its regular duties as long as it's not fully exited.
 
 ### Using a beacon node for broadcasting
 
