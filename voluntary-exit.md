@@ -12,6 +12,8 @@ There are a lot of different ways to perform a voluntary exit. Each consensus cl
 - [Teku](https://docs.teku.consensys.net/HowTo/Voluntary-Exit)
 - [Lighthouse](https://lighthouse-book.sigmaprime.io/voluntary-exit.html)
 
+A video tutorial of this guide can be seen on https://youtu.be/KoBAacMWA_k .
+
 ## Overview
 
 We will use 3 tools with this guide: [ethdo](https://github.com/wealdtech/ethdo), [the beaconcha.in broadcast tool](https://beaconcha.in/tools/broadcast) and [Tails](https://tails.boum.org/).
