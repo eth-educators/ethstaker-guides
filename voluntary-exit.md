@@ -152,6 +152,22 @@ tar xvf ethdo-1.30.0-linux-amd64.tar.gz
 
 You should see a message saying *offline-preparation.json generated* if everything worked fine.
 
+### Prepared alternative
+
+If you are having issues creating your `offline-preparation.json`, you can use these alternative files. They are regenerated every day at 0:00 UTC. You will need to extract the archive first (either the `.tar.gz` file on Linux or macOS or the `.zip` file on Windows) to get the `offline-preparation.json` file.
+
+For Mainnet:
+- https://files.ethstaker.cc/offline-preparation-mainnet.tar.gz
+- https://files.ethstaker.cc/offline-preparation-mainnet.tar.gz.sha256
+- https://files.ethstaker.cc/offline-preparation-mainnet.zip
+- https://files.ethstaker.cc/offline-preparation-mainnet.zip.sha256
+
+For Goerli:
+- https://files.ethstaker.cc/offline-preparation-goerli.tar.gz
+- https://files.ethstaker.cc/offline-preparation-goerli.tar.gz.sha256
+- https://files.ethstaker.cc/offline-preparation-goerli.zip
+- https://files.ethstaker.cc/offline-preparation-goerli.zip.sha256
+
 ### Finalizing your documents
 
 Copy those files on your second USB stick.
