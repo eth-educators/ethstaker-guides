@@ -9,8 +9,6 @@ Random documents for the ETHStaker community.
 - [Guide on how to prepare a staking machine for the Merge](prepare-for-the-merge.md)
 - [Guide on how to join the Goerli/Prater merge testnet (Geth/Lighthouse)](merge-goerli-prater.md)
 - [Guide on how to join the Goerli/Prater merge testnet (Besu/Teku)](merge-goerli-prater-alt.md)
-- [Guide on how to join the Zhejiang testnet (Geth/Lighthouse)](zhejiang.md)
-- [Guide on how to join the Zhejiang testnet (Besu/Teku)](zhejiang-alt.md)
 
 ## MEV
 
