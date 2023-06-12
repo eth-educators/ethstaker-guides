@@ -44,9 +44,9 @@ Download [the latest release version for Lighthouse](https://github.com/sigp/lig
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v3.2.1/lighthouse-v3.2.1-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v3.2.1-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v3.2.1-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/sigp/lighthouse/releases/download/v4.2.0/lighthouse-v4.2.0-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v4.2.0-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v4.2.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Lighthouse version globally.
@@ -154,7 +154,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Beacon Node (Prater)
+Description=Lighthouse Ethereum Client Beacon Node (Goerli)
 Wants=network-online.target
 After=network-online.target
 
@@ -165,13 +165,13 @@ Group=lighthousebeacon
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse bn \
-    --network prater \
+    --network goerli \
     --datadir /var/lib/lighthouse \
     --http \
     --execution-endpoint http://127.0.0.1:8551 \
     --metrics \
     --validator-monitor-auto \
-    --checkpoint-sync-url https://goerli.checkpoint-sync.ethdevops.io \
+    --checkpoint-sync-url https://goerli.beaconstate.ethstaker.cc \
     --execution-jwt /var/lib/ethereum/jwttoken
 
 [Install]
@@ -206,7 +206,7 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ### Requesting testnet funds
 
-You can request Goerli ETH from [EthStaker Discord server](https://discord.io/ethstaker) in the #request-goerli-eth💸 channel with a BrightID verification. You can check out [these other faucet links](https://faucetlink.to/goerli) as well. You will need at least 32 Goerli ETH if you want to do a validator deposit for Goerli. The EthStaker Discord faucet will give you 32.05 Goerli ETH in one go.
+Requesting or obtaining enough Goerli ETH to perform your validator deposit can be challenging at this point. We suggest you use the EthStaker #cheap-goerli-validator free process. Join the [EthStaker Discord server](https://discord.io/ethstaker) and use the `/cheap-goerli-deposit` slash command (start typing the command and it will show up above your input box). From there, follow the instructions from the bot. As a harder alternative, you can try obtaining 32 Goerli ETH from various faucets or bridges on https://faucetlink.to/goerli .
 
 ## Adding a validator
 
@@ -217,27 +217,23 @@ There are 2 great tools to create your validator keys:
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
 * CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
 
-If you choose the *Wagyu Key Gen* application, make sure to select the *Prater* network and follow the instructions provided.
+If you choose the *Wagyu Key Gen* application, make sure to select the *Goerli* network and follow the instructions provided. If you are using the #cheap-goerli-validator process, you will need to use `0x4D496CcC28058B1D74B7a19541663E21154f9c84` as your withdrawal address. This is only required for that process. When on Mainnet, you should use a withdrawal address you control if you want to use one.
 
 If you choose the *staking-deposit-cli* application, here is how to create your validator keys:
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.2.0/staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ rm staking_deposit-cli-9ab0b05-linux-amd64.tar.gz
-$ cd staking_deposit-cli-9ab0b05-linux-amd64/
-$ ./deposit new-mnemonic --num_validators 1 --chain prater
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ rm staking_deposit-cli-d7b5304-linux-amd64.tar.gz
+$ cd staking_deposit-cli-d7b5304-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain goerli --execution_address 0x4D496CcC28058B1D74B7a19541663E21154f9c84
 $ ls -d $PWD/validator_keys/*
 ```
 
 Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
 
-Next we will do the deposit using the Prater launchpad. Make sure you have access to a browser with MetaMask, your account with the funds from the faucet and the deposit file we just created.
-
-Go to [the Prater launchpad](https://prater.launchpad.ethereum.org/en/). Follow the instructions, make sure *Prater* is the selected network in MetaMask and use the deposit file to perform your deposit.
-
-You can check that your deposit transaction went through on [the transaction explorer](https://goerli.etherscan.io/address/0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b).
+Next we will need to perform your deposit. If you used the #cheap-goerli-validator process, you can perform your deposit on https://goerli.launchpad.ethstaker.cc/ . If you managed to obtained 32 Goerli ETH, you can use the official Goerli launchpad on https://goerli.launchpad.ethereum.org/ .
 
 ### Configuring your Lighthouse validator client
 
@@ -256,7 +252,7 @@ Import your keystore that includes your validator key for the Lighthouse validat
 $ sudo /usr/local/bin/lighthouse account validator import \
     --directory /path/to/keystores \
     --datadir /var/lib/lighthouse \
-    --network prater
+    --network goerli
 $ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
 ```
 
@@ -270,7 +266,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Validator Client (Prater)
+Description=Lighthouse Ethereum Client Validator Client (Goerli)
 Wants=network-online.target
 After=network-online.target
 
@@ -281,7 +277,7 @@ Type=simple
 Restart=always
 RestartSec=5
 ExecStart=/usr/local/bin/lighthouse vc \
-    --network prater \
+    --network goerli \
     --datadir /var/lib/lighthouse \
     --graffiti EthStaker \
     --metrics \
@@ -315,16 +311,12 @@ $ sudo journalctl -f -u lighthousevalidator.service -o cat | ccze -A
 
 Press `Ctrl` + `C` to stop showing those messages.
 
-## What's next?
-
-You performs a lot of different tasks to help with the [*#TestingTheMerge*](https://twitter.com/search?q=%23TestingTheMerge) initiative. Check out [the program structure](https://hackmd.io/WKpg6SNzQbi1jVKNgrSgWg). There are different tasks for all technical abilities.
-
 ## Support
 
-If you have any question or if you need additional support, make sure to get in touch with people involved with this initiative:
+If you have any question or if you need additional support, make sure to get in touch with the EthStaker community on:
 
-* EthStaker Discord: [discord.io/ethstaker](https://discord.io/ethstaker) in the #ropsten channel
-* Eth R&D Discord: [discord.gg/qGpsxSA](https://discord.gg/qGpsxSA) in the #testing channel under the *Merge* category.
+* Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
+* Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
 
 ## Credits
 
