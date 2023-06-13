@@ -40,36 +40,36 @@ Create a user account for the service to run under. This account will not be abl
 $ sudo useradd --no-create-home --shell /bin/false node_exporter
 ```
 
-Download the latest stable version of Node Exporter from https://prometheus.io/download/#node_exporter (avoid any pre-release version). As of this date, the latest stable release version is 1.3.1 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Node Exporter from https://prometheus.io/download/#node_exporter (avoid any pre-release version). As of this date, the latest stable release version is 1.6.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
-$ wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz
+$ wget https://github.com/prometheus/node_exporter/releases/download/v1.6.0/node_exporter-1.6.0.linux-amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown on https://prometheus.io/download/#node_exporter is the same as the file we just downloaded.
 
 ```console
-$ sha256sum node_exporter-1.3.1.linux-amd64.tar.gz
+$ sha256sum node_exporter-1.6.0.linux-amd64.tar.gz
 ```
 
 Extract the archive.
 
 ```console
-$ tar xvf node_exporter-1.3.1.linux-amd64.tar.gz
+$ tar xvf node_exporter-1.6.0.linux-amd64.tar.gz
 ```
 
 Copy the binary to the following location and set ownership.
 
 ```console
-$ sudo cp node_exporter-1.3.1.linux-amd64/node_exporter /usr/local/bin
+$ sudo cp node_exporter-1.6.0.linux-amd64/node_exporter /usr/local/bin
 $ sudo chown -R node_exporter:node_exporter /usr/local/bin/node_exporter
 ```
 
 Remove the download leftovers.
 
 ```console
-$ rm -rf node_exporter-1.3.1.linux-amd64
-$ rm node_exporter-1.3.1.linux-amd64.tar.gz
+$ rm -rf node_exporter-1.6.0.linux-amd64
+$ rm node_exporter-1.6.0.linux-amd64.tar.gz
 ```
 
 Create a systemd service file to store the service config which tells systemd to run Node Exporter as the node_exporter user.
@@ -158,29 +158,29 @@ $ sudo chown -R prometheus:prometheus /etc/prometheus
 $ sudo chown -R prometheus:prometheus /var/lib/prometheus
 ```
 
-Download the latest stable version of Prometheus from https://prometheus.io/download/#prometheus (avoid any pre-release version). As of this date, the latest stable release version is 2.38.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Prometheus from https://prometheus.io/download/#prometheus (avoid any pre-release version). As of this date, the latest stable release version is 2.44.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
-$ wget https://github.com/prometheus/prometheus/releases/download/v2.38.0/prometheus-2.38.0.linux-amd64.tar.gz
+$ wget https://github.com/prometheus/prometheus/releases/download/v2.44.0/prometheus-2.44.0.linux-amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown on https://prometheus.io/download/#prometheus is the same as the file we just downloaded.
 
 ```console
-$ sha256sum prometheus-2.38.0.linux-amd64.tar.gz
+$ sha256sum prometheus-2.44.0.linux-amd64.tar.gz
 ```
 
 Extract the archive.
 
 ```console
-$ tar xvf prometheus-2.38.0.linux-amd64.tar.gz
+$ tar xvf prometheus-2.44.0.linux-amd64.tar.gz
 ```
 
 Copy the binaries to the following locations and set ownership.
 
 ```console
-$ sudo cp prometheus-2.38.0.linux-amd64/prometheus /usr/local/bin/
-$ sudo cp prometheus-2.38.0.linux-amd64/promtool /usr/local/bin/
+$ sudo cp prometheus-2.44.0.linux-amd64/prometheus /usr/local/bin/
+$ sudo cp prometheus-2.44.0.linux-amd64/promtool /usr/local/bin/
 $ sudo chown -R prometheus:prometheus /usr/local/bin/prometheus
 $ sudo chown -R prometheus:prometheus /usr/local/bin/promtool
 ```
@@ -188,8 +188,8 @@ $ sudo chown -R prometheus:prometheus /usr/local/bin/promtool
 Copy the content files to the following locations and set ownership.
 
 ```console
-$ sudo cp -r prometheus-2.38.0.linux-amd64/consoles /etc/prometheus
-$ sudo cp -r prometheus-2.38.0.linux-amd64/console_libraries /etc/prometheus
+$ sudo cp -r prometheus-2.44.0.linux-amd64/consoles /etc/prometheus
+$ sudo cp -r prometheus-2.44.0.linux-amd64/console_libraries /etc/prometheus
 $ sudo chown -R prometheus:prometheus /etc/prometheus/consoles
 $ sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
 ```
@@ -197,8 +197,8 @@ $ sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
 Remove the download leftovers.
 
 ```console
-$ rm -rf prometheus-2.38.0.linux-amd64
-$ rm prometheus-2.38.0.linux-amd64.tar.gz
+$ rm -rf prometheus-2.44.0.linux-amd64
+$ rm prometheus-2.44.0.linux-amd64.tar.gz
 ```
 
 Setup the Prometheus configuration file. Open the YAML config file for editing.
@@ -248,7 +248,7 @@ $ sudo -u prometheus /usr/local/bin/prometheus \
     --web.console.libraries=/etc/prometheus/console_libraries \
     --web.listen-address="localhost:9090"
 ```
-Output should look something like this. Press Ctrl + C to exit.
+Output should look something like this. Press `Ctrl` + `C` to exit.
 
 ```
 level=info ts=2021-08-04T16:18:42.042Z caller=main.go:981 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
@@ -349,7 +349,7 @@ Import the Grafana PGP key.
 $ sudo wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
 ```
 
-Add the Grafana OSS APT repository for stable releases.
+Add the Grafana APT repository for stable releases.
 
 ```console
 $ echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
@@ -450,13 +450,13 @@ After your first log in, you will be asked to change the password for the admin 
 
 ### Adding the Prometheus data source
 
-Grafana has the ability to connect to multiple data sources. We have to add our Prometheus data source before we can use it. In the left column menu, hover on the *Configuration* menu (it looks like a cog) and click on the *Data sources* element. Click on the *Add data source* button. Select the *Prometheus* data source type. In the URL field, enter `http://localhost:9090`. Click the *Save and test* button at the bottom of the page. If everything is working, you should see a *Data source is working* message.
+Grafana has the ability to connect to multiple data sources. We have to add our Prometheus data source before we can use it. In the top left part of the page, click on the hamburger button (☰). Navigate in *Connections* > *Data sources*. Click on the *Add data source* button. Select the *Prometheus* data source type. In the URL field, enter `http://localhost:9090`. Click the *Save and test* button at the bottom of the page. If everything is working, you should see a *Data source is working* message.
 
 ![Grafana - Adding Prometheus data source](images/grafana-prom-datasource.png)
 
 ### Node Exporter dashboard
 
-A default installation does not include any dashboard. Let's add one for the hardware and OS metrics we are getting from Node Exporter. In the left column menu, hover on the *Create* menu (it looks like a plus sign) and click on the *Import* element. In the *Import via grafana.com* field, type `1860` and click on the *Load* button. On this next screen, make sure to select the Prometheus datasource from the dropdown list named *Prometheus*. Click on the *Import* button at the bottom.
+A default installation does not include any dashboard. Let's add one for the hardware and OS metrics we are getting from Node Exporter. In the top left part of the page, click on the hamburger button (☰). Navigate in *Dashboards*. Click on the *New* dropdown button and click on *Import*. In the *Import via grafana.com* field, type `1860` and click on the *Load* button. On this next screen, make sure to select the Prometheus datasource from the dropdown list named *Prometheus*. Click on the *Import* button at the bottom.
 
 ![Grafana - Node Exporter dashboard - Import](images/grafana-ne-import.png)
 
@@ -468,7 +468,7 @@ When viewing a dashboard, you will notice a few things:
 
 * You can change everything in your dashboards. Panels can be moved, added, removed or changed to show what you prefer or to show it differently.
 * Information is shown for a specific period. In the Node Export dashboard, you will notice a *Last 24 hours* period is selected in a dropdown list in the top right corner. That is your current viewing period which can be changed to your preferences.
-* Information is automatically refreshed. In the Node Export dashboard, you will notice a *1m* delay is selected in a dropdown list in the top right corner. This is your current refreshing delay which can be changed to your preferences.
+* Information can automatically be refreshed. In the Node Export dashboard, you will notice a double circular arrows icon (🔄) with a dropdown button (˅) in the top right part of the page. Using that dropdown button, you can select an automatic refresh delay like *1m* for 1 minute.
 
 You can customize your experience in a lot of different ways. Check out [the Grafana documentation](https://grafana.com/docs/) to learn more about this.
 
