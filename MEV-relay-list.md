@@ -55,6 +55,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Manifold](https://securerpc.com/) |  | `https://0x8a72a5ec3e2909fff931c8b42c9e0e6c6e660ac48a98016777fc63a73316b3ffb5c622495106277f8dbcc17a06e92ca3@goerli-relay.securerpc.com/` |
 | [Aestus](https://aestus.live) |  | `https://0xab78bf8c781c58078c3beb5710c57940874dd96aef2835e7742c866b4c7c0406754376c2c8285a36c630346aa5c5f833@goerli.aestus.live` |
 | [Ultra Sound](https://relay-stag.ultrasound.money) |  | `https://0xb1559beef7b5ba3127485bbbb090362d9f497ba64e177ee2c8e7db74746306efad687f2cf8574e38d70067d40ef136dc@relay-stag.ultrasound.money` |
+| [Wen Merge](https://goerli-relay.wenmerge.com) | Relay from [Wen Merge](https://wenmerge.com) | `http://0x88d0cc4b8139580d176cf6863db874ee9c505fc3f6362aa005fd9a91f7ea8b47ba026c424a678e072fd67ba6e952e1a1@goerli-relay.wenmerge.com:9062` |
 
 # MEV relay list for Sepolia testnet
 
