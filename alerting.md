@@ -229,7 +229,7 @@ rule_files:
 Setup the rules for alerting. Open the rules file.
 
 ```console
-# sudo nano /etc/prometheus/alert_rules.yml
+$ sudo nano /etc/prometheus/alert_rules.yml
 ```
 
 Paste the following base rules into the file. Exit and save the file.
