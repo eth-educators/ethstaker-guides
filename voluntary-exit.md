@@ -36,7 +36,7 @@ You will also need the validator public key or the validator index as identified
 
 ### Tooling
 
-For most of this guide, we will use ethdo *version 1.30.0*. You should use the latest stable version available from https://github.com/wealdtech/ethdo/releases and adapt this guide to that latest version if a new version is released.
+For most of this guide, we will use ethdo *version 1.32.0*. You should use the latest stable version available from https://github.com/wealdtech/ethdo/releases and adapt this guide to that latest version if a new version is released.
 
 ## Preparing for offline generation
 
@@ -49,24 +49,24 @@ Open a powershell command prompt, press `⊞ Win`+`R`, type `powershell` and pre
 Download the etho archive and the associated checksum file.
 
 ```powershell
-iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-windows-exe.zip -outfile ethdo-1.30.0-windows-exe.zip
-iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-windows-exe-zip.sha256 -outfile ethdo-1.30.0-windows-exe-zip.sha256
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-windows-exe.zip -outfile ethdo-1.32.0-windows-exe.zip
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-windows-exe-zip.sha256 -outfile ethdo-1.32.0-windows-exe-zip.sha256
 ```
 
 Compute the archive hash value and compare it to the expected value.
 
 ```powershell
-Get-FileHash .\ethdo-1.30.0-windows-exe.zip | Select -Property @{n='hash';e={$_.hash.tolower()}} | Select -ExpandProperty "hash"
-cat .\ethdo-1.30.0-windows-exe-zip.sha256
+Get-FileHash .\ethdo-1.32.0-windows-exe.zip | Select -Property @{n='hash';e={$_.hash.tolower()}} | Select -ExpandProperty "hash"
+cat .\ethdo-1.32.0-windows-exe-zip.sha256
 ```
 
-Both of these output values should match. As of today and for version `1.30.0`, they should both be `d2e84e8f9ab96820afe72cb206aa3abfd6bfccac152e709100af56e30c07b0e9`. If they do not match, there might be a security issue and you should seek further support.
+Both of these output values should match. As of today and for version `1.32.0`, they should both be `a9f50c08ff6ae61c0fe21af28f6c69008f6588e8dc1c0c1b5e07cb1db09a100e`. If they do not match, there might be a security issue and you should seek further support.
 
 Extract the ethdo archive and generate the preparation file.
 
 ```powershell
-Expand-Archive .\ethdo-1.30.0-windows-exe.zip
-cd .\ethdo-1.30.0-windows-exe\
+Expand-Archive .\ethdo-1.32.0-windows-exe.zip
+cd .\ethdo-1.32.0-windows-exe\
 .\ethdo.exe validator exit --prepare-offline
 ```
 
@@ -75,8 +75,8 @@ You should see a message saying *offline-preparation.json generated* if everythi
 Download the Linux version of ethdo as well to prepare for when we will need to execute this offline on Tails.
 
 ```powershell
-iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz -outfile ethdo-1.30.0-linux-amd64.tar.gz
-iwr https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256 -outfile ethdo-1.30.0-linux-amd64.tar.gz.sha256
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-linux-amd64.tar.gz -outfile ethdo-1.32.0-linux-amd64.tar.gz
+iwr https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-linux-amd64.tar.gz.sha256 -outfile ethdo-1.32.0-linux-amd64.tar.gz.sha256
 ```
 
 Open an explorer window in this current directory to easily access the files we just obtained.
@@ -90,23 +90,23 @@ start .
 Open a terminal. Download the etho archive and the associated checksum file.
 
 ```console
-curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-darwin-amd64.tar.gz
-curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-darwin-amd64.tar.gz.sha256
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-darwin-amd64.tar.gz
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-darwin-amd64.tar.gz.sha256
 ```
 
 Make sure ethdo checksum matches.
 
 ```console
-shasum -a 256 ethdo-1.30.0-darwin-amd64.tar.gz
-cat ethdo-1.30.0-darwin-amd64.tar.gz.sha256
+shasum -a 256 ethdo-1.32.0-darwin-amd64.tar.gz
+cat ethdo-1.32.0-darwin-amd64.tar.gz.sha256
 ```
 
-Both of these output values should have matching checksum. As of today and for version `1.30.0`, they should both be `5a86e99f2c9babbde2a5bf1e72289e3cd5c6e60705d0011e9f394f3297b30126`. If they do not match, there might be a security issue and you should seek further support.
+Both of these output values should have matching checksum. As of today and for version `1.32.0`, they should both be `01530957be9afeb67852ea77eeb18aa57933f5de5707fb1d3011044f921b0bac`. If they do not match, there might be a security issue and you should seek further support.
 
 Extract the ethdo archive and generate the preparation file.
 
 ```console
-tar xvf ethdo-1.30.0-darwin-amd64.tar.gz
+tar xvf ethdo-1.32.0-darwin-amd64.tar.gz
 ./ethdo validator exit --prepare-offline
 ```
 
@@ -115,8 +115,8 @@ You should see a message saying *offline-preparation.json generated* if everythi
 Download the Linux version of ethdo as well to prepare for when we will need to execute this offline on Tails.
 
 ```console
-curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz
-curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-linux-amd64.tar.gz
+curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-linux-amd64.tar.gz.sha256
 ```
 
 Open an finder window in this current directory to easily access the files we just obtained.
@@ -130,23 +130,23 @@ open .
 Open a terminal. Download the etho archive and the associated checksum file.
 
 ```console
-wget https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz
-wget https://github.com/wealdtech/ethdo/releases/download/v1.30.0/ethdo-1.30.0-linux-amd64.tar.gz.sha256
+wget https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-linux-amd64.tar.gz
+wget https://github.com/wealdtech/ethdo/releases/download/v1.32.0/ethdo-1.32.0-linux-amd64.tar.gz.sha256
 ```
 
 Make sure ethdo checksum matches.
 
 ```console
-sha256sum ethdo-1.30.0-linux-amd64.tar.gz
-cat ethdo-1.30.0-linux-amd64.tar.gz.sha256
+sha256sum ethdo-1.32.0-linux-amd64.tar.gz
+cat ethdo-1.32.0-linux-amd64.tar.gz.sha256
 ```
 
-Both of these output values should have matching checksum. As of today and for version `1.30.0`, they should both be `6fbe587f522ad2eb8d6ce22dfdb15f7d163b491a670bf50e5acf12dd0f58125c`. If they do not match, there might be a security issue and you should seek further support.
+Both of these output values should have matching checksum. As of today and for version `1.32.0`, they should both be `f097ce45373fb40e6f8783c2f6b253e50bfcde9db5714e82c4e0d3bf4885c8f6`. If they do not match, there might be a security issue and you should seek further support.
 
 Extract the ethdo archive and generate the preparation file.
 
 ```console
-tar xvf ethdo-1.30.0-linux-amd64.tar.gz
+tar xvf ethdo-1.32.0-linux-amd64.tar.gz
 ./ethdo validator exit --prepare-offline
 ```
 
@@ -173,8 +173,8 @@ For Goerli:
 Copy those files on your second USB stick.
 
 - `offline-preparation.json`
-- `ethdo-1.30.0-linux-amd64.tar.gz`
-- `ethdo-1.30.0-linux-amd64.tar.gz.sha256`
+- `ethdo-1.32.0-linux-amd64.tar.gz`
+- `ethdo-1.32.0-linux-amd64.tar.gz.sha256`
 
 If you want to use your keystore file and the associated password to generate your voluntary exit file, make sure to copy the keystore file on the same USB stick that you put the `offline-preparation.json` file. Try avoiding entering the associated password in a file on the same USB stick in clear text.
 
@@ -191,16 +191,16 @@ Plug in your second USB stick and copy all the documents and tools we included i
 Start a terminal. Make sure ethdo checksum matches.
 
 ```console
-sha256sum ethdo-1.30.0-linux-amd64.tar.gz
-cat ethdo-1.30.0-linux-amd64.tar.gz.sha256
+sha256sum ethdo-1.32.0-linux-amd64.tar.gz
+cat ethdo-1.32.0-linux-amd64.tar.gz.sha256
 ```
 
-Both of these output values should have matching checksum. As of today and for version `1.30.0`, they should both be `6fbe587f522ad2eb8d6ce22dfdb15f7d163b491a670bf50e5acf12dd0f58125c`. If they do not match, there might be a security issue and you should seek further support.
+Both of these output values should have matching checksum. As of today and for version `1.32.0`, they should both be `f097ce45373fb40e6f8783c2f6b253e50bfcde9db5714e82c4e0d3bf4885c8f6`. If they do not match, there might be a security issue and you should seek further support.
 
 Extract the ethdo archive.
 
 ```console
-tar xvf ethdo-1.30.0-linux-amd64.tar.gz
+tar xvf ethdo-1.32.0-linux-amd64.tar.gz
 ```
 
 From here you can either use [your keystore file and the associated password](#generating-a-voluntary-exit-using-your-keystore-file-and-the-associated-password) or use [your mnemonic](#generating-a-voluntary-exit-using-your-mnemonic) to generate your voluntary exit file.
