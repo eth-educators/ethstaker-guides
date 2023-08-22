@@ -27,17 +27,15 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 
 * [MEV Panda](https://www.mevpanda.com) by OreoMev
 * [Uptime Monitor](https://mev-relays.beaconstate.info/) by 1337
-* [mevboost.org](https://www.mevboost.org/) by Anish Agnihotri
 * [mevboost.pics](https://www.mevboost.pics/) by Toni Wahrstätter
 * [Tornado Warnings](https://tornado-warning.info/) by Toni Wahrstätter
 * [MEV Watch](https://www.mevwatch.info/) by Labrys
 * [Relays](https://beaconcha.in/relays) from beaconcha.in
 * [Relay Scan](https://www.relayscan.io) from Chris Hager
 * [Transparency dashboard](https://transparency.flashbots.net/) by Flashbots
-* [Relay Monitor](https://app.metrika.co/dashboard/ethereum/relay-monitor/north-america-east?tr=30m) by Metrika (beta)
+* [Relay Monitor](https://app.metrika.co/ethereum/dashboard/mev/relay-overview?tr=1d) by Metrika
 * [Rated Network](https://www.rated.network/relays?network=mainnet) by Rated Network
 * [Inclusion Watch](https://www.inclusion.watch) by donnoh.eth and emiliano.eth
-* [Valitraitors](https://valitraitors.info/) by Brainbot
 * [Neutrality Watch](https://eth.neutralitywatch.com/) specifically analyses Lido operators. [Github](https://github.com/mikgur/Ethereum-censorability-monitor).
 
 # MEV relay list for Goerli testnet
