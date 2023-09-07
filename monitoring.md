@@ -453,7 +453,7 @@ After your first log in, you will be asked to change the password for the admin 
 
 ### Adding the Prometheus data source
 
-Grafana has the ability to connect to multiple data sources. We have to add our Prometheus data source before we can use it. In the top left part of the page, click on the hamburger button (☰). Navigate in *Connections* > *Data sources*. Click on the *Add data source* button. Select the *Prometheus* data source type. In the URL field, enter `http://localhost:9090`. Click the *Save and test* button at the bottom of the page. If everything is working, you should see a *Data source is working* message.
+Grafana has the ability to connect to multiple data sources. We have to add our Prometheus data source before we can use it. In the top left part of the page, click on the hamburger button (☰). Navigate in *Connections* > *Data sources*. Click on the *Add data source* button. Select the *Prometheus* data source type. In the URL field, enter `http://localhost:9090`. Click the *Save and test* button at the bottom of the page. If everything is working, you should see a *Successfully queried the Prometheus API* message.
 
 ![Grafana - Adding Prometheus data source](images/grafana-prom-datasource.png)
 
