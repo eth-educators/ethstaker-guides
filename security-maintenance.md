@@ -91,5 +91,5 @@ Ubuntu and Canonical offers a live patching service called [Livepatch](https://u
 
 If you have any question or if you need additional support, make sure to get in touch with the ETHStaker community on:
 
-* Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
+* Discord: [dsc.gg/ethstaker](https://dsc.gg/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)

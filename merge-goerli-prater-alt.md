@@ -160,7 +160,7 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ### Requesting testnet funds
 
-Requesting or obtaining enough Goerli ETH to perform your validator deposit can be challenging at this point. We suggest you use the EthStaker #cheap-goerli-validator free process. Join the [EthStaker Discord server](https://discord.io/ethstaker) and use the `/cheap-goerli-deposit` slash command (start typing the command and it will show up above your input box). From there, follow the instructions from the bot. As a harder alternative, you can try obtaining 32 Goerli ETH from various faucets or bridges on https://faucetlink.to/goerli .
+Requesting or obtaining enough Goerli ETH to perform your validator deposit can be challenging at this point. We suggest you use the EthStaker #cheap-goerli-validator free process. Join the [EthStaker Discord server](https://dsc.gg/ethstaker) and use the `/cheap-goerli-deposit` slash command (start typing the command and it will show up above your input box). From there, follow the instructions from the bot. As a harder alternative, you can try obtaining 32 Goerli ETH from various faucets or bridges on https://faucetlink.to/goerli .
 
 ## Adding a validator
 
@@ -307,7 +307,7 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 If you have any question or if you need additional support, make sure to get in touch with the EthStaker community on:
 
-* Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
+* Discord: [dsc.gg/ethstaker](https://dsc.gg/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
 
 ## Credits

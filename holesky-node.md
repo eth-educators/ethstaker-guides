@@ -225,7 +225,7 @@ TODO (Waiting on testnet launch and public launchpad)
 
 If you have any question or if you need additional support, make sure to get in touch with the EthStaker community on:
 
-* Discord: [discord.io/ethstaker](https://discord.io/ethstaker)
+* Discord: [dsc.gg/ethstaker](https://dsc.gg/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
 
 ## Credits
