@@ -2,7 +2,7 @@
 
 [Holešky](https://github.com/eth-clients/holesky) is a new Ethereum testnet meant to replace Goerli as a staking, infrastructure and protocol-developer testnet.
 
-This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Holesky* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 22.04) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
+This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the *Holesky* testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 22.04 or Debian 12) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.
 
 ## Overview
 
@@ -26,16 +26,19 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install software-properties-common wget curl ccze
+$ sudo apt -y install wget curl ccze unzip libsnappy-dev
 ```
 
 ## Installing Nethermind
 
-Add the Nethermind PPA and install the Nethermind package.
+Download [the latest release version for Nethermind](https://github.com/NethermindEth/nethermind/releases) and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux-x64 version.
 
 ```console
-$ sudo add-apt-repository -y ppa:nethermindeth/nethermind
-$ sudo apt -y install nethermind
+$ cd ~
+$ wget https://github.com/NethermindEth/nethermind/releases/download/1.20.3/nethermind-1.20.3-e8c161a5-linux-x64.zip
+$ sudo mkdir -p /usr/share/nethermind
+$ sudo unzip nethermind-1.20.3-e8c161a5-linux-x64.zip -d /usr/share/nethermind
+$ rm nethermind-1.20.3-e8c161a5-linux-x64.zip
 ```
 
 ## Installing Lighthouse
