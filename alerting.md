@@ -239,19 +239,19 @@ groups:
 - name: alert_rules
   rules:
   - alert: Available_disk_space_too_low
-    expr: node_filesystem_avail_bytes{mountpoint="/"} <= 81920000000
+    expr: node_filesystem_avail_bytes{mountpoint="/"} <= 85899345920
     for: 1m
     labels:
       severity: critical
     annotations:
-      summary: Available disk space below 80GB
+      summary: Available disk space below 80 GiB
   - alert: Available_memory_too_low
-    expr: node_memory_MemAvailable_bytes <= 1024000000
+    expr: node_memory_MemAvailable_bytes <= 1073741824
     for: 1m
     labels:
       severity: critical
     annotations:
-      summary: Available memory below 1GB
+      summary: Available memory below 1 GiB
   - alert: CPU_usage_too_high
     expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) >= 90
     for: 5m
@@ -263,8 +263,8 @@ groups:
 
 This base rules file has 3 rules which you can adjust by modifying the `expr` field's value.
 
-1. The first rule will alert you when you have less than around 80GB (81920000000 bytes) of available disk space on your `/` mount continuously for 1 minute. If your filesystem and your partitions are configured in a different way where you want to check for a different mount, you will have to change that `expr` field. If you have direct access to your prometheus web interface (often at `http://<machine ip>:9090`), you can execute the `node_filesystem_avail_bytes` query to view all possible mounts and their current free space. You can also view your current mounts and their free space by running the `$ df -h` command.
-2. The second rule will alert you when you have less than around 1GB (1024000000 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1GB (1024000000 bytes) threshold value in that `expr` field.
+1. The first rule will alert you when you have less than around 80 GiB (85899345920 bytes) of available disk space on your `/` mount continuously for 1 minute. If your filesystem and your partitions are configured in a different way where you want to check for a different mount, you will have to change that `expr` field. If you have direct access to your prometheus web interface (often at `http://<machine ip>:9090`), you can execute the `node_filesystem_avail_bytes` query to view all possible mounts and their current free space. You can also view your current mounts and their free space by running the `$ df -h` command.
+2. The second rule will alert you when you have less than around 1 GiB (1073741824 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1 GiB (1073741824 bytes) threshold value in that `expr` field.
 3. The third rule will alert you when your CPU cores are used for more than 90% of their processing power continuously for 5 minutes.
 
 Set ownership for the config file. If your prometheus service is running under an account that is not `prometheus`, adjust accordingly.
