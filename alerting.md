@@ -59,29 +59,29 @@ $ sudo chown -R alertmanager:alertmanager /etc/alertmanager
 $ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
 ```
 
-Download the latest stable version of Alertmanager from https://prometheus.io/download/#alertmanager (avoid any pre-release version). As of this date, the latest version is 0.25.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Alertmanager from https://prometheus.io/download/#alertmanager (avoid any pre-release version). As of this date, the latest version is 0.26.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
-$ wget https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz
+$ wget https://github.com/prometheus/alertmanager/releases/download/v0.26.0/alertmanager-0.26.0.linux-amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown on https://prometheus.io/download/#alertmanager is the same as the file we just downloaded.
 
 ```console
-$ sha256sum alertmanager-0.25.0.linux-amd64.tar.gz
+$ sha256sum alertmanager-0.26.0.linux-amd64.tar.gz
 ```
 
 Extract the archive.
 
 ```console
-$ tar xvf alertmanager-0.25.0.linux-amd64.tar.gz
+$ tar xvf alertmanager-0.26.0.linux-amd64.tar.gz
 ```
 
 Copy the binaries to the following locations and set ownership.
 
 ```console
-$ sudo cp alertmanager-0.25.0.linux-amd64/alertmanager /usr/local/bin/
-$ sudo cp alertmanager-0.25.0.linux-amd64/amtool /usr/local/bin/
+$ sudo cp alertmanager-0.26.0.linux-amd64/alertmanager /usr/local/bin/
+$ sudo cp alertmanager-0.26.0.linux-amd64/amtool /usr/local/bin/
 $ sudo chown alertmanager:alertmanager /usr/local/bin/alertmanager
 $ sudo chown alertmanager:alertmanager /usr/local/bin/amtool
 ```
@@ -89,8 +89,8 @@ $ sudo chown alertmanager:alertmanager /usr/local/bin/amtool
 Remove the download leftovers.
 
 ```console
-$ rm -rf alertmanager-0.25.0.linux-amd64
-$ rm alertmanager-0.25.0.linux-amd64.tar.gz
+$ rm -rf alertmanager-0.26.0.linux-amd64
+$ rm alertmanager-0.26.0.linux-amd64.tar.gz
 ```
 
 Setup the Alertmanager configuration file. Open the YAML config file for editing.
