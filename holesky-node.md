@@ -35,10 +35,10 @@ Download [the latest release version for Nethermind](https://github.com/Nethermi
 
 ```console
 $ cd ~
-$ wget https://github.com/NethermindEth/nethermind/releases/download/1.20.4/nethermind-1.20.4-d06ec791-linux-x64.zip
+$ wget https://github.com/NethermindEth/nethermind/releases/download/1.21.0/nethermind-1.21.0-bb9b72c0-linux-x64.zip
 $ sudo mkdir -p /usr/share/nethermind
-$ sudo unzip nethermind-1.20.4-d06ec791-linux-x64.zip -d /usr/share/nethermind
-$ rm nethermind-1.20.4-d06ec791-linux-x64.zip
+$ sudo unzip nethermind-1.21.0-bb9b72c0-linux-x64.zip -d /usr/share/nethermind
+$ rm nethermind-1.21.0-bb9b72c0-linux-x64.zip
 ```
 
 ## Installing Lighthouse
@@ -102,7 +102,7 @@ RestartSec=5
 TimeoutStopSec=180
 WorkingDirectory=/var/lib/nethermind
 Environment="DOTNET_BUNDLE_EXTRACT_BASE_DIR=/var/lib/nethermind"
-ExecStart=/usr/share/nethermind/Nethermind.Runner \
+ExecStart=/usr/share/nethermind/nethermind \
   --config holesky \
   --datadir /var/lib/nethermind \
   --Metrics.Enabled true \
