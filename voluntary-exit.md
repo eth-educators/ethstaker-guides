@@ -280,6 +280,10 @@ Here is a concrete example of using this command.
 curl -X POST http://localhost:5052/eth/v1/beacon/pool/voluntary_exits -H "Content-Type: application/json" -d @459921-exit.json
 ```
 
+## Full exit / withdrawal process
+
+There are multiple steps and delays when performing a voluntary exit and waiting for the final withdrawal. Check out [this great graphic](https://media.discordapp.net/attachments/939440360789266462/1105846872700108850/exit1.png) by Ladislaus to find more about those steps.
+
 ## Support
 
 If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
