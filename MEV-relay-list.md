@@ -53,7 +53,6 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Ultra Sound](https://relay-stag.ultrasound.money) |  | `https://0xb1559beef7b5ba3127485bbbb090362d9f497ba64e177ee2c8e7db74746306efad687f2cf8574e38d70067d40ef136dc@relay-stag.ultrasound.money` |
 | [Wenmerge](https://goerli-relay.wenmerge.com) | Relay from [Wenmerge](https://wenmerge.com) | `https://0x88d0cc4b8139580d176cf6863db874ee9c505fc3f6362aa005fd9a91f7ea8b47ba026c424a678e072fd67ba6e952e1a1@goerli-relay.wenmerge.com` |
 | [Frontier Relay](https://frontier.tech) |  | `https://0x95a0a6af2566fa7db732020bb2724be61963ac1eb760aa1046365eb443bd4e3cc0fba0265d40a2d81dd94366643e986a@goerli-blockspace.frontier.tech` |
-| [Tané](https://goerli-relay.tanelabs.com) | Relay from [Tané](https://tanelabs.com) | `https://0xb5222967262a53c612cdbbf8833871d18efbdc55d52c8d38a49c22910c0c9f6d2e0af936ec516f556e6cc19ba94f13f7@goerli-relay.tanelabs.com` |
 
 # MEV relay list for Sepolia testnet
 
