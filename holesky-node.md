@@ -216,11 +216,110 @@ Press `Ctrl` + `C` to stop showing those messages.
 
 ### Requesting testnet funds
 
-TODO (Waiting on testnet launch and public faucets)
+Requesting or obtaining enough Holesky ETH to perform your validator deposit can be challenging. We suggest you use the EthStaker #cheap-holesky-validator free process. Join the [EthStaker Discord server](https://dsc.gg/ethstaker) and use the `/cheap-holesky-deposit` slash command (start typing the command and it will show up above your input box). From there, follow the instructions from the bot. As an alternative, you can try obtaining 32 Holesky ETH from various faucets or bridges on https://faucetlink.to/holesky . Holesky ETH was also distributed to anyone who created or deployed a smart contract previously on Goerli. You might already have some Holesky ETH in your wallet if you were involved with smart contracts on Goerli.
 
 ## Adding a validator
 
-TODO (Waiting on testnet launch and public launchpad)
+### Creating your validator keys and performing the deposit
+
+There are 2 great tools to create your validator keys:
+
+* GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
+* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
+
+If you choose the *Wagyu Key Gen* application, make sure to select the *Holesky* network and follow the instructions provided. If you are using the #cheap-holesky-validator process, you will need to use `0x4D496CcC28058B1D74B7a19541663E21154f9c84` as your withdrawal address. This is only required for that process. When on Mainnet, you should use a withdrawal address you control if you want to use one.
+
+If you choose the *staking-deposit-cli* application, here is how to create your validator keys. Make sure to replace the `0x4D496CcC28058B1D74B7a19541663E21154f9c84` withdrawal address with your own address that you control if you need or want to:
+
+```console
+$ cd ~
+$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.7.0/staking_deposit-cli-fdab65d-linux-amd64.tar.gz
+$ tar xvf staking_deposit-cli-fdab65d-linux-amd64.tar.gz
+$ rm staking_deposit-cli-fdab65d-linux-amd64.tar.gz
+$ cd staking_deposit-cli-fdab65d-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain holesky --execution_address 0x4D496CcC28058B1D74B7a19541663E21154f9c84
+$ ls -d $PWD/validator_keys/*
+```
+
+Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with `deposit_data-` and ends with `.json`) and one or more keystore files (starts with `keystore-` and ends with `.json`), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.
+
+Next we will need to perform your deposit. If you used the #cheap-holesky-validator process, you can perform your deposit on https://holesky.launchpad.ethstaker.cc/ . If you managed to obtained 32 Holesky ETH, you can use the official Holesky launchpad on https://holesky.launchpad.ethereum.org/ .
+
+### Configuring your Lighthouse validator client
+
+Create a dedicated user for running the Lighthouse validator client, create a directory for holding the data and assign the proper permissions.
+
+```console
+$ sudo useradd --no-create-home --shell /bin/false lighthousevalidator
+$ sudo mkdir -p /var/lib/lighthouse/validators
+$ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
+$ sudo chmod 700 /var/lib/lighthouse/validators
+```
+
+Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank. Make sure to replace `/path/to/keystores` with the actual path to your keystores created [in the previous step](#creating-your-validator-keys-and-performing-the-deposit).
+
+```console
+$ sudo /usr/local/bin/lighthouse account validator import \
+    --directory /path/to/keystores \
+    --datadir /var/lib/lighthouse \
+    --network holesky
+$ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
+```
+
+Create a systemd service config file to configure the Lighthouse validator client service.
+
+```console
+$ sudo nano /etc/systemd/system/lighthousevalidator.service
+```
+
+Paste the following service configuration into the file. Exit and save once done (`Ctrl` + `X`, `Y`, `Enter`). Make sure to replace the `0x0000000000000000000000000000000000000000` address with your own Ethereum address that you control where you want to receive the transaction tips.
+
+```ini
+[Unit]
+Description=Lighthouse Ethereum Client Validator Client (Holesky)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=lighthousevalidator
+Group=lighthousevalidator
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/lighthouse vc \
+    --network holesky \
+    --datadir /var/lib/lighthouse \
+    --graffiti EthStaker \
+    --metrics \
+    --suggested-fee-recipient 0x0000000000000000000000000000000000000000
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.
+
+```console
+$ sudo systemctl daemon-reload
+$ sudo systemctl start lighthousevalidator.service
+$ sudo systemctl status lighthousevalidator.service
+```
+
+It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Lighthouse validator client service).
+
+Enable the Lighthouse validator client service to automatically start on reboot.
+
+```console
+$ sudo systemctl enable lighthousevalidator.service
+```
+
+You can watch the live messages from your Lighthouse validator client logs using this command.
+
+```console
+$ sudo journalctl -f -u lighthousevalidator.service -o cat | ccze -A
+```
+
+Press `Ctrl` + `C` to stop showing those messages.
 
 ## Support
 
