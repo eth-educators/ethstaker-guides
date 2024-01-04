@@ -178,6 +178,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --datadir /var/lib/lighthouse \
     --http \
     --execution-endpoint http://127.0.0.1:8551 \
+    --checkpoint-sync-url https://holesky.beaconstate.ethstaker.cc \
     --metrics \
     --execution-jwt /var/lib/ethereum/jwttoken \
     --gui \
