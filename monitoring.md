@@ -92,7 +92,10 @@ User=node_exporter
 Group=node_exporter
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/node_exporter --web.listen-address="localhost:9100"
+ExecStart=/usr/local/bin/node_exporter \
+    --collector.systemd \
+    --collector.processes \
+    --web.listen-address="localhost:9100"
 
 [Install]
 WantedBy=multi-user.target
