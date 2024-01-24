@@ -28,7 +28,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [Uptime Monitor](https://mev-relays.beaconstate.info/) by 1337
 * [mevboost.pics](https://www.mevboost.pics/) by Toni Wahrstätter
 * [timing.pics](https://timing.pics) by Toni Wahrstätter
-* [Tornado Warnings](https://tornado-warning.info/) by Toni Wahrstätter
+* [tornado.pics](https://tornado.pics) by Toni Wahrstätter
 * [MEV Watch](https://www.mevwatch.info/) by Labrys
 * [Relays](https://beaconcha.in/relays) from beaconcha.in
 * [Relay Scan](https://www.relayscan.io) from Chris Hager
