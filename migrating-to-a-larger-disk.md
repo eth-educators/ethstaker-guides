@@ -196,7 +196,11 @@ Keep in mind that the exact key and the process can vary, so it's recommended to
 
 ### Restarting your machine
 
-Once all the data is copied onto that larger SSD, plug that larger disk into your staking or node machine. Restart that machine and you should be good to go. Once you confirmed that the larger SSD works fine, you should format and erase all the data from your smaller disk especially if you are running a staking machine. The main consern is running both of these disks at the same time and potentially creating a slashing event.
+Once all the data is copied onto that larger SSD, plug that larger disk into your staking or node machine. Restart that machine and you should be good to go.
+
+## What's next?
+
+Once you confirm that the larger SSD works fine, you should format and erase all the data from your smaller disk especially if you are running a staking machine. The main consern is running both of these disks at the same time and potentially creating a slashing event.
 
 ## Support
 
