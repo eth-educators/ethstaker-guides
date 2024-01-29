@@ -12,6 +12,106 @@ On Mainnet, you should expect the current disk usage to be around **1 TB to 1.7 
 
 ## Solutions to Check Before Buying a New Disk and Migrating
 
+### Checking on your current disk usage
+
+On linux, you can run `df -h` to find out more about file system disk usage. It will return something like this:
+
+```
+Filesystem                         Size  Used Avail Use% Mounted on
+tmpfs                              1.6G  2.6M  1.6G   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv  913G  378G  489G  44% /
+tmpfs                              7.6G     0  7.6G   0% /dev/shm
+tmpfs                              5.0M     0  5.0M   0% /run/lock
+/dev/nvme0n1p2                     2.0G  375M  1.5G  21% /boot
+/dev/nvme0n1p1                     1.1G  6.4M  1.1G   1% /boot/efi
+tmpfs                              1.6G  4.0K  1.6G   1% /run/user/1000
+```
+
+In this example, you can see the root mount `/` is the main one with 913 GB of total disk space, of which 378 GB is used leaving 489 GB of free disk space.
+
+On linux, you can run `sudo fdisk -l` to find out more about your disks and partition. It will return something like:
+
+```
+Disk /dev/nvme0n1: 931.51 GiB, 1000204886016 bytes, 1953525168 sectors
+Disk model: WDS100T3X0C-00SJG0
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: XXX
+
+Device           Start        End    Sectors   Size Type
+/dev/nvme0n1p1    2048    2203647    2201600     1G EFI System
+/dev/nvme0n1p2 2203648    6397951    4194304     2G Linux filesystem
+/dev/nvme0n1p3 6397952 1953521663 1947123712 928.5G Linux filesystem
+
+
+Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 928.46 GiB, 996923146240 bytes, 1947115520 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+```
+
+In this example, you can see a single SSD on `/dev/nvme0n1` with a 931.51 GiB size and a few partition.
+
+On linux, if you have ncdu installed (it can be installed with `sudo apt install ncdu` on any Debian related distro), you can run `sudo ncdu -x -q /` to get some great insights into which directory and which application is using the most disk space. You can interactivly browse into the larger directories to figure out which subdirectories are using most of you disk space. It will return something like:
+
+```
+ncdu 1.15.1 ~ Use the arrow keys to navigate, press ? for help
+--- / --------------------------------------------------------------------------
+    1.0 TiB [##########] /var
+    8.0 GiB [          ] /home
+    4.0 GiB [          ]  swap.img
+    3.8 GiB [          ] /usr
+    6.2 MiB [          ] /etc
+    2.3 MiB [          ] /root
+  104.0 KiB [          ] /tmp
+   36.0 KiB [          ] /snap
+e  16.0 KiB [          ] /lost+found
+e   4.0 KiB [          ] /srv
+e   4.0 KiB [          ] /opt
+e   4.0 KiB [          ] /mnt
+e   4.0 KiB [          ] /media
+@   0.0   B [          ]  libx32
+@   0.0   B [          ]  lib64
+@   0.0   B [          ]  lib32
+@   0.0   B [          ]  sbin
+@   0.0   B [          ]  lib
+@   0.0   B [          ]  bin
+>   0.0   B [          ] /sys
+>   0.0   B [          ] /run
+```
+
+Browsing into `/var/lib` will reveal how much disk space subdirectories in that directory are using:
+
+```
+ncdu 1.15.1 ~ Use the arrow keys to navigate, press ? for help
+--- /var/lib -------------------------------------------------------------------
+                         /..
+  929.4 GiB [##########] /goethereum
+   64.7 GiB [          ] /lighthouse
+    1.1 GiB [          ] /prometheus
+    1.0 GiB [          ] /snapd
+  164.6 MiB [          ] /apt
+   32.9 MiB [          ] /dpkg
+    3.2 MiB [          ] /command-not-found
+    3.1 MiB [          ] /ubuntu-advantage
+    1.5 MiB [          ] /grafana
+    1.1 MiB [          ] /fwupd
+  704.0 KiB [          ] /usbutils
+  612.0 KiB [          ] /systemd
+  208.0 KiB [          ] /cloud
+  124.0 KiB [          ] /ucf
+   40.0 KiB [          ] /polkit-1
+   36.0 KiB [          ] /PackageKit
+   28.0 KiB [          ] /pam
+   20.0 KiB [          ] /update-notifier
+   16.0 KiB [          ] /grub
+   12.0 KiB [          ] /update-manager
+```
+
+In this example, you can see that Geth is using 929.4 GiB and Lighthouse is using 64.7 GiB since they were configured to store their databases under `/var/lib`.
+
 ### Pruning
 
 Some clients like Geth and Nethermind support pruning your existing database to lower its disk usage. The general idea is that these clients accumulate data that can be removed with a manual or automatic process.
@@ -88,6 +188,15 @@ There are some common keyboard keys that are often used during the boot process 
 - ESC or Tab: In some cases, pressing the ESC key or the Tab key during startup may display a boot menu where you can select the USB drive.
 
 Keep in mind that the exact key and the process can vary, so it's recommended to check your computer's manual or look for on-screen prompts during startup. If you're still unsure, you can provide the make and model of your computer, [we can try to find it for you](#support).
+
+5. From the live OS or tool you installed on the USB stick, select to copy or clone from a local disk to another local disk. If you are using Clonezilla, there is also an option to extend the new partition to use all the available space. Enable that option.
+6. Wait for the cloning process to complete. This can take a few hours depending on the copying speed.
+7. Shut down the machine.
+8. Remove both SSDs.
+
+### Restarting your machine
+
+Once all the data is copied onto that larger SSD, plug that larger disk into your staking or node machine. Restart that machine and you should be good to go.
 
 ## Support
 
