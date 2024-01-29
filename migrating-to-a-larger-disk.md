@@ -42,22 +42,56 @@ Different clients and configurations can lead to lower disk usage. Migrating fro
 
 ### Using Multiple Disks
 
-If your machine supports installing multiple good SSDs and your system is configured to enable extending your partitions or volumes easily, such as [with LVM](https://www.cyberciti.biz/faq/howto-add-disk-to-lvm-volume-on-linux-to-increase-size-of-pool/), adding another disk can be an interesting alternative to migrating to a bigger disk. This approach can limit the downtime it takes to add your new SSD to the machine. It has a con in terms of larger risks coming from a disk failure. Your new machine will now fail if either one of your disks fails instead of the risk coming from a single disk. Using various [RAID setups](https://en.wikipedia.org/wiki/RAID) can help alleviate the risks from disk failures in a multiple disks configuration, but it's probably overkill for home stakers and home node operators. RAID setups are out of scope for this guide.
+If your machine supports installing multiple good SSDs and your system is configured to enable extending your partitions or volumes easily, such as [with LVM](https://www.cyberciti.biz/faq/howto-add-disk-to-lvm-volume-on-linux-to-increase-size-of-pool/), adding another disk can be an interesting alternative to migrating to a larger disk. This approach can limit the downtime it takes to gain more disk space. It has a con in terms of larger risks coming from a disk failure. Your new machine will now fail if either one of your disks fails instead of the risk coming from a single disk. Using various [RAID setups](https://en.wikipedia.org/wiki/RAID) can help alleviate the risks from disk failures in a multiple disks configuration, but it's probably overkill for home stakers and home node operators. RAID setups are out of scope for this guide.
 
 ### Monitoring and Alerting
 
 A good practice is to install and configure [monitoring](monitoring.md) and [alerting](alerting.md) tools to watch your machine's free disk space.
 
-## Migrating to a Bigger Disk
+## Migrating to a Larger Disk
 
-The general idea to migrate to a bigger disk is simple.
+The general idea to migrate to a larger disk is simple.
 
 1. Stop your staking or node machine.
 2. Plug both disks into the same machine (it can be the same staking or node machine, or it can be another one).
 3. Boot into a live OS or a tool to perform the copy.
-4. Extend your volume or your partition on the new bigger disk to be able to use the full capacity.
-5. Plug the bigger disk into your staking or node machine and restart that machine.
+4. Extend your volume or your partition on the new larger disk to be able to use the full capacity.
+5. Plug the larger disk into your staking or node machine and restart that machine.
 
 From there, your machine should simply work as it did before with more disk space for its operations. Extending your volume or partition (step 4) can be performed during the copying step, after the copying step, or even after restarting your staking or node machine.
 
 ### Requirements
+
+You will need a machine where you can plug both disks at the same time. If you don't have enough room for both SSDs, you can buy an adapter like one you plug into a USB port. You will need a USB stick to put your live OS or tools on. Tools and general support to perform this on the Apple M1, M2 or M3 platform is limited. [Asahi Linux](https://asahilinux.org/) and their derivative work might be useful instead of using Clonezilla. Various [native Apple software](https://appleinsider.com/inside/mac/best/best-disk-clone-software-for-mac) could also work. We will focus on using an amd64 platform to perform the migration for this guide.
+
+### Preparing your USB stick
+
+This can be done on any machine connected to the Internet.
+
+1. Use an empty USB stick or a USB stick that does not contain any important document. Plug it in.
+2. Download [the latest stable release of Clonezilla Live](https://clonezilla.org/downloads.php). The ISO version for amd64 CPU architecture is likely what you will want.
+3. Download [Rufus](https://rufus.ie/en/) (On Windows) or [balena Etcher](https://etcher.balena.io/) (On macOS or Linux) to create your bootable USB stick.
+4. Run Rufus or balena Etcher, select the Clonezilla Live archive you downloaded at step 2 and select your USB stick. Create your bootable USB stick by following the software instructions.
+
+### Copying the content on the larger disk
+
+1. Stop the machine you want to use to perform the disk copy.
+2. Plug in both SSDs in the same machine.
+3. Plug in your bootable USB stick.
+4. Boot your machine using the USB stick image and OS. The actual instruction to boot onto a USB stick will vary from machine to machine.
+
+There are some common keyboard keys that are often used during the boot process to access the boot menu or BIOS/UEFI settings where you can choose the boot device. Here are a few possibilities:
+
+- F2 or Del: On many systems, pressing the F2 key or the Del key during the initial startup process will take you to the BIOS or UEFI settings. From there, you can navigate to the Boot menu and select the USB drive as the boot device.
+- F12 or Esc: Some systems use the F12 key or the Esc key to directly access the boot menu during startup. Pressing either of these keys should bring up a menu where you can choose the USB drive as the boot option.
+- F10 or F9: On certain computers, the F10 or F9 key might be used to access the Boot menu directly during startup.
+- ESC or Tab: In some cases, pressing the ESC key or the Tab key during startup may display a boot menu where you can select the USB drive.
+
+Keep in mind that the exact key and the process can vary, so it's recommended to check your computer's manual or look for on-screen prompts during startup. If you're still unsure, you can provide the make and model of your computer, [we can try to find it for you](#support).
+
+## Support
+
+If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:
+
+* Discord: [dsc.gg/ethstaker](https://dsc.gg/ethstaker)
+* Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
