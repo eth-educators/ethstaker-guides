@@ -12,9 +12,9 @@ On Mainnet, you should expect the current disk usage to be around **1 TB to 1.7 
 
 ## Solutions to Check Before Buying a New Disk and Migrating
 
-### Checking on your current disk usage
+### Checking Your Current Disk Usage
 
-On linux, you can run `df -h` to find out more about file system disk usage. It will return something like this:
+On Linux, you can run `df -h` to find out more about file system disk usage. It will return something like this:
 
 ```
 Filesystem                         Size  Used Avail Use% Mounted on
@@ -27,9 +27,9 @@ tmpfs                              5.0M     0  5.0M   0% /run/lock
 tmpfs                              1.6G  4.0K  1.6G   1% /run/user/1000
 ```
 
-In this example, you can see the root mount `/` is the main one with 913 GB of total disk space, of which 378 GB is used leaving 489 GB of free disk space.
+In this example, you can see the root mount `/` is the main one with 913 GB of total disk space, of which 378 GB is used, leaving 489 GB of free disk space.
 
-On linux, you can run `sudo fdisk -l` to find out more about your disks and partition. It will return something like:
+On Linux, you can run `sudo fdisk -l` to find out more about your disks and partitions. It will return something like:
 
 ```
 Disk /dev/nvme0n1: 931.51 GiB, 1000204886016 bytes, 1953525168 sectors
@@ -52,9 +52,9 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
-In this example, you can see a single SSD on `/dev/nvme0n1` with a 931.51 GiB size and a few partition.
+In this example, you can see a single SSD on `/dev/nvme0n1` with a 931.51 GiB size and a few partitions.
 
-On linux, if you have ncdu installed (it can be installed with `sudo apt install ncdu` on any Debian related distro), you can run `sudo ncdu -x -q /` to get some great insights into which directory and which application is using the most disk space. You can interactivly browse into the larger directories to figure out which subdirectories are using most of you disk space. It will return something like:
+On Linux, if you have ncdu installed (it can be installed with `sudo apt install ncdu` on any Debian-related distro), you can run `sudo ncdu -x -q /` to get some great insights into which directory and which application is using the most disk space. You can interactively browse into the larger directories to figure out which subdirectories are using most of your disk space. It will return something like:
 
 ```
 ncdu 1.15.1 ~ Use the arrow keys to navigate, press ? for help
@@ -110,7 +110,7 @@ ncdu 1.15.1 ~ Use the arrow keys to navigate, press ? for help
    12.0 KiB [          ] /update-manager
 ```
 
-In this example, you can see that Geth is using 929.4 GiB and Lighthouse is using 64.7 GiB since they were configured to store their databases under `/var/lib`.
+In this example, you can see that Geth is using 929.4 GiB, and Lighthouse is using 64.7 GiB since they were configured to store their databases under `/var/lib`.
 
 ### Pruning
 
