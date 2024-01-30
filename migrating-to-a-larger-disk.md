@@ -178,7 +178,7 @@ This can be done on any machine connected to the Internet.
 1. Stop the machine you want to use to perform the disk copy.
 2. Plug in both SSDs in the same machine.
 3. Plug in your bootable USB stick.
-4. Boot your machine using the USB stick image and OS. The actual instruction to boot onto a USB stick will vary from machine to machine.
+4. Boot your machine using the USB stick image and OS. The actual instructions to boot onto a USB stick will vary from machine to machine.
 
 There are some common keyboard keys that are often used during the boot process to access the boot menu or BIOS/UEFI settings where you can choose the boot device. Here are a few possibilities:
 
