@@ -112,6 +112,25 @@ ncdu 1.15.1 ~ Use the arrow keys to navigate, press ? for help
 
 In this example, you can see that Geth is using 929.4 GiB, and Lighthouse is using 64.7 GiB since they were configured to store their databases under `/var/lib`.
 
+On linux, you can run `lsblk` to list your block devices in a tree-like format. It will return something like this:
+
+```
+NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0                       7:0    0  63.4M  1 loop /snap/core20/1974
+loop1                       7:1    0  63.9M  1 loop /snap/core20/2105
+loop2                       7:2    0 111.9M  1 loop /snap/lxd/24322
+loop3                       7:3    0 114.4M  1 loop /snap/lxd/26741
+loop4                       7:4    0  53.3M  1 loop /snap/snapd/19457
+loop5                       7:5    0  40.4M  1 loop /snap/snapd/20671
+nvme0n1                   259:0    0   1.8T  0 disk
+├─nvme0n1p1               259:1    0     1G  0 part /boot/efi
+├─nvme0n1p2               259:2    0     2G  0 part /boot
+└─nvme0n1p3               259:3    0   1.8T  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0   1.8T  0 lvm  /
+```
+
+In this example, you can see the only disk being `nvme0n1` with 3 partitions and a logical volume using LVM.
+
 ### Pruning
 
 Some clients like Geth and Nethermind support pruning your existing database to lower its disk usage. The general idea is that these clients accumulate data that can be removed with a manual or automatic process.
