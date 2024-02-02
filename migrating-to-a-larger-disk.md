@@ -14,7 +14,7 @@ On Mainnet, you should expect the current disk usage to be around **1 TB to 1.7 
 
 ### Checking Your Current Disk Usage
 
-On Linux, you can run `df -h` to find out more about file system disk usage. It will return something like this:
+On Linux, you can run `df -h` to find out more about filesystem disk usage. It will return something like this:
 
 ```
 Filesystem                         Size  Used Avail Use% Mounted on
@@ -155,10 +155,10 @@ The general idea to migrate to a larger disk is simple.
 1. Stop your staking or node machine.
 2. Plug both disks into the same machine (it can be the same staking or node machine, or it can be another one).
 3. Boot into a live OS or a tool to perform the copy.
-4. Extend your volume or your partition on the new larger disk to be able to use the full capacity.
+4. Extend your volumes, your partitions and your filesystems on the new larger disk to be able to use the full capacity.
 5. Plug the larger disk into your staking or node machine and restart that machine.
 
-From there, your machine should simply work as it did before with more disk space for its operations. Extending your volume or partition (step 4) can be performed during the copying step, after the copying step, or even after restarting your staking or node machine.
+From there, your machine should simply work as it did before with more disk space for its operations. Extending your volumes, partitions and filesystems (step 4) can be performed during the copying step, after the copying step, or even after restarting your staking or node machine.
 
 ### Requirements
 
@@ -189,7 +189,7 @@ There are some common keyboard keys that are often used during the boot process 
 
 Keep in mind that the exact key and the process can vary, so it's recommended to check your computer's manual or look for on-screen prompts during startup. If you're still unsure, you can provide the make and model of your computer, [we can try to find it for you](#support).
 
-5. From the live OS or tool you installed on the USB stick, select to copy or clone from a local disk to another local disk. If you are using Clonezilla, there is also an option to extend the new partition to use all the available space. Enable that option.
+5. From the live OS or tool you installed on the USB stick, select to copy or clone from a local disk to another local disk. If you are using Clonezilla, there is also an option to extend the new partitions to use all the available space. Enable that option.
 6. Wait for the cloning process to complete. This can take a few hours depending on the copying speed.
 7. Shut down the machine.
 8. Remove both SSDs.
@@ -197,6 +197,21 @@ Keep in mind that the exact key and the process can vary, so it's recommended to
 ### Restarting your machine
 
 Once all the data is copied onto that larger SSD, plug that larger disk into your staking or node machine. Restart that machine and you should be good to go.
+
+### Resizing your volumes with LVM
+
+[LVM](https://en.wikipedia.org/wiki/Logical_volume_management) adds a few interesting features and it is the default option when installing and configuring a new Ubuntu 22.04 system. It also adds some complexity when migrating to a larger disk. If you are using LVM, you will need to resize your physical volume, you will need to extend your logical volume and you will likely need to resize your filesystem. This can be done after rebooting on your larger disk while it is running. This can be done with these commands:
+
+```
+sudo pvresize [physical volume path]
+sudo lvextend -l +100%FREE --resizefs [logical volume path]
+```
+
+where `[physical volume path]` is replaced with your physical volume path and `[logical volume path]` is replaced with your logical volume path. You can list all your system physical volumes, volume groups and logical volumes including their paths with `sudo vgdisplay -v`. Including the `--resizefs` flag with the `lvextend` command above will automatically resize the underlying filesystem meaning that you can skip the next section.
+
+### Resizing your filesystem
+
+Some filesystems will need to be resized in order to account for their underlying partition size change. If you are using [ext4](https://en.wikipedia.org/wiki/Ext4) which is common on Linux, you can simply execute `sudo resize2fs [filesystem device]` where `[filesystem device]` is replaced with your filesystem device path. You can list all the filesystems and their type with `df -T` to obtain your filesystem device path. This can be done after rebooting on your larger disk while it is running.
 
 ## What's next?
 
