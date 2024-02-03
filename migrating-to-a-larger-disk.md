@@ -221,16 +221,31 @@ Once all the data is copied onto that larger SSD, plug that larger disk into you
 
 [LVM](https://en.wikipedia.org/wiki/Logical_volume_management) adds a few interesting features and it is the default option when installing and configuring a new Ubuntu 22.04 system. It also adds some complexity when migrating to a larger disk. If you are using LVM, you will need to resize your physical volume, you will need to extend your logical volume and you will likely need to resize your filesystem. This can be done after rebooting on your larger disk while it is running. This can be done with these commands:
 
-```
+```console
 sudo pvresize [physical volume path]
 sudo lvextend -l +100%FREE --resizefs [logical volume path]
 ```
 
-where `[physical volume path]` is replaced with your physical volume path and `[logical volume path]` is replaced with your logical volume path. You can list all your system physical volumes, volume groups and logical volumes including their paths with `sudo vgdisplay -v`. Including the `--resizefs` flag with the `lvextend` command above will automatically resize the underlying filesystem meaning that you can skip the next section.
+where `[physical volume path]` is replaced with your physical volume path and `[logical volume path]` is replaced with your logical volume path.
+
+Here is a concrete example of using this command.
+
+```console
+sudo pvresize /dev/nvme0n1p3
+sudo lvextend -l +100%FREE --resizefs /dev/ubuntu-vg/ubuntu-lv
+```
+
+You can list all your system physical volumes, volume groups and logical volumes including their paths with `sudo vgdisplay -v`. Including the `--resizefs` flag with the `lvextend` command above will automatically resize the underlying filesystem meaning that you can skip the next section.
 
 ### Resizing your filesystem
 
 Some filesystems will need to be resized in order to account for their underlying partition size change. If you are using [ext4](https://en.wikipedia.org/wiki/Ext4) which is common on Linux, you can simply execute `sudo resize2fs [filesystem device]` where `[filesystem device]` is replaced with your filesystem device path. You can list all the filesystems and their type with `df -T` to obtain your filesystem device path. This can be done after rebooting on your larger disk while it is running.
+
+Here is a concrete example of using this command.
+
+```console
+sudo resize2fs /dev/ubuntu-vg/ubuntu-lv
+```
 
 ## What's next?
 
