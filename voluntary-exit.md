@@ -162,11 +162,11 @@ For Mainnet:
 - https://files.ethstaker.cc/offline-preparation-mainnet.zip
 - https://files.ethstaker.cc/offline-preparation-mainnet.zip.sha256
 
-For Goerli:
-- https://files.ethstaker.cc/offline-preparation-goerli.tar.gz
-- https://files.ethstaker.cc/offline-preparation-goerli.tar.gz.sha256
-- https://files.ethstaker.cc/offline-preparation-goerli.zip
-- https://files.ethstaker.cc/offline-preparation-goerli.zip.sha256
+For Holesky:
+- https://files.ethstaker.cc/offline-preparation-holesky.tar.gz
+- https://files.ethstaker.cc/offline-preparation-holesky.tar.gz.sha256
+- https://files.ethstaker.cc/offline-preparation-holesky.zip
+- https://files.ethstaker.cc/offline-preparation-holesky.zip.sha256
 
 ### Finalizing your documents
 
