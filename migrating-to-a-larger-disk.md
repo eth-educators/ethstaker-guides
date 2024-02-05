@@ -254,6 +254,8 @@ Finally, you can select an action to be performed when Clonezilla is done with i
 
 Once you answer all these questions, you will be asked to confirm everything. As Clonezilla perform the disk clone, you will see a progress dialog displaying an estimate of the remaining time.
 
+![Clonezilla - Progress Dialog](images/clonezilla-progress-dialog.png)
+
 6. Wait for the cloning process to complete. This can take a few hours depending on the copying speed.
 7. Shut down the machine.
 8. Remove both SSDs.
