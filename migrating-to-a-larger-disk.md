@@ -183,6 +183,8 @@ From there, your machine should simply work as it did before with more disk spac
 
 You will need a machine where you can plug both disks at the same time. If you don't have enough room for both SSDs, you can buy an adapter like one you plug into a USB port. You will need a USB stick to put your live OS or tools on. Tools and general support to perform this on the Apple M1, M2 or M3 platform is limited. [Asahi Linux](https://asahilinux.org/) and their derivative work might be useful instead of using Clonezilla. Various [native Apple software](https://appleinsider.com/inside/mac/best/best-disk-clone-software-for-mac) could also work. We will focus on using an amd64 platform to perform the migration for this guide.
 
+There are commercial software alternatives to using [Clonezilla](https://clonezilla.org/) (EaseUS Todo Backup, Macrium Reflect, Acronis Cyber Protect Home Office, AOMEI Backupper, etc) for disk cloning. The main pros of using Clonezilla are that it is free and open source. The cons of using Clonezilla include limited support and a text-based user interface. [Rescuezilla](https://rescuezilla.com/) is a nice GUI on top of Clonezilla if you are intimidated by the text-based user interface.
+
 ### Preparing your USB stick
 
 This can be done on any machine connected to the Internet.
@@ -208,7 +210,50 @@ There are some common keyboard keys that are often used during the boot process 
 
 Keep in mind that the exact key and the process can vary, so it's recommended to check your computer's manual or look for on-screen prompts during startup. If you're still unsure, you can provide the make and model of your computer, [we can try to find it for you](#support).
 
-5. From the live OS or tool you installed on the USB stick, select to copy or clone from a local disk to another local disk. If you are using Clonezilla, there is also an option to extend the new partitions to use all the available space. Enable that option.
+5. From the live OS or tool you installed on the USB stick, select to copy or clone from a local disk to another local disk. If you are using Clonezilla, there is also an option to extend the new partitions to use all the available space (`-k1` *Create partition table proportionally*). Enable that option.
+
+When booting from the Clonezilla Live you can choose the default option, *Clonezilla live (VGA 800x600)*.
+
+![Clonezilla - Boot menu](images/clonezilla-boot-menu.png)
+
+Start the regular text-based user interface by choosing the default option, *Start Clonezilla*.
+
+![Clonezilla - Start](images/clonezilla-start.png)
+
+Select the *device-device* mode to clone a full disk to another one.
+
+![Clonezilla - Mode](images/clonezilla-mode.png)
+
+Choose the *Beginner* mode for advanced parameters.
+
+![Clonezilla - Advanced Mode](images/clonezilla-advanced-mode.png)
+
+Select the *disk_to_local_disk* clone mode.
+
+![Clonezilla - Disk Mode](images/clonezilla-disk-mode.png)
+
+Select your small disk as the source disk.
+
+![Clonezilla - Source Disk](images/clonezilla-source-disk.png)
+
+Select your larger disk as the target disk.
+
+![Clonezilla - Target Disk](images/clonezilla-target-disk.png)
+
+You can select the *-sfsck* option to skip checking/repairing the source file system.
+
+![Clonezilla - Repair FS](images/clonezilla-repair-fs.png)
+
+If you want to automatically expand your partitions, select the *-k1* option to *Create partition table proportionally* on the larger disk. If you do not select this option, you will need to manually expand your partitions afterwards.
+
+![Clonezilla - Partition Resize](images/clonezilla-partition-resize.png)
+
+Finally, you can select an action to be performed when Clonezilla is done with its task.
+
+![Clonezilla - Finish Action](images/clonezilla-finish-action.png)
+
+Once you answer all these questions, you will be asked to confirm everything. As Clonezilla perform the disk clone, you will see a progress dialog displaying an estimate of the remaining time.
+
 6. Wait for the cloning process to complete. This can take a few hours depending on the copying speed.
 7. Shut down the machine.
 8. Remove both SSDs.
