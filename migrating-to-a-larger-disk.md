@@ -4,6 +4,8 @@ Disk usage is a constant concern for stakers and node operators. The blockchain 
 
 This guide is meant for people with little or no experience migrating to a larger disk. It will show you step by step how to check your disk usage, which solutions are possible to manage disk usage, which tools you will need to migrate to a larger disk, and the process of migrating to a larger disk. It will assume you are using a modern Linux distribution to run your staker or node operating system. Many of these instructions and steps are possible on Windows or macOS, but this is out of scope for this guide.
 
+A video tutorial of this guide can be seen on https://youtu.be/xWyf84Syq7o .
+
 If you know what you are doing, you can simply read the [Migrating to a Larger Disk](#migrating-to-a-larger-disk) section.
 
 ## Current Expected Disk Usage
