@@ -298,7 +298,7 @@ sudo resize2fs /dev/ubuntu-vg/ubuntu-lv
 
 ## What's next?
 
-Once you confirm that the larger SSD works fine, you should format and erase all the data from your smaller disk especially if you are running a staking machine. The main consern is running both of these disks at the same time and potentially creating a slashing event.
+Once you confirm that the larger SSD works fine, you should format and erase all the data from your smaller disk especially if you are running a staking machine. The main concern is running both of these disks at the same time and potentially creating a slashing event.
 
 ## Support
 
