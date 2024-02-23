@@ -276,7 +276,7 @@ Paste the following service configuration into the file. Exit and save once done
 
 ```ini
 [Unit]
-Description=Lighthouse Ethereum Client Validator Client (Holesky)
+Description=Lighthouse Validator Client (Holesky)
 Wants=network-online.target
 After=network-online.target
 
