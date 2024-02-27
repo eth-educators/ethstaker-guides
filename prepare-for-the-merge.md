@@ -191,25 +191,25 @@ Create a user account for the service to run under. This account will not be abl
 $ sudo useradd --no-create-home --shell /bin/false mevboost
 ```
 
-Download the latest stable version of mev-boost from https://github.com/flashbots/mev-boost/releases (avoid any pre-release version). As of this date, the latest stable release version is 1.6 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should likely end with *linux_amd64.tar.gz* (for linux and AMD64 instructions set). Use a different archive if you are on a different architecture or a different operating system.
+Download the latest stable version of mev-boost from https://github.com/flashbots/mev-boost/releases (avoid any pre-release version). As of this date, the latest stable release version is 1.7 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should likely end with *linux_amd64.tar.gz* (for linux and AMD64 instructions set). Use a different archive if you are on a different architecture or a different operating system.
 
 ```console
 $ cd ~
-$ wget https://github.com/flashbots/mev-boost/releases/download/v1.6/mev-boost_1.6_linux_amd64.tar.gz
+$ wget https://github.com/flashbots/mev-boost/releases/download/v1.7/mev-boost_1.7_linux_amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown [in the checksums.txt file](https://github.com/flashbots/mev-boost/releases) is the same as the file we just downloaded.
 
 ```console
-$ sha256sum mev-boost_1.6_linux_amd64.tar.gz
+$ sha256sum mev-boost_1.7_linux_amd64.tar.gz
 ```
 
 Extract the archive. Install mev-boost globally and remove the download leftovers.
 
 ```console
-$ tar xvf mev-boost_1.6_linux_amd64.tar.gz
+$ tar xvf mev-boost_1.7_linux_amd64.tar.gz
 $ sudo cp mev-boost /usr/local/bin
-$ rm mev-boost LICENSE README.md mev-boost_1.6_linux_amd64.tar.gz
+$ rm mev-boost LICENSE README.md mev-boost_1.7_linux_amd64.tar.gz
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 ```
 
@@ -294,12 +294,12 @@ When a new version is released, you can update mev-boost. Find the latest stable
 
 ```console
 $ cd ~
-$ wget https://github.com/flashbots/mev-boost/releases/download/v1.6/mev-boost_1.6_linux_amd64.tar.gz
-$ sha256sum mev-boost_1.6_linux_amd64.tar.gz
-$ tar xvf mev-boost_1.6_linux_amd64.tar.gz
+$ wget https://github.com/flashbots/mev-boost/releases/download/v1.7/mev-boost_1.7_linux_amd64.tar.gz
+$ sha256sum mev-boost_1.7_linux_amd64.tar.gz
+$ tar xvf mev-boost_1.7_linux_amd64.tar.gz
 $ sudo systemctl stop mevboost
 $ sudo cp mev-boost /usr/local/bin
-$ rm mev-boost LICENSE README.md mev-boost_1.6_linux_amd64.tar.gz
+$ rm mev-boost LICENSE README.md mev-boost_1.7_linux_amd64.tar.gz
 $ sudo chown mevboost:mevboost /usr/local/bin/mev-boost
 $ sudo systemctl start mevboost
 ```
