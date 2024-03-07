@@ -26,7 +26,6 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 ## External relay monitoring
 
 * [MEV Panda](https://www.mevpanda.com) by OreoMev
-* [Uptime Monitor](https://mev-relays.beaconstate.info/) by 1337
 * [mevboost.pics](https://www.mevboost.pics/) by Toni Wahrstätter
 * [timing.pics](https://timing.pics) by Toni Wahrstätter
 * [tornado.pics](https://tornado.pics) by Toni Wahrstätter
