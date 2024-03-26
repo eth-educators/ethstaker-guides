@@ -40,32 +40,6 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 * [Inclusion Watch](https://www.inclusion.watch) by donnoh.eth and emiliano.eth
 * [Neutrality Watch](https://eth.neutralitywatch.com/) specifically analyses Lido operators. [Github](https://github.com/mikgur/Ethereum-censorability-monitor).
 
-# MEV relay list for Goerli testnet
-
-Here is a list of MEV relays for the Ethereum Goerli test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
-
-Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
-
-| Operator | Notes | Relay URL |
-|----------|-------|-----------|
-| [Flashbots](https://www.flashbots.net/) | | `https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@builder-relay-goerli.flashbots.net` |
-| [bloXroute](https://bloxroute.com/) | [Max profit relay](https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators#relay-types) that propagates all available transactions/bundles with no filtering. | `https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.max-profit.builder.goerli.blxrbdn.com` |
-| [Eden Network](https://v2.docs.edennetwork.io/) |  | `https://0xb1d229d9c21298a87846c7022ebeef277dfc321fe674fa45312e20b5b6c400bfde9383f801848d7837ed5fc449083a12@relay-goerli.edennetwork.io` |
-| [Manifold](https://securerpc.com/) |  | `https://0x8a72a5ec3e2909fff931c8b42c9e0e6c6e660ac48a98016777fc63a73316b3ffb5c622495106277f8dbcc17a06e92ca3@goerli-relay.securerpc.com/` |
-| [Ultra Sound](https://relay-stag.ultrasound.money) |  | `https://0xb1559beef7b5ba3127485bbbb090362d9f497ba64e177ee2c8e7db74746306efad687f2cf8574e38d70067d40ef136dc@relay-stag.ultrasound.money` |
-| [Wenmerge](https://goerli-relay.wenmerge.com) | Relay from [Wenmerge](https://wenmerge.com) | `https://0x88d0cc4b8139580d176cf6863db874ee9c505fc3f6362aa005fd9a91f7ea8b47ba026c424a678e072fd67ba6e952e1a1@goerli-relay.wenmerge.com` |
-| [Frontier Relay](https://frontier.tech) |  | `https://0x95a0a6af2566fa7db732020bb2724be61963ac1eb760aa1046365eb443bd4e3cc0fba0265d40a2d81dd94366643e986a@goerli-blockspace.frontier.tech` |
-
-# MEV relay list for Sepolia testnet
-
-Here is a list of MEV relays for the Ethereum Sepolia test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
-
-Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
-
-| Operator | Notes | Relay URL |
-|----------|-------|-----------|
-| [Flashbots](https://www.flashbots.net/) | | `https://0x845bd072b7cd566f02faeb0a4033ce9399e42839ced64e8b2adcfc859ed1e8e1a5a293336a49feac6d9a5edb779be53a@boost-relay-sepolia.flashbots.net` |
-
 # MEV relay list for Holesky testnet
 
 Here is a list of MEV relays for the Ethereum Holesky test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
@@ -77,6 +51,16 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Flashbots](https://www.flashbots.net/) | | `https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@boost-relay-holesky.flashbots.net` |
 | [Aestus](https://holesky.aestus.live/) | | `https://0xab78bf8c781c58078c3beb5710c57940874dd96aef2835e7742c866b4c7c0406754376c2c8285a36c630346aa5c5f833@holesky.aestus.live` |
 | [Titan](https://holesky.titanrelay.xyz/) | | `https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@holesky.titanrelay.xyz` |
+
+# MEV relay list for Sepolia testnet
+
+Here is a list of MEV relays for the Ethereum Sepolia test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
+
+Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
+
+| Operator | Notes | Relay URL |
+|----------|-------|-----------|
+| [Flashbots](https://www.flashbots.net/) | | `https://0x845bd072b7cd566f02faeb0a4033ce9399e42839ced64e8b2adcfc859ed1e8e1a5a293336a49feac6d9a5edb779be53a@boost-relay-sepolia.flashbots.net` |
 
 # Configuring MEV boost software
 
