@@ -14,7 +14,7 @@ On Mainnet, you should expect the current disk usage to be around **1 TB to 1.7 
 
 ## Solutions to Check Before Buying a New Disk and Migrating
 
-I recommend running ncdu as describe below as the first step to figure out exactly which application or directory is consuming the most disk space. A common low-hanging fruit is to [resync your consensus client with a checkpoint sync endpoint](#updating-and-resyncing-from-scratch) especially if it has been a while since your last resync. If your consensus client is using way more than around 110 GB of disk space, you will likely benefit from this resync. If your execution client is using way more than 1.0 TB of disk space, there are ways to improve described below.
+I recommend running ncdu has described below as the first step to figure out exactly which application or directory is consuming the most disk space. A common low-hanging fruit is to [resync your consensus client with a checkpoint sync endpoint](#updating-and-resyncing-from-scratch) especially if it has been a while since your last resync. If your consensus client is using way more than around 110 GB of disk space, you will likely benefit from this resync. If your execution client is using way more than 1.0 TB of disk space, there are ways to improve described below.
 
 ### Checking Your Current Disk Usage
 
