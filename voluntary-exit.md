@@ -195,7 +195,7 @@ sha256sum ethdo-1.35.2-linux-amd64.tar.gz
 cat ethdo-1.35.2-linux-amd64.tar.gz.sha256
 ```
 
-Both of these output values should have matching checksum. As of today and for version `1.35.2`, they should both be `6af0e3fbd841ae2267028f59ef037ad897dc7c1c60eb1b7a90f30234ed4d427a`. If they do not match, there might be a security issue and you should seek further support.
+Both of these output values should have matching checksum. As of today and for version `1.35.2`, they should both be `047a05eed50f03299cc64a3fdfa7e8111c7e23c41a066699ef66740d95044805`. If they do not match, there might be a security issue and you should seek further support.
 
 Extract the ethdo archive.
 
