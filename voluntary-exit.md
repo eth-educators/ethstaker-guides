@@ -8,7 +8,7 @@ There are a lot of different ways to perform a voluntary exit. Each consensus cl
 
 - [Prysm](https://docs.prylabs.network/docs/wallet/exiting-a-validator)
 - [Nimbus](https://nimbus.guide/voluntary-exit.html)
-- [Lodestar](https://chainsafe.github.io/lodestar/reference/cli/#validator-voluntary-exit)
+- [Lodestar](https://chainsafe.github.io/lodestar/run/validator-management/validator-cli#validator-voluntary-exit)
 - [Teku](https://docs.teku.consensys.net/HowTo/Voluntary-Exit)
 - [Lighthouse](https://lighthouse-book.sigmaprime.io/voluntary-exit.html)
 
