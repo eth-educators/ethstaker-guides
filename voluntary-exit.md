@@ -246,7 +246,7 @@ As a template, the command call looks like:
 Here is a concrete example of using this command.
 
 ```console
-./ethdo validator exit --validator=459921 --json --offline --mnemonic="silent hill auto ability front sting tunnel empower venture once wise local suffer repeat deny deliver hawk silk wedding random coil you town narrow" > 459921-exit.json
+./ethdo validator exit --validator=459921 --json --offline --mnemonic="silent hill auto ability front string tunnel empower venture once wise local suffer repeat deny deliver hawk silk wedding random coil you town narrow" > 459921-exit.json
 ```
 
 In this example, it would result in a file named `459921-exit.json` in your home folder for performing the voluntary exit of validator 459921.
