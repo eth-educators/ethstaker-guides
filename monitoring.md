@@ -393,7 +393,7 @@ Modify the configuration file by removing the semicolon (`;`) in front of `http_
 ;protocol = http
 
 # The ip address to bind to, empty will bind to all interfaces
-http_addr = localhost
+http_addr = 127.0.0.1
 ```
 
 Reload systemd to reflect the changes.
