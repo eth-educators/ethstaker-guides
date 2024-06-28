@@ -35,10 +35,10 @@ Download [the latest release version for Nethermind](https://github.com/Nethermi
 
 ```console
 $ cd ~
-$ wget https://github.com/NethermindEth/nethermind/releases/download/1.25.4/nethermind-1.25.4-20b10b35-linux-x64.zip
+$ wget https://github.com/NethermindEth/nethermind/releases/download/1.27.0/nethermind-1.27.0-220b5b85-linux-x64.zip
 $ sudo mkdir -p /usr/share/nethermind
-$ sudo unzip nethermind-1.25.4-20b10b35-linux-x64.zip -d /usr/share/nethermind
-$ rm nethermind-1.25.4-20b10b35-linux-x64.zip
+$ sudo unzip nethermind-1.27.0-220b5b85-linux-x64.zip -d /usr/share/nethermind
+$ rm nethermind-1.27.0-220b5b85-linux-x64.zip
 ```
 
 ## Installing Lighthouse
@@ -47,9 +47,9 @@ Download [the latest release version for Lighthouse](https://github.com/sigp/lig
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v5.0.0/lighthouse-v5.0.0-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v5.0.0-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v5.0.0-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/sigp/lighthouse/releases/download/v5.2.1/lighthouse-v5.2.1-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v5.2.1-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v5.2.1-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Lighthouse version globally.
