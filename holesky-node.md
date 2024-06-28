@@ -26,7 +26,7 @@ $ sudo apt -y upgrade
 Install prerequisites commonly available.
 
 ```console
-$ sudo apt -y install wget curl ccze unzip libsnappy-dev
+$ sudo apt -y install wget curl ccze unzip
 ```
 
 ## Installing Nethermind
