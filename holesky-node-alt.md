@@ -35,9 +35,9 @@ Download [the latest release version for Reth](https://github.com/paradigmxyz/re
 
 ```console
 $ cd ~
-$ wget https://github.com/paradigmxyz/reth/releases/download/v1.0.0/reth-v1.0.0-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf reth-v1.0.0-x86_64-unknown-linux-gnu.tar.gz
-$ rm reth-v1.0.0-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/paradigmxyz/reth/releases/download/v1.0.1/reth-v1.0.1-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf reth-v1.0.1-x86_64-unknown-linux-gnu.tar.gz
+$ rm reth-v1.0.1-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Reth version globally.
