@@ -53,9 +53,9 @@ Download [the latest release version for Lodestar](https://github.com/ChainSafe/
 
 ```console
 $ cd ~
-$ wget https://github.com/ChainSafe/lodestar/releases/download/v1.20.0/lodestar-v1.20.0-linux-amd64.tar.gz
-$ tar xvf lodestar-v1.20.0-linux-amd64.tar.gz
-$ rm lodestar-v1.20.0-linux-amd64.tar.gz
+$ wget https://github.com/ChainSafe/lodestar/releases/download/v1.20.1/lodestar-v1.20.1-linux-amd64.tar.gz
+$ tar xvf lodestar-v1.20.1-linux-amd64.tar.gz
+$ rm lodestar-v1.20.1-linux-amd64.tar.gz
 ```
 
 Install this Lodestar version globally.
