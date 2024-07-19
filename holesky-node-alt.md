@@ -35,9 +35,9 @@ Download [the latest release version for Reth](https://github.com/paradigmxyz/re
 
 ```console
 $ cd ~
-$ wget https://github.com/paradigmxyz/reth/releases/download/v1.0.1/reth-v1.0.1-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf reth-v1.0.1-x86_64-unknown-linux-gnu.tar.gz
-$ rm reth-v1.0.1-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/paradigmxyz/reth/releases/download/v1.0.3/reth-v1.0.3-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf reth-v1.0.3-x86_64-unknown-linux-gnu.tar.gz
+$ rm reth-v1.0.3-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Reth version globally.
@@ -53,9 +53,9 @@ Download [the latest release version for Lodestar](https://github.com/ChainSafe/
 
 ```console
 $ cd ~
-$ wget https://github.com/ChainSafe/lodestar/releases/download/v1.20.1/lodestar-v1.20.1-linux-amd64.tar.gz
-$ tar xvf lodestar-v1.20.1-linux-amd64.tar.gz
-$ rm lodestar-v1.20.1-linux-amd64.tar.gz
+$ wget https://github.com/ChainSafe/lodestar/releases/download/v1.20.2/lodestar-v1.20.2-linux-amd64.tar.gz
+$ tar xvf lodestar-v1.20.2-linux-amd64.tar.gz
+$ rm lodestar-v1.20.2-linux-amd64.tar.gz
 ```
 
 Install this Lodestar version globally.
