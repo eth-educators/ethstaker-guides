@@ -245,7 +245,9 @@ WantedBy=multi-user.target
 
 You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`.
 
-Selecting your relays **can be an important decision** for some stakers. Some relay might sensor transactions. Some relay might be more *ethical* in terms of which strategies they accept or not. You should do your own diligence when selecting which relay you want to use.
+You can change the min-bid value to reflect how much you want to use the MEV relays in relation to how much they are offering in terms of rewards. There is little value in giving all block production to MEV relays if they are not to offer any substancial rewards in exchange. The 0.05 ETH min-bid value is a good compromise. You can learn more on about this on [The Cost of Resilience](https://writings.flashbots.net/the-cost-of-resilience/).
+
+Selecting your relays **can be an important decision** for some stakers. Some relay might sensor transactions. Some relay might be more *ethical* in terms of which strategies they accept or not. You should do your own diligence when selecting which relay you want to use. EthStaker has nice list of [MEV relays](https://ethstaker.cc/mev-relay-list) to choose from.
 
 Reload systemd to reflect the changes. If you edit that file again to add or remove relays, you need will to reload systemd again to reflect the changes before restarting your mev-boost service.
 
