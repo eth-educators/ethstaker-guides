@@ -40,36 +40,36 @@ Create a user account for the service to run under. This account will not be abl
 $ sudo useradd --no-create-home --shell /bin/false node_exporter
 ```
 
-Download the latest stable version of Node Exporter from https://prometheus.io/download/#node_exporter (avoid any pre-release version). As of this date, the latest stable release version is 1.6.1 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Node Exporter from https://prometheus.io/download/#node_exporter (avoid any pre-release version). As of this date, the latest stable release version is 1.8.2 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
-$ wget https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
+$ wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown on https://prometheus.io/download/#node_exporter is the same as the file we just downloaded.
 
 ```console
-$ sha256sum node_exporter-1.6.1.linux-amd64.tar.gz
+$ sha256sum node_exporter-1.8.2.linux-amd64.tar.gz
 ```
 
 Extract the archive.
 
 ```console
-$ tar xvf node_exporter-1.6.1.linux-amd64.tar.gz
+$ tar xvf node_exporter-1.8.2.linux-amd64.tar.gz
 ```
 
 Copy the binary to the following location and set ownership.
 
 ```console
-$ sudo cp node_exporter-1.6.1.linux-amd64/node_exporter /usr/local/bin
+$ sudo cp node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin
 $ sudo chown -R node_exporter:node_exporter /usr/local/bin/node_exporter
 ```
 
 Remove the download leftovers.
 
 ```console
-$ rm -rf node_exporter-1.6.1.linux-amd64
-$ rm node_exporter-1.6.1.linux-amd64.tar.gz
+$ rm -rf node_exporter-1.8.2.linux-amd64
+$ rm node_exporter-1.8.2.linux-amd64.tar.gz
 ```
 
 Create a systemd service file to store the service config which tells systemd to run Node Exporter as the node_exporter user.
@@ -161,29 +161,29 @@ $ sudo chown -R prometheus:prometheus /etc/prometheus
 $ sudo chown -R prometheus:prometheus /var/lib/prometheus
 ```
 
-Download the latest stable version of Prometheus from https://prometheus.io/download/#prometheus (avoid any pre-release version). As of this date, the latest stable release version is 2.47.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
+Download the latest stable version of Prometheus from https://prometheus.io/download/#prometheus (avoid any pre-release version). As of this date, the latest stable release version is 2.54.1 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with *linux-amd64.tar.gz* (for linux and AMD64 instructions set).
 
 ```console
-$ wget https://github.com/prometheus/prometheus/releases/download/v2.47.0/prometheus-2.47.0.linux-amd64.tar.gz
+$ wget https://github.com/prometheus/prometheus/releases/download/v2.54.1/prometheus-2.54.1.linux-amd64.tar.gz
 ```
 
 Verify that the SHA256 Checksum as shown on https://prometheus.io/download/#prometheus is the same as the file we just downloaded.
 
 ```console
-$ sha256sum prometheus-2.47.0.linux-amd64.tar.gz
+$ sha256sum prometheus-2.54.1.linux-amd64.tar.gz
 ```
 
 Extract the archive.
 
 ```console
-$ tar xvf prometheus-2.47.0.linux-amd64.tar.gz
+$ tar xvf prometheus-2.54.1.linux-amd64.tar.gz
 ```
 
 Copy the binaries to the following locations and set ownership.
 
 ```console
-$ sudo cp prometheus-2.47.0.linux-amd64/prometheus /usr/local/bin/
-$ sudo cp prometheus-2.47.0.linux-amd64/promtool /usr/local/bin/
+$ sudo cp prometheus-2.54.1.linux-amd64/prometheus /usr/local/bin/
+$ sudo cp prometheus-2.54.1.linux-amd64/promtool /usr/local/bin/
 $ sudo chown -R prometheus:prometheus /usr/local/bin/prometheus
 $ sudo chown -R prometheus:prometheus /usr/local/bin/promtool
 ```
@@ -191,8 +191,8 @@ $ sudo chown -R prometheus:prometheus /usr/local/bin/promtool
 Copy the content files to the following locations and set ownership.
 
 ```console
-$ sudo cp -r prometheus-2.47.0.linux-amd64/consoles /etc/prometheus
-$ sudo cp -r prometheus-2.47.0.linux-amd64/console_libraries /etc/prometheus
+$ sudo cp -r prometheus-2.54.1.linux-amd64/consoles /etc/prometheus
+$ sudo cp -r prometheus-2.54.1.linux-amd64/console_libraries /etc/prometheus
 $ sudo chown -R prometheus:prometheus /etc/prometheus/consoles
 $ sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
 ```
@@ -200,8 +200,8 @@ $ sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
 Remove the download leftovers.
 
 ```console
-$ rm -rf prometheus-2.47.0.linux-amd64
-$ rm prometheus-2.47.0.linux-amd64.tar.gz
+$ rm -rf prometheus-2.54.1.linux-amd64
+$ rm prometheus-2.54.1.linux-amd64.tar.gz
 ```
 
 Setup the Prometheus configuration file. Open the YAML config file for editing.
