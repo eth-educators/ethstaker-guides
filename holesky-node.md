@@ -1,4 +1,4 @@
-# Guide on how to setup a Holeksy testnet node (Nethermind/Lighthouse)
+# Guide on how to setup a Holesky testnet node (Nethermind/Lighthouse)
 
 [Holešky](https://github.com/eth-clients/holesky) is a new Ethereum testnet meant to replace Goerli as a staking, infrastructure and protocol-developer testnet.
 
