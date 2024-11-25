@@ -125,18 +125,6 @@ def update_prometheus(release_data):
                 subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_prometheus_path])
                 subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_promtool_path])
 
-                print('Updating installed Prometheus content...')
-                extracted_consoles_path = extracted_directory + '/' + 'consoles'
-                extracted_console_libraries_path = extracted_directory + '/' + 'console_libraries'
-                installed_consoles_path = PROMETHEUS_DATA_PATH + 'consoles'
-                installed_console_libraries_path = PROMETHEUS_DATA_PATH + 'console_libraries'
-                subprocess.run(['sudo', 'rm', '-rf', installed_consoles_path])
-                subprocess.run(['sudo', 'rm', '-rf', installed_console_libraries_path])
-                subprocess.run(['sudo', 'cp', '-r', extracted_consoles_path, PROMETHEUS_DATA_PATH])
-                subprocess.run(['sudo', 'cp', '-r', extracted_console_libraries_path, PROMETHEUS_DATA_PATH])
-                subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_consoles_path])
-                subprocess.run(['sudo', 'chown', '-R', PROMETHEUS_USER_GROUP, installed_console_libraries_path])
-
                 print('Restarting Prometheus service...')
                 subprocess.run(['sudo', 'systemctl', 'start', PROMETHEUS_SERVICE_NAME])
         else:
