@@ -1,6 +1,13 @@
 # MEV relay list for Mainnet
 
-Here is a list of MEV relays for the Ethereum Mainnet network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
+Here is a list of MEV relays for the Ethereum Mainnet network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit. 
+
+> [!NOTE]
+> Clients like Prysm weigh locally built blocks with a percentage boost for comparision against submitted blocks.    
+> This is used to prioritize local block construction over relay/builder block construction.    
+> Boost is an additional percentage to multiple local block value. Use builder block if:    
+> ` builder_bid_value * 100 > local_block_value * (local-block-value-boost + 100) `    
+> The default weight is `10`    
 
 Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
 
@@ -13,16 +20,15 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Titan Relay](https://docs.titanrelay.xyz/) | No filtering and no censorship | Maximize validator payout by including all available transactions and MEV bundles | [Helix](https://github.com/gattaca-com/helix) | 100% to validator | Internal and external builders. Permissionless | [Dashboard](https://titanrelay.xyz/) | Yes | [Titan Relay documentation](https://docs.titanrelay.xyz/) | [Discord](https://x.com/titanbuilderxyz) | `https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz` |
 | [Titan Relay Regional](https://docs.titanrelay.xyz/) | Filters out OFAC sanctioned addresses | Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC | [Helix](https://github.com/gattaca-com/helix) | 100% to validator | Internal and external builders. Permissionless | [Dashboard](https://regional.titanrelay.xyz/) | Yes | [Titan Relay documentation](https://docs.titanrelay.xyz/) | [Discord](https://x.com/titanbuilderxyz) | `https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz` |
 | [Flashbots](https://boost.flashbots.net/) | Filters out OFAC sanctioned addresses ([Twitter Screenshot][2]) | Maximize validator payout without including transactions and bundles sent from/to wallet addresses that are sanctioned by OFAC | [mev-boost-relay](https://github.com/flashbots/mev-boost-relay) | Specific to builder of bid with highest validator value. 100% to validator from Flashbots builders. | Internal and external builders. Permissionless. | [Dashboard](https://boost-relay.flashbots.net/) | Yes | [Flashbots documentation](https://docs.flashbots.net/flashbots-mev-boost/introduction) | [Discord](https://discord.com/invite/3TjWjBerRb) | `https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net` |
-| [Manifold](https://securerpc.com/) | No filtering and no censorship | Maximize validator payout by including all available private transactions and MEV bundles | [mev-freelay](https://github.com/manifoldfinance/mev-freelay) | Varied | Internal and external builders. Permissionless. | [Dashboard](https://mainnet-relay.securerpc.com/) | Yes | [Manifold documentation](https://kb.manifoldfinance.com/) This relay had a major issue on October 15th 2022 ([1][4], [2][5]). | [Forum](https://forums.manifoldfinance.com/) [Email](mailto:sam@manifoldfinance.com) | `https://0x98650451ba02064f7b000f5768cf0cf4d4e492317d82871bdc87ef841a0743f69f0f1eea11168503240ac35d101c9135@mainnet-relay.securerpc.com` |
-| [Ultra Sound](https://relay.ultrasound.money/) | No filtering and no censorship | Maximize validator payout by including all available transactions and MEV bundles | [mev-boost-relay](https://github.com/flashbots/mev-boost-relay) | 100% to validator | Public and permissionless. | [Dashboard](https://relay.ultrasound.money/) | Yes |  | [Twitter](https://twitter.com/ultrasoundmoney) [Email](mailto:contact@ultrasound.money) | `https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money` |
+| [Manifold Finance SecureRPC](https://securerpc.com/) | No filtering and no censorship | Maximize validator payout by including all available private transactions and MEV bundles | [mev-freelay](https://github.com/manifoldfinance/mev-freelay) | Varied | Internal and external builders. Permissionless. | [Dashboard](https://mainnet-relay.securerpc.com/) | Yes | [Manifold documentation](https:/securerpc.com) | [Forum](https://forums.manifoldfinance.com/) [Email](mailto:sam@manifoldfinance.com) | `https://0x98650451ba02064f7b000f5768cf0cf4d4e492317d82871bdc87ef841a0743f69f0f1eea11168503240ac35d101c9135@mainnet-relay.securerpc.com` |
+| [Ultra Sound](https://relay.ultrasound.money/) | Optimistic Priority Relay No filtering and no censorship | Maximize validator payout by including all available transactions and MEV bundles | [mev-boost-relay](https://github.com/flashbots/mev-boost-relay) | 100% to validator | Public and permissionless. | [Dashboard](https://relay.ultrasound.money/) | Yes |  | [Twitter](https://twitter.com/ultrasoundmoney) [Email](mailto:contact@ultrasound.money) | `https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money` |
 | [Wenmerge](https://relay.wenmerge.com) | No filtering and no censorship | Maximize validator payout by including all available transactions and MEV bundles | [mev-boost-relay](https://github.com/flashbots/mev-boost-relay) | 100% to validator from wenmerge builders. Specific to builder of bid with highest validator value.| Public and permissionless. | [Dashboard](https://relay.wenmerge.com/) | Yes | A relay from Wenmerge to support eth community. | [Website](https://wenmerge.com) [Twitter](https://twitter.com/Wenmerge2022) [Email](mailto:contact@wenmerge.com) | `https://0x8c7d33605ecef85403f8b7289c8058f440cbb6bf72b055dfe2f3e2c6695b6a1ea5a9cd0eb3a7982927a463feb4c3dae2@relay.wenmerge.com` |
 |[Proof Relay](https://pon.network/)|Only filtering is availability of ZK Proof for block and validator payment|Open auction - maximum value|[Proof Relay](https://github.com/pon-pbs/proof-relay)|100% to validator|Public and permissionless.|[Status](https://proof-relay.ponrelay.com/relay/config)|No - header only|[Docs](https://docs.pon.network/)|[Discord](https://discord.gg/rXjDArC776)|`https://0xa44f64faca0209764461b2abfe3533f9f6ed1d51844974e22d79d4cfd06eff858bb434d063e512ce55a1841e66977bfd@proof-relay.ponrelay.com`|
 
 [1]: https://discord.com/channels/761540124940697600/1019624727234490378/1024710921706295388
 [2]: https://twitter.com/bantg/status/1559948198508118016
 [3]: https://docs.bloxroute.com/the-merge-eth2.0/mev-relay-instructions-for-validators
-[4]: https://research.lido.fi/t/lido-on-ethereum-relay-voting-proposal/3135/11
-[5]: https://hackmd.io/@manifoldx/2022-10-15
+
 
 ## External relay monitoring
 
@@ -52,6 +58,21 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Flashbots](https://www.flashbots.net/) | | `https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@boost-relay-holesky.flashbots.net` |
 | [Aestus](https://holesky.aestus.live/) | | `https://0xab78bf8c781c58078c3beb5710c57940874dd96aef2835e7742c866b4c7c0406754376c2c8285a36c630346aa5c5f833@holesky.aestus.live` |
 | [Titan](https://holesky.titanrelay.xyz/) | | `https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@holesky.titanrelay.xyz` |
+| [Manifold SecureRPC](https://holesky-relay.securerpc.com/) | `https://0x94392909bb5b7875ed990c17757ea1602e05e076161e9fc7235a33587ce7ebbe1cc52f0ae3ea28139a7c4b8608dd44d3@holesky-relay.securerpc.com/` |
+
+# MEV relay for MEV Auction for Holesky testnet
+
+MEV Auction is a new backwards compatible MEV-Boost improvement auction in which we divide a block in two parts: ⍺-blockspace and β-blockspace
+- ⍺-blockspace is a very time sensitive kind of priority transactions. These transactions often come in last second.
+- β-blockspace however can be considered non-priority sensitive, meaning it is not very time sensitive, hence can be priced differently.
+
+[You can read more at mevauction.com](https://mevauction.com)
+
+| Operator | Notes | Relay URL |
+|----------|-------|-----------|
+| [Manifold SecureRPC Auction](https://holesky-auction.securerpc.com/) | `https://0x94392909bb5b7875ed990c17757ea1602e05e076161e9fc7235a33587ce7ebbe1cc52f0ae3ea28139a7c4b8608dd44d3@holesky-relay.securerpc.com/` |
+
+
 
 # MEV relay list for Sepolia testnet
 
