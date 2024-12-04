@@ -22,7 +22,7 @@ We will use 3 tools with this guide: [ethdo](https://github.com/wealdtech/ethdo)
 
 **beaconcha.in** is an open-source Ethereum explorer. In this guide, we will use it to broadcast the voluntary exit using their *Broadcast Signed Messages* tool.
 
-**Tails** is a portable operating system that protects against surveillance and malicious actors. In this guide, we will use it to perform all the sensible operations offline to prevent exposing your secrets.
+**Tails** is a portable operating system that protects against surveillance and malicious actors. In this guide, we will use it to perform all the sensitive operations offline to prevent exposing your secrets.
 
 The first step will be to prepare and generate a file for offline signing using ethdo. The second step will be to boot a computer into Tails, sign and generate your voluntary exit file using ethdo. The third step will be to broadcast this voluntary exit. You will need 2 USB sticks, one to boot the Tails operating system from and the second one to hold ethdo and the documents we will need. You will also need a PC that supports [AMD64 instructions](https://tails.boum.org/doc/about/requirements/index.en.html) to boot into.
 
@@ -46,7 +46,7 @@ Using ethdo, we will connect to a beacon node endpoint and create a file named `
 
 Open a powershell command prompt, press `⊞ Win`+`R`, type `powershell` and press `↵ Enter`. You will see a blue or black window where you can type commands.
 
-Download the etho archive and the associated checksum file.
+Download the ethdo archive and the associated checksum file.
 
 ```powershell
 $ProgressPreference = 'SilentlyContinue'; iwr https://github.com/wealdtech/ethdo/releases/download/v1.35.2/ethdo-1.35.2-windows-exe.zip -outfile ethdo-1.35.2-windows-exe.zip
@@ -119,7 +119,7 @@ curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.35.2/ethdo-1.
 curl -O -L https://github.com/wealdtech/ethdo/releases/download/v1.35.2/ethdo-1.35.2-linux-amd64.tar.gz.sha256
 ```
 
-Open an finder window in this current directory to easily access the files we just obtained.
+Open a finder window in this current directory to easily access the files we just obtained.
 
 ```console
 open .
