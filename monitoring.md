@@ -1,6 +1,6 @@
 # Guide on how to do monitoring for an Ethereum validator
 
-Monitoring your system resources is an important task for any system administrator using any kind of machine whether you are a professional managing a large data center or simply someone tinkering at home.
+Monitoring your system resources is an important task for any system administrator managing any kind of machine whether you are a professional managing a large data center or simply someone tinkering at home.
 
 This guide is meant for people with no or little experience in monitoring. It will show you step by step how to do monitoring on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD).
 
@@ -28,7 +28,7 @@ We will install 3 tools with this guide: [Prometheus](https://prometheus.io/docs
 
 ## Executing the commands
 
-Almost all of these commands will be performed in a terminal. Start your *Terminal* application. Any line that starts with the dollar sign (`$`) is a command that need to be executed in your terminal. Do not input the dollar sign (`$`) in your terminal, only the text that comes after that.
+Almost all of these commands will be performed in a terminal. Start your *Terminal* application. Any line that starts with the dollar sign (`$`) is a command that needs to be executed in your terminal. Do not input the dollar sign (`$`) in your terminal, only the text that comes after that.
 
 Executing a command with `sudo` will occasionally ask you for your password. Make sure to enter your account password correctly. You can execute the command again if you fail to enter the correct password after a few attempts.
 
