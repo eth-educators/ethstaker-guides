@@ -1,6 +1,6 @@
 # Guide on how to do security and maintenance for an Ethereum validator's machine
 
-Your staking machine is unsafe like many others, but we can help it. Just like with many things in life, you are consistently being exposed to risks you might not even know about. You can spend a very large amount of time, efforts and money and still be exposed to many risks. The rabbit hole goes deep. This guide is a first plunge into the world of security and maintenance to give you a foundation for your own Ethereum validator's machine.
+Your staking machine is as unsafe as many others, but we can help it. Just like with many things in life, you are consistently being exposed to risks you might not even know about. You can spend a very large amount of time, efforts and money and still be exposed to many risks. The rabbit hole runs deep. This guide is a first plunge into the world of security and maintenance to give you a foundation for your own Ethereum validator's machine.
 
 The following suggestions are general tips that can apply to many different environments and use cases. Security can be subjective. What feels safe or safer for someone can be quite different from someone else. As you start looking at these risks from different angles, you may find alternative solutions that have their own pros and cons.
 
