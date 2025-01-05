@@ -7,8 +7,17 @@ theme:
     - search.suggest
     - search.highlight
     - search.share
+    - navigation.footer
 plugins:
   - search
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/ethstaker
+    - icon: fontawesome/brands/github
+      link: https://github.com/eth-educators
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/ethstaker
 nav:
   - Home: README.md
   - Better Router:
