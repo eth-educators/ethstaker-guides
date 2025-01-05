@@ -1,4 +1,4 @@
-# The Problem
+## The Problem
 
 When running an Ethereum node at home, the ISP's router may "buckle" under the sheer number of connections your node creates.
 
@@ -9,7 +9,7 @@ route is rebooted, and/or the Ethereum node is shut off.
 
 *Above: Typical scenario with undersized ISP router*
 
-# The Solution
+## The Solution
 
 Place the ISP's router into "bridge mode", and run your own router. The ISP's router in bridge mode no longer understands
 IP addresses, does not provide WiFi, and generally has no clue what a "connection" is.
@@ -23,7 +23,7 @@ provide good support for issues with the line. This also simplifies setup.
 
 *Above: We do not know whether Vitalik actually approves of this setup*
 
-## Which home router?
+### Which home router?
 
 Most home routers in the USD 200+ range should do great. Two models are particularly well liked, the
 [Netgear RS line](https://www.netgear.com/home/wifi/routers/listing-filter/ax-wifi7/), and the
@@ -36,7 +36,7 @@ We've documented Netgear, and are interested in receiving screen shots and a wal
 does not work well, and cannot handle GBit Internet. If you have one on Comcast in bridge mode, and it works for you, please get in touch so we can
 document it, including minimum firmware version, any specific settings to make it work, and throughput restrictions.
 
-## Do all ISPs support bridge mode?
+### Do all ISPs support bridge mode?
 
 Not all ISPs do.
 
