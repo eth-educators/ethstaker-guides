@@ -14,6 +14,9 @@ port on the Netgear RS.
 Netgear will prompt you for an admin password, download a firmware update, and restart. At that
 point, you should be able to log in with the new admin password and continue setup.
 
+You may also have the option to set a new WiFi SSID and password. These should be set to the existing SSID
+and password from your ISP's router, so that you don't have to reconfigure any devices in your network.
+
 Netgear defaults to an internal `192.168.1.0/24` network. We haven't tested what happens if that also happens to be
 the default network of the ISP router. It's possible firmware update will fail, or that you'll need to set up the Netgear router
 without Internet connection, and connect it only after the ISP router has been switched to "bridge mode". Firmware

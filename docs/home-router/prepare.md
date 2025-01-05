@@ -9,7 +9,8 @@ a gaming console may as well
     - Do you have any devices with a static IP? Your node might use a static IP, instead
 of a DHCP reservation.
     - Port forwarding settings. Your node likely has some, gaming consoles may as well. This
-may be in an app, not configurable via your ISP router's web interface
+may be in an app, not configurable via your ISP router's web interface. Be sure to write down
+the port number, as well as the protocol: Is it TCP, UDP, or both TCP and UDP?
     - Is IPv6 configured? Note down anything that doesn't look like "default" settings
 - Verify you have logins to everything you need
     - Your ISP's website
