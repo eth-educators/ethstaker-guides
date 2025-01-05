@@ -14,6 +14,10 @@ nav:
   - Better Router:
     - Overview: home-router/overview.md
     - Prepare: home-router/prepare.md
+    - Netgear Router Setup:
+      - Initial Setup: home-router/rs300-start.md
+    - Final Switchover:
+      - Comcast: home-router/comcast-bridge.md
   - Holesky Testnet:
     - Lighthouse/Nethermind: holesky-node.md
     - Lodestar/Reth: holesky-node-alt.md
@@ -22,7 +26,7 @@ nav:
     - Alerting: alerting.md
     - Maintenance and Security: security-maintenance.md
     - Migrate to a larger disk: migrating-to-a-larger-disk.md
-  - Exiting a validaror: voluntary-exit.md
+  - Exiting a validator: voluntary-exit.md
   - MEV Relay List: MEV-relay-list.md
   - Legacy Guides:
     - Prepare for the Merge: prepare-for-the-merge.md
