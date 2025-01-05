@@ -16,6 +16,7 @@ nav:
     - Prepare: home-router/prepare.md
     - Netgear Router Setup:
       - Initial Setup: home-router/rs300-start.md
+      - Port Forwarding: home-router/rs300-advanced.md
     - Final Switchover:
       - Comcast: home-router/comcast-bridge.md
   - Holesky Testnet:
