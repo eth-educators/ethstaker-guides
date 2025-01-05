@@ -4,7 +4,7 @@ Gather some information about your current network, so you are prepared for the 
 - Document your current setup
     - WiFi SSID(s) and their passwords
     - Internal ("LAN") network address, e.g. `10.1.0.0/24` or `192.168.1.0/24`
-    - DHCP settings, specifically any "DHCP reservation" settins. Your node likely has one,
+    - DHCP settings, specifically any "DHCP reservation" settings. Your node likely has one,
 a gaming console may as well
     - Do you have any devices with a static IP? Your node might use a static IP, instead
 of a DHCP reservation.
