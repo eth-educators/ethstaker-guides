@@ -1,0 +1,15 @@
+site_name: Ethstaker Guides
+#site_url: https://guides.ethstaker.cc  # Hoped-for CNAME in future
+site_url: https://eth-educators.github.io/ethstaker-guides/
+theme:
+  name: material
+  features:
+    - search.suggest
+    - search.highlight
+    - search.share
+plugins:
+  - search
+nav:
+  - Home: README.md
+  - Better Router:
+    - Overview: home-router/overview.md
