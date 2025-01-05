@@ -19,6 +19,10 @@ Your own router handles connections and WiFi, and will handle the Ethereum node 
 The ISP's router is kept in the setup so that the ISP has a clear "demarc" - Demarcation Point - and will continue to
 provide good support for issues with the line. This also simplifies setup.
 
+![Network improved](../images/home-router/vitalik-network.png)
+
+*Above: We do not know whether Vitalik actually approves of this setup*
+
 ## Which home router?
 
 Most home routers in the USD 200+ range should do great. Two models are particularly well liked, the
