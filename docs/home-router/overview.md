@@ -3,7 +3,7 @@
 When running an Ethereum node at home, the ISP's router may "buckle" under the sheer number of connections your node creates.
 
 The symptom for this is typically that Internet access slows to a crawl or fails entirely, but recovers for a while when the
-route is rebooted, and/or the Ethereum node is shut off.
+router is rebooted, and/or the Ethereum node is shut off.
 
 ![Network amxiety](../images/home-router/cheems-network.png)
 
