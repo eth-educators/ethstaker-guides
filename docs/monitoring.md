@@ -516,7 +516,7 @@ Aug 09 12:34:05 remy-MINIPC-PN50 systemd[1]: Reloaded Prometheus.
 Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:34:05.304Z caller=main.go:981 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
 Aug 09 12:34:05 remy-MINIPC-PN50 prometheus[1934]: level=info ts=2021-08-09T16:34:05.311Z caller=main.go:1012 msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml totalDuration=7.822144ms remote_storage=4.305µs web_handler=6.249µs query_engine=1.734µs scrape=1.831998ms scrape_sd=83.865µs notify=618.619µs notify_sd=51.754µs rules=1.993µs
 ```
-3. Import [a good Geth dashboard for Prometheus](https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/dashboards/geth-grafana.json) in Grafana.
+3. Import [a good Geth dashboard for Prometheus](https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/docs/dashboards/geth-grafana.json) in Grafana.
 
 ### Prysm
 
@@ -726,8 +726,8 @@ I created some simple scripts to ease the pain of updating Prometheus and Node E
 You can easily download those scripts with:
 
 ```console
-$ wget https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/scripts/update-prometheus.py
-$ wget https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/scripts/update-node-exporter.py
+$ wget https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/docs/scripts/update-prometheus.py
+$ wget https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/docs/scripts/update-node-exporter.py
 ```
 
 To run the Prometheus update script, use this command:

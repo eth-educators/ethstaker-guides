@@ -65,4 +65,4 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 
 # Configuring MEV boost software
 
-If you need help installing and configuring mev-boost on your machine, check out our [Guide on how to prepare a staking machine for the Merge](https://github.com/eth-educators/ethstaker-guides/blob/main/prepare-for-the-merge.md#choosing-and-configuring-an-mev-solution)
+If you need help installing and configuring mev-boost on your machine, check out our [Guide on how to prepare a staking machine for the Merge](https://github.com/eth-educators/ethstaker-guides/blob/main/docs/prepare-for-the-merge.md#choosing-and-configuring-an-mev-solution)

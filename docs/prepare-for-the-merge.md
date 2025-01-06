@@ -101,7 +101,7 @@ If you used a guide or a tool to setup your staking machine, you should first ch
 
 ## Using the new configuration options for your Ethereum clients
 
-The communication between your consensus client and your execution client is going to change with the Merge. They will use this [new Engine API](https://github.com/ethereum/execution-apis/tree/main/src/engine) which will be served at a port independent from the JSON-RPC API currently in use.
+The communication between your consensus client and your execution client is going to change with the Merge. They will use this [new Engine API](https://github.com/ethereum/execution-apis/tree/main/docs/src/engine) which will be served at a port independent from the JSON-RPC API currently in use.
 
 You are likely going to need to use a new configuration option for this endpoint or at least update it on your consensus client beacon node. The default port for the Engine API is 8551 and the default port for the JSON-RPC API is 8545. You might not need to change any configuration option on your execution client, but you will likely need to modify your beacon node configuration. Here are the common values you will likely need to add or modify for each consensus client assuming your execution client engine API endpoint is at `http://localhost:8551`:
 
@@ -115,7 +115,7 @@ As usual, when changing the configuration for your consensus client, you will ne
 
 ## Configuring a JWT token file
 
-The new Engine API used to communicate between the execution client and the consensus client requires [authentication](https://github.com/ethereum/execution-apis/blob/main/src/engine/authentication.md) which is provided with a JWT token stored in a file. There are various ways to configure this. Here is a simple one.
+The new Engine API used to communicate between the execution client and the consensus client requires [authentication](https://github.com/ethereum/execution-apis/blob/main/docs/src/engine/authentication.md) which is provided with a JWT token stored in a file. There are various ways to configure this. Here is a simple one.
 
 ### Creating the JWT token file
 
