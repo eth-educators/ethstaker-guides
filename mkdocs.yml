@@ -1,6 +1,5 @@
 site_name: Ethstaker Guides
-#site_url: https://guides.ethstaker.cc  # Hoped-for CNAME in future
-site_url: https://eth-educators.github.io/ethstaker-guides/
+site_url: https://guides.ethstaker.cc
 theme:
   name: material
   features:
