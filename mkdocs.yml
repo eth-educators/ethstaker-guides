@@ -36,6 +36,5 @@ nav:
     - Maintenance and Security: security-maintenance.md
     - Migrate to a larger disk: migrating-to-a-larger-disk.md
   - Exiting a validator: voluntary-exit.md
-  - MEV Relay List: MEV-relay-list.md
   - Legacy Guides:
     - Prepare for the Merge: prepare-for-the-merge.md
