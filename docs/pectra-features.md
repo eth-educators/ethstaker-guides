@@ -21,7 +21,7 @@ In order for this operation to work, the validators must be active on the consen
 
 It was always possible to deposit additional funds into an existing validator but with this new compounding validator type the top up action will likely become more commun. It used to be that 32 ETH was the only possible maximum effective ETH balance and most well-behaved validators' balance would be near 32 ETH. There will be a lot of different and desirable increments on a compounding validator balance and we will see a much wilder distribution on the consensus layer after Pectra. Every integer increment changes on your validator's balance increase the amount of rewards you can get. For type 0 and type 1 validators, it caps at 32 ETH, but for type 2 validators, it caps at 2048 ETH. If you have a type 2 validator with 44 ETH on balance and you have 1 additional ETH you want to stake, you can deposit this 1 ETH on that validator to increase your rewards for instance. A new deposit or performing this top up action needs to include at least 1 ETH to be valid meaning that you cannot send 0.5 ETH with the deposit action if you are missing 0.5 ETH to reach the next increment.
 
-There are various delays after performing a consolidation request operation depending on the type of transaction. There is also a queue and some increasing fee if demand for this operation exceed the target configured by the network to control congestion. The current configuration says there is a maximum of 2 consolidation requests per block and 1 is the target amount of consolidation request per block.
+There are various delays after performing a consolidation request operation depending on the type of transaction. There is also a queue and some increasing fee if demand for this operation exceed the target configured by the network for rate limiting. The current configuration says there is a maximum of 2 consolidation requests per block and 1 is the target amount of consolidation request per block.
 
 ## User triggered exit and withdrawals
 
@@ -33,9 +33,13 @@ This manual exit request is possible for type 1 or type 2 validators. When asked
 
 In order for these requests to work, the validator must be active on the consensus layer. The withdrawal address must also match with the address of the one sending the transaction, meaning that the withdrawal address is controlling these requests.
 
-There are various delays after performing an exit or a withdraw with this new mechanism. There is also a queue and some increasing fee if demand for this operation exceed the target configured by the network to control congestion. The current configuration says there is a maximum of 16 exit or withdrawal requests per block and 2 is the target amount of exit or withdrawal requests per block.
+There are various delays after performing an exit or a withdraw with this new mechanism. There is also a queue and some increasing fee if demand for this operation exceed the target configured by the network for rate limiting. The current configuration says there is a maximum of 16 exit or withdrawal requests per block and 2 is the target amount of exit or withdrawal requests per block.
 
 ## More blobs
+
+[EIP-7691: Blob throughput increase](https://eips.ethereum.org/EIPS/eip-7691) increase the number of blobs to scale Ethereum via L2 solutions. It increases the target number of blobs per block from 3 to 6 and it increases the maximum number of blobs per block from 6 to 9.
+
+This will likely have a negatice impact on bandwidth requirements for stakers until PeerDAS is included in a later fork.
 
 ## Support
 
