@@ -1,49 +1,49 @@
-# New staking features included in Pectra
+# New Staking Features in Pectra
 
-[Pectra](https://eips.ethereum.org/EIPS/eip-7600), combining changes on the consensus layer ([Electra](https://github.com/ethereum/consensus-specs/tree/dev/specs/electra)) with changes on the execution layer (Prague), is the next hard fork in line to upgrade the Ethereum protocol. This document covers the new staking related features and changes included with this upgrade.
+[Pectra](https://eips.ethereum.org/EIPS/eip-7600), combining changes on the consensus layer ([Electra](https://github.com/ethereum/consensus-specs/tree/dev/specs/electra)) with changes on the execution layer (Prague), is the next hard fork planned to upgrade the Ethereum protocol. This document covers the new staking-related features and changes included in this upgrade.
 
-## Consolidated or compounding validators
+## Consolidated or Compounding Validators
 
-[EIP-7251: Increase the MAX_EFFECTIVE_BALANCE](https://eips.ethereum.org/EIPS/eip-7251) defines a new type of validator that I will call a consolidated or compounding validator. It enables stakers to earn compounding rewards on a single validator that can have up to 2048 effective ETH on its balance. It can be refered to as a type 2 or `0x02` validator, with `0x02` being the first 2 bytes of its withdrawal credential. We were used to only having type 0 or `0x00` validators and type 1 or `0x01` validators before. Here are all the different validator types we will have after Pectra:
+[EIP-7251: Increase the MAX_EFFECTIVE_BALANCE](https://eips.ethereum.org/EIPS/eip-7251) defines a new type of validator called a consolidated or compounding validator. It enables stakers to earn compounding rewards on a single validator that can have up to 2048 effective ETH on its balance. This can be referred to as a type 2 or `0x02` validator, with `0x02` being the first 2 bytes of its withdrawal credentials. Previously, only type 0 (`0x00`) and type 1 (`0x01`) validators existed. Here are all the validator types available after Pectra:
 
-- Type 0 or `0x00`: A regular validator without a withdrawal address. It can also be called a *BLS* or *locked* validator. Its balance keeps increasing after each successful duty performed without anywhere to go until there is a withdrawal address added with the BLS to execution change operation. Peforming this BLS to execution change operation will transform it into a type 1 validator.
-- Type 1 or `0x01`: A regular validator with a withdrawal address. Its balance is maxed at 32 ETH after which an automatic partial withdrawal will send any excess balance to the withdrawal address on a rolling window (there are usually a few days between those automatic withdrawals).
-- Type 2 or `0x02`: A compounding validator with a withdrawal address. Its balance is maxed at 2048 ETH after which an automatic partial withdrawal will send any excess balance to the withdrawal address on a rolling window (there are usually a few days between those automatic withdrawals). The rewards structure and slashing penalties are changed such that they are compounding and somewhat equivalent to running multiple regular validators without the related computational burden for the network or the node operator.
+- Type 0 or `0x00`: A regular validator without a withdrawal address. It can also be called a *BLS* or *locked* validator. Its balance continues to increase after each successful duty performed without anywhere to go until a withdrawal address is added with the BLS to execution change operation. Performing this BLS to execution change operation will transform it into a type 1 validator.
+- Type 1 or `0x01`: A regular validator with a withdrawal address. Its balance is capped at 32 ETH, after which an automatic partial withdrawal sends any excess balance to the withdrawal address on a rolling window (typically every few days).
+- Type 2 or `0x02`: A compounding validator with a withdrawal address. Its balance is capped at 2048 ETH, after which an automatic partial withdrawal sends any excess balance to the withdrawal address on a rolling window. The rewards structure and slashing penalties are adjusted to be compounding and roughly equivalent to running multiple regular validators without the associated computational burden for the network or node operator.
 
-If you are currently running a type 0 or type 1 validator, nothing will change for you after Pectra. Type 1 validators will keep obtaining their automatic partial withdrawals on balances above 32 ETH. You will get the opportunity to use the new type 2 validator if you want.
+If you currently run a type 0 or type 1 validator, nothing will change after Pectra. Type 1 validators will continue receiving automatic partial withdrawals for balances above 32 ETH. You will have the option to use the new type 2 validator if desired.
 
-Similar to depositing for a type 1 validator, stakers will be able to create brand new type 2 validators by creating a new deposit with the correct withdrawal credentials. There will also be a migration path from a type 1 validator to a type 2 validator through the consolidation request operation. The consolidation request operation enables stakers to consolidate 1 or multiple validators into one or many larger type 2 validators. This operation is performed on the execution layer with a transaction sent from the validator withdrawal address to a smart contract. There are 2 types of transactions you can perform with the consolidation request operation:
+Similar to depositing for a type 1 validator, stakers can create new type 2 validators by making a deposit with the correct withdrawal credentials. There is also a migration path from type 1 to type 2 validators through the consolidation request operation. This operation allows stakers to consolidate one or multiple validators into one or many larger type 2 validators. The operation is performed on the execution layer with a transaction sent from the validator withdrawal address to a smart contract. There are two types of transactions possible with the consolidation request operation:
 
-1. Transform an existing type 1 validator to a type 2 validator.
-2. Transfert the balance from a type 1 or type 2 validator to a type 2 validator. This will effectively exit the source validator and consolidate its balance on the target validator.
+1. Transform an existing type 1 validator to a type 2 validator
+2. Transfer the balance from a type 1 or type 2 validator to a type 2 validator. This will exit the source validator and consolidate its balance on the target validator
 
-In order for this operation to work, the validators must be active on the consensus layer and they must share the same associated withdrawal address. The withdrawal address must also match with the address of the one sending the transaction, meaning that the withdrawal address is controlling this consolidation request operation.
+For this operation to work, the validators must be active on the consensus layer and share the same withdrawal address. The withdrawal address must match the address sending the transaction, as the withdrawal address controls this consolidation request operation.
 
-It was always possible to deposit additional funds into an existing validator but with this new compounding validator type the top up action will likely become more commun. It used to be that 32 ETH was the only possible maximum effective ETH balance and most well-behaved validators' balance would be near 32 ETH. There will be a lot of different and desirable increments on a compounding validator balance and we will see a much wilder distribution on the consensus layer after Pectra. Every integer increment changes on your validator's balance increase the amount of rewards you can get. For type 0 and type 1 validators, it caps at 32 ETH, but for type 2 validators, it caps at 2048 ETH. If you have a type 2 validator with 44 ETH on balance and you have 1 additional ETH you want to stake, you can deposit this 1 ETH on that validator to increase your rewards for instance. A new deposit or performing this top up action needs to include at least 1 ETH to be valid meaning that you cannot send 0.5 ETH with the deposit action if you are missing 0.5 ETH to reach the next increment.
+While it has always been possible to deposit additional funds into an existing validator, this practice will likely become more common with the new compounding validator type. Previously, 32 ETH was the only possible maximum effective ETH balance, and most well-behaved validators' balances stayed near 32 ETH. After Pectra, we will see a wider distribution of validator balances on the consensus layer. Every integer increment in your validator's balance increases your potential rewards. For type 0 and type 1 validators, this caps at 32 ETH, but for type 2 validators, it caps at 2048 ETH. For example, if you have a type 2 validator with 44 ETH and want to stake an additional ETH, you can deposit it to increase your rewards. New deposits or top-ups must include at least 1 ETH to be valid.
 
-There are various delays after performing a consolidation request operation depending on the type of transaction. There is also a queue and some increasing fee if demand for this operation exceed the target configured by the network for rate limiting. The current configuration says there is a maximum of 2 consolidation requests per block and 1 is the target amount of consolidation request per block.
+Various delays apply after performing a consolidation request operation, depending on the transaction type. There is also a queue and increasing fees if demand exceeds the network's configured rate limit. The current configuration allows a maximum of 2 consolidation requests per block, with 1 being the target.
 
-## User triggered exit and withdrawals
+## User-Triggered Exit and Withdrawals
 
-[EIP-7002: Execution layer triggerable withdrawals](https://eips.ethereum.org/EIPS/eip-7002) defines new mechanisms to allow stakers to manually exit or withdraw any valid amount from their validator balance. These operations are performed on the execution layer with a transaction sent from the validator withdrawal address to a smart contract.
+[EIP-7002: Execution layer triggerable withdrawals](https://eips.ethereum.org/EIPS/eip-7002) defines new mechanisms allowing stakers to manually exit or withdraw any valid amount from their validator balance. These operations are performed on the execution layer via a transaction sent from the validator withdrawal address to a smart contract.
 
-This manual withdrawal request is only possible with type 2 validators defined in [EIP-7251](#consolidated-or-compounding-validators). You can pass any amount to withdraw but it will max out to leave 32 ETH on your validator's balance no matter what meaning that you cannot overdraw and cause an unexpected exit because there isn't enough ETH left after withdrawal on your validator's balance.
+Manual withdrawal requests are only possible with type 2 validators defined in [EIP-7251](#consolidated-or-compounding-validators). You can specify any withdrawal amount, but the operation will ensure at least 32 ETH remains in your validator's balance to prevent unexpected exits due to insufficient funds.
 
-This manual exit request is possible for type 1 or type 2 validators. When asked for, a validator exited in this way will be exited in a similar way as the voluntary exit performed on the consensus layer. As a reminder, performing a voluntary exit on the consensus layer is free while you will need to pay for gas and the queue fee for performing a manual exit request with this mechanism.
+Manual exit requests are available for both type 1 and type 2 validators. When requested, a validator will exit similarly to a voluntary exit performed on the consensus layer. While voluntary exits on the consensus layer are free, manual exit requests require gas fees and potential queue fees.
 
-In order for these requests to work, the validator must be active on the consensus layer. The withdrawal address must also match with the address of the one sending the transaction, meaning that the withdrawal address is controlling these requests.
+For these requests to work, the validator must be active on the consensus layer, and the withdrawal address must match the address sending the transaction.
 
-There are various delays after performing an exit or a withdraw with this new mechanism. There is also a queue and some increasing fee if demand for this operation exceed the target configured by the network for rate limiting. The current configuration says there is a maximum of 16 exit or withdrawal requests per block and 2 is the target amount of exit or withdrawal requests per block.
+Various delays apply after performing an exit or withdrawal using this new mechanism. There is also a queue and increasing fees if demand exceeds the network's configured rate limit. The current configuration allows a maximum of 16 exit or withdrawal requests per block, with 2 being the target.
 
-## More blobs
+## More Blobs
 
-[EIP-7691: Blob throughput increase](https://eips.ethereum.org/EIPS/eip-7691) increase the number of blobs to scale Ethereum via L2 solutions. It increases the target number of blobs per block from 3 to 6 and it increases the maximum number of blobs per block from 6 to 9.
+[EIP-7691: Blob throughput increase](https://eips.ethereum.org/EIPS/eip-7691) increases the number of blobs to scale Ethereum via L2 solutions. It raises the target number of blobs per block from 3 to 6 and increases the maximum number of blobs per block from 6 to 9.
 
-This will likely have a negatice impact on bandwidth requirements for stakers until PeerDAS is included in a later fork.
+This will likely increase bandwidth requirements for stakers until PeerDAS is included in a later fork.
 
 ## Support
 
-If you have any question or if you need additional support, make sure to get in touch with the EthStaker community on:
+If you have questions or need additional support, connect with the EthStaker community on:
 
 * Discord: [dsc.gg/ethstaker](https://dsc.gg/ethstaker)
 * Reddit: [reddit.com/r/ethstaker](https://www.reddit.com/r/ethstaker/)
