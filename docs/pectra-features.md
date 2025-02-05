@@ -29,7 +29,7 @@ Various delays apply after performing a consolidation request operation, dependi
 
 Manual withdrawal requests are only possible with type 2 validators defined in [EIP-7251](#consolidated-or-compounding-validators). You can specify any withdrawal amount, but the operation will ensure at least 32 ETH remains in your validator's balance to prevent unexpected exits due to insufficient funds.
 
-Manual exit requests are available for both type 1 and type 2 validators. When requested, a validator will exit similarly to a voluntary exit performed on the consensus layer. While voluntary exits on the consensus layer are free, manual exit requests require gas fees and potential queue fees.
+Manual exit requests are available for both type 1 and type 2 validators. When requested, a validator will exit similarly to a voluntary exit performed on the consensus layer. While voluntary exits on the consensus layer are free, manual exit requests require the owner to pay gas fees and rate limiting fees.
 
 For these requests to work, the validator must be active on the consensus layer, and the withdrawal address must match the address sending the transaction.
 
