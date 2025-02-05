@@ -21,7 +21,7 @@ For this operation to work, the validators must be active on the consensus layer
 
 While it has always been possible to deposit additional funds into an existing validator, this practice will likely become more common with the new compounding validator type. Previously, 32 ETH was the only possible maximum effective ETH balance, and most well-behaved validators' balances stayed near 32 ETH. After Pectra, we will see a wider distribution of validator balances on the consensus layer. Every integer increment in your validator's balance increases your potential rewards. For type 0 and type 1 validators, this caps at 32 ETH, but for type 2 validators, it caps at 2048 ETH. For example, if you have a type 2 validator with 44 ETH and want to stake an additional ETH, you can deposit it to increase your rewards. New deposits or top-ups must include at least 1 ETH to be valid.
 
-Various delays apply after performing a consolidation request operation, depending on the transaction type. The network defines a maximum of 2 consolidation requests per block, with 1 being the target. To avoid hindering and prevent others from using this feature a queue and a fee market are used for rate limiting. It gets exponentially more expensive to add more consolidation requests as the network processes more than 1 per block.
+Various delays apply after performing a consolidation request operation, depending on the transaction type. The network defines a maximum of 2 consolidation requests per block, with 1 being the target. To avoid hindering and prevent others from using this feature a fee is used for rate limiting. It gets exponentially more expensive to add more consolidation requests as the network processes more than 1 per block. Requests are added to a queue and they are processed in order on the next block with available room.
 
 ## User-Triggered Exit and Withdrawals
 
@@ -33,7 +33,7 @@ Manual exit requests are available for both type 1 and type 2 validators. When r
 
 For these requests to work, the validator must be active on the consensus layer, and the withdrawal address must match the address sending the transaction.
 
-Various delays apply after performing an exit or withdrawal using this new mechanism. The network defines a maximum of 16 exit or withdrawal requests per block, with 2 being the target. To avoid hindering and prevent others from using this feature a queue and a fee market are used for rate limiting. It gets exponentially more expensive to add more exit or withdrawal requests as the network processes more than 2 per block.
+Various delays apply after performing an exit or withdrawal using this new mechanism. The network defines a maximum of 16 exit or withdrawal requests per block, with 2 being the target. To avoid hindering and prevent others from using this feature a fee is used for rate limiting. It gets exponentially more expensive to add more exit or withdrawal requests as the network processes more than 2 per block. Requests are added to a queue and they are processed in order on the next block with available room.
 
 ## More Blobs
 
