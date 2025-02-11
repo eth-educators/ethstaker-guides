@@ -10,6 +10,14 @@
 - Type 1 or `0x01`: A regular validator with a withdrawal address. Its balance is capped at 32 ETH, after which an automatic partial withdrawal sends any excess balance to the withdrawal address on a rolling window (typically every few days).
 - Type 2 or `0x02`: A compounding validator with a withdrawal address. Its balance is capped at 2048 ETH, after which an automatic partial withdrawal sends any excess balance to the withdrawal address on a rolling window. The rewards structure and slashing penalties are adjusted to be compounding and roughly equivalent to running multiple regular validators without the associated computational burden for the network or node operator.
 
+### Rewards and Proposer Selection Probability
+
+Unlike traditional validators, type 2 validators allow **compounding rewards**, meaning that earned rewards remain within the validator’s balance instead of being automatically withdrawn above 32 ETH. This compounding effect enables long-term validators to accumulate higher returns over time.  
+
+However, **the fundamental reward structure remains unchanged**—attestation, proposal, and sync committee rewards are calculated the same way as for type 1 validators. The probability of being selected as a **block proposer or sync committee member is directly proportional to the validator’s effective balance**. This means that while a single type 2 validator with 2048 ETH has a higher probability of proposing a block compared to a 32 ETH validator, splitting the same 2048 ETH across multiple 32 ETH validators results in an identical overall proposal probability.  
+
+Additionally, **slashing penalties have been reduced**, making large validators less risky than before. Previously, slashing resulted in an immediate loss of 1/32 of a validator's balance, but with EIP-7251, this penalty has been reduced to **1/4096**, significantly lowering the downside for high-balance validators.
+
 If you currently run a type 0 or type 1 validator, nothing will change after Pectra. Type 1 validators will continue receiving automatic partial withdrawals for balances above 32 ETH. You will have the option to use the new type 2 validator if desired.
 
 New validators can be deposited directly as type 2 validators. There is also a migration path from type 1 to type 2 validators through the consolidation request operation. This operation allows stakers to consolidate one or multiple validators into one or many larger type 2 validators. The operation is performed on the execution layer with a transaction sent from the validator withdrawal address to a smart contract. There are two types of transactions possible with the consolidation request operation:
