@@ -49,6 +49,10 @@ Various delays apply after performing an exit or withdrawal using this new mecha
 
 This will likely increase bandwidth requirements for stakers until PeerDAS is included in a later fork.
 
+## Faster deposits
+
+[EIP-6110: Supply validator deposits on chain](https://eips.ethereum.org/EIPS/eip-6110) improves the validator deposit mechanism on the beacon chain. This change reduces the delay between making a deposit and its recognition by the beacon chain from over 9 hours to approximately 13 minutes.
+
 ## Support
 
 If you have questions or need additional support, connect with the EthStaker community on:
