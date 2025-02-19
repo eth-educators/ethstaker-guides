@@ -2,6 +2,15 @@
 
 [Pectra](https://eips.ethereum.org/EIPS/eip-7600), combining changes on the consensus layer ([Electra](https://github.com/ethereum/consensus-specs/tree/dev/specs/electra)) with changes on the execution layer (Prague), is the next hard fork planned to upgrade the Ethereum protocol. This document covers the new staking-related features and changes included in this upgrade.
 
+## Fork Schedule
+
+Pectra was [officially announced on Holesky and Sepolia](https://blog.ethereum.org/2025/02/14/pectra-testnet-announcement). Here is the planned schedule for these forks:
+
+- [Holesky](https://github.com/eth-clients/holesky) at epoch 115968 (Feb. 24, 2025, 21:55 UTC)
+- [Sepolia](https://github.com/eth-clients/sepolia) at epoch 222464 (Mar. 5, 2025, 7:29 UTC)
+
+Once both testnets have successfully upgraded, a mainnet activation schedule will be chosen.
+
 ## Consolidated or Compounding Validators
 
 [EIP-7251: Increase the MAX_EFFECTIVE_BALANCE](https://eips.ethereum.org/EIPS/eip-7251) defines a new type of validator called a consolidated or compounding validator. It enables stakers to earn compounding rewards on a single validator that can have up to 2048 effective ETH on its balance. This can be referred to as a type 2 or `0x02` validator, with `0x02` being the first 2 bytes of its withdrawal credentials. Previously, only type 0 (`0x00`) and type 1 (`0x01`) validators existed. Here are all the validator types available after Pectra:
