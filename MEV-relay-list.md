@@ -52,6 +52,7 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Flashbots](https://www.flashbots.net/) | | `https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@boost-relay-holesky.flashbots.net` |
 | [Aestus](https://holesky.aestus.live/) | | `https://0xab78bf8c781c58078c3beb5710c57940874dd96aef2835e7742c866b4c7c0406754376c2c8285a36c630346aa5c5f833@holesky.aestus.live` |
 | [Titan](https://holesky.titanrelay.xyz/) | | `https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@holesky.titanrelay.xyz` |
+| [Bloxroute](https://bloxroute.holesky.blxrbdn.com/) | | `https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.holesky.blxrbdn.com` |
 
 # MEV relay list for Sepolia testnet
 
