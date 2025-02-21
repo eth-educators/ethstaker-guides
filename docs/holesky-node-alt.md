@@ -35,9 +35,9 @@ Download [the latest release version for Reth](https://github.com/paradigmxyz/re
 
 ```console
 $ cd ~
-$ wget https://github.com/paradigmxyz/reth/releases/download/v1.0.4/reth-v1.0.4-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf reth-v1.0.4-x86_64-unknown-linux-gnu.tar.gz
-$ rm reth-v1.0.4-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/paradigmxyz/reth/releases/download/v1.2.0/op-reth-v1.2.0-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf op-reth-v1.2.0-x86_64-unknown-linux-gnu.tar.gz
+$ rm op-reth-v1.2.0-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Reth version globally.
@@ -53,9 +53,9 @@ Download [the latest release version for Lodestar](https://github.com/ChainSafe/
 
 ```console
 $ cd ~
-$ wget https://github.com/ChainSafe/lodestar/releases/download/v1.21.0/lodestar-v1.21.0-linux-amd64.tar.gz
-$ tar xvf lodestar-v1.21.0-linux-amd64.tar.gz
-$ rm lodestar-v1.21.0-linux-amd64.tar.gz
+$ wget https://github.com/ChainSafe/lodestar/releases/download/v1.27.0/lodestar-v1.27.0-linux-amd64.tar.gz
+$ tar xvf lodestar-v1.27.0-linux-amd64.tar.gz
+$ rm lodestar-v1.27.0-linux-amd64.tar.gz
 ```
 
 Install this Lodestar version globally.
@@ -221,18 +221,18 @@ Requesting or obtaining enough Holesky ETH to perform your validator deposit can
 There are 2 great tools to create your validator keys:
 
 * GUI based: [Wagyu Key Gen](https://github.com/stake-house/wagyu-key-gen)
-* CLI based: [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli)
+* CLI based: [ethstaker-deposit-cli](https://github.com/eth-educators/ethstaker-deposit-cli)
 
 If you choose the *Wagyu Key Gen* application, make sure to select the *Holesky* network and follow the instructions provided. If you are using the #cheap-holesky-validator process, you will need to use `0x4D496CcC28058B1D74B7a19541663E21154f9c84` as your withdrawal address. This is only required for that process. When on Mainnet, you should use a withdrawal address you control if you want to use one.
 
-If you choose the *staking-deposit-cli* application, here is how to create your validator keys. Make sure to replace the `0x4D496CcC28058B1D74B7a19541663E21154f9c84` withdrawal address with your own address that you control if you need or want to:
+If you choose the *ethstaker-deposit-cli* application, here is how to create your validator keys. Make sure to replace the `0x4D496CcC28058B1D74B7a19541663E21154f9c84` withdrawal address with your own address that you control if you need or want to:
 
 ```console
 $ cd ~
-$ wget https://github.com/ethereum/staking-deposit-cli/releases/download/v2.7.0/staking_deposit-cli-fdab65d-linux-amd64.tar.gz
-$ tar xvf staking_deposit-cli-fdab65d-linux-amd64.tar.gz
-$ rm staking_deposit-cli-fdab65d-linux-amd64.tar.gz
-$ cd staking_deposit-cli-fdab65d-linux-amd64/
+$ wget https://github.com/eth-educators/ethstaker-deposit-cli/releases/download/v1.0.0/ethstaker_deposit-cli-4ce275e-linux-amd64.tar.gz
+$ tar xvf ethstaker_deposit-cli-4ce275e-linux-amd64.tar.gz
+$ rm ethstaker_deposit-cli-4ce275e-linux-amd64.tar.gz
+$ cd ethstaker_deposit-cli-4ce275e-linux-amd64/
 $ ./deposit new-mnemonic --num_validators 1 --chain holesky --execution_address 0x4D496CcC28058B1D74B7a19541663E21154f9c84
 $ ls -d $PWD/validator_keys/*
 ```
