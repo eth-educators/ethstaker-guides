@@ -35,10 +35,10 @@ Download [the latest release version for Nethermind](https://github.com/Nethermi
 
 ```console
 $ cd ~
-$ wget https://github.com/NethermindEth/nethermind/releases/download/1.31.0/nethermind-1.31.0-a7337ba9-linux-x64.zip
+$ wget https://github.com/NethermindEth/nethermind/releases/download/1.31.1/nethermind-1.31.1-0922c465-linux-x64.zip
 $ sudo mkdir -p /usr/share/nethermind
-$ sudo unzip nethermind-1.31.0-a7337ba9-linux-x64.zip -d /usr/share/nethermind
-$ rm nethermind-1.31.0-a7337ba9-linux-x64.zip
+$ sudo unzip nethermind-1.31.1-0922c465-linux-x64.zip -d /usr/share/nethermind
+$ rm nethermind-1.31.1-0922c465-linux-x64.zip
 ```
 
 ## Installing Lighthouse
