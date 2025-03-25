@@ -62,6 +62,17 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 | [Titan](https://holesky.titanrelay.xyz/) | | `https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@holesky.titanrelay.xyz` |
 | [Manifold SecureRPC](https://holesky-relay.securerpc.com/) | `https://0x94392909bb5b7875ed990c17757ea1602e05e076161e9fc7235a33587ce7ebbe1cc52f0ae3ea28139a7c4b8608dd44d3@holesky-relay.securerpc.com/` |
 
+# MEV relay list for Hoodi testnet
+
+Here is a list of MEV relays for the Ethereum Hoodi test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
+
+Selecting your relays **can be an important decision** for some stakers. You should do your own diligence when selecting which relay you want to use.
+
+| Operator | Notes | Relay URL |
+|----------|-------|-----------|
+| [Titan](https://hoodi.titanrelay.xyz/) | | `https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@hoodi.titanrelay.xyz` |
+
+
 # MEV relay list for Sepolia testnet
 
 Here is a list of MEV relays for the Ethereum Sepolia test network. To add one to your mev-boost configuration, simply copy and paste the *Relay URL* in your `-relays` flag value. You can add multiple relays comma-separated to the `-relays` flag, like this: `-relays https://relay1,https://relay2`. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
