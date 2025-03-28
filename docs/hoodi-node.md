@@ -47,9 +47,9 @@ Download [this specific version for Lighthouse](https://github.com/sigp/lighthou
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v7.0.0-beta.4/lighthouse-v7.0.0-beta.4-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v7.0.0-beta.4-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v7.0.0-beta.4-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/sigp/lighthouse/releases/download/v7.0.0-beta.5/lighthouse-v7.0.0-beta.5-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v7.0.0-beta.5-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v7.0.0-beta.5-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Lighthouse version globally.
