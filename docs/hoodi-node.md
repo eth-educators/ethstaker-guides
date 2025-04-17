@@ -43,13 +43,13 @@ $ rm nethermind-1.31.6-4e68f8ee-linux-x64.zip
 
 ## Installing Lighthouse
 
-Download [this specific version for Lighthouse](https://github.com/sigp/lighthouse/releases/tag/v7.0.0-beta.4) and extract it. If the latest version is more recent and supports the Hoodi network, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
+Download [this specific version for Lighthouse](https://github.com/sigp/lighthouse/releases/tag/v7.0.0-beta.7) and extract it. If the latest version is more recent and supports the Hoodi network, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.
 
 ```console
 $ cd ~
-$ wget https://github.com/sigp/lighthouse/releases/download/v7.0.0-beta.5/lighthouse-v7.0.0-beta.5-x86_64-unknown-linux-gnu.tar.gz
-$ tar xvf lighthouse-v7.0.0-beta.5-x86_64-unknown-linux-gnu.tar.gz
-$ rm lighthouse-v7.0.0-beta.5-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/sigp/lighthouse/releases/download/v7.0.0-beta.7/lighthouse-v7.0.0-beta.7-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v7.0.0-beta.7-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v7.0.0-beta.7-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Install this Lighthouse version globally.
