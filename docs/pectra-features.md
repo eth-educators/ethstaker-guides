@@ -9,7 +9,9 @@ Pectra was [officially announced on Holesky and Sepolia](https://blog.ethereum.o
 - [Holesky](https://github.com/eth-clients/holesky) at epoch 115968 (Feb. 24, 2025, 21:55 UTC)
 - [Sepolia](https://github.com/eth-clients/sepolia) at epoch 222464 (Mar. 5, 2025, 7:29 UTC)
 
-Once both testnets have successfully upgraded, a mainnet activation schedule will be chosen.
+It was [officially announced on Mainnet](https://blog.ethereum.org/2025/04/23/pectra-mainnet). Here is the planned schedule:
+
+- At epoch 364032 (May 07, 2025, 10:05:11 UTC)
 
 ## Consolidated or Compounding Validators
 
