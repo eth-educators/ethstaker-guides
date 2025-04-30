@@ -64,6 +64,19 @@ Selecting your relays **can be an important decision** for some stakers. You sho
 |----------|-------|-----------|
 | [Flashbots](https://www.flashbots.net/) | | `https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@boost-relay-sepolia.flashbots.net` |
 
+# MEV relay list for Hoodi testnet
+Here is a list of MEV relays for the Ethereum Hoodi test network. To add one to your mev-boost configuration, simply copy and paste the Relay URL in your -relays flag value. You can add multiple relays comma-separated to the -relays flag, like this: -relays https://relay1,https://relay2. If you are using multiple relays, the current algorithm for mev-boost will select the relay that offers you the most profit.
+
+Selecting your relays can be an important decision for some stakers. You should do your own diligence when selecting which relay you want to use.
+
+| Operator | Notes | Relay URL |
+|----------|-------|-----------|
+| [Bloxroute](https://bloxroute.hoodi.blxrbdn.com/) | | `https://0x821f2a65afb70e7f2e820a925a9b4c80a159620582c1766b1b09729fec178b11ea22abb3a51f07b288be815a1a2ff516@bloxroute.hoodi.blxrbdn.com` |
+| [Flashbots](https://www.flashbots.net/) | | `https://0xafa4c6985aa049fb79dd37010438cfebeb0f2bd42b115b89dd678dab0670c1de38da0c4e9138c9290a398ecd9a0b3110@boost-relay-hoodi.flashbots.net` |
+| [Titan](https://hoodi.titanrelay.xyz/) | | `https://0xaa58208899c6105603b74396734a6263cc7d947f444f396a90f7b7d3e65d102aec7e5e5291b27e08d02c50a050825c2f@hoodi.titanrelay.xyz` |
+| [Aestus](https://hoodi.aestus.live/) | | `https://0x98f0ef62f00780cf8eb06701a7d22725b9437d4768bb19b363e882ae87129945ec206ec2dc16933f31d983f8225772b6@hoodi.aestus.live` |
+
+
 # Configuring MEV boost software
 
 If you need help installing and configuring mev-boost on your machine, check out our [Guide on how to prepare a staking machine for the Merge](https://github.com/eth-educators/ethstaker-guides/blob/main/prepare-for-the-merge.md#choosing-and-configuring-an-mev-solution)
