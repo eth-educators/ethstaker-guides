@@ -1,0 +1,1294 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://guides.ethstaker.cc/hoodi-node/">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Guide on how to setup a Hoodi testnet node (Nethermind/Lighthouse) - Ethstaker Guides</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-on-how-to-setup-a-hoodi-testnet-node-nethermindlighthouse" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Ethstaker Guides" class="md-header__button md-logo" aria-label="Ethstaker Guides" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ethstaker Guides
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guide on how to setup a Hoodi testnet node (Nethermind/Lighthouse)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Ethstaker Guides" class="md-nav__button md-logo" aria-label="Ethstaker Guides" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Ethstaker Guides
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Better Router
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Better Router
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/prepare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prepare
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Netgear Router Setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Netgear Router Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/rs300-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Initial Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/rs300-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Port Forwarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Final Switchover
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Final Switchover
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/comcast-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comcast
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Holesky Testnet
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Holesky Testnet
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../holesky-node.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lighthouse/Nethermind
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../holesky-node-alt.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lodestar/Reth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Monitoring and Maintenance
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Monitoring and Maintenance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monitoring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alerting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alerting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Maintenance and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrating-to-a-larger-disk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrate to a larger disk
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voluntary-exit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exiting a validator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Legacy Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Legacy Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prepare-for-the-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prepare for the Merge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-the-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing the commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-nethermind" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Nethermind
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-lighthouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Lighthouse
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-jwt-token-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating the JWT token file
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-your-nethermind-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring your Nethermind node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-your-lighthouse-beacon-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring your Lighthouse beacon node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trying-the-hoodi-testnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trying the Hoodi testnet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trying the Hoodi testnet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requesting-testnet-funds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requesting testnet funds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-a-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a validator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding a validator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-your-validator-keys-and-performing-the-deposit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating your validator keys and performing the deposit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-your-lighthouse-validator-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring your Lighthouse validator client
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credits
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guide-on-how-to-setup-a-hoodi-testnet-node-nethermindlighthouse">Guide on how to setup a Hoodi testnet node (Nethermind/Lighthouse)</h1>
+<p><a href="https://github.com/eth-clients/hoodi">Hoodi</a> is a new Ethereum testnet meant to replace Holesky as a staking, infrastructure and protocol-developer testnet.</p>
+<p>This guide is meant for people with little or some experience in running Ethereum clients and using the command-line interface (CLI). It will show you step by step how to setup your machine to join the <em>Hoodi</em> testnet by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 24.04 or Debian 12) on a modern x86 CPU (Intel, AMD). A clean install of your operating system on a dedicated machine or a virtual machine before proceeding is preferable.</p>
+<h2 id="overview">Overview</h2>
+<p>We will use the latest version for Nethermind and the latest version for Lighthouse. We will configure them to connect to the <em>Hoodi</em> testnet.</p>
+<h2 id="executing-the-commands">Executing the commands</h2>
+<p>Almost all of these commands will be performed in a terminal. Start your <em>Terminal</em> application. Any line that starts with the dollar sign (<code>$</code>) is a command that need to be executed in your terminal. Do not input the dollar sign (<code>$</code>) in your terminal, only the text that comes after that.</p>
+<p>Executing a command with <code>sudo</code> will occasionally ask you for your password. Make sure to enter your account password correctly. You can execute the command again if you fail to enter the correct password after a few attempts.</p>
+<h2 id="installing-prerequisites">Installing Prerequisites</h2>
+<p>Make sure we have fully updated packages first.</p>
+<pre><code class="language-console">$ sudo apt -y update
+$ sudo apt -y upgrade
+</code></pre>
+<p>Install prerequisites commonly available.</p>
+<pre><code class="language-console">$ sudo apt -y install wget curl ccze unzip
+</code></pre>
+<h2 id="installing-nethermind">Installing Nethermind</h2>
+<p>Download <a href="https://github.com/NethermindEth/nethermind/releases">the latest release version for Nethermind</a> and extract it. If the latest version is more recent than what is used here, use that version and adjust for the new URL and archive name. Make sure to use the linux-x64 version.</p>
+<pre><code class="language-console">$ cd ~
+$ wget https://github.com/NethermindEth/nethermind/releases/download/1.31.6/nethermind-1.31.6-4e68f8ee-linux-x64.zip
+$ sudo mkdir -p /usr/share/nethermind
+$ sudo unzip nethermind-1.31.6-4e68f8ee-linux-x64.zip -d /usr/share/nethermind
+$ rm nethermind-1.31.6-4e68f8ee-linux-x64.zip
+</code></pre>
+<h2 id="installing-lighthouse">Installing Lighthouse</h2>
+<p>Download <a href="https://github.com/sigp/lighthouse/releases/tag/v7.0.0-beta.7">this specific version for Lighthouse</a> and extract it. If the latest version is more recent and supports the Hoodi network, use that version and adjust for the new URL and archive name. Make sure to use the linux x86_64 version.</p>
+<pre><code class="language-console">$ cd ~
+$ wget https://github.com/sigp/lighthouse/releases/download/v7.0.0-beta.7/lighthouse-v7.0.0-beta.7-x86_64-unknown-linux-gnu.tar.gz
+$ tar xvf lighthouse-v7.0.0-beta.7-x86_64-unknown-linux-gnu.tar.gz
+$ rm lighthouse-v7.0.0-beta.7-x86_64-unknown-linux-gnu.tar.gz
+</code></pre>
+<p>Install this Lighthouse version globally.</p>
+<pre><code class="language-console">$ sudo cp ~/lighthouse /usr/local/bin
+$ rm ~/lighthouse
+</code></pre>
+<h2 id="creating-the-jwt-token-file">Creating the JWT token file</h2>
+<p>Create a JWT token file in a neutral location and make it readable to everyone. We will use the <code>/var/lib/ethereum/jwttoken</code> location to store the JWT token file.</p>
+<pre><code>$ sudo mkdir -p /var/lib/ethereum
+$ openssl rand -hex 32 | tr -d &quot;\n&quot; | sudo tee /var/lib/ethereum/jwttoken
+$ sudo chmod +r /var/lib/ethereum/jwttoken
+</code></pre>
+<h2 id="configuring-your-nethermind-node">Configuring your Nethermind node</h2>
+<p>Create a dedicated user for running Nethermind, create a directory for holding the data and assign the proper permissions.</p>
+<pre><code class="language-console">$ sudo useradd --no-create-home --shell /bin/false nethermind
+$ sudo mkdir -p /var/lib/nethermind
+$ sudo chown -R nethermind:nethermind /var/lib/nethermind
+</code></pre>
+<p>Create a systemd service config file to configure the Nethermind node service.</p>
+<pre><code class="language-console">$ sudo nano /etc/systemd/system/nethermind.service
+</code></pre>
+<p>Paste the following service configuration into the file. Exit and save once done (<code>Ctrl</code> + <code>X</code>, <code>Y</code>, <code>Enter</code>).</p>
+<pre><code class="language-ini">[Unit]
+Description=Nethermind Execution Client (Hoodi)
+After=network.target
+Wants=network.target
+
+[Service]
+User=nethermind
+Group=nethermind
+Type=simple
+Restart=always
+RestartSec=5
+TimeoutStopSec=180
+WorkingDirectory=/var/lib/nethermind
+Environment=&quot;DOTNET_BUNDLE_EXTRACT_BASE_DIR=/var/lib/nethermind&quot;
+ExecStart=/usr/share/nethermind/nethermind \
+  --config hoodi \
+  --datadir /var/lib/nethermind \
+  --Metrics.Enabled true \
+  --Metrics.ExposePort 6061 \
+  --Sync.SnapSync true \
+  --JsonRpc.JwtSecretFile /var/lib/ethereum/jwttoken \
+  --JsonRpc.Enabled true \
+  --HealthChecks.Enabled true \
+  --JsonRpc.EnabledModules='[Eth, Subscribe, Trace, TxPool, Web3, Personal, Proof, Net, Parity, Health, Rpc, Admin]' \
+  --JsonRpc.AdditionalRpcUrls=http://127.0.0.1:8555|http|admin \
+  --JsonRpc.EnginePort 8551
+
+[Install]
+WantedBy=default.target
+</code></pre>
+<p>Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.</p>
+<pre><code class="language-console">$ sudo systemctl daemon-reload
+$ sudo systemctl start nethermind.service
+$ sudo systemctl status nethermind.service
+</code></pre>
+<p>It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the nethermind service).</p>
+<p>Enable the nethermind service to automatically start on reboot.</p>
+<pre><code class="language-console">$ sudo systemctl enable nethermind.service
+</code></pre>
+<p>You can watch the live messages from your Nethermind node logs using this command. Make sure nothing suspicious shows up in your logs.</p>
+<pre><code class="language-console">$ sudo journalctl -f -u nethermind.service -o cat | ccze -A
+</code></pre>
+<p>Press <code>Ctrl</code> + <code>C</code> to stop showing those messages.</p>
+<h2 id="configuring-your-lighthouse-beacon-node">Configuring your Lighthouse beacon node</h2>
+<p>Create a dedicated user for running the Lighthouse beacon node, create a directory for holding the data, copy testnet files and assign the proper permissions.</p>
+<pre><code class="language-console">$ sudo useradd --no-create-home --shell /bin/false lighthousebeacon
+$ sudo mkdir -p /var/lib/lighthouse
+$ sudo chown -R lighthousebeacon:lighthousebeacon /var/lib/lighthouse
+</code></pre>
+<p>Create a systemd service config file to configure the Lighthouse beacon node service.</p>
+<pre><code class="language-console">$ sudo nano /etc/systemd/system/lighthousebeacon.service
+</code></pre>
+<p>Paste the following service configuration into the file. Exit and save once done (<code>Ctrl</code> + <code>X</code>, <code>Y</code>, <code>Enter</code>).</p>
+<pre><code class="language-ini">[Unit]
+Description=Lighthouse Beacon Node (Hoodi)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=lighthousebeacon
+Group=lighthousebeacon
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/lighthouse bn \
+    --network hoodi \
+    --datadir /var/lib/lighthouse \
+    --http \
+    --execution-endpoint http://127.0.0.1:8551 \
+    --checkpoint-sync-url https://hoodi.beaconstate.ethstaker.cc \
+    --metrics \
+    --execution-jwt /var/lib/ethereum/jwttoken \
+    --validator-monitor-auto \
+    --boot-nodes=enr:-OS4QMJGE13xEROqvKN1xnnt7U-noc51VXyM6wFMuL9LMhQDfo1p1dF_zFdS4OsnXz_vIYk-nQWnqJMWRDKvkSK6_CwDh2F0dG5ldHOIAAAAADAAAACGY2xpZW502IpMaWdodGhvdXNljDcuMC4wLWJldGEuM4RldGgykNLxmX9gAAkQAAgAAAAAAACCaWSCdjSCaXCEhse4F4RxdWljgiMqiXNlY3AyNTZrMaECef77P8k5l3PC_raLw42OAzdXfxeQ-58BJriNaqiRGJSIc3luY25ldHMAg3RjcIIjKIN1ZHCCIyg,enr:-LK4QDwhXMitMbC8xRiNL-XGMhRyMSOnxej-zGifjv9Nm5G8EF285phTU-CAsMHRRefZimNI7eNpAluijMQP7NDC8kEMh2F0dG5ldHOIAAAAAAAABgCEZXRoMpDS8Zl_YAAJEAAIAAAAAAAAgmlkgnY0gmlwhAOIT_SJc2VjcDI1NmsxoQMoHWNL4MAvh6YpQeM2SUjhUrLIPsAVPB8nyxbmckC6KIN0Y3CCIyiDdWRwgiMo,enr:-LK4QPYl2HnMPQ7b1es6Nf_tFYkyya5bj9IqAKOEj2cmoqVkN8ANbJJJK40MX4kciL7pZszPHw6vLNyeC-O3HUrLQv8Mh2F0dG5ldHOIAAAAAAAAAMCEZXRoMpDS8Zl_YAAJEAAIAAAAAAAAgmlkgnY0gmlwhAMYRG-Jc2VjcDI1NmsxoQPQ35tjr6q1qUqwAnegQmYQyfqxC_6437CObkZneI9n34N0Y3CCIyiDdWRwgiMo
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.</p>
+<pre><code class="language-console">$ sudo systemctl daemon-reload
+$ sudo systemctl start lighthousebeacon.service
+$ sudo systemctl status lighthousebeacon.service
+</code></pre>
+<p>It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Lighthouse beacon node service).</p>
+<p>Enable the Lighthouse beacon node service to automatically start on reboot.</p>
+<pre><code class="language-console">$ sudo systemctl enable lighthousebeacon.service
+</code></pre>
+<p>You can watch the live messages from your Lighthouse beacon node logs using this command. Make sure nothing suspicious shows up in your logs.</p>
+<pre><code class="language-console">$ sudo journalctl -f -u lighthousebeacon.service -o cat | ccze -A
+</code></pre>
+<p>Press <code>Ctrl</code> + <code>C</code> to stop showing those messages.</p>
+<h2 id="trying-the-hoodi-testnet">Trying the Hoodi testnet</h2>
+<h3 id="requesting-testnet-funds">Requesting testnet funds</h3>
+<p>Requesting or obtaining enough Hoodi ETH to perform your validator deposit can be challenging. We suggest you use the EthStaker #cheap-hoodi-validator free process. Join the <a href="https://dsc.gg/ethstaker">EthStaker Discord server</a> and use the <code>/cheap-hoodi-deposit</code> slash command (start typing the command and it will show up above your input box). From there, follow the instructions from the bot. As an alternative, you can try obtaining 32 Hoodi ETH from this great faucet on https://hoodi-faucet.pk910.de/ . Hoodi ETH was also distributed to many people who previously interacted with the Holesky network. You might already have some Hoodi ETH in your wallet if you used Holesky so check first.</p>
+<h2 id="adding-a-validator">Adding a validator</h2>
+<h3 id="creating-your-validator-keys-and-performing-the-deposit">Creating your validator keys and performing the deposit</h3>
+<p>There are 2 great tools to create your validator keys:</p>
+<ul>
+<li>GUI based: <a href="https://github.com/stake-house/wagyu-key-gen">Wagyu Key Gen</a></li>
+<li>CLI based: <a href="https://github.com/eth-educators/ethstaker-deposit-cli">ethstaker-deposit-cli</a></li>
+</ul>
+<p>If you choose the <em>Wagyu Key Gen</em> application, make sure to select the <em>Hoodi</em> network and follow the instructions provided. If you are using the #cheap-hoodi-validator process, you will need to use <code>0x4D496CcC28058B1D74B7a19541663E21154f9c84</code> as your withdrawal address. This is only required for that process. When on Mainnet, you should use a withdrawal address you control if you want to use one.</p>
+<p>If you choose the <em>ethstaker-deposit-cli</em> application, here is how to create your validator keys. Make sure to replace the <code>0x4D496CcC28058B1D74B7a19541663E21154f9c84</code> withdrawal address with your own address that you control if you need or want to:</p>
+<pre><code class="language-console">$ cd ~
+$ wget https://github.com/eth-educators/ethstaker-deposit-cli/releases/download/v1.1.0/ethstaker_deposit-cli-08f1e66-linux-amd64.tar.gz
+$ tar xvf ethstaker_deposit-cli-08f1e66-linux-amd64.tar.gz
+$ rm ethstaker_deposit-cli-08f1e66-linux-amd64.tar.gz
+$ cd ethstaker_deposit-cli-08f1e66-linux-amd64/
+$ ./deposit new-mnemonic --num_validators 1 --chain hoodi --execution_address 0x4D496CcC28058B1D74B7a19541663E21154f9c84
+$ ls -d $PWD/validator_keys/*
+</code></pre>
+<p>Make sure to store your keystore password and your mnemonic somewhere safe. You should end up with a deposit file (starts with <code>deposit_data-</code> and ends with <code>.json</code>) and one or more keystore files (starts with <code>keystore-</code> and ends with <code>.json</code>), 1 per validator. Copy them around if needed. Make sure your deposit file and your keystore files are in a known and accessible location on your machine.</p>
+<p>Next we will need to perform your deposit. If you used the #cheap-hoodi-validator process, you can perform your deposit on https://cheap.hoodi.launchpad.ethstaker.cc/ . If you managed to obtained 32 Hoodi ETH, you can use the official Hoodi launchpad on https://hoodi.launchpad.ethereum.org/ .</p>
+<h3 id="configuring-your-lighthouse-validator-client">Configuring your Lighthouse validator client</h3>
+<p>Create a dedicated user for running the Lighthouse validator client, create a directory for holding the data and assign the proper permissions.</p>
+<pre><code class="language-console">$ sudo useradd --no-create-home --shell /bin/false lighthousevalidator
+$ sudo mkdir -p /var/lib/lighthouse/validators
+$ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
+$ sudo chmod 700 /var/lib/lighthouse/validators
+</code></pre>
+<p>Import your keystore that includes your validator key for the Lighthouse validator client. Running the first command will prompt you for that keystore password. Make sure to enter it correctly and avoid leaving it blank. Make sure to replace <code>/path/to/keystores</code> with the actual path to your keystores created <a href="#creating-your-validator-keys-and-performing-the-deposit">in the previous step</a>.</p>
+<pre><code class="language-console">$ sudo /usr/local/bin/lighthouse account validator import \
+    --directory /path/to/keystores \
+    --datadir /var/lib/lighthouse \
+    --network hoodi
+$ sudo chown -R lighthousevalidator:lighthousevalidator /var/lib/lighthouse/validators
+</code></pre>
+<p>Create a systemd service config file to configure the Lighthouse validator client service.</p>
+<pre><code class="language-console">$ sudo nano /etc/systemd/system/lighthousevalidator.service
+</code></pre>
+<p>Paste the following service configuration into the file. Exit and save once done (<code>Ctrl</code> + <code>X</code>, <code>Y</code>, <code>Enter</code>). Make sure to replace the <code>0x0000000000000000000000000000000000000000</code> address with your own Ethereum address that you control where you want to receive the transaction tips.</p>
+<pre><code class="language-ini">[Unit]
+Description=Lighthouse Validator Client (Hoodi)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=lighthousevalidator
+Group=lighthousevalidator
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/lighthouse vc \
+    --network hoodi \
+    --datadir /var/lib/lighthouse \
+    --graffiti EthStaker \
+    --metrics \
+    --suggested-fee-recipient 0x0000000000000000000000000000000000000000
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Reload systemd to reflect the changes and start the service. Check status to make sure it’s running correctly.</p>
+<pre><code class="language-console">$ sudo systemctl daemon-reload
+$ sudo systemctl start lighthousevalidator.service
+$ sudo systemctl status lighthousevalidator.service
+</code></pre>
+<p>It should say active (running) in green text. If not then go back and repeat the steps to fix the problem. Press Q to quit (will not affect the Lighthouse validator client service).</p>
+<p>Enable the Lighthouse validator client service to automatically start on reboot.</p>
+<pre><code class="language-console">$ sudo systemctl enable lighthousevalidator.service
+</code></pre>
+<p>You can watch the live messages from your Lighthouse validator client logs using this command.</p>
+<pre><code class="language-console">$ sudo journalctl -f -u lighthousevalidator.service -o cat | ccze -A
+</code></pre>
+<p>Press <code>Ctrl</code> + <code>C</code> to stop showing those messages.</p>
+<h2 id="support">Support</h2>
+<p>If you have any question or if you need additional support, make sure to get in touch with the EthStaker community on:</p>
+<ul>
+<li>Discord: <a href="https://dsc.gg/ethstaker">dsc.gg/ethstaker</a></li>
+<li>Reddit: <a href="https://www.reddit.com/r/ethstaker/">reddit.com/r/ethstaker</a></li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p>Based on <a href="https://github.com/SomerEsat/ethereum-staking-guide">Somer Esat's guide</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/ethstaker" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/eth-educators" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/ethstaker" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "search.share", "navigation.footer"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

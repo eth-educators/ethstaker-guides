@@ -1,0 +1,1600 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://guides.ethstaker.cc/alerting/">
+      
+      
+        <link rel="prev" href="../monitoring/">
+      
+      
+        <link rel="next" href="../security-maintenance/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Alerting - Ethstaker Guides</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-on-how-to-do-alerting-for-an-ethereum-validator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Ethstaker Guides" class="md-header__button md-logo" aria-label="Ethstaker Guides" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ethstaker Guides
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Alerting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Ethstaker Guides" class="md-nav__button md-logo" aria-label="Ethstaker Guides" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Ethstaker Guides
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Better Router
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Better Router
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/prepare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prepare
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Netgear Router Setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Netgear Router Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/rs300-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Initial Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/rs300-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Port Forwarding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Final Switchover
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Final Switchover
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-router/comcast-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comcast
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Holesky Testnet
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Holesky Testnet
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../holesky-node.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lighthouse/Nethermind
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../holesky-node-alt.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lodestar/Reth
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Monitoring and Maintenance
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Monitoring and Maintenance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monitoring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Alerting
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alerting
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-would-you-want-to-do-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why would you want to do alerting?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-an-account-on-pagerduty" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup an account on PagerDuty
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-the-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing the commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-alertmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Alertmanager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-prometheus-to-use-alertmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Prometheus to use Alertmanager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-alerting-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding alerting rules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-your-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing your rules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing your rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-disk-space-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available disk space test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-memory-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available memory test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolving-the-incidents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolving the incidents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security risks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alertmanager-update-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alertmanager update scripts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credits
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Maintenance and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrating-to-a-larger-disk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrate to a larger disk
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../voluntary-exit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exiting a validator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Legacy Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Legacy Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prepare-for-the-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prepare for the Merge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-would-you-want-to-do-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why would you want to do alerting?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-an-account-on-pagerduty" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup an account on PagerDuty
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-the-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing the commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-alertmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Alertmanager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-prometheus-to-use-alertmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Prometheus to use Alertmanager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-alerting-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding alerting rules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-your-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing your rules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing your rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-disk-space-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available disk space test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-memory-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available memory test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolving-the-incidents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolving the incidents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security risks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alertmanager-update-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alertmanager update scripts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#credits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credits
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guide-on-how-to-do-alerting-for-an-ethereum-validator">Guide on how to do alerting for an Ethereum validator</h1>
+<p>Knowing when there is a potential problem with your machine or your processes is very good practice in IT. It can help you prevent major issues with your system. Alerting is the art of getting notified for when those issues are rising up. A common issue for which alerting is very useful and that many validators are likely to face is low remaining disk space because of the clients' databases growth and <a href="https://www.reddit.com/r/ethstaker/comments/n7mnx5/psa_if_youre_running_geth_prune/">the need to do some pruning</a> to control that growth.</p>
+<p>This guide is meant for people with no or little experience in alerting. This guide will show you step by step how to do alerting on your machine by giving you the instructions to install and configure all the tools needed. It will assume you are using a modern linux distribution with systemd and APT (like Ubuntu 20.04) on a modern x86 CPU (Intel, AMD). It will also use PagerDuty as a easy way to integrate with different messaging services (Email, SMS, Slack, etc) and to manage your incidents. If you do not currently use Prometheus with Node Exporter to monitor your system, you can use <a href="../monitoring/">my monitoring guide</a> to install and configure those tools before using this guide.</p>
+<p>A video tutorial of this guide can be seen on https://youtu.be/h2nrVZNofxc .</p>
+<h2 id="why-would-you-want-to-do-alerting">Why would you want to do alerting?</h2>
+<p>Here are some good reasons why you might want to do alerting on your machine:</p>
+<ol>
+<li><strong>Automatic issue detection</strong>: You want to automatically check for issues with your system.</li>
+<li><strong>Issue prevention</strong>: You want to be able to find out about potential issues ahead of time.</li>
+<li><strong>Issue notification</strong>: You want to be automatically notified when there is an issue with your system.</li>
+</ol>
+<h2 id="overview">Overview</h2>
+<p>We will install 1 additional tool to your setup that should already be using Prometheus and Node Exporter: <a href="https://www.prometheus.io/docs/alerting/latest/alertmanager/">Alertmanager</a>. We will also be using <a href="https://www.pagerduty.com/use-cases/it-operations/">PagerDuty</a> as our incident manager and as our tool to get notified. We will configure Prometheus to check for rules that might indicate a problem with your machine. When a rule is triggered or resolved, Prometheus will send that information to Alertmanage which will route it to PagerDuty.</p>
+<p><strong>Prometheus</strong> is an open-source systems monitoring project. It collects and stores different metrics in a specialized database. It can be configured to constantly verify that certain metrics are within our expected margins. In our setup, it will periodically check for rules and forward any unexpected result to Alertmanager.</p>
+<p><strong>Alertmanager</strong> is an open-source project that handles alerts sent by client applications such as Prometheus. In our setup, it will receive alerts that are triggered and resolved from Prometheus and it will route them to PagerDuty.</p>
+<p><strong>PagerDuty</strong> is a large online incident response platform. It can be used for a wide variety of incident management use cases. In our setup, it will receive alerts from Alertmanager and it will notify us when we have an incident with our machine. Optionally, it can be used to manage your incidents in greater detail.</p>
+<p><img alt="Alerting - Overview" src="../images/alerting-overview.png" /></p>
+<h2 id="setup-an-account-on-pagerduty">Setup an account on PagerDuty</h2>
+<p>Create an account on https://www.pagerduty.com/ . You can start with the free trial and migrate to the free plan when you are done with the trial.</p>
+<p>When you eventually reach your Incidents dashboard, make sure to click on the initial test incident and manually resolve it. Click your first service and to go the Integrations tab. Click the <em>+ Add another integration</em> and choose <em>Events API V2</em>. Open up the <em>Events API V2</em> section and copy the value in the <em>Integration Key</em> field. We will need that API key in one configuration file below. It should look like a bunch of random letters and numbers.</p>
+<p>There are many different ways of configuring PagerDuty to receive a notification when an incident occurs. Play around and check what is available. By default, you should receive an email. It might be interesting to add an SMS notification in there.</p>
+<h2 id="executing-the-commands">Executing the commands</h2>
+<p>Almost all of these commands will be performed in a terminal. Start your <em>Terminal</em> application. Any line that starts with the dollar sign (<code>$</code>) is a command that need to be executed in your terminal. Do not input the dollar sign (<code>$</code>) in your terminal, only the text that comes after that.</p>
+<p>Executing a command with <code>sudo</code> will occasionally ask you for your password. Make sure to enter your account password correctly. You can execute the command again if you fail to enter the correct password after a few attempts.</p>
+<h2 id="installing-alertmanager">Installing Alertmanager</h2>
+<p>These steps will install Alertmanager as a systemd service.</p>
+<p>Create the alertmanager user.</p>
+<pre><code class="language-console">$ sudo useradd --no-create-home --shell /bin/false alertmanager
+</code></pre>
+<p>Create the configuration and data directories with proper ownership.</p>
+<pre><code class="language-console">$ sudo mkdir /etc/alertmanager
+$ sudo mkdir /var/lib/alertmanager
+$ sudo chown -R alertmanager:alertmanager /etc/alertmanager
+$ sudo chown -R alertmanager:alertmanager /var/lib/alertmanager
+</code></pre>
+<p>Download the latest stable version of Alertmanager from https://prometheus.io/download/#alertmanager (avoid any pre-release version). As of this date, the latest version is 0.27.0 . Adjust the following instructions accordingly if there is a newer stable release version with a different archive name. The file name should end with <em>linux-amd64.tar.gz</em> (for linux and AMD64 instructions set).</p>
+<pre><code class="language-console">$ wget https://github.com/prometheus/alertmanager/releases/download/v0.27.0/alertmanager-0.27.0.linux-amd64.tar.gz
+</code></pre>
+<p>Verify that the SHA256 Checksum as shown on https://prometheus.io/download/#alertmanager is the same as the file we just downloaded.</p>
+<pre><code class="language-console">$ sha256sum alertmanager-0.27.0.linux-amd64.tar.gz
+</code></pre>
+<p>Extract the archive.</p>
+<pre><code class="language-console">$ tar xvf alertmanager-0.27.0.linux-amd64.tar.gz
+</code></pre>
+<p>Copy the binaries to the following locations and set ownership.</p>
+<pre><code class="language-console">$ sudo cp alertmanager-0.27.0.linux-amd64/alertmanager /usr/local/bin/
+$ sudo cp alertmanager-0.27.0.linux-amd64/amtool /usr/local/bin/
+$ sudo chown alertmanager:alertmanager /usr/local/bin/alertmanager
+$ sudo chown alertmanager:alertmanager /usr/local/bin/amtool
+</code></pre>
+<p>Remove the download leftovers.</p>
+<pre><code class="language-console">$ rm -rf alertmanager-0.27.0.linux-amd64
+$ rm alertmanager-0.27.0.linux-amd64.tar.gz
+</code></pre>
+<p>Setup the Alertmanager configuration file. Open the YAML config file for editing.</p>
+<pre><code class="language-console">$ sudo nano /etc/alertmanager/alertmanager.yml
+</code></pre>
+<p>Paste the following into the file taking care to <strong>replace the placeholder PagerDuty API key by your real API key</strong> created in the <em>Setup an account on PagerDuty</em> section above (the <code>&lt;</code> and <code>&gt;</code> characters at the start and at the end of the placeholder should be removed). Exit and save the file.</p>
+<pre><code class="language-yaml">route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: 'pagerduty'
+
+receivers:
+- name: 'pagerduty'
+  pagerduty_configs:
+  - routing_key: &lt;PagerDuty API key&gt;
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
+</code></pre>
+<p>Set ownership for the config file.</p>
+<pre><code class="language-console">$ sudo chown alertmanager:alertmanager /etc/alertmanager/alertmanager.yml
+</code></pre>
+<p>Setup the Alertmanager systemd service. Open the service definition file.</p>
+<pre><code class="language-console">$ sudo nano /etc/systemd/system/alertmanager.service
+</code></pre>
+<p>Paste the following into the file. Exit and save the file.</p>
+<pre><code class="language-ini">[Unit]
+Description=Alertmanager
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=alertmanager
+Group=alertmanager
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/alertmanager \
+    --config.file /etc/alertmanager/alertmanager.yml \
+    --storage.path /var/lib/alertmanager/ \
+    --web.listen-address=&quot;localhost:9093&quot; \
+    --cluster.listen-address=&quot;&quot;
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Reload systemd to reflect the changes.</p>
+<pre><code class="language-console">$ sudo systemctl daemon-reload
+</code></pre>
+<p>Start the service and check the status to make sure it's running correctly.</p>
+<pre><code class="language-console">$ sudo systemctl start alertmanager.service
+$ sudo systemctl status alertmanager.service
+</code></pre>
+<p>Output should look something like this.</p>
+<pre><code>● alertmanager.service - Alertmanager
+     Loaded: loaded (/etc/systemd/system/alertmanager.service; enabled; vendor &gt;
+     Active: active (running) since Mon 2021-07-12 22:12:06 UTC; 1s ago
+   Main PID: 81779 (alertmanager)
+      Tasks: 9 (limit: 18405)
+     Memory: 22.3M
+     CGroup: /system.slice/alertmanager.service
+             └─81779 /usr/local/bin/alertmanager --config.file /etc/alertmanage&gt;
+
+Jul 12 22:12:06 testsystem systemd[1]: Started Alertmanager.
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+Jul 12 22:12:06 testsystem alertmanager[81779]: level=info ts=2021-07-12T22:1&gt;
+</code></pre>
+<p>If you did everything right, it should say active (running) in green. If not then go back and repeat the steps to fix the problem. Press Q to quit.</p>
+<p>Enable the Alertmanager service to start on boot.</p>
+<pre><code class="language-console">$ sudo systemctl enable alertmanager.service
+</code></pre>
+<h2 id="configuring-prometheus-to-use-alertmanager">Configuring Prometheus to use Alertmanager</h2>
+<p>Edit your prometheus configuration file. It's likely in <code>/etc/prometheus/prometheus.yml</code>. If not, adjust accordingly.</p>
+<pre><code class="language-console">$ sudo nano /etc/prometheus/prometheus.yml
+</code></pre>
+<p>Make sure you have the following sections in that configuration file. You might already have part of it in comments. If so, just remove the related comments and paste this in there. This section is often located before the <code>scrape_configs</code> section.</p>
+<pre><code class="language-yaml">alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+
+rule_files:
+  - &quot;alert_rules.yml&quot;
+</code></pre>
+<h2 id="adding-alerting-rules">Adding alerting rules</h2>
+<p>Setup the rules for alerting. Open the rules file.</p>
+<pre><code class="language-console">$ sudo nano /etc/prometheus/alert_rules.yml
+</code></pre>
+<p>Paste the following base rules into the file. Exit and save the file.</p>
+<pre><code class="language-yaml">groups:
+- name: alert_rules
+  rules:
+  - alert: Available_disk_space_too_low
+    expr: node_filesystem_avail_bytes{mountpoint=&quot;/&quot;} &lt;= 85899345920
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: Available disk space below 80 GiB
+  - alert: Available_memory_too_low
+    expr: node_memory_MemAvailable_bytes &lt;= 1073741824
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: Available memory below 1 GiB
+  - alert: CPU_usage_too_high
+    expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt;= 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: CPU usage above 90%
+</code></pre>
+<p>This base rules file has 3 rules which you can adjust by modifying the <code>expr</code> field's value.</p>
+<ol>
+<li>The first rule will alert you when you have less than around 80 GiB (85899345920 bytes) of available disk space on your <code>/</code> mount continuously for 1 minute. If your filesystem and your partitions are configured in a different way where you want to check for a different mount, you will have to change that <code>expr</code> field. If you have direct access to your prometheus web interface (often at <code>http://&lt;machine ip&gt;:9090</code>), you can execute the <code>node_filesystem_avail_bytes</code> query to view all possible mounts and their current free space. You can also view your current mounts and their free space by running the <code>$ df -h</code> command.</li>
+<li>The second rule will alert you when you have less than around 1 GiB (1073741824 bytes) of free RAM to be used by your processes continuously for 1 minute. If your machine is consistently using almost all of your available RAM, you might want to lower that 1 GiB (1073741824 bytes) threshold value in that <code>expr</code> field.</li>
+<li>The third rule will alert you when your CPU cores are used for more than 90% of their processing power continuously for 5 minutes.</li>
+</ol>
+<p>Set ownership for the config file. If your prometheus service is running under an account that is not <code>prometheus</code>, adjust accordingly.</p>
+<pre><code class="language-console">$ sudo chown prometheus:prometheus /etc/prometheus/alert_rules.yml
+</code></pre>
+<p>Restart your prometheus service and check the status to make sure it's running correctly. If your prometheus service is not configured to run using systemd with the <code>prometheus.service</code> name, adjust accordingly.</p>
+<pre><code class="language-console">$ sudo systemctl restart prometheus.service
+$ sudo systemctl status prometheus.service
+</code></pre>
+<p>Output should look something like this.</p>
+<pre><code>● prometheus.service - Prometheus
+     Loaded: loaded (/etc/systemd/system/prometheus.service; enabled; vendor pr&gt;
+     Active: active (running) since Tue 2021-07-13 01:36:01 UTC; 6s ago
+   Main PID: 83685 (prometheus)
+      Tasks: 12 (limit: 18405)
+     Memory: 125.4M
+     CGroup: /system.slice/prometheus.service
+             └─83685 /usr/local/bin/prometheus --config.file /etc/prometheus/pr&gt;
+
+Jul 13 01:36:01 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+Jul 13 01:36:02 testsystem prometheus[83685]: level=info ts=2021-07-13T01:36:&gt;
+</code></pre>
+<p>If you did everything right, it should say active (running) in green. If not then go back and repeat the steps to fix the problem. Press Q to quit.</p>
+<h2 id="testing-your-rules">Testing your rules</h2>
+<p>Time to test some of these rules.</p>
+<h3 id="available-disk-space-test">Available disk space test</h3>
+<p>Here is an example to test your <em>Available disk space</em> rule. First, check how much space you have left on your disk.</p>
+<pre><code class="language-console">$ df -h
+</code></pre>
+<p>You should see something like this.</p>
+<pre><code>Filesystem                         Size  Used Avail Use% Mounted on
+udev                               7.5G     0  7.5G   0% /dev
+tmpfs                              1.6G  1.7M  1.6G   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv  915G  438G  431G  51% /
+tmpfs                              7.6G     0  7.6G   0% /dev/shm
+tmpfs                              5.0M     0  5.0M   0% /run/lock
+tmpfs                              7.6G     0  7.6G   0% /sys/fs/cgroup
+/dev/nvme0n1p2                     976M  108M  801M  12% /boot
+/dev/nvme0n1p1                     511M  7.9M  504M   2% /boot/efi
+/dev/loop1                          56M   56M     0 100% /snap/core18/1944
+/dev/loop0                         100M  100M     0 100% /snap/core/11316
+/dev/loop2                         9.2M  9.2M     0 100% /snap/canonical-livepatch/99
+/dev/loop3                          32M   32M     0 100% /snap/snapd/10707
+/dev/loop4                          70M   70M     0 100% /snap/lxd/19188
+/dev/loop5                          33M   33M     0 100% /snap/snapd/12398
+/dev/loop6                          68M   68M     0 100% /snap/lxd/20326
+/dev/loop7                          56M   56M     0 100% /snap/core18/2074
+tmpfs                              1.6G     0  1.6G   0% /run/user/1000
+</code></pre>
+<p>Here, we can see that the main mount is <code>/</code>. It has around 431GB of available disk space. If you want to test the 80GB limit we set in the alerting rules, we can create a dummy file that is 400GB in size with this command.</p>
+<pre><code class="language-console">$ fallocate -l 400G largespacer.img
+</code></pre>
+<p>That will leave us only around 31GB of available disk space. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.</p>
+<p>Once your <em>Available disk space</em> test is done, you can remove the dummy file with this command.</p>
+<pre><code class="language-console">$ rm largespacer.img
+</code></pre>
+<h3 id="available-memory-test">Available memory test</h3>
+<p>Here is an example to test your <em>Available memory</em> rule. Make sure your incident is resolved on PagerDuty first if you just tested your <em>Available disk space</em> rule.</p>
+<p>Check how much memory you have available.</p>
+<pre><code class="language-console">$ free -kh
+</code></pre>
+<p>You should see something like this.</p>
+<pre><code>              total        used        free      shared  buff/cache   available
+Mem:           15Gi       5.5Gi       334Mi       0.0Ki       9.3Gi       9.3Gi
+Swap:         4.0Gi       114Mi       3.9Gi
+</code></pre>
+<p>You should check the available column in this output. In this example, we have about 9.3GB of available RAM. We can use the following command to start a dummy process that will use around 8.8GB of memory to reach our less than around 1GB of free RAM threshold.</p>
+<pre><code class="language-console">$ &lt;/dev/zero head -c 8800m | tail
+</code></pre>
+<p>Trying to consume RAM with a dummy process like that can be tricky because of how the operating system manages free memory. If you fail to trigger your rule, try to slowly increment the amount of memory consumed with a new dummy process. This should leave us around 500MB of free RAM. Waiting around 2 minutes should trigger an incident on PagerDuty and you should receive an email with the alert details.</p>
+<p>Once your <em>Available memory</em> test is done, you can terminate the dummy process that is needlessly consuming your memory by typing <code>CTRL</code>+<code>C</code> in your terminal.</p>
+<h2 id="resolving-the-incidents">Resolving the incidents</h2>
+<p>Once the alert is resolved, Alertmanager will call PagerDuty and it should automatically resolve the incident within a few minutes. You can manually acknowledge and resolve any incident on your PagerDuty Incidents dashboard.</p>
+<p>That's it. That should give you some good alerting foundation. There is a lot more you can do with such setup but we will leave that as an exercise to the reader.</p>
+<h2 id="security-risks">Security risks</h2>
+<p>Adding and using Alertmanager, Prometheus and PagerDuty with this configuration comes with a few additional security risks for your system.</p>
+<p>The first risk comes from the tools themselves. There might be some security issues with them that I am not aware of which might compromise your machine to some malicious actors. A great way to prevent such risk is to keep your system updated.</p>
+<p>Keeping Prometheus and Alertmanager updated will require some efforts. You will need to monitor new stable releases and whether they include severe or critical bug fixes. To update to a new version, you will need to download the latest stable release, extract the archive, copy the binaries to their expected location and restart these services. The process and the instructions to download the new version, extract the archive and copy the binaries is exactly the same one mentioned at the beginning of the <a href="#installing-alertmanager">Installing Alertmanager</a> section. You can find the same related section for Prometheus <a href="../monitoring/#installing-prometheus">on my monitoring guide</a>. Easy to use script that do all those steps for you are <a href="#alertmanager-update-scripts">included below</a>.</p>
+<p>To restart the Alertmanager service after you updated its binary, use this command.</p>
+<pre><code class="language-console">$ sudo systemctl restart alertmanager.service
+</code></pre>
+<p>To restart the Prometheus service after you updated its binary, use this command.</p>
+<pre><code class="language-console">$ sudo systemctl restart prometheus.service
+</code></pre>
+<p>You can find all the Prometheus releases and their changelog on https://github.com/prometheus/prometheus/releases. You can find all the Alertmanager releases and their changelog on https://github.com/prometheus/alertmanager/releases.</p>
+<p>You might never need to update these tools as there might not be any severe or critical issue with them or there might not be an issue that can be easily exploited by a malicious actor with the version you have. However, it's a good practice to monitor releases for the tools you are using and update them regularly.</p>
+<p>There might be some risks associated with using PagerDuty. You should contact them and reach their support if you are concerned about the risks associated with that platform.</p>
+<p>The second risk comes from the additional attack surface that these tools are creating. One of this attack surface is the HTTP server it is adding and the port on which it is listening. This guide configured Alertmanager to only listen on your localhost interface meaning that it cannot be accessed from any other machine on a network. You would have to have malicious processes or actors connecting to Alertmanager from your machine to trigger a false alert for instance. A good way to prevent this risk is to limit the running processes, run only trusted processes, limit who can connect to the machine and only allow trusted people connecting to your machine.</p>
+<p>There might be other kind of risks associated with those tools and this configuration, but I think these two are the main ones.</p>
+<h3 id="alertmanager-update-scripts">Alertmanager update scripts</h3>
+<p>I created a simple script to ease the pain of updating Alertmanager. You can find it in this repository: <a href="../scripts/update-alertmanager.py">update-alertmanager.py</a>. This script will check the current installed version and it will compare it with the latest stable release version on Github. If there is a new version available, it will prompt you to update it. This script require a somewhat recent version of Python 3 which should already be installed on your system.</p>
+<p>You can easily download this script with:</p>
+<pre><code class="language-console">$ wget https://raw.githubusercontent.com/eth-educators/ethstaker-guides/main/docs/scripts/update-alertmanager.py
+</code></pre>
+<p>To run the Alertmanager update script, use this command:</p>
+<pre><code class="language-console">$ python3 update-alertmanager.py
+</code></pre>
+<h2 id="support">Support</h2>
+<p>If you have any question or if you need additional support, make sure to get in touch with the ethstaker community on:</p>
+<ul>
+<li>Discord: <a href="https://dsc.gg/ethstaker">dsc.gg/ethstaker</a></li>
+<li>Reddit: <a href="https://www.reddit.com/r/ethstaker/">reddit.com/r/ethstaker</a></li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p>Based on <a href="https://github.com/SomerEsat/ethereum-staking-guide">Somer Esat's guide</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../monitoring/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Monitoring">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Monitoring
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../security-maintenance/" class="md-footer__link md-footer__link--next" aria-label="Next: Maintenance and Security">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Maintenance and Security
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/ethstaker" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/eth-educators" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/ethstaker" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "search.share", "navigation.footer"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
